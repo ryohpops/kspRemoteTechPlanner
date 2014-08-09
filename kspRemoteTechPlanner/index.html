@@ -28,9 +28,22 @@
 
         <div class="row">
             <h2>Description</h2>
-            <p>
-                You can plan your RemoteTech satellites network with graphical figures.
-            </p>
+            <a href="http://forum.kerbalspaceprogram.com/threads/83305-Development-Resumed-RemoteTech-2">RemoteTech2</a> is popular MOD for KerbalSpaceProgram.
+            It provides purpose to launch and use satellites in the world of KSP.<br />
+            Before launching your communication satellite, you can plan your RemoteTech satellites network with graphical figures here.
+            Put needed values into Data input, then hit Calculate.<br />
+            <br />
+            Black circle is orbit of satellites and black dots mean each satellite.
+            Red clear circle is antenna range each satellite has.<br />
+            If arrow connecting a couple of satellites is blue, it'll be OK.
+            But if it's red, any satellites can't connect to their next one.<br />
+            When green circle labeled Stable appears, it means that any orbits lower than Stable altitude never have connection-less flight.<br />
+            <br />
+            This website is under development, sources are available on <a href="https://github.com/ryohpops/kspRemoteTechPlanner">github</a>. Current version is beta 1.<br />
+            Issues, bug reports, contributers are always welcome.<br />
+            <br />
+            Data of bodies is based on <a href="http://wiki.kerbalspaceprogram.com/wiki/Main_Page">wiki</a>.<br />
+            NO GUARANTEES OF CORRECTNESS.
         </div>
 
         <div class="row">
@@ -42,7 +55,7 @@
                             <canvas id="entire" width="800" height="800"></canvas>
                         </div>
                     </div>
-
+<!--
                     <div class="col-md-6" align="center">
                         <h3>Day/Night view</h3>
                         <div id="wrap-canvas">
@@ -56,6 +69,7 @@
                             <canvas id="lost" width="400" height="400"></canvas>
                         </div>
                     </div>
+-->
                 </div>
             </div>
 
@@ -63,7 +77,7 @@
                 <h3>Data input</h3>
                 <form role="form" id="calculator">
                     <div class="form-group">
-                        <label for="body">Bodyt</label>
+                        <label for="body">Body</label>
                         <select class="form-control" id="body">
                             <option selected>Kerbin</option>
                             <optgroup label="Kerbin's moons:">
@@ -97,6 +111,17 @@
                         </div>
                     </div>
                 </form>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12"><hr /></div>
+            <div class="col-sm-12">
+                Created by ryohpops, © 2014. Github repository is <a href="https://github.com/ryohpops/kspRemoteTechPlanner">here</a>.<br />
+                Built with <a href="http://getbootstrap.com/">Bootstrap</a> and <a href="https://github.com/CreateJS/EaselJS">EaselJS</a>,
+                both licensed under <a href="https://github.com/ryohpops/kspRemoteTechPlanner/blob/master/LICENSE">MIT License</a>.<br />
+                <a href="https://kerbalspaceprogram.com/">KSP</a>, Kerbal Space Program and all the planet/moon names are property of <a href="http://www.squad.com.mx/">Squad</a>.
+                <br /><br />
             </div>
         </div>
     </div>
