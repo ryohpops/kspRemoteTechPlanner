@@ -1,0 +1,129 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Visual RemoteTech Planner for KSP</title>
+
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="app.css" rel="stylesheet" />
+
+    <script src="Scripts/jquery-2.1.1.min.js"></script>
+    <script src="Scripts/easeljs-0.7.1.min.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
+    <script src="model/point.js"></script>
+    <script src="model/calculator.js"></script>
+    <script src="model/communicator.js"></script>
+    <script src="model/body.js"></script>
+    <script src="model/satellites.js"></script>
+    <script src="model/bodyData.js"></script>
+    <script src="view/graphicsHelper.js"></script>
+    <script src="view/view.js"></script>
+    <script src="view/entireView.js"></script>
+    <script src="app.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Visual RemoteTech Planner for KSP</h1>
+
+        <div class="row">
+            <h2>Description</h2>
+            <a href="http://forum.kerbalspaceprogram.com/threads/83305-Development-Resumed-RemoteTech-2">RemoteTech2</a> is popular MOD for KerbalSpaceProgram.
+            It provides purpose to launch and use satellites in the world of KSP.<br />
+            Before launching your communication satellite, you can plan your RemoteTech satellites network with graphical figures here.
+            Put needed values into Data input, then hit Calculate.<br />
+            <br />
+            Black circle is orbit of satellites and black dots mean each satellite.
+            Red clear circle is antenna range each satellite has.<br />
+            If arrow connecting a couple of satellites is blue, it'll be OK.
+            But if it's red, any satellites can't connect to their next one.<br />
+            When green circle labeled Stable appears, it means that any orbits lower than Stable altitude never have connection-less flight.<br />
+            <br />
+            This website is under development, sources are available on <a href="https://github.com/ryohpops/kspRemoteTechPlanner">github</a>. Current version is beta 1.<br />
+            Issues, bug reports, contributers are always welcome.<br />
+            <br />
+            Data of bodies is based on <a href="http://wiki.kerbalspaceprogram.com/wiki/Main_Page">wiki</a>.<br />
+            NO GUARANTEES OF CORRECTNESS.
+        </div>
+
+        <div class="row">
+            <div class="col-md-9">
+                <div class="row">
+                    <div class="col-md-12" align="center">
+                        <h3>Entire view</h3>
+                        <div id="wrap-canvas">
+                            <canvas id="entire" width="800" height="800"></canvas>
+                        </div>
+                    </div>
+<!--
+                    <div class="col-md-6" align="center">
+                        <h3>Day/Night view</h3>
+                        <div id="wrap-canvas">
+                            <canvas id="daynight" width="400" height="400"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6" align="center">
+                        <h3>Lost View</h3>
+                        <div id="wrap-canvas">
+                            <canvas id="lost" width="400" height="400"></canvas>
+                        </div>
+                    </div>
+-->
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <h3>Data input</h3>
+                <form role="form" id="calculator">
+                    <div class="form-group">
+                        <label for="body">Body</label>
+                        <select class="form-control" id="body">
+                            <option selected>Kerbin</option>
+                            <optgroup label="Kerbin's moons:">
+                                <option>Mun</option>
+                                <option>Minmus</option>
+                            </optgroup>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="count">Count</label>
+                        <input type="number" class="form-control" id="count" value="4" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="altitude">Altitude(km, ASL)</label>
+                        <input type="number" class="form-control" id="altitude" value="1000" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="range">Communication range</label>
+                        <input type="number" class="form-control" id="range" value="2500" />
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-6">
+                            <button type="button" class="btn btn-primary" id="calculate">Calculate</button>
+                        </div>
+                        <div class="col-sm-6">
+                            <button type="reset" class="btn btn-default" id="reset">Reset</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12"><hr /></div>
+            <div class="col-sm-12">
+                Created by ryohpops, © 2014. Github repository is <a href="https://github.com/ryohpops/kspRemoteTechPlanner">here</a>.<br />
+                Built with <a href="http://getbootstrap.com/">Bootstrap</a> and <a href="https://github.com/CreateJS/EaselJS">EaselJS</a>,
+                both licensed under <a href="https://github.com/ryohpops/kspRemoteTechPlanner/blob/master/LICENSE">MIT License</a>.<br />
+                <a href="https://kerbalspaceprogram.com/">KSP</a>, Kerbal Space Program and all the planet/moon names are property of <a href="http://www.squad.com.mx/">Squad</a>.
+                <br /><br />
+            </div>
+        </div>
+    </div>
+</body>
+</html>
