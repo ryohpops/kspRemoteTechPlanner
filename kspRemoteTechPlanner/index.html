@@ -28,9 +28,19 @@
 
         <div class="row">
             <h2>Description</h2>
-            <p>
-                You can plan your RemoteTech satellites network with graphical figures.
-            </p>
+            <a href="http://forum.kerbalspaceprogram.com/threads/83305-Development-Resumed-RemoteTech-2">RemoteTech2</a> is popular MOD for KerbalSpaceProgram.
+            It provides purpose to launch and use satellites in the world of KSP.<br />
+            Before launching your communication satellite, you can plan your RemoteTech satellites network with graphical figures here.
+            Put needed values into Data input, then hit Calculate.<br />
+            <br />
+            Black circle is orbit of satellites and black dots mean each satellite.
+            Red clear circle is antenna range each satellite has.<br />
+            If arrow connecting a couple of satellites is blue, it'll be OK.
+            But if it's red, any satellites can't connect to their next one.<br />
+            When green circle labeled Stable appears, it means that any orbits lower than Stable altitude never have connection-less flight.<br />
+            <br />
+            Data of bodies is based on <a href="http://wiki.kerbalspaceprogram.com/wiki/Main_Page">wiki</a>.<br />
+            NO GUARANTEES OF CORRECTNESS.
         </div>
 
         <div class="row">
@@ -63,7 +73,7 @@
                 <h3>Data input</h3>
                 <form role="form" id="calculator">
                     <div class="form-group">
-                        <label for="body">Bodyt</label>
+                        <label for="body">Body</label>
                         <select class="form-control" id="body">
                             <option selected>Kerbin</option>
                             <optgroup label="Kerbin's moons:">
