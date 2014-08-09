@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Visual RemoteTech Planner for KSP</title>
+
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="app.css" rel="stylesheet" />
+
+    <script src="Scripts/jquery-2.1.1.min.js"></script>
+    <script src="Scripts/easeljs-0.7.1.min.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
+    <script src="model/point.js"></script>
+    <script src="model/calculator.js"></script>
+    <script src="model/communicator.js"></script>
+    <script src="model/body.js"></script>
+    <script src="model/satellites.js"></script>
+    <script src="model/bodyData.js"></script>
+    <script src="view/graphicsHelper.js"></script>
+    <script src="view/view.js"></script>
+    <script src="view/entireView.js"></script>
+    <script src="app.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Visual RemoteTech Planner for KSP</h1>
+
+        <div class="row">
+            <h2>Description</h2>
+            <p>
+                You can plan your RemoteTech satellites network with graphical figures.
+            </p>
+        </div>
+
+        <div class="row">
+            <div class="col-md-9">
+                <div class="row">
+                    <div class="col-md-12" align="center">
+                        <h3>Entire view</h3>
+                        <div id="wrap-canvas">
+                            <canvas id="entire" width="800" height="800"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6" align="center">
+                        <h3>Day/Night view</h3>
+                        <div id="wrap-canvas">
+                            <canvas id="daynight" width="400" height="400"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6" align="center">
+                        <h3>Lost View</h3>
+                        <div id="wrap-canvas">
+                            <canvas id="lost" width="400" height="400"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <h3>Data input</h3>
+                <form role="form" id="calculator">
+                    <div class="form-group">
+                        <label for="body">Bodyt</label>
+                        <select class="form-control" id="body">
+                            <option selected>Kerbin</option>
+                            <optgroup label="Kerbin's moons:">
+                                <option>Mun</option>
+                                <option>Minmus</option>
+                            </optgroup>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="count">Count</label>
+                        <input type="number" class="form-control" id="count" value="4" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="altitude">Altitude(km, ASL)</label>
+                        <input type="number" class="form-control" id="altitude" value="1000" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="range">Communication range</label>
+                        <input type="number" class="form-control" id="range" value="2500" />
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-6">
+                            <button type="button" class="btn btn-primary" id="calculate">Calculate</button>
+                        </div>
+                        <div class="col-sm-6">
+                            <button type="reset" class="btn btn-default" id="reset">Reset</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
