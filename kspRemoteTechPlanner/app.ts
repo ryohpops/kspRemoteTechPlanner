@@ -15,13 +15,10 @@ var satellites: Satellites;
 var stageEntire: createjs.Stage;
 var viewEntire: EntireView;
 
-/*
-// Day/Night View
-var stageDayNight: createjs.Stage;
-var shapesDayNight: createjs.Container;
-var textsDayNight: createjs.Container;
-var dayNightView: DayNightView;
-*/
+// Night View
+var stageNight: createjs.Stage;
+var viewNight: NightView;
+
 
 // startup
 $(() => {
