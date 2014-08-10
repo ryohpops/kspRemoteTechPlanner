@@ -6,6 +6,7 @@
 /// <reference path="model/bodydata.ts" />
 /// <reference path="model/satellites.ts" />
 /// <reference path="view/entireview.ts" />
+/// <reference path="view/nightview.ts" />
 // values
 var body;
 var satellites;
