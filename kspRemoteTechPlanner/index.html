@@ -53,21 +53,21 @@
                 <div class="row">
                     <div class="col-md-12" align="center">
                         <h3>Entire view</h3>
-                        <div id="wrap-canvas">
+                        <div class="wrap-canvas">
                             <canvas id="entire" width="800" height="800"></canvas>
                         </div>
                     </div>
 
                     <div class="col-md-6" align="center">
                         <h3>Night view</h3>
-                        <div id="wrap-canvas">
+                        <div class="wrap-canvas">
                             <canvas id="night" width="400" height="400"></canvas>
                         </div>
                     </div>
 
                     <!--<div class="col-md-6" align="center">
                         <h3>Lost View</h3>
-                        <div id="wrap-canvas">
+                        <div class="wrap-canvas">
                             <canvas id="lost" width="400" height="400"></canvas>
                         </div>
                     </div>-->
@@ -86,6 +86,30 @@
                                 <option>Minmus</option>
                             </optgroup>
                         </select>
+
+                        <div class="manual-input" id="body">
+                            <div class="form-group">
+                                <label for="body_name">Name</label>
+                                <input type="text" class="form-control" id="body_name" />
+                            </div>
+                            <div class="form-group">
+                                <label for="body_color">Color</label>
+                                <input type="text" class="form-control" id="body_color" />
+                            </div>
+                            <div class="form-group">
+                                <label for="body_radius">Radius</label>
+                                <input type="number" class="form-control" id="body_radius" />
+                            </div>
+                            <div class="form-group">
+                                <label for="body_stdGravParam">Standard gravitational parameter</label>
+                                <input type="number" class="form-control" id="body_stdGravParam" />
+                            </div>
+                        </div>
+
+                        <button type="button" class="btn btn-xs manual-input" id="body">
+                            <span class="glyphicon glyphicon-collapse-up"></span>
+                            <span class="glyphicon glyphicon-collapse-down"></span>
+                        </button>
                     </div>
 
                     <div class="form-group">
@@ -125,8 +149,8 @@
             <div class="col-sm-12">
                 Created by ryohpops, © 2014. Forum is <a href="http://forum.kerbalspaceprogram.com/threads/90113-WEB-Visual-RemoteTech-Planner-for-MOD-RemoteTech2">here</a>
                 and github repository is <a href="https://github.com/ryohpops/kspRemoteTechPlanner">here</a>.<br />
-                Built with <a href="http://getbootstrap.com/">Bootstrap</a> and <a href="https://github.com/CreateJS/EaselJS">EaselJS</a>,
-                both licensed under <a href="https://github.com/ryohpops/kspRemoteTechPlanner/blob/master/LICENSE">MIT License</a>.<br />
+                Built with <a href="http://getbootstrap.com/">Bootstrap</a>, <a href="http://glyphicons.com/">GLYPHICONS</a> Halflings and <a href="https://github.com/CreateJS/EaselJS">EaselJS</a>,
+                licensed under <a href="https://github.com/ryohpops/kspRemoteTechPlanner/blob/master/LICENSE">MIT License</a>.<br />                
                 <a href="https://kerbalspaceprogram.com/">KSP</a>, Kerbal Space Program and all the planet/moon names are property of <a href="http://www.squad.com.mx/">Squad</a>.
                 <br /><br />
             </div>

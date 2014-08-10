@@ -38,6 +38,9 @@ function init() {
     viewNight = new NightView(stageNight, 5000, 400);
 
     // init controls
+    $("button.manual-input#body").on("click", function (ev) {
+        $("div.manual-input#body").slideToggle();
+    });
     $("button#calculate").on("click", function (ev) {
         update();
     });
