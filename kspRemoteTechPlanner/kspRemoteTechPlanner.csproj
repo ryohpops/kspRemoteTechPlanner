@@ -49,7 +49,6 @@
     <TypeScriptCompile Include="model\bodyData.ts" />
     <TypeScriptCompile Include="model\calculator.ts" />
     <TypeScriptCompile Include="view\view.ts" />
-    <TypeScriptCompile Include="dayNightView.ts" />
     <TypeScriptCompile Include="view\graphicsHelper.ts" />
     <TypeScriptCompile Include="model\satellites.ts" />
     <TypeScriptCompile Include="Scripts\typings\createjs-lib\createjs-lib.d.ts" />

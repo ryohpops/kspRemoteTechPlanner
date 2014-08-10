@@ -19,7 +19,6 @@ var viewEntire: EntireView;
 var stageNight: createjs.Stage;
 var viewNight: NightView;
 
-
 // startup
 $(() => {
     init();
@@ -27,21 +26,16 @@ $(() => {
 
 // method definitions
 function init() {
+    // init values
+    body = new Body();
+    satellites = new Satellites();
+
     // init views
     stageEntire = new createjs.Stage($("canvas#entire")[0]);
     viewEntire = new EntireView(stageEntire, 10000, 800);
 
-    /*
-    stageDayNight = new createjs.Stage($("canvas#daynight")[0]);
-    shapesDayNight = new createjs.Container();
-    textsDayNight = new createjs.Container();
-    stageDayNight.addChild(shapesDayNight);
-    stageDayNight.addChild(textsDayNight);
-    */
-
-    // init values
-    body = new Body();
-    satellites = new Satellites();
+    stageNight = new createjs.Stage($("canvas#night")[0]);
+    viewNight = new NightView(stageNight, 5000, 400);
 
     // init controls
     $("button#calculate").on("click", (ev) => { update() });
@@ -64,4 +58,6 @@ function update() {
     // show objects
     viewEntire.show();
     stageEntire.update();
+    viewNight.show();
+    stageNight.update();
 }
