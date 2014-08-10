@@ -33,10 +33,15 @@ var Calculator;
     }
     Calculator.distanceBetweenPointAndLine = distanceBetweenPointAndLine;
 
-    function chordToArc(radius, chordLength) {
-        var centerRad = 2 * Math.asin(radius / (chordLength / 2));
-        return radius * centerRad;
+    function orbitalPeriod(bodyRadius, altitude, stdGravParam) {
+        return 2 * Math.PI * Math.sqrt(Math.pow(bodyRadius + altitude, 3) / stdGravParam);
     }
-    Calculator.chordToArc = chordToArc;
+    Calculator.orbitalPeriod = orbitalPeriod;
+
+    function orbitalNightTime(bodyRadius, altitude, stdGravParam) {
+        var ra = bodyRadius + altitude;
+        return 2 * Math.pow(ra, 2) / Math.sqrt(ra * stdGravParam) * Math.asin(bodyRadius / ra);
+    }
+    Calculator.orbitalNightTime = orbitalNightTime;
 })(Calculator || (Calculator = {}));
 //# sourceMappingURL=calculator.js.map
