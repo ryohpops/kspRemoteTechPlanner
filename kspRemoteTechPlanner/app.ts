@@ -7,20 +7,21 @@
 /// <reference path="model/satellites.ts" />
 /// <reference path="view/entireview.ts" />
 /// <reference path="view/nightview.ts" />
+
 // values
-var body;
-var satellites;
+var body: Body;
+var satellites: Satellites;
 
 // Entire View
-var stageEntire;
-var viewEntire;
+var stageEntire: createjs.Stage;
+var viewEntire: EntireView;
 
 // Night View
-var stageNight;
-var viewNight;
+var stageNight: createjs.Stage;
+var viewNight: NightView;
 
 // startup
-$(function () {
+$(() => {
     init();
 });
 
@@ -38,16 +39,14 @@ function init() {
     viewNight = new NightView(stageNight, 5000, 400);
 
     // init controls
-    $("button#calculate").on("click", function (ev) {
-        update();
-    });
+    $("button#calculate").on("click", (ev) => { update() });
 
     update();
 }
 
 function update() {
     // update objects
-    var b = BodyData.getBody($("select#body").val());
+    var b: Body = BodyData.getBody($("select#body").val());
     body.name = b.name;
     body.color = b.color;
     body.radius = b.radius;
@@ -64,4 +63,3 @@ function update() {
     viewNight.show();
     stageNight.update();
 }
-//# sourceMappingURL=app.js.map

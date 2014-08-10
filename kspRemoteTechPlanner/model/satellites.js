@@ -16,6 +16,22 @@ var Satellites = (function () {
     Satellites.prototype.stableRange = function () {
         return Calculator.circleCrossPoint(new Point(0, 0), this.range, this.satPosition(0, 0), this.satPosition(1, 0), 0 /* high */);
     };
+
+    Satellites.prototype.orbitalPeriod = function () {
+        return Calculator.orbitalPeriod(this.body.radius, this.altitude, this.body.stdGravParam);
+    };
+
+    Satellites.prototype.nightTime = function () {
+        return Calculator.orbitalNightTime(this.body.radius, this.altitude, this.body.stdGravParam);
+    };
+
+    Satellites.prototype.requiredBattery = function () {
+        return this.elcConsumption * this.nightTime();
+    };
+
+    Satellites.prototype.requiredGenerator = function () {
+        return this.elcConsumption * this.orbitalPeriod() / (this.orbitalPeriod() - this.nightTime());
+    };
     return Satellites;
 })();
 //# sourceMappingURL=satellites.js.map

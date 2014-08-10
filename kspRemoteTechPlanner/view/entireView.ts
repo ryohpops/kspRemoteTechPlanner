@@ -6,16 +6,19 @@
 /// <reference path="../model/satellites.ts" />
 /// <reference path="graphicshelper.ts" />
 /// <reference path="view.ts" />
-var __extends = this.__extends || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    __.prototype = b.prototype;
-    d.prototype = new __();
-};
-var EntireView = (function (_super) {
-    __extends(EntireView, _super);
-    function EntireView(stage, innerSize, outerSize) {
-        _super.call(this, stage, innerSize, outerSize);
+
+class EntireView extends View {
+    body: Body;
+    satellites: Satellites;
+
+    shapeInner: createjs.Shape;
+    txtBodyName: createjs.Text;
+    txtSatAltitude: createjs.Text;
+    txtCommDistance: createjs.Text;
+    txtCommStableRange: createjs.Text;
+
+    constructor(stage: createjs.Stage, innerSize: number, outerSize: number) {
+        super(stage, innerSize, outerSize);
 
         // shape for drawing in inner coordinates
         this.shapeInner = new createjs.Shape();
@@ -50,49 +53,67 @@ var EntireView = (function (_super) {
         this.txtCommStableRange.x = this.outerSize / 2;
         this.texts.addChild(this.txtCommStableRange);
     }
-    EntireView.prototype.show = function () {
+
+    show(): void {
         this.shapeInner.graphics.clear();
         this.shapeInner.graphics.setStrokeStyle(8);
 
         this.showSatellites(this.shapeInner.graphics);
         this.showBody(this.shapeInner.graphics);
-    };
+    }
 
-    EntireView.prototype.showBody = function (g) {
+    private showBody(g: createjs.Graphics): void {
         // orbiting body
-        g.beginFill(body.color).drawCircle(this.innerSize / 2, this.innerSize / 2, body.radius).endFill();
+        g.beginFill(body.color)
+            .drawCircle(this.innerSize / 2, this.innerSize / 2, body.radius)
+            .endFill();
 
         // name of orbiting body
         this.txtBodyName.text = body.name;
-    };
+    }
 
-    EntireView.prototype.showSatellites = function (g) {
+    private showSatellites(g: createjs.Graphics): void {
         // orbit
-        g.beginStroke("black").drawCircle(this.innerSize / 2, this.innerSize / 2, satellites.altitude + body.radius).endStroke();
+        g.beginStroke("black")
+            .drawCircle(this.innerSize / 2, this.innerSize / 2, satellites.altitude + body.radius)
+            .endStroke();
 
         this.txtSatAltitude.text = "Altitude: " + satellites.altitude + " km";
         this.txtSatAltitude.y = this.outerSize / 2 + this.toOuter(satellites.altitude + body.radius) + 10;
 
-        for (var i = 0; i < satellites.count; i++) {
-            g.beginFill("black").drawCircle(satellites.satPosition(i, this.innerSize).x, satellites.satPosition(i, this.innerSize).y, 50).endFill();
+        // positions
+        for (var i: number = 0; i < satellites.count; i++) {
+            g.beginFill("black")
+                .drawCircle(satellites.satPosition(i, this.innerSize).x, satellites.satPosition(i, this.innerSize).y, 50)
+                .endFill();
         }
 
-        for (var i = 0; i < satellites.count; i++) {
-            g.beginFill("rgba(255,0,0,0.1)").drawCircle(satellites.satPosition(i, this.innerSize).x, satellites.satPosition(i, this.innerSize).y, satellites.range).endFill();
+        // communication area
+        for (var i: number = 0; i < satellites.count; i++) {
+            g.beginFill("rgba(255,0,0,0.1)")
+                .drawCircle(satellites.satPosition(i, this.innerSize).x, satellites.satPosition(i, this.innerSize).y, satellites.range)
+                .endFill();
         }
 
         // distance
         g.beginStroke(Communicator.isNextSatConnectable(body, satellites, this.innerSize) ? "blue" : "red");
-        GraphicsHelper.drawDualArrow(this.shapeInner.graphics, satellites.satPosition(0, this.innerSize).x, satellites.satPosition(0, this.innerSize).y, satellites.satPosition(1, this.innerSize).x, satellites.satPosition(1, this.innerSize).y, this.toInner(20)).endStroke();
+        GraphicsHelper.drawDualArrow(this.shapeInner.graphics,
+            satellites.satPosition(0, this.innerSize).x, satellites.satPosition(0, this.innerSize).y,
+            satellites.satPosition(1, this.innerSize).x, satellites.satPosition(1, this.innerSize).y, this.toInner(20))
+            .endStroke();
 
         this.txtCommDistance.text = "Distance: " + satellites.satDistance().toFixed(3) + " km";
-        this.txtCommDistance.x = this.toOuter(satellites.satPosition(0, this.innerSize).x + (satellites.satPosition(1, this.innerSize).x - satellites.satPosition(0, this.innerSize).x) / 2) + 5;
-        this.txtCommDistance.y = this.toOuter(satellites.satPosition(0, this.innerSize).y + (satellites.satPosition(1, this.innerSize).y - satellites.satPosition(0, this.innerSize).y) / 2) + 5;
+        this.txtCommDistance.x = this.toOuter(satellites.satPosition(0, this.innerSize).x + (satellites.satPosition(1, this.innerSize).x
+            - satellites.satPosition(0, this.innerSize).x) / 2) + 5;
+        this.txtCommDistance.y = this.toOuter(satellites.satPosition(0, this.innerSize).y + (satellites.satPosition(1, this.innerSize).y
+            - satellites.satPosition(0, this.innerSize).y) / 2) + 5;
 
         // stable area
         if (Communicator.hasStableArea(body, satellites, this.innerSize)) {
             // upper limit of stable area
-            this.shapeInner.graphics.beginStroke("green").drawCircle(this.innerSize / 2, this.innerSize / 2, satellites.stableRange()).endStroke();
+            this.shapeInner.graphics.beginStroke("green")
+                .drawCircle(this.innerSize / 2, this.innerSize / 2, satellites.stableRange())
+                .endStroke();
 
             // range of stable area
             this.txtCommStableRange.text = "Stable: " + satellites.stableRange().toFixed(3) + " km";
@@ -100,7 +121,5 @@ var EntireView = (function (_super) {
         } else {
             this.txtCommStableRange.text = "";
         }
-    };
-    return EntireView;
-})(View);
-//# sourceMappingURL=entireView.js.map
+    }
+}
