@@ -2,5 +2,5 @@
     name: string;
     color: string;
     radius: number;
-    gravitationalParameter: number;
+    stdGravParam: number;
 } 

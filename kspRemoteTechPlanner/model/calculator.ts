@@ -28,8 +28,12 @@ module Calculator {
         return length(point, h);
     }
 
-    export function chordToArc(radius: number, chordLength: number): number {
-        var centerRad: number = 2 * Math.asin(radius / (chordLength / 2));
-        return radius * centerRad;
+    export function orbitalPeriod(bodyRadius: number, altitude: number, stdGravParam: number) {
+        return 2 * Math.PI * Math.sqrt(Math.pow(bodyRadius + altitude, 3) / stdGravParam);
+    }
+
+    export function orbitalNightTime(bodyRadius: number, altitude: number, stdGravParam: number) {
+        var ra: number = bodyRadius + altitude;
+        return 2 * Math.pow(ra, 2) / Math.sqrt(ra * stdGravParam) * Math.asin(bodyRadius / ra);
     }
 }

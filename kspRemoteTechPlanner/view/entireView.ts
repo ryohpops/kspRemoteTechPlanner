@@ -3,7 +3,6 @@
 /// <reference path="../scripts/typings/tweenjs/tweenjs.d.ts" />
 /// <reference path="../model/body.ts" />
 /// <reference path="../model/communicator.ts" />
-/// <reference path="../model/point.ts" />
 /// <reference path="../model/satellites.ts" />
 /// <reference path="graphicshelper.ts" />
 /// <reference path="view.ts" />

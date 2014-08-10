@@ -2,8 +2,6 @@
 /// <reference path="../scripts/typings/createjs-lib/createjs-lib.d.ts" />
 /// <reference path="../scripts/typings/tweenjs/tweenjs.d.ts" />
 /// <reference path="../model/body.ts" />
-/// <reference path="../model/communicator.ts" />
-/// <reference path="../model/point.ts" />
 /// <reference path="../model/satellites.ts" />
 /// <reference path="graphicshelper.ts" />
 /// <reference path="view.ts" />
@@ -23,7 +21,7 @@ var NightView = (function (_super) {
         this.shapes.addChild(this.shapeOuter);
 
         // orbital period
-        this.txtOrbitalPeriod = new createjs.Text("", "20px Arial", "black");
+        this.txtOrbitalPeriod = new createjs.Text("", "16px Arial", "black");
         this.txtOrbitalPeriod.textAlign = "center";
         this.txtOrbitalPeriod.textBaseline = "bottom";
         this.txtOrbitalPeriod.x = this.outerSize / 2;
@@ -31,7 +29,7 @@ var NightView = (function (_super) {
         this.texts.addChild(this.txtOrbitalPeriod);
 
         // required generation amount of electricity
-        this.txtRequiredGenerator = new createjs.Text("", "20px Arial", "black");
+        this.txtRequiredGenerator = new createjs.Text("", "16px Arial", "black");
         this.txtRequiredGenerator.textAlign = "center";
         this.txtRequiredGenerator.textBaseline = "top";
         this.txtRequiredGenerator.x = this.outerSize / 2;
@@ -39,23 +37,24 @@ var NightView = (function (_super) {
         this.texts.addChild(this.txtRequiredGenerator);
 
         // time of night
-        this.txtNightTime = new createjs.Text("", "20px Arial", "black");
+        this.txtNightTime = new createjs.Text("", "16px Arial", "black");
         this.txtNightTime.textAlign = "left";
         this.txtNightTime.textBaseline = "bottom";
-        this.txtNightTime.x = this.outerSize / 2 + NightView.bodyRadius;
+        this.txtNightTime.x = this.outerSize / 2;
         this.txtNightTime.y = this.outerSize / 2 - NightView.bodyRadius - 5;
         this.texts.addChild(this.txtNightTime);
 
         // required battery capacity
-        this.txtRequiredBattery = new createjs.Text("", "20px Arial", "black");
+        this.txtRequiredBattery = new createjs.Text("", "16px Arial", "black");
         this.txtRequiredBattery.textAlign = "left";
         this.txtRequiredBattery.textBaseline = "top";
-        this.txtRequiredBattery.x = this.outerSize / 2 + NightView.bodyRadius;
+        this.txtRequiredBattery.x = this.outerSize / 2;
         this.txtRequiredBattery.y = this.outerSize / 2 + NightView.bodyRadius + 5;
         this.texts.addChild(this.txtRequiredBattery);
     }
     NightView.prototype.show = function () {
         this.shapeOuter.graphics.clear();
+        this.shapeOuter.graphics.setStrokeStyle(2);
 
         // night area
         this.shapeOuter.graphics.beginFill("rgba(0,0,0,0.2)").drawRect(this.outerSize / 2, this.outerSize / 2 - NightView.bodyRadius, this.outerSize / 2, NightView.bodyRadius * 2).endFill();
@@ -64,7 +63,19 @@ var NightView = (function (_super) {
         this.shapeOuter.graphics.beginFill(body.color).drawCircle(this.outerSize / 2, this.outerSize / 2, NightView.bodyRadius).endFill();
 
         // orbit
-        this.shapeOuter.graphics.beginStroke("black").drawCircle(this.outerSize / 2, this.outerSize / 2, NightView.orbitRadius).endFill();
+        this.shapeOuter.graphics.beginStroke("lightgray").drawCircle(this.outerSize / 2, this.outerSize / 2, NightView.orbitRadius).endStroke();
+
+        // orbital period
+        this.txtOrbitalPeriod.text = "Orbital period: " + satellites.orbitalPeriod().toFixed(3) + " sec.";
+
+        // night time
+        this.txtNightTime.text = "Night time: " + satellites.nightTime().toFixed(3) + " sec.";
+
+        // required battery
+        this.txtRequiredBattery.text = "Required Battery: " + satellites.requiredBattery().toFixed(3);
+
+        // required generator
+        this.txtRequiredGenerator.text = "Required Generator: " + satellites.requiredGenerator().toFixed(3) + " per sec.";
     };
     NightView.bodyRadius = 50;
     NightView.orbitRadius = 150;

@@ -50,11 +50,12 @@ function update() {
     body.name = b.name;
     body.color = b.color;
     body.radius = b.radius;
-    body.gravitationalParameter = b.gravitationalParameter;
+    body.stdGravParam = b.stdGravParam;
     satellites.body = body;
     satellites.count = parseInt($("input#count").val());
     satellites.altitude = parseFloat($("input#altitude").val());
     satellites.range = parseFloat($("input#range").val());
+    satellites.elcConsumption = parseFloat($("input#elcConsumption").val());
 
     // show objects
     viewEntire.show();
