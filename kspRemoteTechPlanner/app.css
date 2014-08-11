@@ -9,7 +9,6 @@ div.manual-input {
     display: none;
 }
 
-button.manual-input {
-    margin: 5%;
-    width: 90%;
+button.manual-input[id$="detail"] {
+    width: 10%;
 }
