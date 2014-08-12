@@ -79,7 +79,7 @@
 
             <div class="col-md-3">
                 <h3>Data input</h3>
-                <form role="form" id="calculator">
+                <form role="form">
                     <div class="form-group">
                         <label for="body">Body</label>
                         <select class="form-control" id="body">
@@ -93,19 +93,19 @@
                         <div class="manual-input" id="body">
                             <div class="form-group">
                                 <label for="body_name">Name</label>
-                                <input type="text" class="form-control" id="body_name" />
+                                <input type="text" class="form-control" id="body_name" value="Kerbin" />
                             </div>
                             <div class="form-group">
                                 <label for="body_color">Color</label>
-                                <input type="text" class="form-control" id="body_color" />
+                                <input type="text" class="form-control" id="body_color" value="darkgreen" />
                             </div>
                             <div class="form-group">
                                 <label for="body_radius">Radius(km)</label>
-                                <input type="number" class="form-control" id="body_radius" step="10" />
+                                <input type="number" class="form-control" id="body_radius" step="10" value="600" />
                             </div>
                             <div class="form-group">
                                 <label for="body_stdGravParam">Standard gravitational parameter<br />(km<sup>3</sup>s<sup>-2</sup>)</label>
-                                <input type="number" class="form-control" id="body_stdGravParam" step="0.1"/>
+                                <input type="number" class="form-control" id="body_stdGravParam" step="0.1" value="3531.6" />
                             </div>
                         </div>
 
@@ -131,7 +131,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="elcConsumption">Probe electricity consumption<br />(per sec.)</label>
+                        <label for="elcConsumption">Probe electricity consumption<br />(exclude antenna's, per sec.)</label>
                         <input type="number" class="form-control" id="elcConsumption" value="0.01" step="0.01" />
                     </div>
 
@@ -150,19 +150,19 @@
                         <div class="manual-input" id="antenna">
                             <div class="form-group">
                                 <label for="antenna_name">Name</label>
-                                <input type="text" class="form-control" id="antenna_name" />
+                                <input type="text" class="form-control" id="antenna_name" value="Communotron 16" />
                             </div>
                             <div class="form-group" style="display:none">
                                 <label for="antenna_type">Type(omni or dish)</label>
-                                <input type="text" class="form-control" id="antenna_type" />
+                                <input type="text" class="form-control" id="antenna_type" value="omni" />
                             </div>
                             <div class="form-group">
                                 <label for="antenna_range">Range(km)</label>
-                                <input type="number" class="form-control" id="antenna_range" step="100" />
+                                <input type="number" class="form-control" id="antenna_range" step="100" value="2500" />
                             </div>
                             <div class="form-group">
                                 <label for="antenna_elcConsumption">Electricity consumption(per sec.)</label>
-                                <input type="number" class="form-control" id="antenna_elcConsumption" step="0.01" />
+                                <input type="number" class="form-control" id="antenna_elcConsumption" step="0.01" value="0.13" />
                             </div>
                         </div>
 
