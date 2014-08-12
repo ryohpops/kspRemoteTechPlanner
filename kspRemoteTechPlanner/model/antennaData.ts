@@ -8,7 +8,7 @@ module AntennaData {
         "Communotron 32": { name: "Communotron 32", type: AntennaType.omni, range: 5000, elcConsumption: 0.6 }
     };
 
-    export function getBody(name: string): Antenna {
+    export function getAntenna(name: string): Antenna {
         return antennas[name];
     }
 }

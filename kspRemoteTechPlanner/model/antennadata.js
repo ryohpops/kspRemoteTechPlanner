@@ -8,9 +8,9 @@ var AntennaData;
         "Communotron 32": { name: "Communotron 32", type: 0 /* omni */, range: 5000, elcConsumption: 0.6 }
     };
 
-    function getBody(name) {
+    function getAntenna(name) {
         return antennas[name];
     }
-    AntennaData.getBody = getBody;
+    AntennaData.getAntenna = getAntenna;
 })(AntennaData || (AntennaData = {}));
 //# sourceMappingURL=antennadata.js.map

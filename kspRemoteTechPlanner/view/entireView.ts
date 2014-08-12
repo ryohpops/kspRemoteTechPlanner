@@ -91,7 +91,7 @@ class EntireView extends View {
         // communication area
         for (var i: number = 0; i < satellites.count; i++) {
             g.beginFill("rgba(255,0,0,0.1)")
-                .drawCircle(satellites.satPosition(i, this.innerSize).x, satellites.satPosition(i, this.innerSize).y, satellites.range)
+                .drawCircle(satellites.satPosition(i, this.innerSize).x, satellites.satPosition(i, this.innerSize).y, satellites.antenna.range)
                 .endFill();
         }
 

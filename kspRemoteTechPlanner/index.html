@@ -15,8 +15,10 @@
     <script src="model/calculator.js"></script>
     <script src="model/communicator.js"></script>
     <script src="model/body.js"></script>
+    <script src="model/antenna.js"></script>
     <script src="model/satellites.js"></script>
     <script src="model/bodyData.js"></script>
+    <script src="model/antennaData.js"></script>
     <script src="view/graphicsHelper.js"></script>
     <script src="view/view.js"></script>
     <script src="view/entireView.js"></script>
@@ -97,11 +99,11 @@
                                 <input type="text" class="form-control" id="body_color" />
                             </div>
                             <div class="form-group">
-                                <label for="body_radius">Radius</label>
+                                <label for="body_radius">Radius(km)</label>
                                 <input type="number" class="form-control" id="body_radius" />
                             </div>
                             <div class="form-group">
-                                <label for="body_stdGravParam">Standard gravitational parameter</label>
+                                <label for="body_stdGravParam">Standard gravitational parameter<br />(km<sup>3</sup>s<sup>-2</sup>)</label>
                                 <input type="number" class="form-control" id="body_stdGravParam" />
                             </div>
                         </div>
@@ -128,13 +130,50 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="range">Communication range</label>
-                        <input type="number" class="form-control" id="range" value="2500" />
+                        <label for="elcConsumption">Probe electricity consumption<br />(per sec.)</label>
+                        <input type="number" class="form-control" id="elcConsumption" value="0.01" />
                     </div>
 
                     <div class="form-group">
-                        <label for="consumption">Electricity consumption(per sec.)</label>
-                        <input type="number" class="form-control" id="elcConsumption" value="0.15" />
+                        <label for="antenna">Antenna</label>
+                        <select class="form-control" id="antenna">
+                            <optgroup label="Omnidirectional">
+                                <option>Reflectron DP-10</option>
+                                <option selected>Communotron 16</option>
+                                <option>CommTech EXP-VR-2T</option>
+                                <option>Communotron 32</option>
+                            </optgroup>
+                            <optgroup label="Dish"></optgroup>
+                        </select>
+
+                        <div class="manual-input" id="antenna">
+                            <div class="form-group">
+                                <label for="antenna_name">Name</label>
+                                <input type="text" class="form-control" id="antenna_name" />
+                            </div>
+                            <div class="form-group" style="display:none">
+                                <label for="antenna_type">Type(omni or dish)</label>
+                                <input type="text" class="form-control" id="antenna_type" />
+                            </div>
+                            <div class="form-group">
+                                <label for="antenna_range">Range(km)</label>
+                                <input type="number" class="form-control" id="antenna_range" />
+                            </div>
+                            <div class="form-group">
+                                <label for="antenna_elcConsumption">Electricity consumption(per sec.)</label>
+                                <input type="number" class="form-control" id="antenna_elcConsumption" />
+                            </div>
+                        </div>
+
+                        <div class="btn-group btn-group-xs btn-group-justified">
+                            <button type="button" class="btn btn-xs manual-input" id="antenna_detail">
+                                <span class="glyphicon glyphicon-collapse-up"></span>
+                                <span class="glyphicon glyphicon-collapse-down"></span>
+                            </button>
+                            <button type="button" class="btn btn-xs manual-input" id="antenna_reset">
+                                <span class="glyphicon glyphicon-repeat"></span>
+                            </button>
+                        </div>
                     </div>
 
                     <div class="form-group">
