@@ -9,6 +9,10 @@ div.manual-input {
     display: none;
 }
 
-button.manual-input[id$="detail"] {
+button.manual-input[id$="_detail"] {
+    width: 90%;
+}
+
+button.manual-input[id$="_reset"] {
     width: 10%;
 }
