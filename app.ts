@@ -9,21 +9,22 @@
 /// <reference path="model/satellites.ts" />
 /// <reference path="view/entireview.ts" />
 /// <reference path="view/nightview.ts" />
+
 // values
-var body;
-var antenna;
-var satellites;
+var body: Body;
+var antenna: Antenna;
+var satellites: Satellites;
 
 // Entire View
-var stageEntire;
-var viewEntire;
+var stageEntire: createjs.Stage;
+var viewEntire: EntireView;
 
 // Night View
-var stageNight;
-var viewNight;
+var stageNight: createjs.Stage;
+var viewNight: NightView;
 
 // startup
-$(function () {
+$(() => {
     init();
 });
 
@@ -45,22 +46,12 @@ function init() {
 
     // init controls
     $("select#body").on("change", onBodySelect);
-    $("button.manual-input#body_detail").on("click", function (ev) {
-        $("div.manual-input#body").slideToggle();
-    });
-    $("button.manual-input#body_reset").on("click", function (ev) {
-        onBodySelect(ev);
-    });
+    $("button.manual-input#body_detail").on("click", (ev) => { $("div.manual-input#body").slideToggle() });
+    $("button.manual-input#body_reset").on("click", (ev) => { onBodySelect(ev) });
     $("select#antenna").on("change", onAntennaSelect);
-    $("button.manual-input#antenna_detail").on("click", function (ev) {
-        $("div.manual-input#antenna").slideToggle();
-    });
-    $("button.manual-input#antenna_reset").on("click", function (ev) {
-        onAntennaSelect(ev);
-    });
-    $("button#calculate").on("click", function (ev) {
-        update();
-    });
+    $("button.manual-input#antenna_detail").on("click", (ev) => { $("div.manual-input#antenna").slideToggle() });
+    $("button.manual-input#antenna_reset").on("click", (ev) => { onAntennaSelect(ev) });
+    $("button#calculate").on("click", (ev) => { update() });
 
     onBodySelect(null);
     onAntennaSelect(null);
@@ -76,9 +67,9 @@ function update() {
 
     antenna.name = $("input#antenna_name").val();
     if ($("input#antenna_type").val() == "omni") {
-        antenna.type = 0 /* omni */;
+        antenna.type = AntennaType.omni;
     } else if ($("input#antenna_type").val() == "dish") {
-        antenna.type = 1 /* dish */;
+        antenna.type = AntennaType.dish;
     }
     antenna.range = parseFloat($("input#antenna_range").val());
     antenna.elcConsumption = parseFloat($("input#antenna_elcConsumption").val());
@@ -96,7 +87,7 @@ function update() {
 
 // event handler
 function onBodySelect(ev) {
-    var b = BodyData.getBody($("select#body").val());
+    var b: Body = BodyData.getBody($("select#body").val());
     $("input#body_name").val(b.name);
     $("input#body_color").val(b.color);
     $("input#body_radius").val(b.radius.toString());
@@ -104,14 +95,13 @@ function onBodySelect(ev) {
 }
 
 function onAntennaSelect(ev) {
-    var a = AntennaData.getAntenna($("select#antenna").val());
+    var a: Antenna = AntennaData.getAntenna($("select#antenna").val());
     $("input#antenna_name").val(a.name);
-    if (a.type == 0 /* omni */) {
+    if (a.type == AntennaType.omni) {
         $("input#antenna_type").val("omni");
-    } else if (a.type == 1 /* dish */) {
+    } else if (a.type == AntennaType.dish) {
         $("input#antenna_type").val("dish");
     }
     $("input#antenna_range").val(a.range.toString());
     $("input#antenna_elcConsumption").val(a.elcConsumption.toString());
 }
-//# sourceMappingURL=app.js.map

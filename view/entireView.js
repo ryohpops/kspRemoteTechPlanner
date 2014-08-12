@@ -78,7 +78,7 @@ var EntireView = (function (_super) {
         }
 
         for (var i = 0; i < satellites.count; i++) {
-            g.beginFill("rgba(255,0,0,0.1)").drawCircle(satellites.satPosition(i, this.innerSize).x, satellites.satPosition(i, this.innerSize).y, satellites.range).endFill();
+            g.beginFill("rgba(255,0,0,0.1)").drawCircle(satellites.satPosition(i, this.innerSize).x, satellites.satPosition(i, this.innerSize).y, satellites.antenna.range).endFill();
         }
 
         // distance

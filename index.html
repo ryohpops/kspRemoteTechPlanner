@@ -15,8 +15,10 @@
     <script src="model/calculator.js"></script>
     <script src="model/communicator.js"></script>
     <script src="model/body.js"></script>
+    <script src="model/antenna.js"></script>
     <script src="model/satellites.js"></script>
     <script src="model/bodyData.js"></script>
+    <script src="model/antennaData.js"></script>
     <script src="view/graphicsHelper.js"></script>
     <script src="view/view.js"></script>
     <script src="view/entireView.js"></script>
@@ -41,10 +43,11 @@
             When green circle labeled Stable appears, it means that any orbits lower than Stable altitude never have connection-less flight.<br />
             <br />
             This website is under development, forum is <a href="http://forum.kerbalspaceprogram.com/threads/90113-WEB-Visual-RemoteTech-Planner-for-MOD-RemoteTech2">here</a>
-            and sources are available on <a href="https://github.com/ryohpops/kspRemoteTechPlanner">github</a>. Current version is beta2.<br />
+            and sources are available on <a href="https://github.com/ryohpops/kspRemoteTechPlanner">github</a>. Current version is beta2.1.<br />
             Issues, bug reports, contributers are always welcome.<br />
             <br />
-            Data of bodies is based on <a href="http://wiki.kerbalspaceprogram.com/wiki/Main_Page">KSP Wiki</a>.<br />
+            Data of bodies is based on <a href="http://wiki.kerbalspaceprogram.com/wiki/Main_Page">KSP Wiki</a> and
+            <a href="http://remotetechnologiesgroup.github.io/RemoteTech/">RemoteTech2 manual</a>.<br />
             NO GUARANTEES OF CORRECTNESS.
         </div>
 
@@ -53,21 +56,21 @@
                 <div class="row">
                     <div class="col-md-12" align="center">
                         <h3>Entire view</h3>
-                        <div id="wrap-canvas">
+                        <div class="wrap-canvas">
                             <canvas id="entire" width="800" height="800"></canvas>
                         </div>
                     </div>
 
                     <div class="col-md-6" align="center">
                         <h3>Night view</h3>
-                        <div id="wrap-canvas">
+                        <div class="wrap-canvas">
                             <canvas id="night" width="400" height="400"></canvas>
                         </div>
                     </div>
 
                     <!--<div class="col-md-6" align="center">
                         <h3>Lost View</h3>
-                        <div id="wrap-canvas">
+                        <div class="wrap-canvas">
                             <canvas id="lost" width="400" height="400"></canvas>
                         </div>
                     </div>-->
@@ -76,7 +79,7 @@
 
             <div class="col-md-3">
                 <h3>Data input</h3>
-                <form role="form" id="calculator">
+                <form role="form">
                     <div class="form-group">
                         <label for="body">Body</label>
                         <select class="form-control" id="body">
@@ -86,6 +89,35 @@
                                 <option>Minmus</option>
                             </optgroup>
                         </select>
+
+                        <div class="manual-input" id="body">
+                            <div class="form-group">
+                                <label for="body_name">Name</label>
+                                <input type="text" class="form-control" id="body_name" value="Kerbin" />
+                            </div>
+                            <div class="form-group">
+                                <label for="body_color">Color</label>
+                                <input type="text" class="form-control" id="body_color" value="darkgreen" />
+                            </div>
+                            <div class="form-group">
+                                <label for="body_radius">Radius(km)</label>
+                                <input type="number" class="form-control" id="body_radius" step="10" value="600" />
+                            </div>
+                            <div class="form-group">
+                                <label for="body_stdGravParam">Standard gravitational parameter<br />(km<sup>3</sup>s<sup>-2</sup>)</label>
+                                <input type="number" class="form-control" id="body_stdGravParam" step="0.1" value="3531.6" />
+                            </div>
+                        </div>
+
+                        <div class="btn-group btn-group-xs btn-group-justified">
+                            <button type="button" class="btn btn-xs manual-input" id="body_detail">
+                                <span class="glyphicon glyphicon-collapse-up"></span>
+                                <span class="glyphicon glyphicon-collapse-down"></span>
+                            </button>
+                            <button type="button" class="btn btn-xs manual-input" id="body_reset">
+                                <span class="glyphicon glyphicon-repeat"></span>
+                            </button>
+                        </div>
                     </div>
 
                     <div class="form-group">
@@ -95,17 +127,54 @@
 
                     <div class="form-group">
                         <label for="altitude">Altitude(km, ASL)</label>
-                        <input type="number" class="form-control" id="altitude" value="1000" />
+                        <input type="number" class="form-control" id="altitude" value="1000" step="10" />
                     </div>
 
                     <div class="form-group">
-                        <label for="range">Communication range</label>
-                        <input type="number" class="form-control" id="range" value="2500" />
+                        <label for="elcConsumption">Probe electricity consumption<br />(exclude antenna's, per sec.)</label>
+                        <input type="number" class="form-control" id="elcConsumption" value="0.01" step="0.01" />
                     </div>
 
                     <div class="form-group">
-                        <label for="consumption">Electricity consumption(per sec.)</label>
-                        <input type="number" class="form-control" id="elcConsumption" value="0.15" />
+                        <label for="antenna">Antenna</label>
+                        <select class="form-control" id="antenna">
+                            <optgroup label="Omnidirectional">
+                                <option>Reflectron DP-10</option>
+                                <option selected>Communotron 16</option>
+                                <option>CommTech EXP-VR-2T</option>
+                                <option>Communotron 32</option>
+                            </optgroup>
+                            <optgroup label="Dish"></optgroup>
+                        </select>
+
+                        <div class="manual-input" id="antenna">
+                            <div class="form-group">
+                                <label for="antenna_name">Name</label>
+                                <input type="text" class="form-control" id="antenna_name" value="Communotron 16" />
+                            </div>
+                            <div class="form-group" style="display:none">
+                                <label for="antenna_type">Type(omni or dish)</label>
+                                <input type="text" class="form-control" id="antenna_type" value="omni" />
+                            </div>
+                            <div class="form-group">
+                                <label for="antenna_range">Range(km)</label>
+                                <input type="number" class="form-control" id="antenna_range" step="100" value="2500" />
+                            </div>
+                            <div class="form-group">
+                                <label for="antenna_elcConsumption">Electricity consumption(per sec.)</label>
+                                <input type="number" class="form-control" id="antenna_elcConsumption" step="0.01" value="0.13" />
+                            </div>
+                        </div>
+
+                        <div class="btn-group btn-group-xs btn-group-justified">
+                            <button type="button" class="btn btn-xs manual-input" id="antenna_detail">
+                                <span class="glyphicon glyphicon-collapse-up"></span>
+                                <span class="glyphicon glyphicon-collapse-down"></span>
+                            </button>
+                            <button type="button" class="btn btn-xs manual-input" id="antenna_reset">
+                                <span class="glyphicon glyphicon-repeat"></span>
+                            </button>
+                        </div>
                     </div>
 
                     <div class="form-group">
@@ -125,8 +194,9 @@
             <div class="col-sm-12">
                 Created by ryohpops, © 2014. Forum is <a href="http://forum.kerbalspaceprogram.com/threads/90113-WEB-Visual-RemoteTech-Planner-for-MOD-RemoteTech2">here</a>
                 and github repository is <a href="https://github.com/ryohpops/kspRemoteTechPlanner">here</a>.<br />
-                Built with <a href="http://getbootstrap.com/">Bootstrap</a> and <a href="https://github.com/CreateJS/EaselJS">EaselJS</a>,
-                both licensed under <a href="https://github.com/ryohpops/kspRemoteTechPlanner/blob/master/LICENSE">MIT License</a>.<br />
+                Built with <a href="http://getbootstrap.com/">Bootstrap</a>, <a href="http://glyphicons.com/">GLYPHICONS</a> Halflings and <a href="https://github.com/CreateJS/EaselJS">EaselJS</a>,
+                licensed under <a href="https://github.com/ryohpops/kspRemoteTechPlanner/blob/master/LICENSE">MIT License</a>.<br />
+                <a href="http://forum.kerbalspaceprogram.com/threads/83305-Development-Resumed-RemoteTech-2">RemoteTech2</a> and all the antenna/dish names are property of Remote Technologies Group.<br />
                 <a href="https://kerbalspaceprogram.com/">KSP</a>, Kerbal Space Program and all the planet/moon names are property of <a href="http://www.squad.com.mx/">Squad</a>.
                 <br /><br />
             </div>
