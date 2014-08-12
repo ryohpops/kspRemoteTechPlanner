@@ -41,6 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="app.ts" />
+    <TypeScriptCompile Include="model\antenna.ts" />
+    <TypeScriptCompile Include="model\antennaData.ts" />
     <TypeScriptCompile Include="model\body.ts" />
     <TypeScriptCompile Include="model\communicator.ts" />
     <TypeScriptCompile Include="model\point.ts" />

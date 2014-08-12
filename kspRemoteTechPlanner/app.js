@@ -4,11 +4,14 @@
 /// <reference path="scripts/typings/tweenjs/tweenjs.d.ts" />
 /// <reference path="model/body.ts" />
 /// <reference path="model/bodydata.ts" />
+/// <reference path="model/antenna.ts" />
+/// <reference path="model/antennadata.ts" />
 /// <reference path="model/satellites.ts" />
 /// <reference path="view/entireview.ts" />
 /// <reference path="view/nightview.ts" />
 // values
 var body;
+var antenna;
 var satellites;
 
 // Entire View
@@ -28,6 +31,7 @@ $(function () {
 function init() {
     // init values
     body = new Body();
+    antenna = new Antenna();
     satellites = new Satellites();
 
     // init views
@@ -59,6 +63,7 @@ function update() {
     body.color = $("input#body_color").val();
     body.radius = parseFloat($("input#body_radius").val());
     body.stdGravParam = parseFloat($("input#body_stdGravParam").val());
+
     satellites.body = body;
     satellites.count = parseInt($("input#count").val());
     satellites.altitude = parseFloat($("input#altitude").val());
