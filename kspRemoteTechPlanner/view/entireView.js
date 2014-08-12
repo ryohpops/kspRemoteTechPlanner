@@ -19,7 +19,6 @@ var EntireView = (function (_super) {
 
         // shape for drawing in inner coordinates
         this.shapeInner = new createjs.Shape();
-        this.shapeInner.scaleX = this.shapeInner.scaleY = this.outerSize / this.innerSize;
         this.shapes.addChild(this.shapeInner);
 
         // name of orbiting body
@@ -51,6 +50,8 @@ var EntireView = (function (_super) {
         this.texts.addChild(this.txtCommStableRange);
     }
     EntireView.prototype.show = function () {
+        this.shapeInner.scaleX = this.shapeInner.scaleY = this.outerSize / this.innerSize;
+
         this.shapeInner.graphics.clear();
         this.shapeInner.graphics.setStrokeStyle(8);
 

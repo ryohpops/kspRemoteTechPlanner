@@ -6,7 +6,7 @@ var BodyData;
         "Moho": { name: "Moho", color: "rgb(185,122,87)", radius: 250, stdGravParam: 168.60938 },
         "Eve": { name: "Eve", color: "rgb(163,73,164)", radius: 700, stdGravParam: 8171.7302 },
         "Gilly": { name: "Gilly", color: "rgb(239,228,176)", radius: 13, stdGravParam: 0.0082894498 },
-        "Kerbin": { name: "Kerbin", color: "rgb(63,111,40", radius: 600, stdGravParam: 3531.6 },
+        "Kerbin": { name: "Kerbin", color: "rgb(63,111,40)", radius: 600, stdGravParam: 3531.6 },
         "Mun": { name: "Mun", color: "rgb(127,127,127)", radius: 200, stdGravParam: 65.138398 },
         "Minmus": { name: "Minmus", color: "rgb(153,217,234)", radius: 60, stdGravParam: 1.7658 },
         "Duna": { name: "Duna", color: "rgb(237,28,36)", radius: 320, stdGravParam: 301.36321 },

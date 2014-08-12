@@ -88,6 +88,8 @@ function update() {
     satellites.elcConsumption = parseFloat($("input#elcConsumption").val());
 
     // show objects
+    viewEntire.innerSize = (body.radius + satellites.altitude + antenna.range) * 2 * 1.05;
+
     viewEntire.show();
     stageEntire.update();
     viewNight.show();
