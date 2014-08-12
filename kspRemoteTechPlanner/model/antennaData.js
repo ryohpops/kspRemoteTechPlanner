@@ -15,4 +15,4 @@ var AntennaData;
     }
     AntennaData.getAntenna = getAntenna;
 })(AntennaData || (AntennaData = {}));
-//# sourceMappingURL=antennadata.js.map
+//# sourceMappingURL=antennaData.js.map
