@@ -33,10 +33,10 @@ class Satellites {
     }
 
     requiredBattery(): number {
-        return this.elcConsumption * this.nightTime();
+        return (this.elcConsumption + this.antenna.elcConsumption) * this.nightTime();
     }
 
     requiredGenerator(): number {
-        return this.elcConsumption * this.orbitalPeriod() / (this.orbitalPeriod() - this.nightTime())
+        return (this.elcConsumption + this.antenna.elcConsumption) * this.orbitalPeriod() / (this.orbitalPeriod() - this.nightTime())
     }
 } 

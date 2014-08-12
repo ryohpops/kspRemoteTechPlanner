@@ -80,8 +80,8 @@ function update() {
     } else if ($("input#antenna_type").val() == "dish") {
         antenna.type = 1 /* dish */;
     }
-    antenna.range = $("input#antenna_range").val();
-    antenna.elcConsumption = $("input#antenna_elcConsumption").val();
+    antenna.range = parseFloat($("input#antenna_range").val());
+    antenna.elcConsumption = parseFloat($("input#antenna_elcConsumption").val());
 
     satellites.count = parseInt($("input#count").val());
     satellites.altitude = parseFloat($("input#altitude").val());

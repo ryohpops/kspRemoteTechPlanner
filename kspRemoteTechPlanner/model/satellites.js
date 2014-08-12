@@ -27,11 +27,11 @@ var Satellites = (function () {
     };
 
     Satellites.prototype.requiredBattery = function () {
-        return this.elcConsumption * this.nightTime();
+        return (this.elcConsumption + this.antenna.elcConsumption) * this.nightTime();
     };
 
     Satellites.prototype.requiredGenerator = function () {
-        return this.elcConsumption * this.orbitalPeriod() / (this.orbitalPeriod() - this.nightTime());
+        return (this.elcConsumption + this.antenna.elcConsumption) * this.orbitalPeriod() / (this.orbitalPeriod() - this.nightTime());
     };
     return Satellites;
 })();
