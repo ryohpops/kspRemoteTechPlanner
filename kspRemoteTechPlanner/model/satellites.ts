@@ -1,11 +1,12 @@
 ﻿/// <reference path="body.ts" />
+/// <reference path="antenna.ts" />
 /// <reference path="point.ts" />
 
 class Satellites {
     body: Body;
+    antenna: Antenna;
     count: number;
     altitude: number;
-    range: number;
     elcConsumption: number;
 
     satPosition(offset: number, innerSize: number, count: number= this.count,
@@ -19,7 +20,7 @@ class Satellites {
     }
 
     stableRange(): number {
-        return Calculator.circleCrossPoint(new Point(0, 0), this.range,
+        return Calculator.circleCrossPoint(new Point(0, 0), this.antenna.range,
             this.satPosition(0, 0), this.satPosition(1, 0), Calculator.CircleCrossPointMode.high);
     }
 
@@ -32,10 +33,10 @@ class Satellites {
     }
 
     requiredBattery(): number {
-        return this.elcConsumption * this.nightTime();
+        return (this.elcConsumption + this.antenna.elcConsumption) * this.nightTime();
     }
 
     requiredGenerator(): number {
-        return this.elcConsumption * this.orbitalPeriod() / (this.orbitalPeriod() - this.nightTime())
+        return (this.elcConsumption + this.antenna.elcConsumption) * this.orbitalPeriod() / (this.orbitalPeriod() - this.nightTime())
     }
 } 

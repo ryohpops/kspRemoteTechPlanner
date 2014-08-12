@@ -5,7 +5,7 @@
 var Communicator;
 (function (Communicator) {
     function isNextSatConnectable(body, satellites, innerSize) {
-        return satellites.count >= 2 && Calculator.length(satellites.satPosition(0, innerSize), satellites.satPosition(1, innerSize)) <= satellites.range && Calculator.distanceBetweenPointAndLine(new Point(innerSize / 2, innerSize / 2), satellites.satPosition(0, innerSize), satellites.satPosition(1, innerSize)) >= body.radius;
+        return satellites.count >= 2 && Calculator.length(satellites.satPosition(0, innerSize), satellites.satPosition(1, innerSize)) <= satellites.antenna.range && Calculator.distanceBetweenPointAndLine(new Point(innerSize / 2, innerSize / 2), satellites.satPosition(0, innerSize), satellites.satPosition(1, innerSize)) >= body.radius;
     }
     Communicator.isNextSatConnectable = isNextSatConnectable;
 
