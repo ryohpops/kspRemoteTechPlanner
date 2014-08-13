@@ -10,7 +10,15 @@ div.manual-input {
 }
 
 button.manual-input[id$="_detail"] {
-    width: 90%;
+    width: 70%;
+}
+
+button.manual-input[id$="_add"] {
+    width: 10%;
+}
+
+button.manual-input[id$="_remove"] {
+    width: 10%;
 }
 
 button.manual-input[id$="_reset"] {

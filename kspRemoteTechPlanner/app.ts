@@ -49,8 +49,6 @@ function init() {
     $("button.manual-input#body_detail").on("click", (ev) => { $("div.manual-input#body").slideToggle() });
     $("button.manual-input#body_reset").on("click", (ev) => { onBodySelect(ev) });
 
-    $("input[id^='body_']").on("change", onBodyDetailChanged);
-
     $("select#antenna").on("change", onAntennaSelect);
     $("button.manual-input#antenna_detail").on("click", (ev) => { $("div.manual-input#antenna").slideToggle() });
     $("button.manual-input#antenna_reset").on("click", (ev) => { onAntennaSelect(ev) });
@@ -99,10 +97,6 @@ function onBodySelect(ev) {
     $("input#body_color").val(b.color);
     $("input#body_radius").val(b.radius.toString());
     $("input#body_stdGravParam").val(b.stdGravParam.toString());
-}
-
-function onBodyDetailChanged(ev) {
-
 }
 
 function onAntennaSelect(ev) {

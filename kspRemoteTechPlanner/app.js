@@ -52,8 +52,6 @@ function init() {
         onBodySelect(ev);
     });
 
-    $("input[id^='body_']").on("change", onBodyDetailChanged);
-
     $("select#antenna").on("change", onAntennaSelect);
     $("button.manual-input#antenna_detail").on("click", function (ev) {
         $("div.manual-input#antenna").slideToggle();
@@ -111,9 +109,6 @@ function onBodySelect(ev) {
     $("input#body_color").val(b.color);
     $("input#body_radius").val(b.radius.toString());
     $("input#body_stdGravParam").val(b.stdGravParam.toString());
-}
-
-function onBodyDetailChanged(ev) {
 }
 
 function onAntennaSelect(ev) {
