@@ -10,6 +10,12 @@ Forum is [here](http://forum.kerbalspaceprogram.com/threads/90113-WEB-Visual-Rem
 
 Version history
 
+- beta2.2 : 2014/08/13
+
+ Filled all data except extra-long range dishes.  
+ Implement dynamic canvas resizing.  
+ User-created body data are stored in cookie.
+
 - beta2.1 : 2014/08/12
 
  Manual input mode is now available for body and antenna.

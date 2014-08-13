@@ -19,7 +19,6 @@ var EntireView = (function (_super) {
 
         // shape for drawing in inner coordinates
         this.shapeInner = new createjs.Shape();
-        this.shapeInner.scaleX = this.shapeInner.scaleY = this.outerSize / this.innerSize;
         this.shapes.addChild(this.shapeInner);
 
         // name of orbiting body
@@ -51,8 +50,10 @@ var EntireView = (function (_super) {
         this.texts.addChild(this.txtCommStableRange);
     }
     EntireView.prototype.show = function () {
+        this.shapeInner.scaleX = this.shapeInner.scaleY = this.outerSize / this.innerSize;
+
         this.shapeInner.graphics.clear();
-        this.shapeInner.graphics.setStrokeStyle(8);
+        this.shapeInner.graphics.setStrokeStyle(this.toInner(0.8));
 
         this.showSatellites(this.shapeInner.graphics);
         this.showBody(this.shapeInner.graphics);
@@ -74,7 +75,7 @@ var EntireView = (function (_super) {
         this.txtSatAltitude.y = this.outerSize / 2 + this.toOuter(satellites.altitude + body.radius) + 10;
 
         for (var i = 0; i < satellites.count; i++) {
-            g.beginFill("black").drawCircle(satellites.satPosition(i, this.innerSize).x, satellites.satPosition(i, this.innerSize).y, 50).endFill();
+            g.beginFill("black").drawCircle(satellites.satPosition(i, this.innerSize).x, satellites.satPosition(i, this.innerSize).y, this.toInner(4)).endFill();
         }
 
         for (var i = 0; i < satellites.count; i++) {

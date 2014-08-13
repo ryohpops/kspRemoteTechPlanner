@@ -22,7 +22,6 @@ class EntireView extends View {
 
         // shape for drawing in inner coordinates
         this.shapeInner = new createjs.Shape();
-        this.shapeInner.scaleX = this.shapeInner.scaleY = this.outerSize / this.innerSize;
         this.shapes.addChild(this.shapeInner);
 
         // name of orbiting body
@@ -55,8 +54,10 @@ class EntireView extends View {
     }
 
     show(): void {
+        this.shapeInner.scaleX = this.shapeInner.scaleY = this.outerSize / this.innerSize;
+
         this.shapeInner.graphics.clear();
-        this.shapeInner.graphics.setStrokeStyle(8);
+        this.shapeInner.graphics.setStrokeStyle(this.toInner(0.8));
 
         this.showSatellites(this.shapeInner.graphics);
         this.showBody(this.shapeInner.graphics);
@@ -84,7 +85,7 @@ class EntireView extends View {
         // positions
         for (var i: number = 0; i < satellites.count; i++) {
             g.beginFill("black")
-                .drawCircle(satellites.satPosition(i, this.innerSize).x, satellites.satPosition(i, this.innerSize).y, 50)
+                .drawCircle(satellites.satPosition(i, this.innerSize).x, satellites.satPosition(i, this.innerSize).y, this.toInner(4))
                 .endFill();
         }
 
