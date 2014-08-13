@@ -80,6 +80,7 @@ function init() {
         update();
     });
 
+    // finallize
     onBodySelect(null);
     onAntennaSelect(null);
     update();
@@ -115,10 +116,11 @@ function update() {
 }
 
 // event handler
+// retrieve data of selected body.
 function onBodySelect(ev) {
     var b = BodyData.getBody($("select#body").val());
     if (b == undefined)
-        b = UserBody.userBodies[$("select#body").val()];
+        b = UserBody.userBodies[$("select#body").val()]; // if undefined there then from UserBody.
 
     $("input#body_name").val(b.name);
     $("input#body_color").val(b.color);
@@ -126,11 +128,12 @@ function onBodySelect(ev) {
     $("input#body_stdGravParam").val(b.stdGravParam.toString());
 }
 
+// add new data to UserBody
 function onUserBodyAdd(ev) {
     update();
     if (UserBody.userBodies[body.name] == undefined)
-        addUserBodySelection(body.name);
-    UserBody.userBodies[body.name] = new Body();
+        addUserBodySelection(body.name); // add option to body selector.
+    UserBody.userBodies[body.name] = new Body(); // create new instance and put data into it with cutting reference.
     UserBody.userBodies[body.name].name = body.name;
     UserBody.userBodies[body.name].color = body.color;
     UserBody.userBodies[body.name].radius = body.radius;
@@ -140,10 +143,11 @@ function onUserBodyAdd(ev) {
 
 function addUserBodySelection(name) {
     if ($("select#body > optgroup[label='User data']").length == 0)
-        $("select#body").append("<optgroup label='User data'></optgroup>");
-    $("select#body > optgroup[label='User data']").append("<option>" + name + "</option>");
+        $("select#body").append("<optgroup label='User data'></optgroup>"); // make one.
+    $("select#body > optgroup[label='User data']").append("<option>" + name + "</option>"); // add option for user's data to body selector.
 }
 
+// remove user's body data which has the same name as body_name in body_detail.
 function onUserBodyRemoved(ev) {
     update();
     delete UserBody.userBodies[body.name];
@@ -154,7 +158,7 @@ function onUserBodyRemoved(ev) {
 function removeUserBodySelection(name) {
     $("optgroup[label='User data'] > option:contains('" + name + "')").remove();
     if (UserBody.loadCookie() == false) {
-        $("select#body > optgroup[label='User data']").remove();
+        $("select#body > optgroup[label='User data']").remove(); // remove User data option-group.
     }
 }
 
