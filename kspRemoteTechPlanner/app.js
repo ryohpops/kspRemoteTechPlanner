@@ -51,12 +51,20 @@ function init() {
     $("button.manual-input#body_reset").on("click", function (ev) {
         onBodySelect(ev);
     });
+
+    $("input[id^='body_']").on("change", onBodyDetailChanged);
+
     $("select#antenna").on("change", onAntennaSelect);
     $("button.manual-input#antenna_detail").on("click", function (ev) {
         $("div.manual-input#antenna").slideToggle();
     });
     $("button.manual-input#antenna_reset").on("click", function (ev) {
         onAntennaSelect(ev);
+    });
+
+    $("form#calculator").find("input,select").on("keypress", function (ev) {
+        if (ev.keyCode == 13)
+            update();
     });
     $("button#calculate").on("click", function (ev) {
         update();
@@ -103,6 +111,9 @@ function onBodySelect(ev) {
     $("input#body_color").val(b.color);
     $("input#body_radius").val(b.radius.toString());
     $("input#body_stdGravParam").val(b.stdGravParam.toString());
+}
+
+function onBodyDetailChanged(ev) {
 }
 
 function onAntennaSelect(ev) {
