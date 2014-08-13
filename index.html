@@ -18,6 +18,7 @@
     <script src="model/antenna.js"></script>
     <script src="model/satellites.js"></script>
     <script src="model/bodyData.js"></script>
+    <script src="model/userBody.js"></script>
     <script src="model/antennaData.js"></script>
     <script src="view/graphicsHelper.js"></script>
     <script src="view/view.js"></script>
@@ -43,7 +44,7 @@
             When green circle labeled Stable appears, it means that any orbits lower than Stable altitude never have connection-less flight.<br />
             <br />
             This website is under development, forum is <a href="http://forum.kerbalspaceprogram.com/threads/90113-WEB-Visual-RemoteTech-Planner-for-MOD-RemoteTech2">here</a>
-            and sources are available on <a href="https://github.com/ryohpops/kspRemoteTechPlanner">github</a>. Current version is beta2.1.<br />
+            and sources are available on <a href="https://github.com/ryohpops/kspRemoteTechPlanner">github</a>. Current version is beta2.2.<br />
             Issues, bug reports, contributers are always welcome.<br />
             <br />
             Data of bodies is based on <a href="http://wiki.kerbalspaceprogram.com/wiki/Main_Page">KSP Wiki</a> and
@@ -79,15 +80,35 @@
 
             <div class="col-md-3">
                 <h3>Data input</h3>
-                <form role="form">
+                <form role="form" id="calculator">
                     <div class="form-group">
                         <label for="body">Body</label>
                         <select class="form-control" id="body">
+                            <option>Kerbol</option>
+                            <option>Moho</option>
+                            <option>Eve</option>
+                            <optgroup label="Eve's moon:">
+                                <option>Gilly</option>
+                            </optgroup>
                             <option selected>Kerbin</option>
                             <optgroup label="Kerbin's moons:">
                                 <option>Mun</option>
                                 <option>Minmus</option>
                             </optgroup>
+                            <option>Duna</option>
+                            <optgroup label="Duna's moon:">
+                                <option>Ike</option>
+                            </optgroup>
+                            <option>Dres</option>
+                            <option>Jool</option>
+                            <optgroup label="Jool's moons:">
+                                <option>Laythe</option>
+                                <option>Vall</option>
+                                <option>Tylo</option>
+                                <option>Bop</option>
+                                <option>Pol</option>
+                            </optgroup>
+                            <option>Eeloo</option>
                         </select>
 
                         <div class="manual-input" id="body">
@@ -113,6 +134,12 @@
                             <button type="button" class="btn btn-xs manual-input" id="body_detail">
                                 <span class="glyphicon glyphicon-collapse-up"></span>
                                 <span class="glyphicon glyphicon-collapse-down"></span>
+                            </button>
+                            <button type="button" class="btn btn-xs manual-input" id="body_add">
+                                <span class="glyphicon glyphicon-plus"></span>
+                            </button>
+                            <button type="button" class="btn btn-xs manual-input" id="body_remove">
+                                <span class="glyphicon glyphicon-minus"></span>
                             </button>
                             <button type="button" class="btn btn-xs manual-input" id="body_reset">
                                 <span class="glyphicon glyphicon-repeat"></span>
@@ -144,7 +171,10 @@
                                 <option>CommTech EXP-VR-2T</option>
                                 <option>Communotron 32</option>
                             </optgroup>
-                            <optgroup label="Dish"></optgroup>
+                            <optgroup label="Dish">
+                                <option>Comms DTS-M1</option>
+                                <option>Reflectron KR-7</option>
+                            </optgroup>
                         </select>
 
                         <div class="manual-input" id="antenna">
@@ -171,6 +201,12 @@
                                 <span class="glyphicon glyphicon-collapse-up"></span>
                                 <span class="glyphicon glyphicon-collapse-down"></span>
                             </button>
+                            <!--<button type="button" class="btn btn-xs manual-input" id="body_add">
+                                <span class="glyphicon glyphicon-plus"></span>
+                            </button>
+                            <button type="button" class="btn btn-xs manual-input" id="body_remove">
+                                <span class="glyphicon glyphicon-minus"></span>
+                            </button>-->
                             <button type="button" class="btn btn-xs manual-input" id="antenna_reset">
                                 <span class="glyphicon glyphicon-repeat"></span>
                             </button>
@@ -178,12 +214,8 @@
                     </div>
 
                     <div class="form-group">
-                        <div class="col-sm-6">
-                            <button type="button" class="btn btn-primary" id="calculate">Calculate</button>
-                        </div>
-                        <div class="col-sm-6">
-                            <button type="reset" class="btn btn-default" id="reset">Reset</button>
-                        </div>
+                        <button type="button" class="btn btn-primary" id="calculate">Calculate</button>
+                        <button type="reset" class="btn btn-default" id="reset">Reset</button>
                     </div>
                 </form>
             </div>
