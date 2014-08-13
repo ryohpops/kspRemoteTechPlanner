@@ -4,6 +4,7 @@
 /// <reference path="scripts/typings/tweenjs/tweenjs.d.ts" />
 /// <reference path="model/body.ts" />
 /// <reference path="model/bodydata.ts" />
+/// <reference path="model/userbody.ts" />
 /// <reference path="model/antenna.ts" />
 /// <reference path="model/antennadata.ts" />
 /// <reference path="model/satellites.ts" />
@@ -44,10 +45,20 @@ function init() {
     stageNight = new createjs.Stage($("canvas#night")[0]);
     viewNight = new NightView(stageNight, 5000, 400);
 
-    // init controls
+    // load user data
+    if (UserBody.loadCookie()) {
+        for (var i in UserBody.userBodies) {
+            addUserBodySelection(UserBody.userBodies[i].name);
+        }
+    };
+
+    // add event handlers
     $("select#body").on("change", onBodySelect);
     $("button.manual-input#body_detail").on("click", (ev) => { $("div.manual-input#body").slideToggle() });
     $("button.manual-input#body_reset").on("click", (ev) => { onBodySelect(ev) });
+
+    $("button.manual-input#body_add").on("click", onUserBodyAdd);
+    $("button.manual-input#body_remove").on("click", onUserBodyRemoved);
 
     $("select#antenna").on("change", onAntennaSelect);
     $("button.manual-input#antenna_detail").on("click", (ev) => { $("div.manual-input#antenna").slideToggle() });
@@ -93,10 +104,45 @@ function update() {
 // event handler
 function onBodySelect(ev) {
     var b: Body = BodyData.getBody($("select#body").val());
+    if (b == undefined)
+        b = UserBody.userBodies[$("select#body").val()];
+
     $("input#body_name").val(b.name);
     $("input#body_color").val(b.color);
     $("input#body_radius").val(b.radius.toString());
     $("input#body_stdGravParam").val(b.stdGravParam.toString());
+}
+
+function onUserBodyAdd(ev) {
+    update();
+    if (UserBody.userBodies[body.name] == undefined)
+        addUserBodySelection(body.name);
+    UserBody.userBodies[body.name] = new Body();
+    UserBody.userBodies[body.name].name = body.name;
+    UserBody.userBodies[body.name].color = body.color;
+    UserBody.userBodies[body.name].radius = body.radius;
+    UserBody.userBodies[body.name].stdGravParam = body.stdGravParam;
+    UserBody.saveCookie();
+}
+
+function addUserBodySelection(name: string) {
+    if ($("select#body > optgroup[label='User data']").length == 0)
+        $("select#body").append("<optgroup label='User data'></optgroup>");
+    $("select#body > optgroup[label='User data']").append("<option>" + name + "</option>");
+}
+
+function onUserBodyRemoved(ev) {
+    update();
+    delete UserBody.userBodies[body.name];
+    UserBody.saveCookie();
+    removeUserBodySelection(body.name);
+}
+
+function removeUserBodySelection(name: string) {
+    $("optgroup[label='User data'] > option:contains('" + name + "')").remove();
+    if (UserBody.loadCookie() == false) {
+        $("select#body > optgroup[label='User data']").remove();
+    }
 }
 
 function onAntennaSelect(ev) {
