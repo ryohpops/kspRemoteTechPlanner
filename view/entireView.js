@@ -29,6 +29,13 @@ var EntireView = (function (_super) {
         this.txtBodyName.y = this.outerSize / 2;
         this.texts.addChild(this.txtBodyName);
 
+        // sphere of influence
+        this.txtBodySoI = new createjs.Text("", "16px Arial", "black");
+        this.txtBodySoI.textAlign = "center";
+        this.txtBodySoI.textBaseline = "top";
+        this.txtBodySoI.x = this.outerSize / 2;
+        this.texts.addChild(this.txtBodySoI);
+
         // altitude of satellites
         this.txtSatAltitude = new createjs.Text("", "16px Arial", "black");
         this.txtSatAltitude.textAlign = "center";
@@ -45,7 +52,7 @@ var EntireView = (function (_super) {
         // upper limit to obtain stable connection
         this.txtCommStableRange = new createjs.Text("", "16px Arial", "black");
         this.txtCommStableRange.textAlign = "center";
-        this.txtCommStableRange.textBaseline = "top";
+        this.txtCommStableRange.textBaseline = "bottom";
         this.txtCommStableRange.x = this.outerSize / 2;
         this.texts.addChild(this.txtCommStableRange);
     }
@@ -65,13 +72,20 @@ var EntireView = (function (_super) {
 
         // name of orbiting body
         this.txtBodyName.text = body.name;
+
+        // sphere of influence
+        g.beginStroke("yellow").drawCircle(this.innerSize / 2, this.innerSize / 2, body.soi).endStroke();
+
+        // height of SoI
+        this.txtBodySoI.text = "Sphere of Influence: " + body.soi.toLocaleString("en-US", { maximumFractionDigits: 3 }) + " km";
+        this.txtBodySoI.y = this.outerSize / 2 + Math.max(this.toOuter(body.soi) + 10, this.toOuter(body.radius + satellites.altitude) + 30);
     };
 
     EntireView.prototype.showSatellites = function (g) {
         // orbit
         g.beginStroke("black").drawCircle(this.innerSize / 2, this.innerSize / 2, satellites.altitude + body.radius).endStroke();
 
-        this.txtSatAltitude.text = "Altitude: " + satellites.altitude + " km";
+        this.txtSatAltitude.text = "Altitude: " + satellites.altitude.toLocaleString("en-US", { maximumFractionDigits: 3 }) + " km";
         this.txtSatAltitude.y = this.outerSize / 2 + this.toOuter(satellites.altitude + body.radius) + 10;
 
         for (var i = 0; i < satellites.count; i++) {
@@ -86,7 +100,7 @@ var EntireView = (function (_super) {
         g.beginStroke(Communicator.isNextSatConnectable(body, satellites, this.innerSize) ? "blue" : "red");
         GraphicsHelper.drawDualArrow(this.shapeInner.graphics, satellites.satPosition(0, this.innerSize).x, satellites.satPosition(0, this.innerSize).y, satellites.satPosition(1, this.innerSize).x, satellites.satPosition(1, this.innerSize).y, this.toInner(20)).endStroke();
 
-        this.txtCommDistance.text = "Distance: " + satellites.satDistance().toFixed(3) + " km";
+        this.txtCommDistance.text = "Distance: " + satellites.satDistance().toLocaleString("en-US", { maximumFractionDigits: 3 }) + " km";
         this.txtCommDistance.x = this.toOuter(satellites.satPosition(0, this.innerSize).x + (satellites.satPosition(1, this.innerSize).x - satellites.satPosition(0, this.innerSize).x) / 2) + 5;
         this.txtCommDistance.y = this.toOuter(satellites.satPosition(0, this.innerSize).y + (satellites.satPosition(1, this.innerSize).y - satellites.satPosition(0, this.innerSize).y) / 2) + 5;
 
@@ -96,8 +110,8 @@ var EntireView = (function (_super) {
             this.shapeInner.graphics.beginStroke("green").drawCircle(this.innerSize / 2, this.innerSize / 2, satellites.stableRange()).endStroke();
 
             // range of stable area
-            this.txtCommStableRange.text = "Stable: " + satellites.stableRange().toFixed(3) + " km";
-            this.txtCommStableRange.y = this.outerSize / 2 + this.toOuter(satellites.stableRange()) + 10;
+            this.txtCommStableRange.text = "Stable: " + satellites.stableRange().toLocaleString("en-US", { maximumFractionDigits: 3 }) + " km";
+            this.txtCommStableRange.y = this.outerSize / 2 - this.toOuter(satellites.stableRange()) - 10;
         } else {
             this.txtCommStableRange.text = "";
         }
