@@ -92,6 +92,7 @@ function update() {
     body.color = $("input#body_color").val();
     body.radius = parseFloat($("input#body_radius").val());
     body.stdGravParam = parseFloat($("input#body_stdGravParam").val());
+    body.soi = parseFloat($("input#body_soi").val());
 
     antenna.name = $("input#antenna_name").val();
     if ($("input#antenna_type").val() == "omni") {
@@ -128,6 +129,7 @@ function onBodySelect(ev) {
     $("input#body_color").val(b.color);
     $("input#body_radius").val(b.radius.toString());
     $("input#body_stdGravParam").val(b.stdGravParam.toString());
+    $("input#body_soi").val(b.soi.toString());
 }
 
 // add new data to UserBody
@@ -140,6 +142,7 @@ function onUserBodyAdd(ev) {
     UserBody.userBodies[body.name].color = body.color;
     UserBody.userBodies[body.name].radius = body.radius;
     UserBody.userBodies[body.name].stdGravParam = body.stdGravParam;
+    UserBody.userBodies[body.name].soi = body.soi;
     UserBody.saveCookie();
 }
 
