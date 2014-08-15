@@ -79,6 +79,7 @@ function update() {
     body.color = $("input#body_color").val();
     body.radius = parseFloat($("input#body_radius").val());
     body.stdGravParam = parseFloat($("input#body_stdGravParam").val());
+    body.soi = parseFloat($("input#body_soi").val());
 
     antenna.name = $("input#antenna_name").val();
     if ($("input#antenna_type").val() == "omni") {
@@ -105,14 +106,17 @@ function update() {
 // event handler
 // retrieve data of selected body.
 function onBodySelect(ev) {
-    var b: Body = BodyData.getBody($("select#body").val()); // from BodyData first,
-    if (b == undefined)
-        b = UserBody.userBodies[$("select#body").val()]; // if undefined there then from UserBody.
+    var b: Body;
+    if ($("select#body > optgroup[label='User data']").length == 1) // when option group User data exists,
+        b = UserBody.userBodies[$("select#body").val()];            // aquire data from UserBody first,
+    if (b == undefined)                               // if undefined there or option group User data not exists,
+        b = BodyData.getBody($("select#body").val()); // then from BodyData.
 
     $("input#body_name").val(b.name);
     $("input#body_color").val(b.color);
     $("input#body_radius").val(b.radius.toString());
     $("input#body_stdGravParam").val(b.stdGravParam.toString());
+    $("input#body_soi").val(b.soi.toString());
 }
 
 // add new data to UserBody
@@ -125,6 +129,7 @@ function onUserBodyAdd(ev) {
     UserBody.userBodies[body.name].color = body.color;
     UserBody.userBodies[body.name].radius = body.radius;
     UserBody.userBodies[body.name].stdGravParam = body.stdGravParam;
+    UserBody.userBodies[body.name].soi = body.soi;
     UserBody.saveCookie();
 }
 

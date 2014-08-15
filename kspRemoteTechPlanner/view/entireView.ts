@@ -13,6 +13,7 @@ class EntireView extends View {
 
     shapeInner: createjs.Shape;
     txtBodyName: createjs.Text;
+    txtBodySoI: createjs.Text;
     txtSatAltitude: createjs.Text;
     txtCommDistance: createjs.Text;
     txtCommStableRange: createjs.Text;
@@ -32,6 +33,13 @@ class EntireView extends View {
         this.txtBodyName.y = this.outerSize / 2;
         this.texts.addChild(this.txtBodyName);
 
+        // sphere of influence
+        this.txtBodySoI = new createjs.Text("", "16px Arial", "black");
+        this.txtBodySoI.textAlign = "center";
+        this.txtBodySoI.textBaseline = "top";
+        this.txtBodySoI.x = this.outerSize / 2;
+        this.texts.addChild(this.txtBodySoI);
+
         // altitude of satellites
         this.txtSatAltitude = new createjs.Text("", "16px Arial", "black");
         this.txtSatAltitude.textAlign = "center";
@@ -48,7 +56,7 @@ class EntireView extends View {
         // upper limit to obtain stable connection
         this.txtCommStableRange = new createjs.Text("", "16px Arial", "black");
         this.txtCommStableRange.textAlign = "center";
-        this.txtCommStableRange.textBaseline = "top";
+        this.txtCommStableRange.textBaseline = "bottom";
         this.txtCommStableRange.x = this.outerSize / 2;
         this.texts.addChild(this.txtCommStableRange);
     }
@@ -71,6 +79,15 @@ class EntireView extends View {
 
         // name of orbiting body
         this.txtBodyName.text = body.name;
+
+        // sphere of influence
+        g.beginStroke("yellow")
+            .drawCircle(this.innerSize / 2, this.innerSize / 2, body.soi)
+            .endStroke();
+
+        // height of SoI
+        this.txtBodySoI.text = "Sphere of Influence: " + body.soi.toLocaleString("en-US", { maximumFractionDigits: 3 }) + " km";
+        this.txtBodySoI.y = this.outerSize / 2 + Math.max(this.toOuter(body.soi) + 10, this.toOuter(body.radius + satellites.altitude) + 30);
     }
 
     private showSatellites(g: createjs.Graphics): void {
@@ -79,7 +96,7 @@ class EntireView extends View {
             .drawCircle(this.innerSize / 2, this.innerSize / 2, satellites.altitude + body.radius)
             .endStroke();
 
-        this.txtSatAltitude.text = "Altitude: " + satellites.altitude + " km";
+        this.txtSatAltitude.text = "Altitude: " + satellites.altitude.toLocaleString("en-US", { maximumFractionDigits: 3 }) + " km";
         this.txtSatAltitude.y = this.outerSize / 2 + this.toOuter(satellites.altitude + body.radius) + 10;
 
         // positions
@@ -103,7 +120,7 @@ class EntireView extends View {
             satellites.satPosition(1, this.innerSize).x, satellites.satPosition(1, this.innerSize).y, this.toInner(20))
             .endStroke();
 
-        this.txtCommDistance.text = "Distance: " + satellites.satDistance().toFixed(3) + " km";
+        this.txtCommDistance.text = "Distance: " + satellites.satDistance().toLocaleString("en-US", { maximumFractionDigits: 3 }) + " km";
         this.txtCommDistance.x = this.toOuter(satellites.satPosition(0, this.innerSize).x + (satellites.satPosition(1, this.innerSize).x
             - satellites.satPosition(0, this.innerSize).x) / 2) + 5;
         this.txtCommDistance.y = this.toOuter(satellites.satPosition(0, this.innerSize).y + (satellites.satPosition(1, this.innerSize).y
@@ -117,8 +134,8 @@ class EntireView extends View {
                 .endStroke();
 
             // range of stable area
-            this.txtCommStableRange.text = "Stable: " + satellites.stableRange().toFixed(3) + " km";
-            this.txtCommStableRange.y = this.outerSize / 2 + this.toOuter(satellites.stableRange()) + 10;
+            this.txtCommStableRange.text = "Stable: " + satellites.stableRange().toLocaleString("en-US", { maximumFractionDigits: 3 }) + " km";
+            this.txtCommStableRange.y = this.outerSize / 2 - this.toOuter(satellites.stableRange()) - 10;
         } else {
             this.txtCommStableRange.text = "";
         }

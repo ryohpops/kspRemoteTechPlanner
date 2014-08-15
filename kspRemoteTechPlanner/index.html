@@ -44,7 +44,7 @@
             When green circle labeled Stable appears, it means that any orbits lower than Stable altitude never have connection-less flight.<br />
             <br />
             This website is under development, forum is <a href="http://forum.kerbalspaceprogram.com/threads/90113-WEB-Visual-RemoteTech-Planner-for-MOD-RemoteTech2">here</a>
-            and sources are available on <a href="https://github.com/ryohpops/kspRemoteTechPlanner">github</a>. Current version is beta2.2.<br />
+            and sources are available on <a href="https://github.com/ryohpops/kspRemoteTechPlanner">github</a>. Current version is beta2.3.<br />
             Issues, bug reports, contributers are always welcome.<br />
             <br />
             Data of bodies is based on <a href="http://wiki.kerbalspaceprogram.com/wiki/Main_Page">KSP Wiki</a> and
@@ -122,11 +122,15 @@
                             </div>
                             <div class="form-group">
                                 <label for="body_radius">Radius(km)</label>
-                                <input type="number" class="form-control" id="body_radius" step="10" value="600" />
+                                <input type="number" class="form-control" id="body_radius" value="600" step="any" min="0" />
                             </div>
                             <div class="form-group">
                                 <label for="body_stdGravParam">Standard gravitational parameter<br />(km<sup>3</sup>s<sup>-2</sup>)</label>
-                                <input type="number" class="form-control" id="body_stdGravParam" step="0.1" value="3531.6" />
+                                <input type="number" class="form-control" id="body_stdGravParam" step="any" min="0" />
+                            </div>
+                            <div class="form-group">
+                                <label for="body_soi">Sphere of Influence(km)</label>
+                                <input type="number" class="form-control" id="body_soi" value="84159.286" step="any" min="0" />
                             </div>
                         </div>
 
@@ -149,17 +153,17 @@
 
                     <div class="form-group">
                         <label for="count">Count</label>
-                        <input type="number" class="form-control" id="count" value="4" />
+                        <input type="number" class="form-control" id="count" value="4" step="1" min="1" />
                     </div>
 
                     <div class="form-group">
                         <label for="altitude">Altitude(km, ASL)</label>
-                        <input type="number" class="form-control" id="altitude" value="1000" step="10" />
+                        <input type="number" class="form-control" id="altitude" value="1000" step="any" min="0" />
                     </div>
 
                     <div class="form-group">
                         <label for="elcConsumption">Probe electricity consumption<br />(exclude antenna's, per sec.)</label>
-                        <input type="number" class="form-control" id="elcConsumption" value="0.01" step="0.01" />
+                        <input type="number" class="form-control" id="elcConsumption" value="0.01" step="any" />
                     </div>
 
                     <div class="form-group">
@@ -184,15 +188,15 @@
                             </div>
                             <div class="form-group" style="display:none">
                                 <label for="antenna_type">Type(omni or dish)</label>
-                                <input type="text" class="form-control" id="antenna_type" value="omni" />
+                                <input type="text" class="form-control" id="antenna_type" value="omni" pattern="omni|dish" />
                             </div>
                             <div class="form-group">
                                 <label for="antenna_range">Range(km)</label>
-                                <input type="number" class="form-control" id="antenna_range" step="100" value="2500" />
+                                <input type="number" class="form-control" id="antenna_range" value="2500" step="any" min="0" />
                             </div>
                             <div class="form-group">
                                 <label for="antenna_elcConsumption">Electricity consumption(per sec.)</label>
-                                <input type="number" class="form-control" id="antenna_elcConsumption" step="0.01" value="0.13" />
+                                <input type="number" class="form-control" id="antenna_elcConsumption" step="any" />
                             </div>
                         </div>
 

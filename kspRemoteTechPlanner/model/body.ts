@@ -3,4 +3,5 @@
     color: string;
     radius: number;
     stdGravParam: number;
+    soi: number;
 } 
