@@ -29,6 +29,13 @@ var EntireView = (function (_super) {
         this.txtBodyName.y = this.outerSize / 2;
         this.texts.addChild(this.txtBodyName);
 
+        // sphere of influence
+        this.txtBodySoI = new createjs.Text("", "16px Arial", "black");
+        this.txtBodySoI.textAlign = "center";
+        this.txtBodySoI.textBaseline = "top";
+        this.txtBodySoI.x = this.outerSize / 2;
+        this.texts.addChild(this.txtBodySoI);
+
         // altitude of satellites
         this.txtSatAltitude = new createjs.Text("", "16px Arial", "black");
         this.txtSatAltitude.textAlign = "center";
@@ -45,7 +52,7 @@ var EntireView = (function (_super) {
         // upper limit to obtain stable connection
         this.txtCommStableRange = new createjs.Text("", "16px Arial", "black");
         this.txtCommStableRange.textAlign = "center";
-        this.txtCommStableRange.textBaseline = "top";
+        this.txtCommStableRange.textBaseline = "bottom";
         this.txtCommStableRange.x = this.outerSize / 2;
         this.texts.addChild(this.txtCommStableRange);
     }
@@ -65,6 +72,13 @@ var EntireView = (function (_super) {
 
         // name of orbiting body
         this.txtBodyName.text = body.name;
+
+        // sphere of influence
+        g.beginStroke("yellow").drawCircle(this.innerSize / 2, this.innerSize / 2, body.soi).endStroke();
+
+        // hight of SoI
+        this.txtBodySoI.text = "Sphere of Influence: " + body.soi.toFixed(3) + " km";
+        this.txtBodySoI.y = this.outerSize / 2 + this.toOuter(body.soi) + 10;
     };
 
     EntireView.prototype.showSatellites = function (g) {
@@ -97,11 +111,11 @@ var EntireView = (function (_super) {
 
             // range of stable area
             this.txtCommStableRange.text = "Stable: " + satellites.stableRange().toFixed(3) + " km";
-            this.txtCommStableRange.y = this.outerSize / 2 + this.toOuter(satellites.stableRange()) + 10;
+            this.txtCommStableRange.y = this.outerSize / 2 - this.toOuter(satellites.stableRange()) - 10;
         } else {
             this.txtCommStableRange.text = "";
         }
     };
     return EntireView;
 })(View);
-//# sourceMappingURL=entireView.js.map
+//# sourceMappingURL=entireview.js.map

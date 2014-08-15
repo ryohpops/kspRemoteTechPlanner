@@ -13,6 +13,7 @@ class EntireView extends View {
 
     shapeInner: createjs.Shape;
     txtBodyName: createjs.Text;
+    txtBodySoI: createjs.Text;
     txtSatAltitude: createjs.Text;
     txtCommDistance: createjs.Text;
     txtCommStableRange: createjs.Text;
@@ -32,6 +33,13 @@ class EntireView extends View {
         this.txtBodyName.y = this.outerSize / 2;
         this.texts.addChild(this.txtBodyName);
 
+        // sphere of influence
+        this.txtBodySoI = new createjs.Text("", "16px Arial", "black");
+        this.txtBodySoI.textAlign = "center";
+        this.txtBodySoI.textBaseline = "top";
+        this.txtBodySoI.x = this.outerSize / 2;
+        this.texts.addChild(this.txtBodySoI);
+
         // altitude of satellites
         this.txtSatAltitude = new createjs.Text("", "16px Arial", "black");
         this.txtSatAltitude.textAlign = "center";
@@ -48,7 +56,7 @@ class EntireView extends View {
         // upper limit to obtain stable connection
         this.txtCommStableRange = new createjs.Text("", "16px Arial", "black");
         this.txtCommStableRange.textAlign = "center";
-        this.txtCommStableRange.textBaseline = "top";
+        this.txtCommStableRange.textBaseline = "bottom";
         this.txtCommStableRange.x = this.outerSize / 2;
         this.texts.addChild(this.txtCommStableRange);
     }
@@ -71,6 +79,15 @@ class EntireView extends View {
 
         // name of orbiting body
         this.txtBodyName.text = body.name;
+
+        // sphere of influence
+        g.beginStroke("yellow")
+            .drawCircle(this.innerSize / 2, this.innerSize / 2, body.soi)
+            .endStroke();
+
+        // hight of SoI
+        this.txtBodySoI.text = "Sphere of Influence: " + body.soi.toFixed(3) + " km";
+        this.txtBodySoI.y = this.outerSize / 2 + this.toOuter(body.soi) + 10;
     }
 
     private showSatellites(g: createjs.Graphics): void {
@@ -118,7 +135,7 @@ class EntireView extends View {
 
             // range of stable area
             this.txtCommStableRange.text = "Stable: " + satellites.stableRange().toFixed(3) + " km";
-            this.txtCommStableRange.y = this.outerSize / 2 + this.toOuter(satellites.stableRange()) + 10;
+            this.txtCommStableRange.y = this.outerSize / 2 - this.toOuter(satellites.stableRange()) - 10;
         } else {
             this.txtCommStableRange.text = "";
         }
