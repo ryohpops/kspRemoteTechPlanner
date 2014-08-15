@@ -85,7 +85,7 @@ class EntireView extends View {
             .drawCircle(this.innerSize / 2, this.innerSize / 2, body.soi)
             .endStroke();
 
-        // hight of SoI
+        // height of SoI
         this.txtBodySoI.text = "Sphere of Influence: " + body.soi.toFixed(3) + " km";
         this.txtBodySoI.y = this.outerSize / 2 + this.toOuter(body.soi) + 10;
     }
