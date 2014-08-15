@@ -118,9 +118,11 @@ function update() {
 // event handler
 // retrieve data of selected body.
 function onBodySelect(ev) {
-    var b = BodyData.getBody($("select#body").val());
+    var b;
+    if ($("select#body > optgroup[label='User data']").length == 1)
+        b = UserBody.userBodies[$("select#body").val()]; // aquire data from UserBody first,
     if (b == undefined)
-        b = UserBody.userBodies[$("select#body").val()]; // if undefined there then from UserBody.
+        b = BodyData.getBody($("select#body").val()); // then from BodyData.
 
     $("input#body_name").val(b.name);
     $("input#body_color").val(b.color);
