@@ -86,8 +86,8 @@ class EntireView extends View {
             .endStroke();
 
         // height of SoI
-        this.txtBodySoI.text = "Sphere of Influence: " + body.soi.toFixed(3) + " km";
-        this.txtBodySoI.y = this.outerSize / 2 + this.toOuter(body.soi) + 10;
+        this.txtBodySoI.text = "Sphere of Influence: " + body.soi.toLocaleString("en-US", { maximumFractionDigits: 3 }) + " km";
+        this.txtBodySoI.y = this.outerSize / 2 + Math.max(this.toOuter(body.soi) + 10, this.toOuter(body.radius + satellites.altitude) + 30);
     }
 
     private showSatellites(g: createjs.Graphics): void {
@@ -96,7 +96,7 @@ class EntireView extends View {
             .drawCircle(this.innerSize / 2, this.innerSize / 2, satellites.altitude + body.radius)
             .endStroke();
 
-        this.txtSatAltitude.text = "Altitude: " + satellites.altitude + " km";
+        this.txtSatAltitude.text = "Altitude: " + satellites.altitude.toLocaleString("en-US", { maximumFractionDigits: 3 }) + " km";
         this.txtSatAltitude.y = this.outerSize / 2 + this.toOuter(satellites.altitude + body.radius) + 10;
 
         // positions
@@ -120,7 +120,7 @@ class EntireView extends View {
             satellites.satPosition(1, this.innerSize).x, satellites.satPosition(1, this.innerSize).y, this.toInner(20))
             .endStroke();
 
-        this.txtCommDistance.text = "Distance: " + satellites.satDistance().toFixed(3) + " km";
+        this.txtCommDistance.text = "Distance: " + satellites.satDistance().toLocaleString("en-US", { maximumFractionDigits: 3 }) + " km";
         this.txtCommDistance.x = this.toOuter(satellites.satPosition(0, this.innerSize).x + (satellites.satPosition(1, this.innerSize).x
             - satellites.satPosition(0, this.innerSize).x) / 2) + 5;
         this.txtCommDistance.y = this.toOuter(satellites.satPosition(0, this.innerSize).y + (satellites.satPosition(1, this.innerSize).y
@@ -134,7 +134,7 @@ class EntireView extends View {
                 .endStroke();
 
             // range of stable area
-            this.txtCommStableRange.text = "Stable: " + satellites.stableRange().toFixed(3) + " km";
+            this.txtCommStableRange.text = "Stable: " + satellites.stableRange().toLocaleString("en-US", { maximumFractionDigits: 3 }) + " km";
             this.txtCommStableRange.y = this.outerSize / 2 - this.toOuter(satellites.stableRange()) - 10;
         } else {
             this.txtCommStableRange.text = "";
