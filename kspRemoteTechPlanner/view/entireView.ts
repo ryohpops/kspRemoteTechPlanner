@@ -130,7 +130,7 @@ class EntireView extends View {
         if (Communicator.hasStableArea(body, satellites, this.innerSize)) {
             // upper limit of stable area
             this.shapeInner.graphics.beginStroke("green")
-                .drawCircle(this.innerSize / 2, this.innerSize / 2, satellites.stableRange())
+                .drawCircle(this.innerSize / 2, this.innerSize / 2, satellites.stableRange() + body.radius)
                 .endStroke();
 
             // range of stable area

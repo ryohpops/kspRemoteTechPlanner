@@ -21,7 +21,7 @@ class Satellites {
 
     stableRange(): number {
         return Calculator.circleCrossPoint(new Point(0, 0), this.antenna.range,
-            this.satPosition(0, 0), this.satPosition(1, 0), Calculator.CircleCrossPointMode.high);
+            this.satPosition(0, 0), this.satPosition(1, 0), Calculator.CircleCrossPointMode.high) - body.radius;
     }
 
     orbitalPeriod(): number {

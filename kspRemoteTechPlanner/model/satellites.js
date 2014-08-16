@@ -15,7 +15,7 @@ var Satellites = (function () {
     };
 
     Satellites.prototype.stableRange = function () {
-        return Calculator.circleCrossPoint(new Point(0, 0), this.antenna.range, this.satPosition(0, 0), this.satPosition(1, 0), 0 /* high */);
+        return Calculator.circleCrossPoint(new Point(0, 0), this.antenna.range, this.satPosition(0, 0), this.satPosition(1, 0), 0 /* high */) - body.radius;
     };
 
     Satellites.prototype.orbitalPeriod = function () {
