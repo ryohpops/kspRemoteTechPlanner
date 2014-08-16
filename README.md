@@ -10,6 +10,10 @@ Forum is [here](http://forum.kerbalspaceprogram.com/threads/90113-WEB-Visual-Rem
 
 Version history
 
+- beta2.3.1 : 2014/08/16
+
+ Fix calculation of stable range, the result was too high.
+
 - beta2.3 : 2014/08/15
 
  Draw sphere of influence.  
