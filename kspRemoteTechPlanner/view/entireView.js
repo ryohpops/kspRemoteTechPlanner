@@ -107,7 +107,7 @@ var EntireView = (function (_super) {
         // stable area
         if (Communicator.hasStableArea(body, satellites, this.innerSize)) {
             // upper limit of stable area
-            this.shapeInner.graphics.beginStroke("green").drawCircle(this.innerSize / 2, this.innerSize / 2, satellites.stableRange() + body.radius).endStroke();
+            this.shapeInner.graphics.beginStroke("green").drawCircle(this.innerSize / 2, this.innerSize / 2, satellites.stableRange() - body.radius).endStroke();
 
             // range of stable area
             this.txtCommStableRange.text = "Stable: " + satellites.stableRange().toLocaleString("en-US", { maximumFractionDigits: 3 }) + " km";
@@ -118,4 +118,4 @@ var EntireView = (function (_super) {
     };
     return EntireView;
 })(View);
-//# sourceMappingURL=entireView.js.map
+//# sourceMappingURL=entireview.js.map
