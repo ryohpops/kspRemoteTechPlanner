@@ -11,9 +11,9 @@
 /// <reference path="view/entireview.ts" />
 /// <reference path="view/nightview.ts" />
 // values
-var body;
-var antenna;
-var satellites;
+var _body;
+var _antenna;
+var _satellites;
 
 // Entire View
 var stageEntire;
@@ -31,18 +31,22 @@ $(function () {
 // method definitions
 function init() {
     // init values
-    body = new Body();
-    antenna = new Antenna();
-    satellites = new Satellites();
-    satellites.antenna = antenna;
-    satellites.body = body;
+    _body = new Body();
+    _antenna = new Antenna();
+    _satellites = new Satellites();
+    _satellites.antenna = _antenna;
+    _satellites.body = _body;
 
     // init views
     stageEntire = new createjs.Stage($("canvas#entire")[0]);
     viewEntire = new EntireView(stageEntire, 10000, 800);
+    viewEntire.body = _body;
+    viewEntire.satellites = _satellites;
 
     stageNight = new createjs.Stage($("canvas#night")[0]);
     viewNight = new NightView(stageNight, 5000, 400);
+    viewNight.body = _body;
+    viewNight.satellites = _satellites;
 
     // load user data
     if (UserBody.loadCookie()) {
@@ -92,27 +96,27 @@ function init() {
 
 function update() {
     // update objects
-    body.name = $("input#body_name").val();
-    body.color = $("input#body_color").val();
-    body.radius = parseFloat($("input#body_radius").val());
-    body.stdGravParam = parseFloat($("input#body_stdGravParam").val());
-    body.soi = parseFloat($("input#body_soi").val());
+    _body.name = $("input#body_name").val();
+    _body.color = $("input#body_color").val();
+    _body.radius = parseFloat($("input#body_radius").val());
+    _body.stdGravParam = parseFloat($("input#body_stdGravParam").val());
+    _body.soi = parseFloat($("input#body_soi").val());
 
-    antenna.name = $("input#antenna_name").val();
+    _antenna.name = $("input#antenna_name").val();
     if ($("input#antenna_type").val() == "omni") {
-        antenna.type = 0 /* omni */;
+        _antenna.type = 0 /* omni */;
     } else if ($("input#antenna_type").val() == "dish") {
-        antenna.type = 1 /* dish */;
+        _antenna.type = 1 /* dish */;
     }
-    antenna.range = parseFloat($("input#antenna_range").val());
-    antenna.elcConsumption = parseFloat($("input#antenna_elcConsumption").val());
+    _antenna.range = parseFloat($("input#antenna_range").val());
+    _antenna.elcConsumption = parseFloat($("input#antenna_elcConsumption").val());
 
-    satellites.count = parseInt($("input#count").val());
-    satellites.altitude = parseFloat($("input#altitude").val());
-    satellites.elcConsumption = parseFloat($("input#elcConsumption").val());
+    _satellites.count = parseInt($("input#count").val());
+    _satellites.altitude = parseFloat($("input#altitude").val());
+    _satellites.elcConsumption = parseFloat($("input#elcConsumption").val());
 
     // show objects
-    viewEntire.innerSize = (body.radius + satellites.altitude + antenna.range) * 2 * 1.05;
+    viewEntire.innerSize = (_body.radius + _satellites.altitude + _antenna.range) * 2 * 1.05;
 
     viewEntire.show();
     stageEntire.update();
@@ -139,14 +143,14 @@ function onBodySelect(ev) {
 // add new data to UserBody
 function onUserBodyAdd(ev) {
     update();
-    if (UserBody.userBodies[body.name] == undefined)
-        addUserBodySelection(body.name); // add option to body selector.
-    UserBody.userBodies[body.name] = new Body(); // create new instance and put data into it with cutting reference.
-    UserBody.userBodies[body.name].name = body.name;
-    UserBody.userBodies[body.name].color = body.color;
-    UserBody.userBodies[body.name].radius = body.radius;
-    UserBody.userBodies[body.name].stdGravParam = body.stdGravParam;
-    UserBody.userBodies[body.name].soi = body.soi;
+    if (UserBody.userBodies[_body.name] == undefined)
+        addUserBodySelection(_body.name); // add option to body selector.
+    UserBody.userBodies[_body.name] = new Body(); // create new instance and put data into it with cutting reference.
+    UserBody.userBodies[_body.name].name = _body.name;
+    UserBody.userBodies[_body.name].color = _body.color;
+    UserBody.userBodies[_body.name].radius = _body.radius;
+    UserBody.userBodies[_body.name].stdGravParam = _body.stdGravParam;
+    UserBody.userBodies[_body.name].soi = _body.soi;
     UserBody.saveCookie();
 }
 
@@ -159,9 +163,9 @@ function addUserBodySelection(name) {
 // remove user's body data which has the same name as body_name in body_detail.
 function onUserBodyRemoved(ev) {
     update();
-    delete UserBody.userBodies[body.name];
+    delete UserBody.userBodies[_body.name];
     UserBody.saveCookie();
-    removeUserBodySelection(body.name);
+    removeUserBodySelection(_body.name);
 }
 
 function removeUserBodySelection(name) {
