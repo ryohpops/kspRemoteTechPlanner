@@ -60,22 +60,22 @@ var NightView = (function (_super) {
         this.shapeOuter.graphics.beginFill("rgba(0,0,0,0.2)").drawRect(this.outerSize / 2, this.outerSize / 2 - NightView.bodyRadius, this.outerSize / 2, NightView.bodyRadius * 2).endFill();
 
         // planet
-        this.shapeOuter.graphics.beginFill(body.color).drawCircle(this.outerSize / 2, this.outerSize / 2, NightView.bodyRadius).endFill();
+        this.shapeOuter.graphics.beginFill(this.body.color).drawCircle(this.outerSize / 2, this.outerSize / 2, NightView.bodyRadius).endFill();
 
         // orbit
         this.shapeOuter.graphics.beginStroke("lightgray").drawCircle(this.outerSize / 2, this.outerSize / 2, NightView.orbitRadius).endStroke();
 
         // orbital period
-        this.txtOrbitalPeriod.text = "Orbital period: " + satellites.orbitalPeriod().toFixed(3) + " sec.";
+        this.txtOrbitalPeriod.text = "Orbital period: " + this.satellites.orbitalPeriod().toFixed(3) + " sec.";
 
         // night time
-        this.txtNightTime.text = "Night time: " + satellites.nightTime().toFixed(3) + " sec.";
+        this.txtNightTime.text = "Night time: " + this.satellites.nightTime().toFixed(3) + " sec.";
 
         // required battery
-        this.txtRequiredBattery.text = "Required Battery: " + satellites.requiredBattery().toFixed(3);
+        this.txtRequiredBattery.text = "Required Battery: " + this.satellites.requiredBattery().toFixed(3);
 
         // required generator
-        this.txtRequiredGenerator.text = "Required Generator: " + satellites.requiredGenerator().toFixed(3) + " per sec.";
+        this.txtRequiredGenerator.text = "Required Generator: " + this.satellites.requiredGenerator().toFixed(3) + " per sec.";
     };
     NightView.bodyRadius = 50;
     NightView.orbitRadius = 150;

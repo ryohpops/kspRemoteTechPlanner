@@ -1,6 +1,6 @@
-﻿/// <reference path="body.ts" />
+﻿/// <reference path="../calculator/point.ts" />
+/// <reference path="body.ts" />
 /// <reference path="antenna.ts" />
-/// <reference path="point.ts" />
 
 class Satellites {
     body: Body;
@@ -16,20 +16,20 @@ class Satellites {
     }
 
     satDistance(): number {
-        return Calculator.length(this.satPosition(0, 0), this.satPosition(1, 0));
+        return Euclidean.length(this.satPosition(0, 0), this.satPosition(1, 0));
     }
 
     stableRange(): number {
-        return Calculator.circleCrossPoint(new Point(0, 0), this.antenna.range,
-            this.satPosition(0, 0), this.satPosition(1, 0), Calculator.CircleCrossPointMode.high) - body.radius;
+        return Euclidean.circleCrossPoint(new Point(0, 0), this.antenna.range,
+            this.satPosition(0, 0), this.satPosition(1, 0), Euclidean.CircleCrossPointMode.high) - this.body.radius;
     }
 
     orbitalPeriod(): number {
-        return Calculator.orbitalPeriod(this.body.radius, this.altitude, this.body.stdGravParam);
+        return Euclidean.orbitalPeriod(this.body.radius, this.altitude, this.body.stdGravParam);
     }
 
     nightTime(): number {
-        return Calculator.orbitalNightTime(this.body.radius, this.altitude, this.body.stdGravParam);
+        return Euclidean.orbitalNightTime(this.body.radius, this.altitude, this.body.stdGravParam);
     }
 
     requiredBattery(): number {

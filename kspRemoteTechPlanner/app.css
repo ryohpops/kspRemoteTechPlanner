@@ -13,10 +13,6 @@ button.manual-input[id$="_detail"] {
     width: 70%;
 }
 
-button.manual-input[id="antenna_detail"] {
-    width: 90%; !important
-}
-
 button.manual-input[id$="_add"] {
     width: 10%;
 }

@@ -11,15 +11,15 @@
     <script src="Scripts/jquery-2.1.1.min.js"></script>
     <script src="Scripts/easeljs-0.7.1.min.js"></script>
     <script src="Scripts/bootstrap.min.js"></script>
-    <script src="model/point.js"></script>
-    <script src="model/calculator.js"></script>
-    <script src="model/communicator.js"></script>
     <script src="model/body.js"></script>
     <script src="model/antenna.js"></script>
     <script src="model/satellites.js"></script>
     <script src="model/bodyData.js"></script>
-    <script src="model/userBody.js"></script>
     <script src="model/antennaData.js"></script>
+    <script src="model/userData.js"></script>
+    <script src="calculator/point.js"></script>
+    <script src="calculator/euclidean.js"></script>
+    <script src="calculator/communication.js"></script>
     <script src="view/graphicsHelper.js"></script>
     <script src="view/view.js"></script>
     <script src="view/entireView.js"></script>
@@ -44,11 +44,12 @@
             When green circle labeled Stable appears, it means that any orbits lower than Stable altitude never have connection-less flight.<br />
             <br />
             This website is under development, forum is <a href="http://forum.kerbalspaceprogram.com/threads/90113-WEB-Visual-RemoteTech-Planner-for-MOD-RemoteTech2">here</a>
-            and sources are available on <a href="https://github.com/ryohpops/kspRemoteTechPlanner">github</a>. Current version is beta2.3.1.<br />
+            and sources are available on <a href="https://github.com/ryohpops/kspRemoteTechPlanner">github</a>. Current version is beta2.4.<br />
             Issues, bug reports, contributers are always welcome.<br />
             <br />
-            Data of bodies is based on <a href="http://wiki.kerbalspaceprogram.com/wiki/Main_Page">KSP Wiki</a> and
-            <a href="http://remotetechnologiesgroup.github.io/RemoteTech/">RemoteTech2 manual</a>.<br />
+            Data of bodies is based on <a href="http://wiki.kerbalspaceprogram.com/wiki/Main_Page">KSP Wiki</a>, 
+            <a href="http://remotetechnologiesgroup.github.io/RemoteTech/">RemoteTech2 manual</a> and 
+            <a href="http://forum.kerbalspaceprogram.com/threads/41652-A-more-accurate-delta-v-map">metaphor's Delta-V map</a>.<br />
             NO GUARANTEES OF CORRECTNESS.
         </div>
 
@@ -114,15 +115,15 @@
                         <div class="manual-input" id="body">
                             <div class="form-group">
                                 <label for="body_name">Name</label>
-                                <input type="text" class="form-control" id="body_name" value="Kerbin" />
+                                <input type="text" class="form-control" id="body_name" />
                             </div>
                             <div class="form-group">
                                 <label for="body_color">Color</label>
-                                <input type="text" class="form-control" id="body_color" value="darkgreen" />
+                                <input type="text" class="form-control" id="body_color" />
                             </div>
                             <div class="form-group">
                                 <label for="body_radius">Radius(km)</label>
-                                <input type="number" class="form-control" id="body_radius" value="600" step="any" min="0" />
+                                <input type="number" class="form-control" id="body_radius" step="any" min="0" />
                             </div>
                             <div class="form-group">
                                 <label for="body_stdGravParam">Standard gravitational parameter<br />(km<sup>3</sup>s<sup>-2</sup>)</label>
@@ -130,7 +131,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="body_soi">Sphere of Influence(km)</label>
-                                <input type="number" class="form-control" id="body_soi" value="84159.286" step="any" min="0" />
+                                <input type="number" class="form-control" id="body_soi" step="any" min="0" />
                             </div>
                         </div>
 
@@ -153,17 +154,17 @@
 
                     <div class="form-group">
                         <label for="count">Count</label>
-                        <input type="number" class="form-control" id="count" value="4" step="1" min="1" />
+                        <input type="number" class="form-control" id="count" step="1" min="1" />
                     </div>
 
                     <div class="form-group">
                         <label for="altitude">Altitude(km, ASL)</label>
-                        <input type="number" class="form-control" id="altitude" value="1000" step="any" min="0" />
+                        <input type="number" class="form-control" id="altitude" step="any" min="0" />
                     </div>
 
                     <div class="form-group">
                         <label for="elcConsumption">Probe electricity consumption<br />(exclude antenna's, per sec.)</label>
-                        <input type="number" class="form-control" id="elcConsumption" value="0.01" step="any" />
+                        <input type="number" class="form-control" id="elcConsumption" step="any" />
                     </div>
 
                     <div class="form-group">
@@ -184,15 +185,15 @@
                         <div class="manual-input" id="antenna">
                             <div class="form-group">
                                 <label for="antenna_name">Name</label>
-                                <input type="text" class="form-control" id="antenna_name" value="Communotron 16" />
+                                <input type="text" class="form-control" id="antenna_name" />
                             </div>
-                            <div class="form-group" style="display:none">
+                            <div class="form-group">
                                 <label for="antenna_type">Type(omni or dish)</label>
-                                <input type="text" class="form-control" id="antenna_type" value="omni" pattern="omni|dish" />
+                                <input type="text" class="form-control" id="antenna_type" pattern="omni|dish" />
                             </div>
                             <div class="form-group">
                                 <label for="antenna_range">Range(km)</label>
-                                <input type="number" class="form-control" id="antenna_range" value="2500" step="any" min="0" />
+                                <input type="number" class="form-control" id="antenna_range" step="any" min="0" />
                             </div>
                             <div class="form-group">
                                 <label for="antenna_elcConsumption">Electricity consumption(per sec.)</label>
@@ -205,12 +206,12 @@
                                 <span class="glyphicon glyphicon-collapse-up"></span>
                                 <span class="glyphicon glyphicon-collapse-down"></span>
                             </button>
-                            <!--<button type="button" class="btn btn-xs manual-input" id="body_add">
+                            <button type="button" class="btn btn-xs manual-input" id="antenna_add">
                                 <span class="glyphicon glyphicon-plus"></span>
                             </button>
-                            <button type="button" class="btn btn-xs manual-input" id="body_remove">
+                            <button type="button" class="btn btn-xs manual-input" id="antenna_remove">
                                 <span class="glyphicon glyphicon-minus"></span>
-                            </button>-->
+                            </button>
                             <button type="button" class="btn btn-xs manual-input" id="antenna_reset">
                                 <span class="glyphicon glyphicon-repeat"></span>
                             </button>
@@ -219,7 +220,7 @@
 
                     <div class="form-group">
                         <button type="button" class="btn btn-primary" id="calculate">Calculate</button>
-                        <button type="reset" class="btn btn-default" id="reset">Reset</button>
+                        <button type="button" class="btn btn-default" id="reset">Reset</button>
                     </div>
                 </form>
             </div>
