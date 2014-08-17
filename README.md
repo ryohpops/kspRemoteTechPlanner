@@ -1,14 +1,19 @@
 kspRemoteTechPlanner
 ====================
 
-web-based satellite network planner for the MOD, [RemoteTech2](http://forum.kerbalspaceprogram.com/threads/83305-Development-Resumed-RemoteTech-2).
+Web-based satellite network planner for the MOD, [RemoteTech2](http://forum.kerbalspaceprogram.com/threads/83305-Development-Resumed-RemoteTech-2).
 
 Latest release is [here](http://ryohpops.github.io/kspRemoteTechPlanner/).
-Current version is beta2.3.
+Current version is beta2.4.
 
 Forum is [here](http://forum.kerbalspaceprogram.com/threads/90113-WEB-Visual-RemoteTech-Planner-for-MOD-RemoteTech2).
 
 Version history
+
+- beta2.4 : 2014/08/17
+
+ Implement manual input mode for antenna (sorry for my wrong history).  
+ User-created antenna data is stored in cookie.
 
 - beta2.3.1 : 2014/08/16
 
@@ -24,11 +29,11 @@ Version history
 
  Filled all data except extra-long range dishes.  
  Implement dynamic canvas resizing.  
- User-created body data are stored in cookie.
+ User-created body data is stored in cookie.
 
 - beta2.1 : 2014/08/12
 
- Manual input mode is now available for body and antenna.
+ Manual input mode is now available for body.
 
 - beta2 : 2014/08/10
 
