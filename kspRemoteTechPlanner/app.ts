@@ -70,14 +70,10 @@ function init() {
 
     $("form#calculator").find("input,select").on("keypress", (ev) => { if (ev.keyCode == 13) update() });
     $("button#calculate").on("click", (ev) => { update() });
-    $("form#calculator").on("reset", (ev) => {
-        ev.preventDefault();
-        $("input#body").val("Kerbin");
-    });
+    $("button#reset").on("click", (ev) => { reset() });
 
     // finallize
-    onBodySelect(null);
-    onAntennaSelect(null);
+    reset();
     update();
 }
 
@@ -109,6 +105,16 @@ function update() {
     stageEntire.update();
     viewNight.show();
     stageNight.update();
+}
+
+function reset() {
+    $("select#body").val("Kerbin");
+    $("input#count").val((4).toString());
+    $("input#altitude").val((1000).toString());
+    $("input#elcConsumption").val((0.01).toString());
+    $("select#antenna").val("Communotron 16");
+    onBodySelect(null);
+    onAntennaSelect(null);
 }
 
 // event handler
