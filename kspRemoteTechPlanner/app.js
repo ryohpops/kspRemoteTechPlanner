@@ -79,6 +79,10 @@ function init() {
     $("button#calculate").on("click", function (ev) {
         update();
     });
+    $("form#calculator").on("reset", function (ev) {
+        ev.preventDefault();
+        $("input#body").val("Kerbin");
+    });
 
     // finallize
     onBodySelect(null);

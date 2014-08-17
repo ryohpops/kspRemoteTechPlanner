@@ -118,4 +118,4 @@ var EntireView = (function (_super) {
     };
     return EntireView;
 })(View);
-//# sourceMappingURL=entireview.js.map
+//# sourceMappingURL=entireView.js.map

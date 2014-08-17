@@ -66,6 +66,10 @@ function init() {
 
     $("form#calculator").find("input,select").on("keypress", (ev) => { if (ev.keyCode == 13) update() });
     $("button#calculate").on("click", (ev) => { update() });
+    $("form#calculator").on("reset", (ev) => {
+        ev.preventDefault();
+        $("input#body").val("Kerbin");
+    });
 
     // finallize
     onBodySelect(null);
