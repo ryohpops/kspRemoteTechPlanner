@@ -68,14 +68,14 @@ function init() {
     $("button.manual-input#body_reset").on("click", (ev) => { onBodySelect(ev) });
 
     $("button.manual-input#body_add").on("click", onUserBodyAdd);
-    $("button.manual-input#body_remove").on("click", onUserBodyRemoved);
+    $("button.manual-input#body_remove").on("click", onUserBodyRemove);
 
     $("select#antenna").on("change", onAntennaSelect);
     $("button.manual-input#antenna_detail").on("click", (ev) => { $("div.manual-input#antenna").slideToggle() });
     $("button.manual-input#antenna_reset").on("click", (ev) => { onAntennaSelect(ev) });
 
     $("button.manual-input#antenna_add").on("click", onUserAntennaAdd);
-    $("button.manual-input#antenna_remove").on("click", onUserAntennaRemoved);
+    $("button.manual-input#antenna_remove").on("click", onUserAntennaRemove);
 
     $("form#calculator").find("input,select").on("keypress", (ev) => { if (ev.keyCode == 13) update() });
     $("button#calculate").on("click", (ev) => { update() });
@@ -157,9 +157,42 @@ function onUserBodyAdd(ev) {
 }
 
 function addUserBodySelection(name: string) {
-    if ($("select#body > optgroup[label='User data']").length == 0) // if there isn't User data option-group,
+    if ($("select#body > optgroup[label='User data']").length == 0)         // if there isn't User data option-group,
         $("select#body").append("<optgroup label='User data'></optgroup>"); // make one.
     $("select#body > optgroup[label='User data']").append("<option>" + name + "</option>"); // add option for user's data to body selector.
+}
+
+// remove user's body data which has the same name as body_name in body_detail.
+function onUserBodyRemove(ev) {
+    update();
+    delete UserData.userBodies[_body.name];
+    UserData.saveCookie();
+    removeUserBodySelection(_body.name);
+}
+
+function removeUserBodySelection(name: string) {
+    $("optgroup[label='User data'] > option:contains('" + name + "')").remove();
+    if (UserData.loadCookie().body == false) {                   // if there are no user's data left,
+        $("select#body > optgroup[label='User data']").remove(); // remove User data option-group.
+    }
+}
+
+// retrieve data of selected antenna.
+function onAntennaSelect(ev) {
+    var a: Antenna;
+    if ($("select#antenna > optgroup[label='User data']").length == 1) // when option group User data exists,
+        a = UserData.userAntennas[$("select#antenna").val()];          // aquire data from UserData first,
+    if (a == undefined)                                        // if undefined there or option group User data not exists,
+        a = AntennaData.getAntenna($("select#antenna").val()); // then from AntennaData.
+
+    $("input#antenna_name").val(a.name);
+    if (a.type == AntennaType.omni) {
+        $("input#antenna_type").val("omni");
+    } else if (a.type == AntennaType.dish) {
+        $("input#antenna_type").val("dish");
+    }
+    $("input#antenna_range").val(a.range.toString());
+    $("input#antenna_elcConsumption").val(a.elcConsumption.toString());
 }
 
 // add new data to user's antenna
@@ -176,28 +209,13 @@ function onUserAntennaAdd(ev) {
 }
 
 function addUserAntennaSelection(name: string) {
-    if ($("select#antenna > optgroup[label='User data']").length == 0) // if there isn't User data option-group,
+    if ($("select#antenna > optgroup[label='User data']").length == 0)         // if there isn't User data option-group,
         $("select#antenna").append("<optgroup label='User data'></optgroup>"); // make one.
     $("select#antenna > optgroup[label='User data']").append("<option>" + name + "</option>"); // add option for user's data to antenna selector.
 }
 
-// remove user's body data which has the same name as body_name in body_detail.
-function onUserBodyRemoved(ev) {
-    update();
-    delete UserData.userBodies[_body.name];
-    UserData.saveCookie();
-    removeUserBodySelection(_body.name);
-}
-
-function removeUserBodySelection(name: string) {
-    $("optgroup[label='User data'] > option:contains('" + name + "')").remove();
-    if (UserData.loadCookie().body == false) {                        // if there are no user's data left,
-        $("select#body > optgroup[label='User data']").remove(); // remove User data option-group.
-    }
-}
-
 // remove user's antenna data which has the same name as antenna_name in antenna_detail.
-function onUserAntennaRemoved(ev) {
+function onUserAntennaRemove(ev) {
     update();
     delete UserData.userAntennas[_antenna.name];
     UserData.saveCookie();
@@ -206,24 +224,7 @@ function onUserAntennaRemoved(ev) {
 
 function removeUserAntennaSelection(name: string) {
     $("optgroup[label='User data'] > option:contains('" + name + "')").remove();
-    if (UserData.loadCookie().antenna == false) {                        // if there are no user's data left,
+    if (UserData.loadCookie().antenna == false) {                   // if there are no user's data left,
         $("select#antenna > optgroup[label='User data']").remove(); // remove User data option-group.
     }
-}
-
-function onAntennaSelect(ev) {
-    var a: Antenna;
-    if ($("select#antenna > optgroup[label='User data']").length == 1) // when option group User data exists,
-        a = UserData.userAntennas[$("select#antenna").val()];          // aquire data from UserData first,
-    if (a == undefined)                                        // if undefined there or option group User data not exists,
-        a = AntennaData.getAntenna($("select#antenna").val()); // then from AntennaData.
-
-    $("input#antenna_name").val(a.name);
-    if (a.type == AntennaType.omni) {
-        $("input#antenna_type").val("omni");
-    } else if (a.type == AntennaType.dish) {
-        $("input#antenna_type").val("dish");
-    }
-    $("input#antenna_range").val(a.range.toString());
-    $("input#antenna_elcConsumption").val(a.elcConsumption.toString());
 }
