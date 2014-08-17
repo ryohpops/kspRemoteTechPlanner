@@ -161,12 +161,14 @@ function onUserBodyAdd(ev) {
     update();
     if (UserData.userBodies[_body.name] == undefined)
         addUserDataSelection("body", _body.name); // add option to body selector.
-    UserData.userBodies[_body.name] = new Body(); // create new instance and put data into it with cutting reference.
-    UserData.userBodies[_body.name].name = _body.name;
-    UserData.userBodies[_body.name].color = _body.color;
-    UserData.userBodies[_body.name].radius = _body.radius;
-    UserData.userBodies[_body.name].stdGravParam = _body.stdGravParam;
-    UserData.userBodies[_body.name].soi = _body.soi;
+
+    var b = new Body();
+    b.name = _body.name;
+    b.color = _body.color;
+    b.radius = _body.radius;
+    b.stdGravParam = _body.stdGravParam;
+    b.soi = _body.soi;
+    UserData.userBodies[_body.name] = b;
     UserData.saveCookie();
 }
 
@@ -203,11 +205,13 @@ function onUserAntennaAdd(ev) {
     update();
     if (UserData.userAntennas[_antenna.name] == undefined)
         addUserDataSelection("antenna", _antenna.name); // add option to antenna selector.
-    UserData.userAntennas[_antenna.name] = new Antenna(); // create new instance and put data into it with cutting reference.
-    UserData.userAntennas[_antenna.name].name = _antenna.name;
-    UserData.userAntennas[_antenna.name].type = _antenna.type;
-    UserData.userAntennas[_antenna.name].range = _antenna.range;
-    UserData.userAntennas[_antenna.name].elcConsumption = _antenna.elcConsumption;
+
+    var a = new Antenna();
+    a.name = _antenna.name;
+    a.type = _antenna.type;
+    a.range = _antenna.range;
+    a.elcConsumption = _antenna.elcConsumption;
+    UserData.userAntennas[_antenna.name] = a;
     UserData.saveCookie();
 }
 

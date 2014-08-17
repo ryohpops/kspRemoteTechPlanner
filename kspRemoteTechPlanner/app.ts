@@ -146,13 +146,15 @@ function onBodySelect(ev) {
 function onUserBodyAdd(ev) {
     update();
     if (UserData.userBodies[_body.name] == undefined) // if the same name body is not defined yet,
-        addUserDataSelection("body", _body.name);             // add option to body selector.
-    UserData.userBodies[_body.name] = new Body(); // create new instance and put data into it with cutting reference.
-    UserData.userBodies[_body.name].name = _body.name;
-    UserData.userBodies[_body.name].color = _body.color;
-    UserData.userBodies[_body.name].radius = _body.radius;
-    UserData.userBodies[_body.name].stdGravParam = _body.stdGravParam;
-    UserData.userBodies[_body.name].soi = _body.soi;
+        addUserDataSelection("body", _body.name);     // add option to body selector.
+
+    var b: Body = new Body(); // create new instance and put data.
+    b.name = _body.name;
+    b.color = _body.color;
+    b.radius = _body.radius;
+    b.stdGravParam = _body.stdGravParam;
+    b.soi = _body.soi;
+    UserData.userBodies[_body.name] = b;
     UserData.saveCookie();
 }
 
@@ -186,12 +188,14 @@ function onAntennaSelect(ev) {
 function onUserAntennaAdd(ev) {
     update();
     if (UserData.userAntennas[_antenna.name] == undefined) // if the same name antenna is not defined yet,
-        addUserDataSelection("antenna", _antenna.name);            // add option to antenna selector.
-    UserData.userAntennas[_antenna.name] = new Antenna(); // create new instance and put data into it with cutting reference.
-    UserData.userAntennas[_antenna.name].name = _antenna.name;
-    UserData.userAntennas[_antenna.name].type = _antenna.type;
-    UserData.userAntennas[_antenna.name].range = _antenna.range;
-    UserData.userAntennas[_antenna.name].elcConsumption = _antenna.elcConsumption;
+        addUserDataSelection("antenna", _antenna.name);    // add option to antenna selector.
+
+    var a: Antenna = new Antenna(); // create new instance and put data.
+    a.name = _antenna.name;
+    a.type = _antenna.type;
+    a.range = _antenna.range;
+    a.elcConsumption = _antenna.elcConsumption;
+    UserData.userAntennas[_antenna.name] = a;
     UserData.saveCookie();
 }
 
@@ -213,7 +217,7 @@ function addUserDataSelection(data: string, name: string) {
 // remove select option for user's data from selector.
 function removeUserDataSelection(data: string, name: string, isDataRemaining: () => boolean) {
     $("optgroup[label='User data'] > option:contains('" + name + "')").remove();
-    if (!isDataRemaining()) {                                             // if there are no user's data left,
+    if (!isDataRemaining()) {                                            // if there are no user's data left,
         $("select#" + data + " > optgroup[label='User data']").remove(); // remove User data option-group.
     }
 }
