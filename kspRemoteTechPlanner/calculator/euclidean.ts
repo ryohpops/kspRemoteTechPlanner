@@ -1,6 +1,6 @@
 ﻿/// <reference path="point.ts" />
 
-module Calculator {
+module Euclidean {
     export enum CircleCrossPointMode {
         high, low
     }

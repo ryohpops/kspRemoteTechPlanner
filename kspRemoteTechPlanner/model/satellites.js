@@ -1,6 +1,6 @@
-﻿/// <reference path="body.ts" />
+﻿/// <reference path="../calculator/point.ts" />
+/// <reference path="body.ts" />
 /// <reference path="antenna.ts" />
-/// <reference path="point.ts" />
 var Satellites = (function () {
     function Satellites() {
     }
@@ -11,19 +11,19 @@ var Satellites = (function () {
     };
 
     Satellites.prototype.satDistance = function () {
-        return Calculator.length(this.satPosition(0, 0), this.satPosition(1, 0));
+        return Euclidean.length(this.satPosition(0, 0), this.satPosition(1, 0));
     };
 
     Satellites.prototype.stableRange = function () {
-        return Calculator.circleCrossPoint(new Point(0, 0), this.antenna.range, this.satPosition(0, 0), this.satPosition(1, 0), 0 /* high */) - this.body.radius;
+        return Euclidean.circleCrossPoint(new Point(0, 0), this.antenna.range, this.satPosition(0, 0), this.satPosition(1, 0), 0 /* high */) - this.body.radius;
     };
 
     Satellites.prototype.orbitalPeriod = function () {
-        return Calculator.orbitalPeriod(this.body.radius, this.altitude, this.body.stdGravParam);
+        return Euclidean.orbitalPeriod(this.body.radius, this.altitude, this.body.stdGravParam);
     };
 
     Satellites.prototype.nightTime = function () {
-        return Calculator.orbitalNightTime(this.body.radius, this.altitude, this.body.stdGravParam);
+        return Euclidean.orbitalNightTime(this.body.radius, this.altitude, this.body.stdGravParam);
     };
 
     Satellites.prototype.requiredBattery = function () {

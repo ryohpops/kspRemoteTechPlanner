@@ -2,8 +2,8 @@
 /// <reference path="../scripts/typings/createjs-lib/createjs-lib.d.ts" />
 /// <reference path="../scripts/typings/tweenjs/tweenjs.d.ts" />
 /// <reference path="../model/body.ts" />
-/// <reference path="../model/communicator.ts" />
 /// <reference path="../model/satellites.ts" />
+/// <reference path="../calculator/communication.ts" />
 /// <reference path="graphicshelper.ts" />
 /// <reference path="view.ts" />
 
@@ -114,7 +114,7 @@ class EntireView extends View {
         }
 
         // distance
-        g.beginStroke(Communicator.isNextSatConnectable(this.body, this.satellites, this.innerSize) ? "blue" : "red");
+        g.beginStroke(Communication.isNextSatConnectable(this.body, this.satellites, this.innerSize) ? "blue" : "red");
         GraphicsHelper.drawDualArrow(this.shapeInner.graphics,
             this.satellites.satPosition(0, this.innerSize).x, this.satellites.satPosition(0, this.innerSize).y,
             this.satellites.satPosition(1, this.innerSize).x, this.satellites.satPosition(1, this.innerSize).y, this.toInner(20))
@@ -127,7 +127,7 @@ class EntireView extends View {
             - this.satellites.satPosition(0, this.innerSize).y) / 2) + 5;
 
         // stable area
-        if (Communicator.hasStableArea(this.body, this.satellites, this.innerSize)) {
+        if (Communication.hasStableArea(this.body, this.satellites, this.innerSize)) {
             // upper limit of stable area
             this.shapeInner.graphics.beginStroke("green")
                 .drawCircle(this.innerSize / 2, this.innerSize / 2, this.satellites.stableRange() + this.body.radius)
