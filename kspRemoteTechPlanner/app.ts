@@ -53,12 +53,12 @@ function init() {
     var cookieExists: UserData.loadCookieResult = UserData.loadCookie();
     if (cookieExists.body) {
         for (var i in UserData.userBodies) {
-            addUserBodySelection(UserData.userBodies[i].name);
+            addUserDataSelection("body", UserData.userBodies[i].name);
         }
     }
     if (cookieExists.antenna) {
         for (var i in UserData.userAntennas) {
-            addUserAntennaSelection(UserData.userAntennas[i].name);
+            addUserDataSelection("antenna", UserData.userAntennas[i].name);
         }
     }
 
@@ -146,7 +146,7 @@ function onBodySelect(ev) {
 function onUserBodyAdd(ev) {
     update();
     if (UserData.userBodies[_body.name] == undefined) // if the same name body is not defined yet,
-        addUserBodySelection(_body.name);             // add option to body selector.
+        addUserDataSelection("body", _body.name);             // add option to body selector.
     UserData.userBodies[_body.name] = new Body(); // create new instance and put data into it with cutting reference.
     UserData.userBodies[_body.name].name = _body.name;
     UserData.userBodies[_body.name].color = _body.color;
@@ -156,25 +156,12 @@ function onUserBodyAdd(ev) {
     UserData.saveCookie();
 }
 
-function addUserBodySelection(name: string) {
-    if ($("select#body > optgroup[label='User data']").length == 0)         // if there isn't User data option-group,
-        $("select#body").append("<optgroup label='User data'></optgroup>"); // make one.
-    $("select#body > optgroup[label='User data']").append("<option>" + name + "</option>"); // add option for user's data to body selector.
-}
-
 // remove user's body data which has the same name as body_name in body_detail.
 function onUserBodyRemove(ev) {
     update();
     delete UserData.userBodies[_body.name];
     UserData.saveCookie();
-    removeUserBodySelection(_body.name);
-}
-
-function removeUserBodySelection(name: string) {
-    $("optgroup[label='User data'] > option:contains('" + name + "')").remove();
-    if (UserData.loadCookie().body == false) {                   // if there are no user's data left,
-        $("select#body > optgroup[label='User data']").remove(); // remove User data option-group.
-    }
+    removeUserDataSelection("body", _body.name, () => { return UserData.loadCookie().body });
 }
 
 // retrieve data of selected antenna.
@@ -199,7 +186,7 @@ function onAntennaSelect(ev) {
 function onUserAntennaAdd(ev) {
     update();
     if (UserData.userAntennas[_antenna.name] == undefined) // if the same name antenna is not defined yet,
-        addUserAntennaSelection(_antenna.name);            // add option to antenna selector.
+        addUserDataSelection("antenna", _antenna.name);            // add option to antenna selector.
     UserData.userAntennas[_antenna.name] = new Antenna(); // create new instance and put data into it with cutting reference.
     UserData.userAntennas[_antenna.name].name = _antenna.name;
     UserData.userAntennas[_antenna.name].type = _antenna.type;
@@ -208,23 +195,25 @@ function onUserAntennaAdd(ev) {
     UserData.saveCookie();
 }
 
-function addUserAntennaSelection(name: string) {
-    if ($("select#antenna > optgroup[label='User data']").length == 0)         // if there isn't User data option-group,
-        $("select#antenna").append("<optgroup label='User data'></optgroup>"); // make one.
-    $("select#antenna > optgroup[label='User data']").append("<option>" + name + "</option>"); // add option for user's data to antenna selector.
-}
-
 // remove user's antenna data which has the same name as antenna_name in antenna_detail.
 function onUserAntennaRemove(ev) {
     update();
     delete UserData.userAntennas[_antenna.name];
     UserData.saveCookie();
-    removeUserAntennaSelection(_antenna.name);
+    removeUserDataSelection("antenna", _antenna.name, () => {return UserData.loadCookie().antenna });
 }
 
-function removeUserAntennaSelection(name: string) {
+// add select option for user's data to selector.
+function addUserDataSelection(data: string, name: string) {
+    if ($("select#" + data + " > optgroup[label='User data']").length == 0)    // if there isn't User data option-group,
+        $("select#" + data).append("<optgroup label='User data'></optgroup>"); // make one.
+    $("select#" + data + " > optgroup[label='User data']").append("<option>" + name + "</option>"); // add option for user's data to selector.
+}
+
+// remove select option for user's data from selector.
+function removeUserDataSelection(data: string, name: string, isDataRemaining: () => boolean) {
     $("optgroup[label='User data'] > option:contains('" + name + "')").remove();
-    if (UserData.loadCookie().antenna == false) {                   // if there are no user's data left,
-        $("select#antenna > optgroup[label='User data']").remove(); // remove User data option-group.
+    if (!isDataRemaining()) {                                             // if there are no user's data left,
+        $("select#" + data + " > optgroup[label='User data']").remove(); // remove User data option-group.
     }
 }
