@@ -81,4 +81,4 @@ var NightView = (function (_super) {
     NightView.orbitRadius = 150;
     return NightView;
 })(View);
-//# sourceMappingURL=nightview.js.map
+//# sourceMappingURL=nightView.js.map
