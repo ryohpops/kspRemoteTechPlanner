@@ -230,7 +230,7 @@ function onAntennaSelect(ev) {
     if ($("select#antenna > optgroup[label='User data']").length == 1)
         a = UserData.userAntennas[$("select#antenna").val()]; // aquire data from UserData first,
     if (a == undefined)
-        a = AntennaData.getAntenna($("select#antenna").val()); // then from BodyData.
+        a = AntennaData.getAntenna($("select#antenna").val()); // then from AntennaData.
 
     $("input#antenna_name").val(a.name);
     if (a.type == 0 /* omni */) {
