@@ -46,7 +46,7 @@
     <TypeScriptCompile Include="model\body.ts" />
     <TypeScriptCompile Include="model\communicator.ts" />
     <TypeScriptCompile Include="model\point.ts" />
-    <TypeScriptCompile Include="model\userBody.ts" />
+    <TypeScriptCompile Include="model\userData.ts" />
     <TypeScriptCompile Include="view\nightView.ts" />
     <TypeScriptCompile Include="view\entireView.ts" />
     <TypeScriptCompile Include="model\bodyData.ts" />

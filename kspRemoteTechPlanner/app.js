@@ -4,7 +4,7 @@
 /// <reference path="scripts/typings/tweenjs/tweenjs.d.ts" />
 /// <reference path="model/body.ts" />
 /// <reference path="model/bodydata.ts" />
-/// <reference path="model/userbody.ts" />
+/// <reference path="model/userdata.ts" />
 /// <reference path="model/antenna.ts" />
 /// <reference path="model/antennadata.ts" />
 /// <reference path="model/satellites.ts" />
@@ -49,12 +49,17 @@ function init() {
     viewNight.satellites = _satellites;
 
     // load user data
-    if (UserBody.loadCookie()) {
-        for (var i in UserBody.userBodies) {
-            addUserBodySelection(UserBody.userBodies[i].name);
+    var cookieExists = UserData.loadCookie();
+    if (cookieExists.body) {
+        for (var i in UserData.userBodies) {
+            addUserBodySelection(UserData.userBodies[i].name);
         }
     }
-    ;
+    if (cookieExists.antenna) {
+        for (var i in UserData.userAntennas) {
+            addUserBodySelection(UserData.userBodies[i].name);
+        }
+    }
 
     // add event handlers
     $("select#body").on("change", onBodySelect);
@@ -137,7 +142,7 @@ function reset() {
 function onBodySelect(ev) {
     var b;
     if ($("select#body > optgroup[label='User data']").length == 1)
-        b = UserBody.userBodies[$("select#body").val()]; // aquire data from UserBody first,
+        b = UserData.userBodies[$("select#body").val()]; // aquire data from UserBody first,
     if (b == undefined)
         b = BodyData.getBody($("select#body").val()); // then from BodyData.
 
@@ -151,15 +156,15 @@ function onBodySelect(ev) {
 // add new data to UserBody
 function onUserBodyAdd(ev) {
     update();
-    if (UserBody.userBodies[_body.name] == undefined)
+    if (UserData.userBodies[_body.name] == undefined)
         addUserBodySelection(_body.name); // add option to body selector.
-    UserBody.userBodies[_body.name] = new Body(); // create new instance and put data into it with cutting reference.
-    UserBody.userBodies[_body.name].name = _body.name;
-    UserBody.userBodies[_body.name].color = _body.color;
-    UserBody.userBodies[_body.name].radius = _body.radius;
-    UserBody.userBodies[_body.name].stdGravParam = _body.stdGravParam;
-    UserBody.userBodies[_body.name].soi = _body.soi;
-    UserBody.saveCookie();
+    UserData.userBodies[_body.name] = new Body(); // create new instance and put data into it with cutting reference.
+    UserData.userBodies[_body.name].name = _body.name;
+    UserData.userBodies[_body.name].color = _body.color;
+    UserData.userBodies[_body.name].radius = _body.radius;
+    UserData.userBodies[_body.name].stdGravParam = _body.stdGravParam;
+    UserData.userBodies[_body.name].soi = _body.soi;
+    UserData.saveCookie();
 }
 
 function addUserBodySelection(name) {
@@ -171,14 +176,14 @@ function addUserBodySelection(name) {
 // remove user's body data which has the same name as body_name in body_detail.
 function onUserBodyRemoved(ev) {
     update();
-    delete UserBody.userBodies[_body.name];
-    UserBody.saveCookie();
+    delete UserData.userBodies[_body.name];
+    UserData.saveCookie();
     removeUserBodySelection(_body.name);
 }
 
 function removeUserBodySelection(name) {
     $("optgroup[label='User data'] > option:contains('" + name + "')").remove();
-    if (UserBody.loadCookie() == false) {
+    if (UserData.loadCookie().body == false) {
         $("select#body > optgroup[label='User data']").remove(); // remove User data option-group.
     }
 }
