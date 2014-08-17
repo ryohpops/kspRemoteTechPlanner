@@ -57,7 +57,7 @@ function init() {
     }
     if (cookieExists.antenna) {
         for (var i in UserData.userAntennas) {
-            addUserBodySelection(UserData.userBodies[i].name);
+            addUserAntennaSelection(UserData.userAntennas[i].name);
         }
     }
 
@@ -80,6 +80,9 @@ function init() {
     $("button.manual-input#antenna_reset").on("click", function (ev) {
         onAntennaSelect(ev);
     });
+
+    $("button.manual-input#antenna_add").on("click", onUserAntennaAdd);
+    $("button.manual-input#antenna_remove").on("click", onUserAntennaRemoved);
 
     $("form#calculator").find("input,select").on("keypress", function (ev) {
         if (ev.keyCode == 13)
@@ -142,7 +145,7 @@ function reset() {
 function onBodySelect(ev) {
     var b;
     if ($("select#body > optgroup[label='User data']").length == 1)
-        b = UserData.userBodies[$("select#body").val()]; // aquire data from UserBody first,
+        b = UserData.userBodies[$("select#body").val()]; // aquire data from UserData first,
     if (b == undefined)
         b = BodyData.getBody($("select#body").val()); // then from BodyData.
 
@@ -153,7 +156,7 @@ function onBodySelect(ev) {
     $("input#body_soi").val(b.soi.toString());
 }
 
-// add new data to UserBody
+// add new data to user's body
 function onUserBodyAdd(ev) {
     update();
     if (UserData.userBodies[_body.name] == undefined)
@@ -173,6 +176,25 @@ function addUserBodySelection(name) {
     $("select#body > optgroup[label='User data']").append("<option>" + name + "</option>"); // add option for user's data to body selector.
 }
 
+// add new data to user's antenna
+function onUserAntennaAdd(ev) {
+    update();
+    if (UserData.userAntennas[_antenna.name] == undefined)
+        addUserAntennaSelection(_antenna.name); // add option to antenna selector.
+    UserData.userAntennas[_antenna.name] = new Antenna(); // create new instance and put data into it with cutting reference.
+    UserData.userAntennas[_antenna.name].name = _antenna.name;
+    UserData.userAntennas[_antenna.name].type = _antenna.type;
+    UserData.userAntennas[_antenna.name].range = _antenna.range;
+    UserData.userAntennas[_antenna.name].elcConsumption = _antenna.elcConsumption;
+    UserData.saveCookie();
+}
+
+function addUserAntennaSelection(name) {
+    if ($("select#antenna > optgroup[label='User data']").length == 0)
+        $("select#antenna").append("<optgroup label='User data'></optgroup>"); // make one.
+    $("select#antenna > optgroup[label='User data']").append("<option>" + name + "</option>"); // add option for user's data to antenna selector.
+}
+
 // remove user's body data which has the same name as body_name in body_detail.
 function onUserBodyRemoved(ev) {
     update();
@@ -188,8 +210,28 @@ function removeUserBodySelection(name) {
     }
 }
 
+// remove user's antenna data which has the same name as antenna_name in antenna_detail.
+function onUserAntennaRemoved(ev) {
+    update();
+    delete UserData.userAntennas[_antenna.name];
+    UserData.saveCookie();
+    removeUserAntennaSelection(_antenna.name);
+}
+
+function removeUserAntennaSelection(name) {
+    $("optgroup[label='User data'] > option:contains('" + name + "')").remove();
+    if (UserData.loadCookie().antenna == false) {
+        $("select#antenna > optgroup[label='User data']").remove(); // remove User data option-group.
+    }
+}
+
 function onAntennaSelect(ev) {
-    var a = AntennaData.getAntenna($("select#antenna").val());
+    var a;
+    if ($("select#antenna > optgroup[label='User data']").length == 1)
+        a = UserData.userAntennas[$("select#antenna").val()]; // aquire data from UserData first,
+    if (a == undefined)
+        a = AntennaData.getAntenna($("select#antenna").val()); // then from BodyData.
+
     $("input#antenna_name").val(a.name);
     if (a.type == 0 /* omni */) {
         $("input#antenna_type").val("omni");
