@@ -1,4 +1,5 @@
 ﻿/// <reference path="scripts/typings/jquery/jquery.d.ts" />
+/// <reference path="scripts/typings/jquery.validation/jquery.validation.d.ts" />
 /// <reference path="scripts/typings/easeljs/easeljs.d.ts" />
 /// <reference path="scripts/typings/createjs-lib/createjs-lib.d.ts" />
 /// <reference path="scripts/typings/tweenjs/tweenjs.d.ts" />
@@ -60,6 +61,16 @@ function init() {
             addUserDataSelection("antenna", UserData.userAntennas[i].name);
         }
     }
+
+    // set validator
+    $("form#calculator").validate({
+        highlight: function (element) {
+            $(element).parent("div").addClass("has-error");
+        },
+        unhighlight: function (element) {
+            $(element).parent("div").removeClass("has-error");
+        }
+    });
 
     // add event handlers
     $("select#body").on("change", onBodySelect);
@@ -142,15 +153,15 @@ function reset() {
 }
 
 function validate() {
-    return true;
+    return validateBody() && validateAntenna() && $("input#count,input#altitude,input#elcConsumption").valid();
 }
 
 function validateBody() {
-    return true;
+    return $("div.manual-input#body").valid();
 }
 
 function validateAntenna() {
-    return true;
+    return $("div.manual-input#antenna").valid();
 }
 
 // event handler
