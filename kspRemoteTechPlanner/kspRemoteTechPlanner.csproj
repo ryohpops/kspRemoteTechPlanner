@@ -51,6 +51,7 @@
     <TypeScriptCompile Include="calculator\point.ts" />
     <TypeScriptCompile Include="model\userData.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery.validation\jquery.validation.d.ts" />
+    <TypeScriptCompile Include="view\deltavView.ts" />
     <TypeScriptCompile Include="view\nightView.ts" />
     <TypeScriptCompile Include="view\entireView.ts" />
     <TypeScriptCompile Include="model\bodyData.ts" />
