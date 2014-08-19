@@ -78,7 +78,7 @@ function init() {
     $("button.manual-input#antenna_remove").on("click", onUserAntennaRemove);
 
     $("form#calculator").find("input,select").on("keypress", (ev) => { if (ev.keyCode == 13) update() });
-    $("button#calculate").on("click", (ev) => { update() });
+    $("button#calculate").on("click", (ev) => { if (validate()) update() });
     $("button#reset").on("click", (ev) => { reset() });
 
     // finallize
@@ -124,6 +124,18 @@ function reset() {
     $("select#antenna").val("Communotron 16");
     onBodySelect(null);
     onAntennaSelect(null);
+}
+
+function validate(): boolean {
+    return true;
+}
+
+function validateBody(): boolean {
+    return true;
+}
+
+function validateAntenna(): boolean {
+    return true;
 }
 
 // event handler

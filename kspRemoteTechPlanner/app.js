@@ -89,7 +89,8 @@ function init() {
             update();
     });
     $("button#calculate").on("click", function (ev) {
-        update();
+        if (validate())
+            update();
     });
     $("button#reset").on("click", function (ev) {
         reset();
@@ -138,6 +139,18 @@ function reset() {
     $("select#antenna").val("Communotron 16");
     onBodySelect(null);
     onAntennaSelect(null);
+}
+
+function validate() {
+    return true;
+}
+
+function validateBody() {
+    return true;
+}
+
+function validateAntenna() {
+    return true;
 }
 
 // event handler
