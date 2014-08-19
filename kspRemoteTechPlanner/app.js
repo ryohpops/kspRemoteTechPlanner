@@ -1,4 +1,5 @@
 ﻿/// <reference path="scripts/typings/jquery/jquery.d.ts" />
+/// <reference path="scripts/typings/jquery.validation/jquery.validation.d.ts" />
 /// <reference path="scripts/typings/easeljs/easeljs.d.ts" />
 /// <reference path="scripts/typings/createjs-lib/createjs-lib.d.ts" />
 /// <reference path="scripts/typings/tweenjs/tweenjs.d.ts" />
@@ -61,6 +62,16 @@ function init() {
         }
     }
 
+    // set validator
+    $("form#calculator").validate({
+        highlight: function (element) {
+            $(element).parent("div").addClass("has-error");
+        },
+        unhighlight: function (element) {
+            $(element).parent("div").removeClass("has-error");
+        }
+    });
+
     // add event handlers
     $("select#body").on("change", onBodySelect);
     $("button.manual-input#body_detail").on("click", function (ev) {
@@ -89,7 +100,8 @@ function init() {
             update();
     });
     $("button#calculate").on("click", function (ev) {
-        update();
+        if (validate())
+            update();
     });
     $("button#reset").on("click", function (ev) {
         reset();
@@ -102,20 +114,8 @@ function init() {
 
 function update() {
     // update objects
-    _body.name = $("input#body_name").val();
-    _body.color = $("input#body_color").val();
-    _body.radius = parseFloat($("input#body_radius").val());
-    _body.stdGravParam = parseFloat($("input#body_stdGravParam").val());
-    _body.soi = parseFloat($("input#body_soi").val());
-
-    _antenna.name = $("input#antenna_name").val();
-    if ($("input#antenna_type").val() == "omni") {
-        _antenna.type = 0 /* omni */;
-    } else if ($("input#antenna_type").val() == "dish") {
-        _antenna.type = 1 /* dish */;
-    }
-    _antenna.range = parseFloat($("input#antenna_range").val());
-    _antenna.elcConsumption = parseFloat($("input#antenna_elcConsumption").val());
+    updateBody();
+    updateAntenna();
 
     _satellites.count = parseInt($("input#count").val());
     _satellites.altitude = parseFloat($("input#altitude").val());
@@ -130,6 +130,25 @@ function update() {
     stageNight.update();
 }
 
+function updateBody() {
+    _body.name = $("input#body_name").val();
+    _body.color = $("input#body_color").val();
+    _body.radius = parseFloat($("input#body_radius").val());
+    _body.stdGravParam = parseFloat($("input#body_stdGravParam").val());
+    _body.soi = parseFloat($("input#body_soi").val());
+}
+
+function updateAntenna() {
+    _antenna.name = $("input#antenna_name").val();
+    if ($("select#antenna_type").val() == "omni") {
+        _antenna.type = 0 /* omni */;
+    } else if ($("select#antenna_type").val() == "dish") {
+        _antenna.type = 1 /* dish */;
+    }
+    _antenna.range = parseFloat($("input#antenna_range").val());
+    _antenna.elcConsumption = parseFloat($("input#antenna_elcConsumption").val());
+}
+
 function reset() {
     $("select#body").val("Kerbin");
     $("input#count").val((4).toString());
@@ -138,6 +157,18 @@ function reset() {
     $("select#antenna").val("Communotron 16");
     onBodySelect(null);
     onAntennaSelect(null);
+}
+
+function validate() {
+    return validateBody() && validateAntenna() && $("input#count,input#altitude,input#elcConsumption").valid();
+}
+
+function validateBody() {
+    return $("div.manual-input#body").children("div").children("input").valid();
+}
+
+function validateAntenna() {
+    return $("div.manual-input#antenna").children("div").children("input").valid();
 }
 
 // event handler
@@ -154,13 +185,20 @@ function onBodySelect(ev) {
     $("input#body_radius").val(b.radius.toString());
     $("input#body_stdGravParam").val(b.stdGravParam.toString());
     $("input#body_soi").val(b.soi.toString());
+
+    validateBody(); // execute validation with loaded value to clear validate state.
 }
 
 // add new data to user's body
 function onUserBodyAdd(ev) {
-    update();
+    if (validateBody())
+        updateBody();
+    else
+        return;
+
     if (UserData.userBodies[_body.name] == undefined)
         addUserDataSelection("body", _body.name); // add option to body selector.
+    $("select#body").val(_body.name);
 
     var b = new Body();
     b.name = _body.name;
@@ -174,10 +212,12 @@ function onUserBodyAdd(ev) {
 
 // remove user's body data which has the same name as body_name in body_detail.
 function onUserBodyRemove(ev) {
-    update();
-    delete UserData.userBodies[_body.name];
+    if ($("input#body_name").valid())
+        delete UserData.userBodies[$("input#body_name").val()];
+    else
+        return;
     UserData.saveCookie();
-    removeUserDataSelection("body", _body.name, function () {
+    removeUserDataSelection("body", $("input#body_name").val(), function () {
         return UserData.loadCookie().body;
     });
 }
@@ -192,19 +232,26 @@ function onAntennaSelect(ev) {
 
     $("input#antenna_name").val(a.name);
     if (a.type == 0 /* omni */) {
-        $("input#antenna_type").val("omni");
+        $("select#antenna_type").val("omni");
     } else if (a.type == 1 /* dish */) {
-        $("input#antenna_type").val("dish");
+        $("select#antenna_type").val("dish");
     }
     $("input#antenna_range").val(a.range.toString());
     $("input#antenna_elcConsumption").val(a.elcConsumption.toString());
+
+    validateAntenna(); // execute validation with loaded value to clear validate state.
 }
 
 // add new data to user's antenna
 function onUserAntennaAdd(ev) {
-    update();
+    if (validateAntenna())
+        updateAntenna();
+    else
+        return;
+
     if (UserData.userAntennas[_antenna.name] == undefined)
         addUserDataSelection("antenna", _antenna.name); // add option to antenna selector.
+    $("select#antenna").val(_antenna.name);
 
     var a = new Antenna();
     a.name = _antenna.name;
@@ -217,10 +264,12 @@ function onUserAntennaAdd(ev) {
 
 // remove user's antenna data which has the same name as antenna_name in antenna_detail.
 function onUserAntennaRemove(ev) {
-    update();
-    delete UserData.userAntennas[_antenna.name];
+    if ($("input#antenna_name").valid())
+        delete UserData.userAntennas[$("input#antenna_name").val()];
+    else
+        return;
     UserData.saveCookie();
-    removeUserDataSelection("antenna", _antenna.name, function () {
+    removeUserDataSelection("antenna", $("input#antenna_name").val(), function () {
         return UserData.loadCookie().antenna;
     });
 }
