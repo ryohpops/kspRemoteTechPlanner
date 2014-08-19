@@ -48,8 +48,8 @@
             and sources are available on <a href="https://github.com/ryohpops/kspRemoteTechPlanner">github</a>. Current version is beta2.4.<br />
             Issues, bug reports, contributers are always welcome.<br />
             <br />
-            Data of bodies is based on <a href="http://wiki.kerbalspaceprogram.com/wiki/Main_Page">KSP Wiki</a>, 
-            <a href="http://remotetechnologiesgroup.github.io/RemoteTech/">RemoteTech2 manual</a> and 
+            Data of bodies is based on <a href="http://wiki.kerbalspaceprogram.com/wiki/Main_Page">KSP Wiki</a>,
+            <a href="http://remotetechnologiesgroup.github.io/RemoteTech/">RemoteTech2 manual</a> and
             <a href="http://forum.kerbalspaceprogram.com/threads/41652-A-more-accurate-delta-v-map">metaphor's Delta-V map</a>.<br />
             NO GUARANTEES OF CORRECTNESS.
         </div>
@@ -92,7 +92,7 @@
                             <optgroup label="Eve's moon:">
                                 <option>Gilly</option>
                             </optgroup>
-                            <option selected>Kerbin</option>
+                            <option>Kerbin</option>
                             <optgroup label="Kerbin's moons:">
                                 <option>Mun</option>
                                 <option>Minmus</option>
@@ -173,7 +173,7 @@
                         <select class="form-control" id="antenna">
                             <optgroup label="Omnidirectional">
                                 <option>Reflectron DP-10</option>
-                                <option selected>Communotron 16</option>
+                                <option>Communotron 16</option>
                                 <option>CommTech EXP-VR-2T</option>
                                 <option>Communotron 32</option>
                             </optgroup>
@@ -189,8 +189,11 @@
                                 <input type="text" class="form-control" id="antenna_name" />
                             </div>
                             <div class="form-group">
-                                <label for="antenna_type">Type(omni or dish)</label>
-                                <input type="text" class="form-control" id="antenna_type" pattern="omni|dish" />
+                                <label for="antenna_type">Type</label>
+                                <select class="form-control" id="antenna_type">
+                                    <option>omni</option>
+                                    <option>dish</option>
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label for="antenna_range">Range(km)</label>
