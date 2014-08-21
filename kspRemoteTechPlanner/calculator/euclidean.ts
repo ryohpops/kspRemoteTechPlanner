@@ -48,4 +48,8 @@ module Euclidean {
         var r2: number = bodyRadius + altitude2;
         return Math.sqrt(stdGravParam / r2) * (1 - Math.sqrt((2 * r1) / (r1 + r2)));
     }
+
+    export function slidePhaseAngle(slideDeg: number, periodLow: number, periodHigh: number) {
+        return slideDeg / (1 - periodHigh / periodLow);
+    }
 }

@@ -17,6 +17,8 @@ class DeltavView extends View {
     shapeOuter: createjs.Shape;
     txtDV1: createjs.Text;
     txtDV2: createjs.Text;
+    txtPhaseAngle: createjs.Text;
+    txtPhaseTime: createjs.Text;
 
     constructor(stage: createjs.Stage, innerSize: number, outerSize: number) {
         super(stage, innerSize, outerSize);

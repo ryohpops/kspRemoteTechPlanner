@@ -57,5 +57,10 @@ var Euclidean;
         return Math.sqrt(stdGravParam / r2) * (1 - Math.sqrt((2 * r1) / (r1 + r2)));
     }
     Euclidean.hohmannDeltav2 = hohmannDeltav2;
+
+    function slidePhaseAngle(slideDeg, periodLow, periodHigh) {
+        return slideDeg / (1 - periodHigh / periodLow);
+    }
+    Euclidean.slidePhaseAngle = slidePhaseAngle;
 })(Euclidean || (Euclidean = {}));
 //# sourceMappingURL=euclidean.js.map
