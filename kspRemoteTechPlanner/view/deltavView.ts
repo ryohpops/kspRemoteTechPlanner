@@ -27,4 +27,34 @@ class DeltavView extends View {
         this.shapeOuter = new createjs.Shape();
         this.shapes.addChild(this.shapeOuter);
     }
+
+    show(): void {
+        this.shapeOuter.graphics.clear();
+        this.shapeOuter.graphics.setStrokeStyle(2);
+
+        // body
+        this.shapeOuter.graphics.beginFill(this.body.color)
+            .drawCircle(this.outerSize / 2, this.outerSize / 2, DeltavView.bodyRadius)
+            .endFill();
+
+        // parking orbit
+        this.shapeOuter.graphics.beginStroke("black")
+            .drawCircle(this.outerSize / 2, this.outerSize / 2, DeltavView.parkingAltitude)
+            .endStroke();
+
+        // designated orbit
+        this.shapeOuter.graphics.beginStroke("black")
+            .drawCircle(this.outerSize / 2, this.outerSize / 2, DeltavView.designatedAltitude)
+            .endStroke();
+
+        // hohmann transfer trajectory
+        this.shapeOuter.graphics.beginStroke("green")
+            .arc(this.outerSize / 2 + (DeltavView.parkingAltitude - DeltavView.designatedAltitude) / 2, this.outerSize / 2,
+            (DeltavView.parkingAltitude + DeltavView.designatedAltitude) / 2, 0, Math.PI, true)
+            .endStroke();
+
+        // designated satellite spot
+
+        // neighbor satellites
+    }
 } 

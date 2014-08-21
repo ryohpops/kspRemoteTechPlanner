@@ -11,6 +11,7 @@
 /// <reference path="model/satellites.ts" />
 /// <reference path="view/entireview.ts" />
 /// <reference path="view/nightview.ts" />
+/// <reference path="view/deltavview.ts" />
 
 // values
 var _body: Body;
@@ -24,6 +25,10 @@ var viewEntire: EntireView;
 // Night View
 var stageNight: createjs.Stage;
 var viewNight: NightView;
+
+// Delta-V View
+var stageDeltav: createjs.Stage;
+var viewDeltav: DeltavView;
 
 // startup
 $(() => {
@@ -49,6 +54,11 @@ function init() {
     viewNight = new NightView(stageNight, 5000, 400);
     viewNight.body = _body;
     viewNight.satellites = _satellites;
+
+    stageDeltav = new createjs.Stage($("canvas#deltav")[0]);
+    viewDeltav = new DeltavView(stageDeltav, 5000, 400);
+    viewDeltav.body = _body;
+    viewDeltav.satellites = _satellites;
 
     // load user data
     var cookieExists: UserData.loadCookieResult = UserData.loadCookie();
@@ -109,6 +119,8 @@ function update() {
     stageEntire.update();
     viewNight.show();
     stageNight.update();
+    viewDeltav.show();
+    stageDeltav.update();
 }
 
 function updateBody() {
