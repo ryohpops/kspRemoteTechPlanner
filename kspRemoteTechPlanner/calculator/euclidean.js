@@ -43,5 +43,19 @@ var Euclidean;
         return 2 * Math.pow(ra, 2) / Math.sqrt(ra * stdGravParam) * Math.asin(bodyRadius / ra);
     }
     Euclidean.orbitalNightTime = orbitalNightTime;
+
+    function hohmannDeltav1(bodyRadius, altitude1, altitude2, stdGravParam) {
+        var r1 = bodyRadius + altitude1;
+        var r2 = bodyRadius + altitude2;
+        return Math.sqrt(stdGravParam / r1) * (Math.sqrt((2 * r2) / (r1 + r2)) - 1);
+    }
+    Euclidean.hohmannDeltav1 = hohmannDeltav1;
+
+    function hohmannDeltav2(bodyRadius, altitude1, altitude2, stdGravParam) {
+        var r1 = bodyRadius + altitude1;
+        var r2 = bodyRadius + altitude2;
+        return Math.sqrt(stdGravParam / r2) * (1 - Math.sqrt((2 * r1) / (r1 + r2)));
+    }
+    Euclidean.hohmannDeltav2 = hohmannDeltav2;
 })(Euclidean || (Euclidean = {}));
 //# sourceMappingURL=euclidean.js.map
