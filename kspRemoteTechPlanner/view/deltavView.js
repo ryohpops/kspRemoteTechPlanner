@@ -35,12 +35,17 @@ var DeltavView = (function (_super) {
 
         // hohmann transfer trajectory
         this.shapeOuter.graphics.beginStroke("green").arc(this.outerSize / 2 + (DeltavView.parkingAltitude - DeltavView.designatedAltitude) / 2, this.outerSize / 2, (DeltavView.parkingAltitude + DeltavView.designatedAltitude) / 2, 0, Math.PI, true).endStroke();
+
         // designated satellite spot
+        this.shapeOuter.graphics.beginStroke("black").drawCircle(this.outerSize / 2 - DeltavView.designatedAltitude, this.outerSize / 2, 5).endStroke();
+
         // neighbor satellites
+        this.shapeOuter.graphics.beginFill("black").drawCircle(this.outerSize / 2 - Math.cos(DeltavView.neighborSatInterval) * DeltavView.designatedAltitude, this.outerSize / 2 - Math.sin(DeltavView.neighborSatInterval) * DeltavView.designatedAltitude, 4).drawCircle(this.outerSize / 2 - Math.cos(DeltavView.neighborSatInterval) * DeltavView.designatedAltitude, this.outerSize / 2 + Math.sin(DeltavView.neighborSatInterval) * DeltavView.designatedAltitude, 4).endFill();
     };
     DeltavView.bodyRadius = 20;
     DeltavView.parkingAltitude = 50;
     DeltavView.designatedAltitude = 150;
+    DeltavView.neighborSatInterval = Math.PI / 3;
     return DeltavView;
 })(View);
 //# sourceMappingURL=deltavView.js.map

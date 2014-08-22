@@ -10,6 +10,7 @@ class DeltavView extends View {
     private static bodyRadius: number = 20;
     private static parkingAltitude: number = 50;
     private static designatedAltitude: number = 150;
+    private static neighborSatInterval: number = Math.PI / 3;
 
     body: Body;
     satellites: Satellites;
@@ -54,7 +55,16 @@ class DeltavView extends View {
             .endStroke();
 
         // designated satellite spot
+        this.shapeOuter.graphics.beginStroke("black")
+            .drawCircle(this.outerSize / 2 - DeltavView.designatedAltitude, this.outerSize / 2, 5)
+            .endStroke();
 
         // neighbor satellites
+        this.shapeOuter.graphics.beginFill("black")
+            .drawCircle(this.outerSize / 2 - Math.cos(DeltavView.neighborSatInterval) * DeltavView.designatedAltitude,
+            this.outerSize / 2 - Math.sin(DeltavView.neighborSatInterval) * DeltavView.designatedAltitude, 4)
+            .drawCircle(this.outerSize / 2 - Math.cos(DeltavView.neighborSatInterval) * DeltavView.designatedAltitude,
+            this.outerSize / 2 + Math.sin(DeltavView.neighborSatInterval) * DeltavView.designatedAltitude, 4)
+            .endFill();
     }
 } 
