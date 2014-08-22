@@ -3,6 +3,7 @@
 /// <reference path="../scripts/typings/tweenjs/tweenjs.d.ts" />
 /// <reference path="../model/body.ts" />
 /// <reference path="../model/satellites.ts" />
+/// <reference path="../calculator/point.ts" />
 /// <reference path="../view/graphicshelper.ts" />
 /// <reference path="../view/view.ts" />
 
@@ -35,40 +36,40 @@ class DeltavView extends View {
 
         // body
         this.shapeOuter.graphics.beginFill(this.body.color)
-            .drawCircle(this.outerSize / 2, this.outerSize / 2, DeltavView.bodyRadius)
+            .drawCircle(this.outerCenter.x, this.outerCenter.y, DeltavView.bodyRadius)
             .endFill();
 
         // parking orbit
         this.shapeOuter.graphics.beginStroke("black")
-            .drawCircle(this.outerSize / 2, this.outerSize / 2, DeltavView.parkingAltitude)
+            .drawCircle(this.outerCenter.x, this.outerCenter.y, DeltavView.parkingAltitude)
             .endStroke();
 
         // designated orbit
         this.shapeOuter.graphics.beginStroke("black")
-            .drawCircle(this.outerSize / 2, this.outerSize / 2, DeltavView.designatedAltitude)
+            .drawCircle(this.outerCenter.x, this.outerCenter.y, DeltavView.designatedAltitude)
             .endStroke();
 
         // hohmann transfer trajectory
         this.shapeOuter.graphics.beginStroke("green")
-            .arc(this.outerSize / 2 + (DeltavView.parkingAltitude - DeltavView.designatedAltitude) / 2, this.outerSize / 2,
+            .arc(this.outerCenter.x + (DeltavView.parkingAltitude - DeltavView.designatedAltitude) / 2, this.outerCenter.y,
             (DeltavView.parkingAltitude + DeltavView.designatedAltitude) / 2, 0, Math.PI, true)
             .endStroke();
         this.shapeOuter.graphics.beginStroke("green")
-        GraphicsHelper.drawArrow(this.shapeOuter.graphics, this.outerSize / 2 + (DeltavView.parkingAltitude - DeltavView.designatedAltitude) / 2,
-            this.outerSize / 2 - (DeltavView.parkingAltitude + DeltavView.designatedAltitude) / 2, 0, 20)
+        GraphicsHelper.drawArrow(this.shapeOuter.graphics, this.outerCenter.x + (DeltavView.parkingAltitude - DeltavView.designatedAltitude) / 2,
+            this.outerCenter.y - (DeltavView.parkingAltitude + DeltavView.designatedAltitude) / 2, 0, 20)
             .endStroke();
 
         // designated satellite spot
         this.shapeOuter.graphics.beginStroke("black")
-            .drawCircle(this.outerSize / 2 - DeltavView.designatedAltitude, this.outerSize / 2, 5)
+            .drawCircle(this.outerCenter.x - DeltavView.designatedAltitude, this.outerCenter.y, 5)
             .endStroke();
 
         // neighbor satellites
         this.shapeOuter.graphics.beginFill("black")
-            .drawCircle(this.outerSize / 2 - Math.cos(DeltavView.neighborSatInterval) * DeltavView.designatedAltitude,
-            this.outerSize / 2 - Math.sin(DeltavView.neighborSatInterval) * DeltavView.designatedAltitude, 4)
-            .drawCircle(this.outerSize / 2 - Math.cos(DeltavView.neighborSatInterval) * DeltavView.designatedAltitude,
-            this.outerSize / 2 + Math.sin(DeltavView.neighborSatInterval) * DeltavView.designatedAltitude, 4)
+            .drawCircle(this.outerCenter.x - Math.cos(DeltavView.neighborSatInterval) * DeltavView.designatedAltitude,
+            this.outerCenter.y - Math.sin(DeltavView.neighborSatInterval) * DeltavView.designatedAltitude, 4)
+            .drawCircle(this.outerCenter.x - Math.cos(DeltavView.neighborSatInterval) * DeltavView.designatedAltitude,
+            this.outerCenter.y + Math.sin(DeltavView.neighborSatInterval) * DeltavView.designatedAltitude, 4)
             .endFill();
     }
 } 

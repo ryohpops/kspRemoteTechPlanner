@@ -1,6 +1,7 @@
 ﻿/// <reference path="../scripts/typings/easeljs/easeljs.d.ts" />
 /// <reference path="../scripts/typings/createjs-lib/createjs-lib.d.ts" />
 /// <reference path="../scripts/typings/tweenjs/tweenjs.d.ts" />
+/// <reference path="../calculator/point.ts" />
 var View = (function () {
     function View(stage, innerSize, outerSize) {
         this.shapes = new createjs.Container();
@@ -11,6 +12,22 @@ var View = (function () {
         this.innerSize = innerSize;
         this.outerSize = outerSize;
     }
+    Object.defineProperty(View.prototype, "innerCenter", {
+        get: function () {
+            return new Point(this.innerSize / 2, this.outerSize / 2);
+        },
+        enumerable: true,
+        configurable: true
+    });
+
+    Object.defineProperty(View.prototype, "outerCenter", {
+        get: function () {
+            return new Point(this.outerSize / 2, this.outerSize / 2);
+        },
+        enumerable: true,
+        configurable: true
+    });
+
     View.prototype.toInner = function (valueOuter) {
         return valueOuter * this.innerSize / this.outerSize;
     };
