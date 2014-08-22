@@ -4,6 +4,14 @@
 /// <reference path="../calculator/point.ts" />
 
 class View {
+    static fontSetNormal: string = "16px Arial";
+    static fontSetBig: string = "20px Arial";
+    static marginText: number = 8;
+    static marginTextPushed: number = 24;
+    static strokeLineWidth: number = 0.8;
+    static dotRadius: number = 4;
+    static arrowSize: number = 20;
+
     shapes: createjs.Container;
     texts: createjs.Container;
     innerSize: number;

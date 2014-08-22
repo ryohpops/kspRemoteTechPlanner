@@ -32,7 +32,7 @@ class DeltavView extends View {
 
     show(): void {
         this.shapeOuter.graphics.clear();
-        this.shapeOuter.graphics.setStrokeStyle(0.8);
+        this.shapeOuter.graphics.setStrokeStyle(View.strokeLineWidth);
 
         // body
         this.shapeOuter.graphics.beginFill(this.body.color)
@@ -56,20 +56,20 @@ class DeltavView extends View {
             .endStroke();
         this.shapeOuter.graphics.beginStroke("green")
         GraphicsHelper.drawArrow(this.shapeOuter.graphics, this.outerCenter.x + (DeltavView.parkingAltitude - DeltavView.designatedAltitude) / 2,
-            this.outerCenter.y - (DeltavView.parkingAltitude + DeltavView.designatedAltitude) / 2, 0, 20)
+            this.outerCenter.y - (DeltavView.parkingAltitude + DeltavView.designatedAltitude) / 2, 0, View.arrowSize)
             .endStroke();
 
         // designated satellite spot
         this.shapeOuter.graphics.beginStroke("black")
-            .drawCircle(this.outerCenter.x - DeltavView.designatedAltitude, this.outerCenter.y, 5)
+            .drawCircle(this.outerCenter.x - DeltavView.designatedAltitude, this.outerCenter.y, View.dotRadius)
             .endStroke();
 
         // neighbor satellites
         this.shapeOuter.graphics.beginFill("black")
             .drawCircle(this.outerCenter.x - Math.cos(DeltavView.neighborSatInterval) * DeltavView.designatedAltitude,
-            this.outerCenter.y - Math.sin(DeltavView.neighborSatInterval) * DeltavView.designatedAltitude, 4)
+            this.outerCenter.y - Math.sin(DeltavView.neighborSatInterval) * DeltavView.designatedAltitude, View.dotRadius)
             .drawCircle(this.outerCenter.x - Math.cos(DeltavView.neighborSatInterval) * DeltavView.designatedAltitude,
-            this.outerCenter.y + Math.sin(DeltavView.neighborSatInterval) * DeltavView.designatedAltitude, 4)
+            this.outerCenter.y + Math.sin(DeltavView.neighborSatInterval) * DeltavView.designatedAltitude, View.dotRadius)
             .endFill();
     }
 } 
