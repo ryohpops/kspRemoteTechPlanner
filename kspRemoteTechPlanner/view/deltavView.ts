@@ -31,7 +31,7 @@ class DeltavView extends View {
 
     show(): void {
         this.shapeOuter.graphics.clear();
-        this.shapeOuter.graphics.setStrokeStyle(2);
+        this.shapeOuter.graphics.setStrokeStyle(0.8);
 
         // body
         this.shapeOuter.graphics.beginFill(this.body.color)
@@ -52,6 +52,10 @@ class DeltavView extends View {
         this.shapeOuter.graphics.beginStroke("green")
             .arc(this.outerSize / 2 + (DeltavView.parkingAltitude - DeltavView.designatedAltitude) / 2, this.outerSize / 2,
             (DeltavView.parkingAltitude + DeltavView.designatedAltitude) / 2, 0, Math.PI, true)
+            .endStroke();
+        this.shapeOuter.graphics.beginStroke("green")
+        GraphicsHelper.drawArrow(this.shapeOuter.graphics, this.outerSize / 2 + (DeltavView.parkingAltitude - DeltavView.designatedAltitude) / 2,
+            this.outerSize / 2 - (DeltavView.parkingAltitude + DeltavView.designatedAltitude) / 2, 0, 20)
             .endStroke();
 
         // designated satellite spot
