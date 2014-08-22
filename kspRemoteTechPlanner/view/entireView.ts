@@ -3,6 +3,7 @@
 /// <reference path="../scripts/typings/tweenjs/tweenjs.d.ts" />
 /// <reference path="../model/body.ts" />
 /// <reference path="../model/satellites.ts" />
+/// <reference path="../calculator/point.ts" />
 /// <reference path="../calculator/communication.ts" />
 /// <reference path="graphicshelper.ts" />
 /// <reference path="view.ts" />
@@ -29,22 +30,22 @@ class EntireView extends View {
         this.txtBodyName = new createjs.Text("", "20px Arial", "black");
         this.txtBodyName.textAlign = "center";
         this.txtBodyName.textBaseline = "middle";
-        this.txtBodyName.x = this.outerSize / 2;
-        this.txtBodyName.y = this.outerSize / 2;
+        this.txtBodyName.x = this.outerCenter.x;
+        this.txtBodyName.y = this.outerCenter.y;
         this.texts.addChild(this.txtBodyName);
 
         // sphere of influence
         this.txtBodySoI = new createjs.Text("", "16px Arial", "black");
         this.txtBodySoI.textAlign = "center";
         this.txtBodySoI.textBaseline = "top";
-        this.txtBodySoI.x = this.outerSize / 2;
+        this.txtBodySoI.x = this.outerCenter.x;
         this.texts.addChild(this.txtBodySoI);
 
         // altitude of satellites
         this.txtSatAltitude = new createjs.Text("", "16px Arial", "black");
         this.txtSatAltitude.textAlign = "center";
         this.txtSatAltitude.textBaseline = "top";
-        this.txtSatAltitude.x = this.outerSize / 2;
+        this.txtSatAltitude.x = this.outerCenter.x;
         this.texts.addChild(this.txtSatAltitude);
 
         // distance between one of satellites and next one
@@ -57,7 +58,7 @@ class EntireView extends View {
         this.txtCommStableRange = new createjs.Text("", "16px Arial", "black");
         this.txtCommStableRange.textAlign = "center";
         this.txtCommStableRange.textBaseline = "bottom";
-        this.txtCommStableRange.x = this.outerSize / 2;
+        this.txtCommStableRange.x = this.outerCenter.x;
         this.texts.addChild(this.txtCommStableRange);
     }
 
@@ -74,30 +75,34 @@ class EntireView extends View {
     private showBody(g: createjs.Graphics): void {
         // orbiting body
         g.beginFill(this.body.color)
-            .drawCircle(this.innerSize / 2, this.innerSize / 2, this.body.radius)
+            .drawCircle(this.innerCenter.x, this.innerCenter.y, this.body.radius)
             .endFill();
 
         // name of orbiting body
         this.txtBodyName.text = this.body.name;
 
-        // sphere of influence
-        g.beginStroke("yellow")
-            .drawCircle(this.innerSize / 2, this.innerSize / 2, this.body.soi)
-            .endStroke();
+        if (this.body.soi != Number.POSITIVE_INFINITY) {
+            // sphere of influence
+            g.beginStroke("yellow")
+                .drawCircle(this.innerCenter.x, this.innerCenter.y, this.body.soi)
+                .endStroke();
 
-        // height of SoI
-        this.txtBodySoI.text = "Sphere of Influence: " + this.body.soi.toLocaleString("en-US", { maximumFractionDigits: 3 }) + " km";
-        this.txtBodySoI.y = this.outerSize / 2 + Math.max(this.toOuter(this.body.soi) + 10, this.toOuter(this.body.radius + this.satellites.altitude) + 30);
+            // height of SoI
+            this.txtBodySoI.text = "Sphere of Influence: " + this.body.soi.toLocaleString("en-US", { maximumFractionDigits: 3 }) + " km";
+            this.txtBodySoI.y = this.outerCenter.y + Math.max(this.toOuter(this.body.soi) + 10, this.toOuter(this.body.radius + this.satellites.altitude) + 30);
+        } else {
+            this.txtBodySoI.text = "";
+        }
     }
 
     private showSatellites(g: createjs.Graphics): void {
         // orbit
         g.beginStroke("black")
-            .drawCircle(this.innerSize / 2, this.innerSize / 2, this.satellites.altitude + this.body.radius)
+            .drawCircle(this.innerCenter.x, this.innerCenter.y, this.satellites.altitude + this.body.radius)
             .endStroke();
 
         this.txtSatAltitude.text = "Altitude: " + this.satellites.altitude.toLocaleString("en-US", { maximumFractionDigits: 3 }) + " km";
-        this.txtSatAltitude.y = this.outerSize / 2 + this.toOuter(this.satellites.altitude + this.body.radius) + 10;
+        this.txtSatAltitude.y = this.outerCenter.y + this.toOuter(this.satellites.altitude + this.body.radius) + 10;
 
         // positions
         for (var i: number = 0; i < this.satellites.count; i++) {
@@ -130,12 +135,12 @@ class EntireView extends View {
         if (Communication.hasStableArea(this.body, this.satellites, this.innerSize)) {
             // upper limit of stable area
             this.shapeInner.graphics.beginStroke("green")
-                .drawCircle(this.innerSize / 2, this.innerSize / 2, this.satellites.stableRange() + this.body.radius)
+                .drawCircle(this.innerCenter.x, this.innerCenter.y, this.satellites.stableRange() + this.body.radius)
                 .endStroke();
 
             // range of stable area
             this.txtCommStableRange.text = "Stable: " + this.satellites.stableRange().toLocaleString("en-US", { maximumFractionDigits: 3 }) + " km";
-            this.txtCommStableRange.y = this.outerSize / 2 - this.toOuter(this.satellites.stableRange() + this.body.radius) - 10;
+            this.txtCommStableRange.y = this.outerCenter.y - this.toOuter(this.satellites.stableRange() + this.body.radius) - 10;
         } else {
             this.txtCommStableRange.text = "";
         }

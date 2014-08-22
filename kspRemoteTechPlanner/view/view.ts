@@ -10,7 +10,7 @@ class View {
     outerSize: number;
 
     get innerCenter(): Point {
-        return new Point(this.innerSize / 2, this.outerSize / 2);
+        return new Point(this.innerSize / 2, this.innerSize / 2);
     }
 
     get outerCenter(): Point {

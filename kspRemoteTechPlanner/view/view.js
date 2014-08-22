@@ -14,7 +14,7 @@ var View = (function () {
     }
     Object.defineProperty(View.prototype, "innerCenter", {
         get: function () {
-            return new Point(this.innerSize / 2, this.outerSize / 2);
+            return new Point(this.innerSize / 2, this.innerSize / 2);
         },
         enumerable: true,
         configurable: true

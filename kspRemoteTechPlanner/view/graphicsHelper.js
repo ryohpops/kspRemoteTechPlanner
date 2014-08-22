@@ -20,4 +20,4 @@ var GraphicsHelper;
     }
     GraphicsHelper.drawDualArrow = drawDualArrow;
 })(GraphicsHelper || (GraphicsHelper = {}));
-//# sourceMappingURL=graphicshelper.js.map
+//# sourceMappingURL=graphicsHelper.js.map
