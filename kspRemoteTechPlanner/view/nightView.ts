@@ -3,8 +3,10 @@
 /// <reference path="../scripts/typings/tweenjs/tweenjs.d.ts" />
 /// <reference path="../model/body.ts" />
 /// <reference path="../model/satellites.ts" />
+/// <reference path="../calculator/point.ts" />
 /// <reference path="graphicshelper.ts" />
 /// <reference path="view.ts" />
+
 
 class NightView extends View {
     private static bodyRadius = 50;
@@ -30,32 +32,32 @@ class NightView extends View {
         this.txtOrbitalPeriod = new createjs.Text("", "16px Arial", "black");
         this.txtOrbitalPeriod.textAlign = "center";
         this.txtOrbitalPeriod.textBaseline = "bottom";
-        this.txtOrbitalPeriod.x = this.outerSize / 2;
-        this.txtOrbitalPeriod.y = this.outerSize / 2 - NightView.orbitRadius - 5;
+        this.txtOrbitalPeriod.x = this.outerCenter.x;
+        this.txtOrbitalPeriod.y = this.outerCenter.y - NightView.orbitRadius - 5;
         this.texts.addChild(this.txtOrbitalPeriod);
 
         // required generation amount of electricity
         this.txtRequiredGenerator = new createjs.Text("", "16px Arial", "black");
         this.txtRequiredGenerator.textAlign = "center";
         this.txtRequiredGenerator.textBaseline = "top";
-        this.txtRequiredGenerator.x = this.outerSize / 2;
-        this.txtRequiredGenerator.y = this.outerSize / 2 + NightView.orbitRadius + 5;
+        this.txtRequiredGenerator.x = this.outerCenter.x;
+        this.txtRequiredGenerator.y = this.outerCenter.y + NightView.orbitRadius + 5;
         this.texts.addChild(this.txtRequiredGenerator);
 
         // time of night
         this.txtNightTime = new createjs.Text("", "16px Arial", "black");
         this.txtNightTime.textAlign = "left";
         this.txtNightTime.textBaseline = "bottom";
-        this.txtNightTime.x = this.outerSize / 2;
-        this.txtNightTime.y = this.outerSize / 2 - NightView.bodyRadius - 5;
+        this.txtNightTime.x = this.outerCenter.x;
+        this.txtNightTime.y = this.outerCenter.y - NightView.bodyRadius - 5;
         this.texts.addChild(this.txtNightTime);
 
         // required battery capacity
         this.txtRequiredBattery = new createjs.Text("", "16px Arial", "black");
         this.txtRequiredBattery.textAlign = "left";
         this.txtRequiredBattery.textBaseline = "top";
-        this.txtRequiredBattery.x = this.outerSize / 2;
-        this.txtRequiredBattery.y = this.outerSize / 2 + NightView.bodyRadius + 5;
+        this.txtRequiredBattery.x = this.outerCenter.x;
+        this.txtRequiredBattery.y = this.outerCenter.y + NightView.bodyRadius + 5;
         this.texts.addChild(this.txtRequiredBattery);
     }
 
@@ -65,17 +67,17 @@ class NightView extends View {
 
         // night area
         this.shapeOuter.graphics.beginFill("rgba(0,0,0,0.2)")
-            .drawRect(this.outerSize / 2, this.outerSize / 2 - NightView.bodyRadius, this.outerSize / 2, NightView.bodyRadius * 2)
+            .drawRect(this.outerCenter.x, this.outerCenter.y - NightView.bodyRadius, this.outerSize / 2, NightView.bodyRadius * 2)
             .endFill();
 
         // planet
         this.shapeOuter.graphics.beginFill(this.body.color)
-            .drawCircle(this.outerSize / 2, this.outerSize / 2, NightView.bodyRadius)
+            .drawCircle(this.outerCenter.x, this.outerCenter.y, NightView.bodyRadius)
             .endFill();
 
         // orbit
         this.shapeOuter.graphics.beginStroke("lightgray")
-            .drawCircle(this.outerSize / 2, this.outerSize / 2, NightView.orbitRadius)
+            .drawCircle(this.outerCenter.x, this.outerCenter.y, NightView.orbitRadius)
             .endStroke();
 
         // orbital period
