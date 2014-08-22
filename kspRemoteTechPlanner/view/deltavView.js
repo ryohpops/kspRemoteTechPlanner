@@ -43,4 +43,4 @@ var DeltavView = (function (_super) {
     DeltavView.designatedAltitude = 150;
     return DeltavView;
 })(View);
-//# sourceMappingURL=deltavview.js.map
+//# sourceMappingURL=deltavView.js.map
