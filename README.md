@@ -4,7 +4,7 @@ kspRemoteTechPlanner
 Web-based satellite network planner for the MOD, [RemoteTech2](http://forum.kerbalspaceprogram.com/threads/83305-Development-Resumed-RemoteTech-2).
 
 Latest release is [here](http://ryohpops.github.io/kspRemoteTechPlanner/).
-Current version is beta2.4.
+Current version is beta2.4.1.
 
 Forum is [here](http://forum.kerbalspaceprogram.com/threads/90113-WEB-Visual-RemoteTech-Planner-for-MOD-RemoteTech2).
 
