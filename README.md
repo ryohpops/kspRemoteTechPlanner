@@ -10,6 +10,10 @@ Forum is [here](http://forum.kerbalspaceprogram.com/threads/90113-WEB-Visual-Rem
 
 Version history
 
+- beta2.4.1 : 2014/08/23
+
+ Fix indication of sphere of influence.
+
 - beta2.4 : 2014/08/17
 
  Implement manual input mode for antenna (sorry for my wrong history).  
