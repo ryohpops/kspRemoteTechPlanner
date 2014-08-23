@@ -6,6 +6,7 @@
 class View {
     static fontSetNormal: string = "16px Arial";
     static fontSetBig: string = "20px Arial";
+    static localeSetting: Intl.NumberFormatOptions = { maximumFractionDigits: 3 };
     static marginText: number = 8;
     static marginTextPushed: number = 24;
     static strokeLineWidth: number = 0.8;

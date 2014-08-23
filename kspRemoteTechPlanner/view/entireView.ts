@@ -88,7 +88,7 @@ class EntireView extends View {
                 .endStroke();
 
             // height of SoI
-            this.txtBodySoI.text = "Sphere of Influence: " + (b.soi - b.radius).toLocaleString("en", { maximumFractionDigits: 3 }) + " km";
+            this.txtBodySoI.text = "Sphere of Influence: " + (b.soi - b.radius).toLocaleString("en", View.localeSetting) + " km";
             this.txtBodySoI.y = this.outerCenter.y + Math.max(this.toOuter(b.soi - b.radius) + View.marginText, this.toOuter(b.radius + s.altitude) + View.marginTextPushed);
         } else {
             this.txtBodySoI.text = "";
@@ -101,7 +101,7 @@ class EntireView extends View {
             .drawCircle(this.innerCenter.x, this.innerCenter.y, s.altitude + b.radius)
             .endStroke();
 
-        this.txtSatAltitude.text = "Altitude: " + s.altitude.toLocaleString("en", { maximumFractionDigits: 3 }) + " km";
+        this.txtSatAltitude.text = "Altitude: " + s.altitude.toLocaleString("en", View.localeSetting) + " km";
         this.txtSatAltitude.y = this.outerCenter.y + this.toOuter(s.altitude + b.radius) + View.marginText;
 
         // positions
@@ -125,7 +125,7 @@ class EntireView extends View {
             this.innerCenter.x + s.satPosition(1).x, this.innerCenter.y + s.satPosition(1).y, this.toInner(View.arrowSize))
             .endStroke();
 
-        this.txtCommDistance.text = "Distance: " + s.satDistance().toLocaleString("en", { maximumFractionDigits: 3 }) + " km";
+        this.txtCommDistance.text = "Distance: " + s.satDistance().toLocaleString("en", View.localeSetting) + " km";
         this.txtCommDistance.x = this.outerCenter.x + this.toOuter((s.satPosition(0).x + s.satPosition(1).x) / 2) + View.marginText / 2;
         this.txtCommDistance.y = this.outerCenter.y + this.toOuter((s.satPosition(0).y + s.satPosition(1).y) / 2) + View.marginText / 2;
 
@@ -137,7 +137,7 @@ class EntireView extends View {
                 .endStroke();
 
             // range of stable area
-            this.txtCommStableRange.text = "Stable: " + s.stableLimitAltitude().toLocaleString("en", { maximumFractionDigits: 3 }) + " km";
+            this.txtCommStableRange.text = "Stable: " + s.stableLimitAltitude().toLocaleString("en", View.localeSetting) + " km";
             this.txtCommStableRange.y = this.outerCenter.y - this.toOuter(s.stableLimitAltitude() + b.radius) - View.marginText;
         } else {
             this.txtCommStableRange.text = "";
