@@ -80,8 +80,9 @@ class EntireView extends View {
         // name of orbiting body
         this.txtBodyName.text = b.name;
 
+        // sphere of influence
         if (b.soi != Number.POSITIVE_INFINITY) {
-            // sphere of influence
+            // limit of SoI
             g.beginStroke("yellow")
                 .drawCircle(this.innerCenter.x, this.innerCenter.y, b.soi)
                 .endStroke();
