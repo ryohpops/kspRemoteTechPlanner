@@ -82,12 +82,12 @@ class EntireView extends View {
 
         // sphere of influence
         g.beginStroke("yellow")
-            .drawCircle(this.innerSize / 2, this.innerSize / 2, this.body.soi)
+            .drawCircle(this.innerSize / 2, this.innerSize / 2, this.body.soi - this.body.radius)
             .endStroke();
 
         // height of SoI
-        this.txtBodySoI.text = "Sphere of Influence: " + this.body.soi.toLocaleString("en-US", { maximumFractionDigits: 3 }) + " km";
-        this.txtBodySoI.y = this.outerSize / 2 + Math.max(this.toOuter(this.body.soi) + 10, this.toOuter(this.body.radius + this.satellites.altitude) + 30);
+        this.txtBodySoI.text = "Sphere of Influence: " + (this.body.soi - this.body.radius).toLocaleString("en-US", { maximumFractionDigits: 3 }) + " km";
+        this.txtBodySoI.y = this.outerSize / 2 + Math.max(this.toOuter(this.body.soi - this.body.radius) + 10, this.toOuter(this.body.radius + this.satellites.altitude) + 30);
     }
 
     private showSatellites(g: createjs.Graphics): void {
