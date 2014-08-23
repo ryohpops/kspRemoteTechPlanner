@@ -91,7 +91,7 @@ function init() {
     $("button.manual-input#antenna_add").on("click", onUserAntennaAdd);
     $("button.manual-input#antenna_remove").on("click", onUserAntennaRemove);
 
-    $("form#calculator").find("input,select").on("keypress", (ev) => { if (ev.keyCode == 13) update() });
+    $("form#calculator").find("input,select").on("keypress", (ev) => { if (ev.keyCode == 13 && validate()) update() });
     $("button#calculate").on("click", (ev) => { if (validate()) update() });
     $("button#reset").on("click", (ev) => { reset() });
 
