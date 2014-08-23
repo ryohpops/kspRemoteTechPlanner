@@ -13,15 +13,14 @@
     <script src="Scripts/easeljs-0.7.1.min.js"></script>
     <script src="Scripts/bootstrap.min.js"></script>
     <script src="model/body.js"></script>
-    <script src="model/antenna.js"></script>
-    <script src="model/satellites.js"></script>
     <script src="model/bodyData.js"></script>
+    <script src="model/antenna.js"></script>
     <script src="model/antennaData.js"></script>
+    <script src="model/satellites.js"></script>
     <script src="model/userData.js"></script>
     <script src="calculator/point.js"></script>
     <script src="calculator/euclidean.js"></script>
     <script src="calculator/orbital.js"></script>
-    <script src="calculator/communication.js"></script>
     <script src="view/graphicsHelper.js"></script>
     <script src="view/view.js"></script>
     <script src="view/entireView.js"></script>
@@ -161,7 +160,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="altitude">Altitude(km, ASL)</label>
+                        <label for="altitude">Altitude(km)</label>
                         <input type="number" class="form-control" id="altitude" step="any" min="0" />
                     </div>
 
@@ -222,6 +221,11 @@
                                 <span class="glyphicon glyphicon-repeat"></span>
                             </button>
                         </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="parkingAltitude">Parking altitude on launch(km)</label>
+                        <input type="number" class="form-control" id="parkingAltitude" step="any"/>
                     </div>
 
                     <div class="form-group">

@@ -108,6 +108,7 @@ function update() {
     _satellites.count = parseInt($("input#count").val());
     _satellites.altitude = parseFloat($("input#altitude").val());
     _satellites.elcConsumption = parseFloat($("input#elcConsumption").val());
+    _satellites.parkingAltitude = parseFloat($("input#parkingAltitude").val());
 
     // show objects
     viewEntire.innerSize = (_body.radius + _satellites.altitude + _antenna.range) * 2 * 1.05;
@@ -145,6 +146,7 @@ function reset() {
     $("input#altitude").val((1000).toString());
     $("input#elcConsumption").val((0.01).toString());
     $("select#antenna").val("Communotron 16");
+    $("input#parkingAltitude").val((70).toString());
     onBodySelect(null);
     onAntennaSelect(null);
 }

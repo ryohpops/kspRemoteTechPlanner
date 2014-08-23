@@ -57,6 +57,16 @@ class Satellites {
     }
 
     hohmannFinishDeltaV(): number {
-        return Orbital.hohmannStartDeltaV(this.body.radius, this.parkingAltitude, this.altitude, this.body.stdGravParam);
+        return Orbital.hohmannFinishDeltaV(this.body.radius, this.parkingAltitude, this.altitude, this.body.stdGravParam);
+    }
+
+    slidePhaseAngle(): number {
+        var periodLow: number = Orbital.orbitalPeriod(this.body.radius, this.parkingAltitude, this.body.stdGravParam);
+        var periodHigh: number = Orbital.orbitalPeriod(this.body.radius, this.altitude, this.body.stdGravParam);
+        return Orbital.slidePhaseAngle(360 / this.count, periodLow, periodHigh);
+    }
+
+    slidePhaseTime(): number {
+        return this.slidePhaseAngle() / 360 * Orbital.orbitalPeriod(this.body.radius, this.parkingAltitude, this.body.stdGravParam);
     }
 } 

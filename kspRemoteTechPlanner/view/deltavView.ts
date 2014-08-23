@@ -38,9 +38,9 @@ class DeltavView extends View {
 
         // delta-v to finish hohmann transfer
         this.txtDV2 = new createjs.Text("", View.fontSetNormal);
-        this.txtDV2.textAlign = "right";
+        this.txtDV2.textAlign = "left";
         this.txtDV2.textBaseline = "middle";
-        this.txtDV2.x = this.outerCenter.x - DeltavView.designatedAltitude - View.marginText;
+        this.txtDV2.x = this.outerCenter.x - DeltavView.designatedAltitude + View.marginText;
         this.txtDV2.y = this.outerCenter.y;
         this.texts.addChild(this.txtDV2);
 
@@ -50,6 +50,7 @@ class DeltavView extends View {
         this.txtPhaseAngle.textBaseline = "bottom";
         this.txtPhaseAngle.x = this.outerCenter.x;
         this.txtPhaseAngle.y = this.outerCenter.y - DeltavView.designatedAltitude - View.marginText;
+        this.texts.addChild(this.txtPhaseAngle);
 
         // phase angle measured as time
         this.txtPhaseTime = new createjs.Text("", View.fontSetNormal);
@@ -57,6 +58,7 @@ class DeltavView extends View {
         this.txtPhaseTime.textBaseline = "top";
         this.txtPhaseTime.x = this.outerCenter.x;
         this.txtPhaseTime.y = this.outerCenter.y + DeltavView.designatedAltitude + View.marginText;
+        this.texts.addChild(this.txtPhaseTime);
     }
 
     show(): void {
@@ -92,6 +94,9 @@ class DeltavView extends View {
             this.outerCenter.y - (DeltavView.parkingAltitude + DeltavView.designatedAltitude) / 2, 0, View.arrowSize)
             .endStroke();
 
+        this.txtDV1.text = "Start dV:\n" + (s.hohmannStartDeltaV() * 1000).toLocaleString("en", View.localeSetting) + " m/s";
+        this.txtDV2.text = "Finish dV:\n" + (s.hohmannFinishDeltaV() * 1000).toLocaleString("en", View.localeSetting) + " m/s";
+
         // designated satellite spot
         this.shapeOuter.graphics.beginStroke("black")
             .drawCircle(this.outerCenter.x - DeltavView.designatedAltitude, this.outerCenter.y, View.dotRadius)
@@ -104,5 +109,8 @@ class DeltavView extends View {
             .drawCircle(this.outerCenter.x - Math.cos(DeltavView.neighborSatInterval) * DeltavView.designatedAltitude,
             this.outerCenter.y + Math.sin(DeltavView.neighborSatInterval) * DeltavView.designatedAltitude, View.dotRadius)
             .endFill();
+
+        this.txtPhaseAngle.text = "Slide angle: " + s.slidePhaseAngle().toLocaleString("en", View.localeSetting) + " deg.";
+        this.txtPhaseTime.text = "Slide time: " + s.slidePhaseTime().toLocaleString("en", View.localeSetting) + " sec.";
     }
 } 
