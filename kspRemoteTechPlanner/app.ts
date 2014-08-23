@@ -51,7 +51,6 @@ function init() {
 
     stageNight = new createjs.Stage($("canvas#night")[0]);
     viewNight = new NightView(stageNight, 5000, 400);
-    viewNight.body = _body;
     viewNight.satellites = _satellites;
 
     stageDeltav = new createjs.Stage($("canvas#deltav")[0]);

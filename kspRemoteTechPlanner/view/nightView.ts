@@ -12,7 +12,6 @@ class NightView extends View {
     private static bodyRadius = 50;
     private static orbitRadius = 150;
 
-    body: Body;
     satellites: Satellites;
 
     shapeOuter: createjs.Shape;
@@ -65,13 +64,17 @@ class NightView extends View {
         this.shapeOuter.graphics.clear();
         this.shapeOuter.graphics.setStrokeStyle(View.strokeLineWidth);
 
+        this.showFigures(this.shapeOuter.graphics, this.satellites, this.satellites.body)
+    }
+
+    private showFigures(g: createjs.Graphics, s: Satellites, b: Body) {
         // night area
         this.shapeOuter.graphics.beginFill("rgba(0,0,0,0.2)")
             .drawRect(this.outerCenter.x, this.outerCenter.y - NightView.bodyRadius, this.outerSize / 2, NightView.bodyRadius * 2)
             .endFill();
 
         // planet
-        this.shapeOuter.graphics.beginFill(this.body.color)
+        this.shapeOuter.graphics.beginFill(b.color)
             .drawCircle(this.outerCenter.x, this.outerCenter.y, NightView.bodyRadius)
             .endFill();
 
@@ -81,15 +84,15 @@ class NightView extends View {
             .endStroke();
 
         // orbital period
-        this.txtOrbitalPeriod.text = "Orbital period: " + this.satellites.orbitalPeriod().toFixed(3) + " sec.";
+        this.txtOrbitalPeriod.text = "Orbital period: " + s.orbitalPeriod().toFixed(3) + " sec.";
 
         // night time
-        this.txtNightTime.text = "Night time: " + this.satellites.nightTime().toFixed(3) + " sec.";
+        this.txtNightTime.text = "Night time: " + s.nightTime().toFixed(3) + " sec.";
 
         // required battery
-        this.txtRequiredBattery.text = "Required Battery: " + this.satellites.requiredBattery().toFixed(3);
+        this.txtRequiredBattery.text = "Required Battery: " + s.requiredBattery().toFixed(3);
 
         // required generator
-        this.txtRequiredGenerator.text = "Required Generator: " + this.satellites.requiredGenerator().toFixed(3) + " per sec.";
+        this.txtRequiredGenerator.text = "Required Generator: " + s.requiredGenerator().toFixed(3) + " per sec.";
     }
 } 
