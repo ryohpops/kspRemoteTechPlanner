@@ -83,15 +83,15 @@ class NightView extends View {
             .endStroke();
 
         // orbital period
-        this.txtOrbitalPeriod.text = "Orbital period: " + s.orbitalPeriod().toFixed(3) + " sec.";
+        this.txtOrbitalPeriod.text = "Orbital period: " + s.orbitalPeriod().toLocaleString("en", { maximumFractionDigits: 3 }) + " sec.";
 
         // night time
-        this.txtNightTime.text = "Night time: " + s.nightTime().toFixed(3) + " sec.";
+        this.txtNightTime.text = "Night time: " + s.nightTime().toLocaleString("en", { maximumFractionDigits: 3 }) + " sec.";
 
         // required battery
-        this.txtRequiredBattery.text = "Required Battery: " + s.requiredBattery().toFixed(3);
+        this.txtRequiredBattery.text = "Required Battery: " + s.requiredBattery().toLocaleString("en", { maximumFractionDigits: 3 });
 
         // required generator
-        this.txtRequiredGenerator.text = "Required Generator: " + s.requiredGenerator().toFixed(3) + " per sec.";
+        this.txtRequiredGenerator.text = "Required Generator: " + s.requiredGenerator().toLocaleString("en", { maximumFractionDigits: 3 }) + " per sec.";
     }
 } 
