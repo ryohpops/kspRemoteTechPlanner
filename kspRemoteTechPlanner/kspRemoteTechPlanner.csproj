@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="app.ts" />
+    <TypeScriptCompile Include="calculator\orbital.ts" />
     <TypeScriptCompile Include="model\antenna.ts" />
     <TypeScriptCompile Include="model\antennaData.ts" />
     <TypeScriptCompile Include="model\body.ts" />

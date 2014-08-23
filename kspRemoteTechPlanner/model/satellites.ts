@@ -1,4 +1,6 @@
 ﻿/// <reference path="../calculator/point.ts" />
+/// <reference path="../calculator/euclidean.ts" />
+/// <reference path="../calculator/orbital.ts" />
 /// <reference path="body.ts" />
 /// <reference path="antenna.ts" />
 
@@ -25,11 +27,11 @@ class Satellites {
     }
 
     orbitalPeriod(): number {
-        return Euclidean.orbitalPeriod(this.body.radius, this.altitude, this.body.stdGravParam);
+        return Orbital.orbitalPeriod(this.body.radius, this.altitude, this.body.stdGravParam);
     }
 
     nightTime(): number {
-        return Euclidean.orbitalNightTime(this.body.radius, this.altitude, this.body.stdGravParam);
+        return Orbital.orbitalNightTime(this.body.radius, this.altitude, this.body.stdGravParam);
     }
 
     requiredBattery(): number {
