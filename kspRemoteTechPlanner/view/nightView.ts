@@ -7,7 +7,6 @@
 /// <reference path="graphicshelper.ts" />
 /// <reference path="view.ts" />
 
-
 class NightView extends View {
     private static bodyRadius = 50;
     private static orbitRadius = 150;

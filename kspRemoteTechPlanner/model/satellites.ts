@@ -10,6 +10,7 @@ class Satellites {
     count: number;
     altitude: number;
     elcConsumption: number;
+    parkingAltitude: number;
 
     satPosition(offset: number): Point {
         var ra: number = this.body.radius + this.altitude;
@@ -49,5 +50,13 @@ class Satellites {
 
     requiredGenerator(): number {
         return (this.elcConsumption + this.antenna.elcConsumption) * this.orbitalPeriod() / (this.orbitalPeriod() - this.nightTime())
+    }
+
+    hohmannStartDeltaV(): number {
+        return Orbital.hohmannStartDeltaV(this.body.radius, this.parkingAltitude, this.altitude, this.body.stdGravParam);
+    }
+
+    hohmannFinishDeltaV(): number {
+        return Orbital.hohmannStartDeltaV(this.body.radius, this.parkingAltitude, this.altitude, this.body.stdGravParam);
     }
 } 
