@@ -11,19 +11,28 @@ class Satellites {
     altitude: number;
     elcConsumption: number;
 
-    satPosition(offset: number, innerSize: number, count: number= this.count,
-        altitude: number= this.altitude + this.body.radius): Point {
-        return new Point(innerSize / 2 + altitude * Math.cos(2 * Math.PI / count * offset),
-            innerSize / 2 + altitude * Math.sin(2 * Math.PI / count * offset));
+    satPosition(offset: number): Point {
+        var ra: number = this.body.radius + this.altitude;
+        return new Point(ra * Math.cos(2 * Math.PI / this.count * offset), + ra * Math.sin(2 * Math.PI / this.count * offset));
     }
 
     satDistance(): number {
-        return Euclidean.length(this.satPosition(0, 0), this.satPosition(1, 0));
+        return Euclidean.length(this.satPosition(0), this.satPosition(1));
     }
 
-    stableRange(): number {
-        return Euclidean.circleCrossPoint(new Point(0, 0), this.antenna.range,
-            this.satPosition(0, 0), this.satPosition(1, 0), Euclidean.CircleCrossPointMode.high) - this.body.radius;
+    isNextSatConnectable(): boolean {
+        return this.count >= 2 &&                                                                                                // at least 2 satellites needed
+            Euclidean.length(this.satPosition(0), this.satPosition(1)) <= this.antenna.range &&                                  // connection range is enough 
+            Euclidean.distanceBetweenPointAndLine(new Point(0, 0), this.satPosition(0), this.satPosition(1)) > this.body.radius; // connection is not blocked by orbiting body
+    }
+
+    hasStableArea(): boolean {
+        return this.count >= 3 && this.isNextSatConnectable(); // at least 3 satellites and they can connect to next one
+    }
+
+    stableLimitAltitude(): number {
+        return Euclidean.circleCrossPoint(new Point(0, 0), this.satPosition(0), this.satPosition(1),
+            this.antenna.range, Euclidean.CircleCrossPointMode.high) - this.body.radius;
     }
 
     orbitalPeriod(): number {

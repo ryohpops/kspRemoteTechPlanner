@@ -4,7 +4,6 @@
 /// <reference path="../model/body.ts" />
 /// <reference path="../model/satellites.ts" />
 /// <reference path="../calculator/point.ts" />
-/// <reference path="../calculator/communication.ts" />
 /// <reference path="graphicshelper.ts" />
 /// <reference path="view.ts" />
 
@@ -107,40 +106,38 @@ class EntireView extends View {
         // positions
         for (var i: number = 0; i < s.count; i++) {
             g.beginFill("black")
-                .drawCircle(s.satPosition(i, this.innerSize).x, s.satPosition(i, this.innerSize).y, this.toInner(View.dotRadius))
+                .drawCircle(this.innerCenter.x + s.satPosition(i).x, this.innerCenter.y + s.satPosition(i).y, this.toInner(View.dotRadius))
                 .endFill();
         }
 
         // communication area
         for (var i: number = 0; i < s.count; i++) {
             g.beginFill("rgba(255,0,0,0.1)")
-                .drawCircle(s.satPosition(i, this.innerSize).x, s.satPosition(i, this.innerSize).y, a.range)
+                .drawCircle(this.innerCenter.x + s.satPosition(i).x, this.innerCenter.y + s.satPosition(i).y, a.range)
                 .endFill();
         }
 
         // distance
-        g.beginStroke(Communication.isNextSatConnectable(b, s, this.innerSize) ? "blue" : "red");
+        g.beginStroke(s.isNextSatConnectable() ? "blue" : "red");
         GraphicsHelper.drawDualArrow(this.shapeInner.graphics,
-            s.satPosition(0, this.innerSize).x, s.satPosition(0, this.innerSize).y,
-            s.satPosition(1, this.innerSize).x, s.satPosition(1, this.innerSize).y, this.toInner(View.arrowSize))
+            this.innerCenter.x + s.satPosition(0).x, this.innerCenter.y + s.satPosition(0).y,
+            this.innerCenter.x + s.satPosition(1).x, this.innerCenter.y + s.satPosition(1).y, this.toInner(View.arrowSize))
             .endStroke();
 
         this.txtCommDistance.text = "Distance: " + s.satDistance().toLocaleString("en-US", { maximumFractionDigits: 3 }) + " km";
-        this.txtCommDistance.x = this.toOuter(s.satPosition(0, this.innerSize).x + (s.satPosition(1, this.innerSize).x
-            - s.satPosition(0, this.innerSize).x) / 2) + View.marginText / 2;
-        this.txtCommDistance.y = this.toOuter(s.satPosition(0, this.innerSize).y + (s.satPosition(1, this.innerSize).y
-            - s.satPosition(0, this.innerSize).y) / 2) + View.marginText / 2;
+        this.txtCommDistance.x = this.outerCenter.x + this.toOuter((s.satPosition(0).x + s.satPosition(1).x) / 2) + View.marginText / 2;
+        this.txtCommDistance.y = this.outerCenter.y + this.toOuter((s.satPosition(0).y + s.satPosition(1).y) / 2) + View.marginText / 2;
 
         // stable area
-        if (Communication.hasStableArea(b, s, this.innerSize)) {
+        if (s.hasStableArea()) {
             // upper limit of stable area
             this.shapeInner.graphics.beginStroke("green")
-                .drawCircle(this.innerCenter.x, this.innerCenter.y, s.stableRange() + b.radius)
+                .drawCircle(this.innerCenter.x, this.innerCenter.y, s.stableLimitAltitude() + b.radius)
                 .endStroke();
 
             // range of stable area
-            this.txtCommStableRange.text = "Stable: " + s.stableRange().toLocaleString("en-US", { maximumFractionDigits: 3 }) + " km";
-            this.txtCommStableRange.y = this.outerCenter.y - this.toOuter(s.stableRange() + b.radius) - View.marginText;
+            this.txtCommStableRange.text = "Stable: " + s.stableLimitAltitude().toLocaleString("en-US", { maximumFractionDigits: 3 }) + " km";
+            this.txtCommStableRange.y = this.outerCenter.y - this.toOuter(s.stableLimitAltitude() + b.radius) - View.marginText;
         } else {
             this.txtCommStableRange.text = "";
         }

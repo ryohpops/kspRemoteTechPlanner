@@ -5,7 +5,7 @@ module Euclidean {
         high, low
     }
 
-    export function circleCrossPoint(origin: Point, radius: number, center1: Point, center2: Point, mode: CircleCrossPointMode): number {
+    export function circleCrossPoint(origin: Point, center1: Point, center2: Point, radius: number, mode: CircleCrossPointMode): number {
         var dist: number = length(center1, center2);
         var rad1: number = Math.atan2(center2.y - center1.y, center2.x - center1.x);
         var rad2: number = Math.acos(dist / (2 * radius));
