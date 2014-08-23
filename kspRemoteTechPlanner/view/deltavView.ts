@@ -13,7 +13,6 @@ class DeltavView extends View {
     private static designatedAltitude: number = 150;
     private static neighborSatInterval: number = Math.PI / 3;
 
-    body: Body;
     satellites: Satellites;
 
     shapeOuter: createjs.Shape;
@@ -34,8 +33,12 @@ class DeltavView extends View {
         this.shapeOuter.graphics.clear();
         this.shapeOuter.graphics.setStrokeStyle(View.strokeLineWidth);
 
+        this.showFigures(this.shapeOuter.graphics, this.satellites, this.satellites.body);
+    }
+
+    private showFigures(g: createjs.Graphics, s: Satellites, b: Body) {
         // body
-        this.shapeOuter.graphics.beginFill(this.body.color)
+        this.shapeOuter.graphics.beginFill(b.color)
             .drawCircle(this.outerCenter.x, this.outerCenter.y, DeltavView.bodyRadius)
             .endFill();
 

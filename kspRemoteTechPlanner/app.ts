@@ -55,7 +55,6 @@ function init() {
 
     stageDeltav = new createjs.Stage($("canvas#deltav")[0]);
     viewDeltav = new DeltavView(stageDeltav, 5000, 400);
-    viewDeltav.body = _body;
     viewDeltav.satellites = _satellites;
 
     // load user data
