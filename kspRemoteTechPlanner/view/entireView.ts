@@ -83,12 +83,12 @@ class EntireView extends View {
         if (b.soi != Number.POSITIVE_INFINITY) {
             // limit of SoI
             g.beginStroke("yellow")
-                .drawCircle(this.innerCenter.x, this.innerCenter.y, b.soi)
+                .drawCircle(this.innerCenter.x, this.innerCenter.y, b.soi - b.radius)
                 .endStroke();
 
             // height of SoI
-            this.txtBodySoI.text = "Sphere of Influence: " + b.soi.toLocaleString("en-US", { maximumFractionDigits: 3 }) + " km";
-            this.txtBodySoI.y = this.outerCenter.y + Math.max(this.toOuter(b.soi) + View.marginText, this.toOuter(b.radius + s.altitude) + View.marginTextPushed);
+            this.txtBodySoI.text = "Sphere of Influence: " + (b.soi - b.radius).toLocaleString("en-US", { maximumFractionDigits: 3 }) + " km";
+            this.txtBodySoI.y = this.outerCenter.y + Math.max(this.toOuter(b.soi - b.radius) + View.marginText, this.toOuter(b.radius + s.altitude) + View.marginTextPushed);
         } else {
             this.txtBodySoI.text = "";
         }
