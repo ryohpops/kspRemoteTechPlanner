@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 
 <html lang="en">
 <head>
@@ -36,19 +36,14 @@
             <h2>Description</h2>
             <a href="http://forum.kerbalspaceprogram.com/threads/83305-Development-Resumed-RemoteTech-2">RemoteTech2</a> is popular MOD for KerbalSpaceProgram.
             It provides purpose to launch and use satellites in the world of KSP.<br />
-            Before launching your communication satellite, you can plan your RemoteTech satellites network with graphical figures here.
-            Put needed values into Data input, then hit Calculate.<br />
-            <br />
-            Black circle is orbit of satellites and black dots mean each satellite.
-            Red clear circle is antenna range each satellite has.<br />
-            If arrow connecting a couple of satellites is blue, it'll be OK.
-            But if it's red, any satellites can't connect to their next one.<br />
-            When green circle labeled Stable appears, it means that any orbits lower than Stable altitude never have connection-less flight.<br />
+            Before launching your communication satellite, you can plan your RemoteTech satellites network with graphical figures here.<br />
+            Put needed values into Data input, then hit Calculate or press enter key.<br />
             <br />
             This website is under development, forum is <a href="http://forum.kerbalspaceprogram.com/threads/90113-WEB-Visual-RemoteTech-Planner-for-MOD-RemoteTech2">here</a>
             and sources are available on <a href="https://github.com/ryohpops/kspRemoteTechPlanner">github</a>. Current version is beta2.4.1.<br />
             Issues, bug reports, contributers are always welcome.<br />
             <br />
+            Use of an autopilot MOD such as <a href="http://forum.kerbalspaceprogram.com/threads/12384-PART-0-24-2-Anatid-Robotics-MuMech-MechJeb-Autopilot-v2-3-1">MechJeb</a> is recommended.<br />
             Data of bodies is based on <a href="http://wiki.kerbalspaceprogram.com/wiki/Main_Page">KSP Wiki</a>,
             <a href="http://remotetechnologiesgroup.github.io/RemoteTech/">RemoteTech2 manual</a> and
             <a href="http://forum.kerbalspaceprogram.com/threads/41652-A-more-accurate-delta-v-map">metaphor's Delta-V map</a>.<br />
@@ -73,7 +68,7 @@
                     </div>
 
                     <div class="col-md-6" align="center">
-                        <h3>Delta-V View</h3>
+                        <h3>Delta-V view</h3>
                         <div class="wrap-canvas">
                             <canvas id="deltav" width="400" height="400"></canvas>
                         </div>
@@ -234,6 +229,43 @@
                     </div>
                 </form>
             </div>
+        </div>
+        
+        <div class="row">
+            <h2>How to read figures</h2>
+            Colored circles in the middle of each views mean primary body.<br />
+            A yellow circle means sphere of influence. Usually it exists beyond the display range.<br />
+            <br />
+            Black circles mean the orbit of satellites and black dots mean each satellite.
+            A Black edged white dot means the spot which your new satellite is going into.<br />
+            Red clear circles mean range of antennas on each satellite.<br />
+            The two-way arrow means distance of these two satellites.<br />
+            If the color of the arrow is blue, all satellites can connect to their next one.
+            But if it is red, any satellites cannot connect to the others.<br />
+            If green circle labeled Stable appears, any orbits lower than Stable altitude never have connection-less flights.<br />
+            <br />
+            Note that only Entire view is dynamically scaled.
+        </div>
+        
+        <div class="row">
+            <h2>How to use solution</h2>
+            <h3>For mechjeb users</h3>
+            <ol>
+                <li>Write down orbital period of the satellite which is at the first spot of your satellites chain.</li>
+                <li>Target the satellite, open Maneuver Planenr and create (do <b>not</b> execute) hohmann transfer.</li>
+                <li>Open Maneuver Editor and put Slide time in Delta-V view into ?time.</li>
+                <li>Push + at ?time and check intersection pointer is shifted properly.</li>
+                <li>Execute node and do circularize at designated altitude.</li>
+                <li>Adjust orbital period of the new satellites to the one you written on step 1.</li>
+            </ol>
+            
+            <h3>For manual control users</h3>
+            <ol>
+                <li>Calculate orbital period of the satellite which is at the first spot of your satellites chain and write it down.</li>
+                <li>Target the satellite and create a maneuver node to perform hohmann transfer.</li>
+                <li>Slide the node forward by Slide angle or Slide time in Delta-v view, and check intersection pointer is shifted properly.</li>
+                <li>Execute node and do circularize at designated altitude.</li>
+            </ol>
         </div>
 
         <div class="row">

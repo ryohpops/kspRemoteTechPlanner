@@ -21,6 +21,6 @@
     }
 
     export function slidePhaseAngle(slideDeg: number, periodLow: number, periodHigh: number) {
-        return slideDeg / (1 + periodLow / periodHigh);
+        return slideDeg / (1 - periodLow / periodHigh);
     }
 }
