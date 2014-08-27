@@ -46,7 +46,7 @@ function init() {
 
     // init views
     stageEntire = new createjs.Stage($("canvas#entire")[0]);
-    viewEntire = new EntireView(stageEntire, 10000, 800);
+    viewEntire = new EntireView(stageEntire, 10000, 840);
     viewEntire.satellites = _satellites;
 
     stageNight = new createjs.Stage($("canvas#night")[0]);
