@@ -78,14 +78,14 @@ function init() {
 
     // add event handlers
     $("select#body").on("change", onBodySelect);
-    $("button.manual-input#body_detail").on("click", (ev) => { $("div.manual-input#body").slideToggle() });
+    $("button.manual-input#body_detail").on("click", (ev) => { $("div.manual-input#manual_body").slideToggle() });
     $("button.manual-input#body_reset").on("click", (ev) => { onBodySelect(ev) });
 
     $("button.manual-input#body_add").on("click", onUserBodyAdd);
     $("button.manual-input#body_remove").on("click", onUserBodyRemove);
 
     $("select#antenna").on("change", onAntennaSelect);
-    $("button.manual-input#antenna_detail").on("click", (ev) => { $("div.manual-input#antenna").slideToggle() });
+    $("button.manual-input#antenna_detail").on("click", (ev) => { $("div.manual-input#manual_antenna").slideToggle() });
     $("button.manual-input#antenna_reset").on("click", (ev) => { onAntennaSelect(ev) });
 
     $("button.manual-input#antenna_add").on("click", onUserAntennaAdd);
@@ -156,11 +156,11 @@ function validate(): boolean {
 }
 
 function validateBody(): boolean {
-    return $("div.manual-input#body").children("div").children("input").valid();
+    return $("div.manual-input#manual_body").children("div").children("input").valid();
 }
 
 function validateAntenna(): boolean {
-    return $("div.manual-input#antenna").children("div").children("input").valid();
+    return $("div.manual-input#manual_antenna").children("div").children("input").valid();
 }
 
 // event handler

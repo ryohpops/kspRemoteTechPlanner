@@ -33,41 +33,43 @@
         <h1>Visual RemoteTech Planner for KSP</h1>
 
         <div class="row">
-            <h2>Description</h2>
-            <a href="http://forum.kerbalspaceprogram.com/threads/83305-Development-Resumed-RemoteTech-2">RemoteTech2</a> is popular MOD for KerbalSpaceProgram.
-            It provides purpose to launch and use satellites in the world of KSP.<br />
-            Before launching your communication satellite, you can plan your RemoteTech satellites network with graphical figures here.<br />
-            Put needed values into Data input, then hit Calculate or press enter key.<br />
-            <br />
-            This website is under development, forum is <a href="http://forum.kerbalspaceprogram.com/threads/90113-WEB-Visual-RemoteTech-Planner-for-MOD-RemoteTech2">here</a>
-            and sources are available on <a href="https://github.com/ryohpops/kspRemoteTechPlanner">github</a>. Current version is beta2.4.1.<br />
-            Issues, bug reports, contributers are always welcome.<br />
-            <br />
-            Use of an autopilot MOD such as <a href="http://forum.kerbalspaceprogram.com/threads/12384-PART-0-24-2-Anatid-Robotics-MuMech-MechJeb-Autopilot-v2-3-1">MechJeb</a> is recommended.<br />
-            Data of bodies is based on <a href="http://wiki.kerbalspaceprogram.com/wiki/Main_Page">KSP Wiki</a>,
-            <a href="http://remotetechnologiesgroup.github.io/RemoteTech/">RemoteTech2 manual</a> and
-            <a href="http://forum.kerbalspaceprogram.com/threads/41652-A-more-accurate-delta-v-map">metaphor's Delta-V map</a>.<br />
-            NO GUARANTEES OF CORRECTNESS.
+            <div class="col-md-12">
+                <h2>Description</h2>
+                <a href="http://forum.kerbalspaceprogram.com/threads/83305-Development-Resumed-RemoteTech-2">RemoteTech2</a> is one of the popular MODs for <a href="https://kerbalspaceprogram.com/">Kerbal Space Program</a>.
+                It provides purposes to launch and operate satellites in the space.<br />
+                Before starting a countdown at the launch pad, how about planning and visualizing the satellite network that you aim at with this web-based planner?<br />
+                Put needed values into Data input, then hit Calculate or press enter key.<br />
+                <br />
+                This website is under development, forum is <a href="http://forum.kerbalspaceprogram.com/threads/90113-WEB-Visual-RemoteTech-Planner-for-MOD-RemoteTech2">here</a>
+                and sources are available on <a href="https://github.com/ryohpops/kspRemoteTechPlanner">github</a>. Current version is beta2.4.1.<br />
+                Issues, bug reports, contributers are always welcome.<br />
+                <br />
+                Use of an autopilot MOD such as <a href="http://forum.kerbalspaceprogram.com/threads/12384-PART-0-24-2-Anatid-Robotics-MuMech-MechJeb-Autopilot-v2-3-1">MechJeb</a> is recommended.<br />
+                Data of bodies is based on <a href="http://wiki.kerbalspaceprogram.com/wiki/Main_Page">KSP Wiki</a>,
+                <a href="http://remotetechnologiesgroup.github.io/RemoteTech/">RemoteTech2 manual</a> and
+                <a href="http://forum.kerbalspaceprogram.com/threads/41652-A-more-accurate-delta-v-map">metaphor's Delta-V map</a>.<br />
+                NO GUARANTEES OF CORRECTNESS.
+            </div>
         </div>
 
         <div class="row">
             <div class="col-md-9">
                 <div class="row">
-                    <div class="col-md-12" align="center">
+                    <div class="col-md-12">
                         <h3>Entire view</h3>
                         <div class="wrap-canvas">
                             <canvas id="entire" width="800" height="800"></canvas>
                         </div>
                     </div>
 
-                    <div class="col-md-6" align="center">
+                    <div class="col-md-6">
                         <h3>Night view</h3>
                         <div class="wrap-canvas">
                             <canvas id="night" width="400" height="400"></canvas>
                         </div>
                     </div>
 
-                    <div class="col-md-6" align="center">
+                    <div class="col-md-6">
                         <h3>Delta-V view</h3>
                         <div class="wrap-canvas">
                             <canvas id="deltav" width="400" height="400"></canvas>
@@ -109,7 +111,7 @@
                             <option>Eeloo</option>
                         </select>
 
-                        <div class="manual-input" id="body">
+                        <div class="manual-input" id="manual_body">
                             <div class="form-group">
                                 <label for="body_name">Name</label>
                                 <input type="text" class="form-control" id="body_name" />
@@ -179,7 +181,7 @@
                             </optgroup>
                         </select>
 
-                        <div class="manual-input" id="antenna">
+                        <div class="manual-input" id="manual_antenna">
                             <div class="form-group">
                                 <label for="antenna_name">Name</label>
                                 <input type="text" class="form-control" id="antenna_name" />
@@ -220,7 +222,7 @@
 
                     <div class="form-group">
                         <label for="parkingAltitude">Parking altitude on launch(km)</label>
-                        <input type="number" class="form-control" id="parkingAltitude" step="any"/>
+                        <input type="number" class="form-control" id="parkingAltitude" step="any" />
                     </div>
 
                     <div class="form-group">
@@ -230,47 +232,54 @@
                 </form>
             </div>
         </div>
-        
+
         <div class="row">
-            <h2>How to read figures</h2>
-            Colored circles in the middle of each views mean primary body.<br />
-            A yellow circle means sphere of influence. Usually it exists beyond the display range.<br />
-            <br />
-            Black circles mean the orbit of satellites and black dots mean each satellite.
-            A Black edged white dot means the spot which your new satellite is going into.<br />
-            Red clear circles mean range of antennas on each satellite.<br />
-            The two-way arrow means distance of these two satellites.<br />
-            If the color of the arrow is blue, all satellites can connect to their next one.
-            But if it is red, any satellites cannot connect to the others.<br />
-            If green circle labeled Stable appears, any orbits lower than Stable altitude never have connection-less flights.<br />
-            <br />
-            Note that only Entire view is dynamically scaled.
-        </div>
-        
-        <div class="row">
-            <h2>How to use solution</h2>
-            <h3>For mechjeb users</h3>
-            <ol>
-                <li>Write down orbital period of the satellite which is at the first spot of your satellites chain.</li>
-                <li>Target the satellite, open Maneuver Planenr and create (do <b>not</b> execute) hohmann transfer.</li>
-                <li>Open Maneuver Editor and put Slide time in Delta-V view into ?time.</li>
-                <li>Push + at ?time and check intersection pointer is shifted properly.</li>
-                <li>Execute node and do circularize at designated altitude.</li>
-                <li>Adjust orbital period of the new satellites to the one you written on step 1.</li>
-            </ol>
-            
-            <h3>For manual control users</h3>
-            <ol>
-                <li>Calculate orbital period of the satellite which is at the first spot of your satellites chain and write it down.</li>
-                <li>Target the satellite and create a maneuver node to perform hohmann transfer.</li>
-                <li>Slide the node forward by Slide angle or Slide time in Delta-v view, and check intersection pointer is shifted properly.</li>
-                <li>Execute node and do circularize at designated altitude.</li>
-            </ol>
+            <div class="col-md-12">
+                <h2>How to read figures</h2>
+                Filled circles in the middle of each views mean primary body. The planet or moon which which has SoI your satellites belong to.<br />
+                A yellow circle means sphere of influence. Above this altitude, orbits cannot form themselves. Usually it exists beyond the Entire view's display range.<br />
+                <br />
+                Black circles mean the orbit of satellites and black dots mean each satellite.
+                A Black edged white dot means the spot which your new satellite is going into after hohmann transfer.<br />
+                Red clear circles mean range of antennas on each satellite. Unlike the figure, satellites cannot communicate through the primary body.<br />
+                The two-way arrow means distance of these two satellites.<br />
+                If the color of the arrow is blue, all satellites can connect to their next one. It will provides a nice ring for smooth communication.<br />
+                If the color is red, any satellites cannot connect to the others. All satellites are in solitude.<br />
+                When green circle labeled Stable appears, any orbits lower than the Stable altitude never have connection-less flights.<br />
+                <br />
+                Note that only the Entire view is dynamically scaled.<br />
+                <br />
+                Slide angle and Slide time mean same amount in different units.<br />
+                Shifting your hohmann transfer node according to this makes shifting the result of the transfer by 360 / &lt;the number of satellites&gt; degrees.
+            </div>
         </div>
 
         <div class="row">
-            <div class="col-sm-12"><hr /></div>
-            <div class="col-sm-12">
+            <div class="col-md-12">
+                <h2>How to use solution</h2>
+                <h3>For MechJeb users</h3>
+                <ol>
+                    <li>Write down orbital period of the satellite which is at the first spot of your satellite chain.</li>
+                    <li>Target the satellite, open Maneuver Planenr and create (do <b>not</b> execute) hohmann transfer.</li>
+                    <li>Open Maneuver Editor and put Slide time in the Delta-V view into Shift time.</li>
+                    <li>Push + at Shift time and check intersection pointer is shifted properly.</li>
+                    <li>Execute node and do circularize at designated altitude.</li>
+                    <li>Adjust orbital period of the new satellites to the one you written on step 1.</li>
+                </ol>
+
+                <h3>For manual control users</h3>
+                <ol>
+                    <li>Target the satellite which is at the first spot of your satellite chain.</li>
+                    <li>Create a maneuver node to perform hohmann transfer.</li>
+                    <li>Slide the node forward by Slide angle or Slide time in the Delta-v view, and check intersection pointer is shifted properly.</li>
+                    <li>Execute node and do circularize at designated altitude.</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12"><hr /></div>
+            <div class="col-md-12">
                 Created by ryohpops, © 2014. Forum is <a href="http://forum.kerbalspaceprogram.com/threads/90113-WEB-Visual-RemoteTech-Planner-for-MOD-RemoteTech2">here</a>
                 and github repository is <a href="https://github.com/ryohpops/kspRemoteTechPlanner">here</a>.<br />
                 Built with <a href="http://getbootstrap.com/">Bootstrap</a>, <a href="http://glyphicons.com/">GLYPHICONS</a> Halflings and <a href="https://github.com/CreateJS/EaselJS">EaselJS</a>,
