@@ -5,7 +5,7 @@ module Euclidean {
         high, low
     }
 
-    export function circleCrossPoint(origin: Point, radius: number, center1: Point, center2: Point, mode: CircleCrossPointMode): number {
+    export function circleCrossPoint(origin: Point, center1: Point, center2: Point, radius: number, mode: CircleCrossPointMode): number {
         var dist: number = length(center1, center2);
         var rad1: number = Math.atan2(center2.y - center1.y, center2.x - center1.x);
         var rad2: number = Math.acos(dist / (2 * radius));
@@ -26,14 +26,5 @@ module Euclidean {
     export function distanceBetweenPointAndLine(point: Point, onLine1: Point, onLine2: Point): number {
         var h: Point = new Point(onLine1.x + (onLine2.x - onLine1.x) / 2, onLine1.y + (onLine2.y - onLine1.y) / 2);
         return length(point, h);
-    }
-
-    export function orbitalPeriod(bodyRadius: number, altitude: number, stdGravParam: number) {
-        return 2 * Math.PI * Math.sqrt(Math.pow(bodyRadius + altitude, 3) / stdGravParam);
-    }
-
-    export function orbitalNightTime(bodyRadius: number, altitude: number, stdGravParam: number) {
-        var ra: number = bodyRadius + altitude;
-        return 2 * Math.pow(ra, 2) / Math.sqrt(ra * stdGravParam) * Math.asin(bodyRadius / ra);
     }
 }

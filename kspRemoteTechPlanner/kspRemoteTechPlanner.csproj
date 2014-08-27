@@ -36,17 +36,22 @@
     <Content Include="Scripts\easeljs-0.7.1.min.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="web.config" />
     <Content Include="Scripts\jquery-2.1.1.min.map" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="app.ts" />
+    <TypeScriptCompile Include="calculator\orbital.ts" />
     <TypeScriptCompile Include="model\antenna.ts" />
     <TypeScriptCompile Include="model\antennaData.ts" />
     <TypeScriptCompile Include="model\body.ts" />
-    <TypeScriptCompile Include="calculator\communication.ts" />
     <TypeScriptCompile Include="calculator\point.ts" />
     <TypeScriptCompile Include="model\userData.ts" />
+    <TypeScriptCompile Include="Scripts\typings\jquery.validation\jquery.validation.d.ts" />
+    <TypeScriptCompile Include="view\deltavView.ts" />
     <TypeScriptCompile Include="view\nightView.ts" />
     <TypeScriptCompile Include="view\entireView.ts" />
     <TypeScriptCompile Include="model\bodyData.ts" />

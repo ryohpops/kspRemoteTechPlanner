@@ -3,12 +3,17 @@ kspRemoteTechPlanner
 
 Web-based satellite network planner for the MOD, [RemoteTech2](http://forum.kerbalspaceprogram.com/threads/83305-Development-Resumed-RemoteTech-2).
 
-Latest release is [here](http://ryohpops.github.io/kspRemoteTechPlanner/).
-Current version is beta2.4.
-
-Forum is [here](http://forum.kerbalspaceprogram.com/threads/90113-WEB-Visual-RemoteTech-Planner-for-MOD-RemoteTech2).
+Latest release is [here](http://ryohpops.github.io/kspRemoteTechPlanner/) and forum is [here](http://forum.kerbalspaceprogram.com/threads/90113-WEB-Visual-RemoteTech-Planner-for-MOD-RemoteTech2).
 
 Version history
+
+- 1.0 : 2014/08/27
+
+ Implement Delta-V view about the delta-v to deploy satellites.
+
+- beta2.4.1 : 2014/08/23
+
+ Fix indication of sphere of influence.
 
 - beta2.4 : 2014/08/17
 

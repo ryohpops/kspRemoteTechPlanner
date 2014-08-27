@@ -1,6 +1,4 @@
-﻿/// <reference path="../scripts/typings/jquery/jquery.d.ts" />
-
-/// <reference path="body.ts" />
+﻿/// <reference path="body.ts" />
 /// <reference path="antenna.ts" />
 
 module UserData {

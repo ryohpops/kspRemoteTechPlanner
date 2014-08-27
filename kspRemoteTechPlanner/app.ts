@@ -1,15 +1,17 @@
 ﻿/// <reference path="scripts/typings/jquery/jquery.d.ts" />
+/// <reference path="scripts/typings/jquery.validation/jquery.validation.d.ts" />
 /// <reference path="scripts/typings/easeljs/easeljs.d.ts" />
 /// <reference path="scripts/typings/createjs-lib/createjs-lib.d.ts" />
 /// <reference path="scripts/typings/tweenjs/tweenjs.d.ts" />
 /// <reference path="model/body.ts" />
 /// <reference path="model/bodydata.ts" />
-/// <reference path="model/userdata.ts" />
 /// <reference path="model/antenna.ts" />
 /// <reference path="model/antennadata.ts" />
 /// <reference path="model/satellites.ts" />
+/// <reference path="model/userdata.ts" />
 /// <reference path="view/entireview.ts" />
 /// <reference path="view/nightview.ts" />
+/// <reference path="view/deltavview.ts" />
 
 // values
 var _body: Body;
@@ -23,6 +25,10 @@ var viewEntire: EntireView;
 // Night View
 var stageNight: createjs.Stage;
 var viewNight: NightView;
+
+// Delta-V View
+var stageDeltav: createjs.Stage;
+var viewDeltav: DeltavView;
 
 // startup
 $(() => {
@@ -41,13 +47,15 @@ function init() {
     // init views
     stageEntire = new createjs.Stage($("canvas#entire")[0]);
     viewEntire = new EntireView(stageEntire, 10000, 800);
-    viewEntire.body = _body;
     viewEntire.satellites = _satellites;
 
     stageNight = new createjs.Stage($("canvas#night")[0]);
     viewNight = new NightView(stageNight, 5000, 400);
-    viewNight.body = _body;
     viewNight.satellites = _satellites;
+
+    stageDeltav = new createjs.Stage($("canvas#deltav")[0]);
+    viewDeltav = new DeltavView(stageDeltav, 5000, 400);
+    viewDeltav.satellites = _satellites;
 
     // load user data
     var cookieExists: UserData.loadCookieResult = UserData.loadCookie();
@@ -62,23 +70,29 @@ function init() {
         }
     }
 
+    // set validator
+    $("form#calculator").validate({
+        highlight: function (element) { $(element).parent("div").addClass("has-error") },
+        unhighlight: function (element) { $(element).parent("div").removeClass("has-error") }
+    });
+
     // add event handlers
     $("select#body").on("change", onBodySelect);
-    $("button.manual-input#body_detail").on("click", (ev) => { $("div.manual-input#body").slideToggle() });
+    $("button.manual-input#body_detail").on("click", (ev) => { $("div.manual-input#manual_body").slideToggle() });
     $("button.manual-input#body_reset").on("click", (ev) => { onBodySelect(ev) });
 
     $("button.manual-input#body_add").on("click", onUserBodyAdd);
     $("button.manual-input#body_remove").on("click", onUserBodyRemove);
 
     $("select#antenna").on("change", onAntennaSelect);
-    $("button.manual-input#antenna_detail").on("click", (ev) => { $("div.manual-input#antenna").slideToggle() });
+    $("button.manual-input#antenna_detail").on("click", (ev) => { $("div.manual-input#manual_antenna").slideToggle() });
     $("button.manual-input#antenna_reset").on("click", (ev) => { onAntennaSelect(ev) });
 
     $("button.manual-input#antenna_add").on("click", onUserAntennaAdd);
     $("button.manual-input#antenna_remove").on("click", onUserAntennaRemove);
 
-    $("form#calculator").find("input,select").on("keypress", (ev) => { if (ev.keyCode == 13) update() });
-    $("button#calculate").on("click", (ev) => { update() });
+    $("form#calculator").find("input,select").on("keypress", (ev) => { if (ev.keyCode == 13 && validate()) update() });
+    $("button#calculate").on("click", (ev) => { if (validate()) update() });
     $("button#reset").on("click", (ev) => { reset() });
 
     // finallize
@@ -88,24 +102,13 @@ function init() {
 
 function update() {
     // update objects
-    _body.name = $("input#body_name").val();
-    _body.color = $("input#body_color").val();
-    _body.radius = parseFloat($("input#body_radius").val());
-    _body.stdGravParam = parseFloat($("input#body_stdGravParam").val());
-    _body.soi = parseFloat($("input#body_soi").val());
-
-    _antenna.name = $("input#antenna_name").val();
-    if ($("input#antenna_type").val() == "omni") {
-        _antenna.type = AntennaType.omni;
-    } else if ($("input#antenna_type").val() == "dish") {
-        _antenna.type = AntennaType.dish;
-    }
-    _antenna.range = parseFloat($("input#antenna_range").val());
-    _antenna.elcConsumption = parseFloat($("input#antenna_elcConsumption").val());
+    updateBody();
+    updateAntenna();
 
     _satellites.count = parseInt($("input#count").val());
     _satellites.altitude = parseFloat($("input#altitude").val());
     _satellites.elcConsumption = parseFloat($("input#elcConsumption").val());
+    _satellites.parkingAltitude = parseFloat($("input#parkingAltitude").val());
 
     // show objects
     viewEntire.innerSize = (_body.radius + _satellites.altitude + _antenna.range) * 2 * 1.05;
@@ -114,6 +117,27 @@ function update() {
     stageEntire.update();
     viewNight.show();
     stageNight.update();
+    viewDeltav.show();
+    stageDeltav.update();
+}
+
+function updateBody() {
+    _body.name = $("input#body_name").val();
+    _body.color = $("input#body_color").val();
+    _body.radius = parseFloat($("input#body_radius").val());
+    _body.stdGravParam = parseFloat($("input#body_stdGravParam").val());
+    _body.soi = parseFloat($("input#body_soi").val());
+}
+
+function updateAntenna() {
+    _antenna.name = $("input#antenna_name").val();
+    if ($("select#antenna_type").val() == "omni") {
+        _antenna.type = AntennaType.omni;
+    } else if ($("select#antenna_type").val() == "dish") {
+        _antenna.type = AntennaType.dish;
+    }
+    _antenna.range = parseFloat($("input#antenna_range").val());
+    _antenna.elcConsumption = parseFloat($("input#antenna_elcConsumption").val());
 }
 
 function reset() {
@@ -122,8 +146,21 @@ function reset() {
     $("input#altitude").val((1000).toString());
     $("input#elcConsumption").val((0.01).toString());
     $("select#antenna").val("Communotron 16");
+    $("input#parkingAltitude").val((70).toString());
     onBodySelect(null);
     onAntennaSelect(null);
+}
+
+function validate(): boolean {
+    return validateBody() && validateAntenna() && $("input#count,input#altitude,input#elcConsumption").valid();
+}
+
+function validateBody(): boolean {
+    return $("div.manual-input#manual_body").children("div").children("input").valid();
+}
+
+function validateAntenna(): boolean {
+    return $("div.manual-input#manual_antenna").children("div").children("input").valid();
 }
 
 // event handler
@@ -140,13 +177,20 @@ function onBodySelect(ev) {
     $("input#body_radius").val(b.radius.toString());
     $("input#body_stdGravParam").val(b.stdGravParam.toString());
     $("input#body_soi").val(b.soi.toString());
+
+    validateBody(); // execute validation with loaded value to clear validate state.
 }
 
 // add new data to user's body
 function onUserBodyAdd(ev) {
-    update();
+    if (validateBody())
+        updateBody();
+    else
+        return;
+
     if (UserData.userBodies[_body.name] == undefined) // if the same name body is not defined yet,
         addUserDataSelection("body", _body.name);     // add option to body selector.
+    $("select#body").val(_body.name);
 
     var b: Body = new Body(); // create new instance and put data.
     b.name = _body.name;
@@ -160,10 +204,12 @@ function onUserBodyAdd(ev) {
 
 // remove user's body data which has the same name as body_name in body_detail.
 function onUserBodyRemove(ev) {
-    update();
-    delete UserData.userBodies[_body.name];
+    if ($("input#body_name").valid())
+        delete UserData.userBodies[$("input#body_name").val()];
+    else
+        return;
     UserData.saveCookie();
-    removeUserDataSelection("body", _body.name, () => { return UserData.loadCookie().body });
+    removeUserDataSelection("body", $("input#body_name").val(), () => { return UserData.loadCookie().body });
 }
 
 // retrieve data of selected antenna.
@@ -176,19 +222,26 @@ function onAntennaSelect(ev) {
 
     $("input#antenna_name").val(a.name);
     if (a.type == AntennaType.omni) {
-        $("input#antenna_type").val("omni");
+        $("select#antenna_type").val("omni");
     } else if (a.type == AntennaType.dish) {
-        $("input#antenna_type").val("dish");
+        $("select#antenna_type").val("dish");
     }
     $("input#antenna_range").val(a.range.toString());
     $("input#antenna_elcConsumption").val(a.elcConsumption.toString());
+
+    validateAntenna(); // execute validation with loaded value to clear validate state.
 }
 
 // add new data to user's antenna
 function onUserAntennaAdd(ev) {
-    update();
+    if (validateAntenna())
+        updateAntenna();
+    else
+        return;
+
     if (UserData.userAntennas[_antenna.name] == undefined) // if the same name antenna is not defined yet,
         addUserDataSelection("antenna", _antenna.name);    // add option to antenna selector.
+    $("select#antenna").val(_antenna.name);
 
     var a: Antenna = new Antenna(); // create new instance and put data.
     a.name = _antenna.name;
@@ -201,10 +254,12 @@ function onUserAntennaAdd(ev) {
 
 // remove user's antenna data which has the same name as antenna_name in antenna_detail.
 function onUserAntennaRemove(ev) {
-    update();
-    delete UserData.userAntennas[_antenna.name];
+    if ($("input#antenna_name").valid())
+        delete UserData.userAntennas[$("input#antenna_name").val()];
+    else
+        return;
     UserData.saveCookie();
-    removeUserDataSelection("antenna", _antenna.name, () => {return UserData.loadCookie().antenna });
+    removeUserDataSelection("antenna", $("input#antenna_name").val(), () => {return UserData.loadCookie().antenna });
 }
 
 // add select option for user's data to selector.
