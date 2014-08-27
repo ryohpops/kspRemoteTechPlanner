@@ -11,12 +11,12 @@
 class EntireView extends View {
     satellites: Satellites;
 
-    shapeInner: createjs.Shape;
-    txtBodyName: createjs.Text;
-    txtBodySoI: createjs.Text;
-    txtSatAltitude: createjs.Text;
-    txtCommDistance: createjs.Text;
-    txtCommStableRange: createjs.Text;
+    private shapeInner: createjs.Shape;
+    private txtBodyName: createjs.Text;
+    private txtBodySoI: createjs.Text;
+    private txtSatAltitude: createjs.Text;
+    private txtCommDistance: createjs.Text;
+    private txtCommStableRange: createjs.Text;
 
     constructor(stage: createjs.Stage, innerSize: number, outerSize: number) {
         super(stage, innerSize, outerSize);
