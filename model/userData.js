@@ -1,7 +1,4 @@
-﻿/// <reference path="../scripts/typings/jquery/jquery.d.ts" />
-/// <reference path="body.ts" />
-/// <reference path="antenna.ts" />
-var UserData;
+﻿var UserData;
 (function (UserData) {
     var keyBody = "userbody";
     var keyAntenna = "userAntenna";
@@ -43,4 +40,3 @@ var UserData;
     }
     UserData.loadCookie = loadCookie;
 })(UserData || (UserData = {}));
-//# sourceMappingURL=userData.js.map

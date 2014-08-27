@@ -9,4 +9,3 @@ var Antenna = (function () {
     }
     return Antenna;
 })();
-//# sourceMappingURL=antenna.js.map

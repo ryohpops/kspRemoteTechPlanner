@@ -1,5 +1,4 @@
-﻿/// <reference path="point.ts" />
-var Euclidean;
+﻿var Euclidean;
 (function (Euclidean) {
     (function (CircleCrossPointMode) {
         CircleCrossPointMode[CircleCrossPointMode["high"] = 0] = "high";
@@ -7,7 +6,7 @@ var Euclidean;
     })(Euclidean.CircleCrossPointMode || (Euclidean.CircleCrossPointMode = {}));
     var CircleCrossPointMode = Euclidean.CircleCrossPointMode;
 
-    function circleCrossPoint(origin, radius, center1, center2, mode) {
+    function circleCrossPoint(origin, center1, center2, radius, mode) {
         var dist = length(center1, center2);
         var rad1 = Math.atan2(center2.y - center1.y, center2.x - center1.x);
         var rad2 = Math.acos(dist / (2 * radius));
@@ -26,22 +25,9 @@ var Euclidean;
     }
     Euclidean.length = length;
 
-    // warning, this calculation is simplified for lmited use case
     function distanceBetweenPointAndLine(point, onLine1, onLine2) {
         var h = new Point(onLine1.x + (onLine2.x - onLine1.x) / 2, onLine1.y + (onLine2.y - onLine1.y) / 2);
         return length(point, h);
     }
     Euclidean.distanceBetweenPointAndLine = distanceBetweenPointAndLine;
-
-    function orbitalPeriod(bodyRadius, altitude, stdGravParam) {
-        return 2 * Math.PI * Math.sqrt(Math.pow(bodyRadius + altitude, 3) / stdGravParam);
-    }
-    Euclidean.orbitalPeriod = orbitalPeriod;
-
-    function orbitalNightTime(bodyRadius, altitude, stdGravParam) {
-        var ra = bodyRadius + altitude;
-        return 2 * Math.pow(ra, 2) / Math.sqrt(ra * stdGravParam) * Math.asin(bodyRadius / ra);
-    }
-    Euclidean.orbitalNightTime = orbitalNightTime;
 })(Euclidean || (Euclidean = {}));
-//# sourceMappingURL=euclidean.js.map

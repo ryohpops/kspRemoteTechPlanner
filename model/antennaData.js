@@ -1,5 +1,4 @@
-﻿/// <reference path="antenna.ts" />
-var AntennaData;
+﻿var AntennaData;
 (function (AntennaData) {
     var antennas = {
         "Reflectron DP-10": { name: "Reflectron DP-10", type: 0 /* omni */, range: 500, elcConsumption: 0.01 },
@@ -15,4 +14,3 @@ var AntennaData;
     }
     AntennaData.getAntenna = getAntenna;
 })(AntennaData || (AntennaData = {}));
-//# sourceMappingURL=antennaData.js.map
