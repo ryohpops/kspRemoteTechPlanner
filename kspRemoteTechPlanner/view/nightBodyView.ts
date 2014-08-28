@@ -7,7 +7,7 @@
 /// <reference path="graphicshelper.ts" />
 /// <reference path="view.ts" />
 
-class NightView extends View {
+class NightBodyView extends View {
     private static bodyRadius = 50;
     private static orbitRadius = 150;
 
@@ -31,7 +31,7 @@ class NightView extends View {
         this.txtOrbitalPeriod.textAlign = "center";
         this.txtOrbitalPeriod.textBaseline = "bottom";
         this.txtOrbitalPeriod.x = this.outerCenter.x;
-        this.txtOrbitalPeriod.y = this.outerCenter.y - NightView.orbitRadius - View.marginText;
+        this.txtOrbitalPeriod.y = this.outerCenter.y - NightBodyView.orbitRadius - View.marginText;
         this.texts.addChild(this.txtOrbitalPeriod);
 
         // required generation amount of electricity
@@ -39,7 +39,7 @@ class NightView extends View {
         this.txtRequiredGenerator.textAlign = "center";
         this.txtRequiredGenerator.textBaseline = "top";
         this.txtRequiredGenerator.x = this.outerCenter.x;
-        this.txtRequiredGenerator.y = this.outerCenter.y + NightView.orbitRadius + View.marginText;
+        this.txtRequiredGenerator.y = this.outerCenter.y + NightBodyView.orbitRadius + View.marginText;
         this.texts.addChild(this.txtRequiredGenerator);
 
         // time of night
@@ -47,7 +47,7 @@ class NightView extends View {
         this.txtNightTime.textAlign = "left";
         this.txtNightTime.textBaseline = "bottom";
         this.txtNightTime.x = this.outerCenter.x;
-        this.txtNightTime.y = this.outerCenter.y - NightView.bodyRadius - View.marginText;
+        this.txtNightTime.y = this.outerCenter.y - NightBodyView.bodyRadius - View.marginText;
         this.texts.addChild(this.txtNightTime);
 
         // required battery capacity
@@ -55,7 +55,7 @@ class NightView extends View {
         this.txtRequiredBattery.textAlign = "left";
         this.txtRequiredBattery.textBaseline = "top";
         this.txtRequiredBattery.x = this.outerCenter.x;
-        this.txtRequiredBattery.y = this.outerCenter.y + NightView.bodyRadius + View.marginText;
+        this.txtRequiredBattery.y = this.outerCenter.y + NightBodyView.bodyRadius + View.marginText;
         this.texts.addChild(this.txtRequiredBattery);
     }
 
@@ -69,17 +69,17 @@ class NightView extends View {
     private showFigures(g: createjs.Graphics, s: Satellites, b: Body) {
         // night area
         this.shapeOuter.graphics.beginFill("rgba(0,0,0,0.2)")
-            .drawRect(this.outerCenter.x, this.outerCenter.y - NightView.bodyRadius, this.outerSize / 2, NightView.bodyRadius * 2)
+            .drawRect(this.outerCenter.x, this.outerCenter.y - NightBodyView.bodyRadius, this.outerSize / 2, NightBodyView.bodyRadius * 2)
             .endFill();
 
         // planet
         this.shapeOuter.graphics.beginFill(b.color)
-            .drawCircle(this.outerCenter.x, this.outerCenter.y, NightView.bodyRadius)
+            .drawCircle(this.outerCenter.x, this.outerCenter.y, NightBodyView.bodyRadius)
             .endFill();
 
         // orbit
         this.shapeOuter.graphics.beginStroke("gray")
-            .drawCircle(this.outerCenter.x, this.outerCenter.y, NightView.orbitRadius)
+            .drawCircle(this.outerCenter.x, this.outerCenter.y, NightBodyView.orbitRadius)
             .endStroke();
 
         // orbital period

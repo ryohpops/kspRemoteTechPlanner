@@ -10,7 +10,7 @@
 /// <reference path="model/satellites.ts" />
 /// <reference path="model/userdata.ts" />
 /// <reference path="view/entireview.ts" />
-/// <reference path="view/nightview.ts" />
+/// <reference path="view/nightbodyview.ts" />
 /// <reference path="view/deltavview.ts" />
 
 // values
@@ -23,8 +23,8 @@ var stageEntire: createjs.Stage;
 var viewEntire: EntireView;
 
 // Night View
-var stageNight: createjs.Stage;
-var viewNight: NightView;
+var stageNightBody: createjs.Stage;
+var viewNightBody: NightBodyView;
 
 // Delta-V View
 var stageDeltav: createjs.Stage;
@@ -49,9 +49,9 @@ function init() {
     viewEntire = new EntireView(stageEntire, 10000, 840);
     viewEntire.satellites = _satellites;
 
-    stageNight = new createjs.Stage($("canvas#night")[0]);
-    viewNight = new NightView(stageNight, 5000, 400);
-    viewNight.satellites = _satellites;
+    stageNightBody = new createjs.Stage($("canvas#nightBody")[0]);
+    viewNightBody = new NightBodyView(stageNightBody, 5000, 400);
+    viewNightBody.satellites = _satellites;
 
     stageDeltav = new createjs.Stage($("canvas#deltav")[0]);
     viewDeltav = new DeltavView(stageDeltav, 5000, 400);
@@ -115,8 +115,8 @@ function update() {
 
     viewEntire.show();
     stageEntire.update();
-    viewNight.show();
-    stageNight.update();
+    viewNightBody.show();
+    stageNightBody.update();
     viewDeltav.show();
     stageDeltav.update();
 }
