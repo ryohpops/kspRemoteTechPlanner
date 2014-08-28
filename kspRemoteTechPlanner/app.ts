@@ -18,15 +18,15 @@ var _body: Body;
 var _antenna: Antenna;
 var _satellites: Satellites;
 
-// Entire View
+// Entire view
 var stageEntire: createjs.Stage;
 var viewEntire: EntireView;
 
-// Night View
+// Night or body view
 var stageNightBody: createjs.Stage;
 var viewNightBody: NightBodyView;
 
-// Delta-V View
+// Delta-V view
 var stageDeltav: createjs.Stage;
 var viewDeltav: DeltavView;
 
