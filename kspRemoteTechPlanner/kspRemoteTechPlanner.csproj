@@ -49,7 +49,6 @@
     <TypeScriptCompile Include="model\antennaData.ts" />
     <TypeScriptCompile Include="model\body.ts" />
     <TypeScriptCompile Include="calculator\point.ts" />
-    <TypeScriptCompile Include="model\parent.ts" />
     <TypeScriptCompile Include="model\userData.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery.validation\jquery.validation.d.ts" />
     <TypeScriptCompile Include="view\deltavView.ts" />
@@ -57,6 +56,7 @@
     <TypeScriptCompile Include="view\entireView.ts" />
     <TypeScriptCompile Include="model\bodyData.ts" />
     <TypeScriptCompile Include="calculator\euclidean.ts" />
+    <TypeScriptCompile Include="view\nightView.ts" />
     <TypeScriptCompile Include="view\view.ts" />
     <TypeScriptCompile Include="view\graphicsHelper.ts" />
     <TypeScriptCompile Include="model\satellites.ts" />
