@@ -17,7 +17,6 @@
     <script src="model/antenna.js"></script>
     <script src="model/antennaData.js"></script>
     <script src="model/satellites.js"></script>
-    <script src="model/parent.js"></script>
     <script src="model/userData.js"></script>
     <script src="calculator/point.js"></script>
     <script src="calculator/euclidean.js"></script>
@@ -227,53 +226,7 @@
                             </button>
                         </div>
                     </div>
-                    
-                    <div class="form-group">
-                        <label for="parent">Parent body</label>
-                        <select class="form-control" id="parent">
-                            <option>Kerbol</option>
-                            <option>Eve</option>
-                            <option>Kerbin</option>
-                            <option>Duna</option>
-                            <option>Jool</option>
-                        </select>
 
-                        <div class="manual-input" id="manual_parent">
-                            <div class="form-group">
-                                <label for="parent_name">Name</label>
-                                <input type="text" class="form-control" id="parent_name" />
-                            </div>
-                            <div class="form-group">
-                                <label for="parent_color">Color</label>
-                                <input type="text" class="form-control" id="parent_color" />
-                            </div>
-                            <div class="form-group">
-                                <label for="parent_radius">Radius(km)</label>
-                                <input type="number" class="form-control" id="parent_radius" step="any" min="0" />
-                            </div>
-                            <div class="form-group">
-                                <label for="parent_stdGravParam">Standard gravitational parameter<br />(km<sup>3</sup>s<sup>-2</sup>)</label>
-                                <input type="number" class="form-control" id="parent_stdGravParam" step="any" min="0" />
-                            </div>
-                        </div>
-
-                        <div class="btn-group btn-group-xs btn-group-justified">
-                            <button type="button" class="btn btn-xs manual-input" id="parent_detail">
-                                <span class="glyphicon glyphicon-collapse-up"></span>
-                                <span class="glyphicon glyphicon-collapse-down"></span>
-                            </button>
-                            <button type="button" class="btn btn-xs manual-input" id="parent_add">
-                                <span class="glyphicon glyphicon-plus"></span>
-                            </button>
-                            <button type="button" class="btn btn-xs manual-input" id="parent_remove">
-                                <span class="glyphicon glyphicon-minus"></span>
-                            </button>
-                            <button type="button" class="btn btn-xs manual-input" id="parent_reset">
-                                <span class="glyphicon glyphicon-repeat"></span>
-                            </button>
-                        </div>
-                    </div>
-                    
                     <div class="form-group">
                         <label for="parkingAltitude">Parking altitude on launch(km)</label>
                         <input type="number" class="form-control" id="parkingAltitude" step="any" />
