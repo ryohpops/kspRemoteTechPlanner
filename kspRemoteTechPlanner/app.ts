@@ -77,23 +77,23 @@ function init() {
     });
 
     // add event handlers
-    $("select#body").change(onBodySelect);
-    $("button.manual-input#body_detail").click((ev) => { $("div.manual-input#manual_body").slideToggle() });
-    $("button.manual-input#body_reset").click((ev) => { onBodySelect(ev) });
+    $("select#body").on("change", onBodySelect);
+    $("button.manual-input#body_detail").on("click", (ev) => { $("div.manual-input#manual_body").slideToggle() });
+    $("button.manual-input#body_reset").on("click", (ev) => { onBodySelect(ev) });
 
-    $("button.manual-input#body_add").click(onUserBodyAdd);
-    $("button.manual-input#body_remove").click(onUserBodyRemove);
+    $("button.manual-input#body_add").on("click", onUserBodyAdd);
+    $("button.manual-input#body_remove").on("click", onUserBodyRemove);
 
-    $("select#antenna").change(onAntennaSelect);
-    $("button.manual-input#antenna_detail").click((ev) => { $("div.manual-input#manual_antenna").slideToggle() });
-    $("button.manual-input#antenna_reset").click((ev) => { onAntennaSelect(ev) });
+    $("select#antenna").on("change", onAntennaSelect);
+    $("button.manual-input#antenna_detail").on("click", (ev) => { $("div.manual-input#manual_antenna").slideToggle() });
+    $("button.manual-input#antenna_reset").on("click", (ev) => { onAntennaSelect(ev) });
 
-    $("button.manual-input#antenna_add").click(onUserAntennaAdd);
-    $("button.manual-input#antenna_remove").click(onUserAntennaRemove);
+    $("button.manual-input#antenna_add").on("click", onUserAntennaAdd);
+    $("button.manual-input#antenna_remove").on("click", onUserAntennaRemove);
 
-    $("form#calculator").find("input,select").keypress((ev) => { if (ev.keyCode == 13 && validate()) update() });
-    $("button#calculate").click((ev) => { if (validate()) update() });
-    $("button#reset").click((ev) => { reset() });
+    $("form#calculator").find("input,select").on("keypress", (ev) => { if (ev.keyCode == 13 && validate()) update() });
+    $("button#calculate").on("click", (ev) => { if (validate()) update() });
+    $("button#reset").on("click", (ev) => { reset() });
 
     // finallize
     reset();
@@ -260,18 +260,6 @@ function onUserAntennaRemove(ev) {
         return;
     UserData.saveCookie();
     removeUserDataSelection("antenna", $("input#antenna_name").val(), () => {return UserData.loadCookie().antenna });
-}
-
-// retrieve data of selected parent.
-function onParentSelect(ev) {
-}
-
-// add new data to user's parent
-function onUserParentAdd(ev) {
-}
-
-// remove user's parent data which has the same name as parent_name in parent_detail.
-function onUserParentRemove(ev) {
 }
 
 // add select option for user's data to selector.
