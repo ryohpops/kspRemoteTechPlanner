@@ -1,8 +1,9 @@
 # User specification
 *.js
 *.map
-!kspRemoteTechPlanner/Scripts/*.js
-!kspRemoteTechPlanner/Scripts/*.map
+!kspRemoteTechPlanner/Content/*
+!kspRemoteTechPlanner/fonts/*
+!kspRemoteTechPlanner/Scripts/*
 .zedstate
 
 ## Ignore Visual Studio temporary files, build results, and
