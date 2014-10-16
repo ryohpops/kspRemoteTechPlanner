@@ -13,11 +13,11 @@ class NightView extends View {
 
     satellites: Satellites;
 
-    shapeOuter: createjs.Shape;
-    txtOrbitalPeriod: createjs.Text;
-    txtRequiredGenerator: createjs.Text;
-    txtNightTime: createjs.Text;
-    txtRequiredBattery: createjs.Text;
+    private shapeOuter: createjs.Shape;
+    private txtOrbitalPeriod: createjs.Text;
+    private txtRequiredGenerator: createjs.Text;
+    private txtNightTime: createjs.Text;
+    private txtRequiredBattery: createjs.Text;
 
     constructor(stage: createjs.Stage, innerSize: number, outerSize: number) {
         super(stage, innerSize, outerSize);

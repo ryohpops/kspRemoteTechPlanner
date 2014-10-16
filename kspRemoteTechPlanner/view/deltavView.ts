@@ -15,11 +15,11 @@ class DeltavView extends View {
 
     satellites: Satellites;
 
-    shapeOuter: createjs.Shape;
-    txtDV1: createjs.Text;
-    txtDV2: createjs.Text;
-    txtPhaseAngle: createjs.Text;
-    txtPhaseTime: createjs.Text;
+    private shapeOuter: createjs.Shape;
+    private txtDV1: createjs.Text;
+    private txtDV2: createjs.Text;
+    private txtPhaseAngle: createjs.Text;
+    private txtPhaseTime: createjs.Text;
 
     constructor(stage: createjs.Stage, innerSize: number, outerSize: number) {
         super(stage, innerSize, outerSize);

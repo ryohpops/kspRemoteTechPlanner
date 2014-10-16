@@ -11,12 +11,13 @@
 class EntireView extends View {
     satellites: Satellites;
 
-    shapeInner: createjs.Shape;
-    txtBodyName: createjs.Text;
-    txtBodySoI: createjs.Text;
-    txtSatAltitude: createjs.Text;
-    txtCommDistance: createjs.Text;
-    txtCommStableRange: createjs.Text;
+    private shapeInner: createjs.Shape;
+    private txtBodyName: createjs.Text;
+    private txtBodySoI: createjs.Text;
+    private txtSatAltitude: createjs.Text;
+    private txtCommDistance: createjs.Text;
+    private txtCommDistance2: createjs.Text;
+    private txtCommStableRange: createjs.Text;
 
     constructor(stage: createjs.Stage, innerSize: number, outerSize: number) {
         super(stage, innerSize, outerSize);
@@ -52,6 +53,12 @@ class EntireView extends View {
         this.txtCommDistance.textAlign = "left";
         this.txtCommDistance.textBaseline = "top";
         this.texts.addChild(this.txtCommDistance);
+
+        // distance between one of satellites and the one after the next
+        this.txtCommDistance2 = new createjs.Text("", View.fontSetNormal);
+        this.txtCommDistance2.textAlign = "right";
+        this.txtCommDistance2.textBaseline = "down";
+        this.texts.addChild(this.txtCommDistance2);
 
         // upper limit to obtain stable connection
         this.txtCommStableRange = new createjs.Text("", View.fontSetNormal);
@@ -128,6 +135,18 @@ class EntireView extends View {
         this.txtCommDistance.text = "Distance: " + s.satDistance().toLocaleString("en", View.localeSetting) + " km";
         this.txtCommDistance.x = this.outerCenter.x + this.toOuter((s.satPosition(0).x + s.satPosition(1).x) / 2) + View.marginText / 2;
         this.txtCommDistance.y = this.outerCenter.y + this.toOuter((s.satPosition(0).y + s.satPosition(1).y) / 2) + View.marginText / 2;
+
+        if (s.count > 4) {
+            g.beginStroke(s.canConnectToSat(2) ? "blue" : "red");
+            GraphicsHelper.drawDualArrow(this.shapeInner.graphics,
+                this.innerCenter.x + s.satPosition(0).x, this.innerCenter.y + s.satPosition(0).y,
+                this.innerCenter.x + s.satPosition(2).x, this.innerCenter.y + s.satPosition(2).y, this.toInner(View.arrowSize))
+                .endStroke();
+
+            this.txtCommDistance2.text = "Distance: " + s.satDistanceTo(2).toLocaleString("en", View.localeSetting) + " km";
+            this.txtCommDistance2.x = this.outerCenter.x + this.toOuter((s.satPosition(0).x + s.satPosition(2).x) / 2) - View.marginText / 2;
+            this.txtCommDistance2.y = this.outerCenter.y + this.toOuter((s.satPosition(0).y + s.satPosition(2).y) / 2) - View.marginText / 2;
+        }
 
         // stable area
         if (s.hasStableArea()) {
