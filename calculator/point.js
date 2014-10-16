@@ -5,3 +5,4 @@
     }
     return Point;
 })();
+//# sourceMappingURL=point.js.map

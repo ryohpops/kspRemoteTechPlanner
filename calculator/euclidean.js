@@ -1,4 +1,5 @@
-﻿var Euclidean;
+﻿/// <reference path="point.ts" />
+var Euclidean;
 (function (Euclidean) {
     (function (CircleCrossPointMode) {
         CircleCrossPointMode[CircleCrossPointMode["high"] = 0] = "high";
@@ -25,9 +26,11 @@
     }
     Euclidean.length = length;
 
+    // warning, this calculation is simplified for lmited use case
     function distanceBetweenPointAndLine(point, onLine1, onLine2) {
         var h = new Point(onLine1.x + (onLine2.x - onLine1.x) / 2, onLine1.y + (onLine2.y - onLine1.y) / 2);
         return length(point, h);
     }
     Euclidean.distanceBetweenPointAndLine = distanceBetweenPointAndLine;
 })(Euclidean || (Euclidean = {}));
+//# sourceMappingURL=euclidean.js.map

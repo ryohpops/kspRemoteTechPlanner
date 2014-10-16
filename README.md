@@ -7,6 +7,10 @@ Latest release is [here](http://ryohpops.github.io/kspRemoteTechPlanner/) and fo
 
 Version history
 
+- 1.1 : 2014/10/16
+
+ Show the distance between a satellite and the one after the next.
+
 - 1.0 : 2014/08/27
 
  Implement Delta-V view about the delta-v to deploy satellites.

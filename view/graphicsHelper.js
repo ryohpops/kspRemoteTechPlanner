@@ -1,4 +1,7 @@
-﻿var GraphicsHelper;
+﻿/// <reference path="../scripts/typings/easeljs/easeljs.d.ts" />
+/// <reference path="../scripts/typings/createjs-lib/createjs-lib.d.ts" />
+/// <reference path="../scripts/typings/tweenjs/tweenjs.d.ts" />
+var GraphicsHelper;
 (function (GraphicsHelper) {
     var arrowAngle = Math.PI / 6;
 
@@ -17,3 +20,4 @@
     }
     GraphicsHelper.drawDualArrow = drawDualArrow;
 })(GraphicsHelper || (GraphicsHelper = {}));
+//# sourceMappingURL=graphicsHelper.js.map

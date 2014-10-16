@@ -1,4 +1,5 @@
-﻿var BodyData;
+﻿/// <reference path="body.ts" />
+var BodyData;
 (function (BodyData) {
     var bodies = {
         "Kerbol": { name: "Kerbol", color: "rgb(255,242,0)", radius: 261600, stdGravParam: 1172332800, soi: Number.POSITIVE_INFINITY },
@@ -25,3 +26,4 @@
     }
     BodyData.getBody = getBody;
 })(BodyData || (BodyData = {}));
+//# sourceMappingURL=bodyData.js.map

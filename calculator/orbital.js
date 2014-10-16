@@ -30,3 +30,4 @@
     }
     Orbital.slidePhaseAngle = slidePhaseAngle;
 })(Orbital || (Orbital = {}));
+//# sourceMappingURL=orbital.js.map

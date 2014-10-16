@@ -1,4 +1,6 @@
-﻿var UserData;
+﻿/// <reference path="body.ts" />
+/// <reference path="antenna.ts" />
+var UserData;
 (function (UserData) {
     var keyBody = "userbody";
     var keyAntenna = "userAntenna";
@@ -40,3 +42,4 @@
     }
     UserData.loadCookie = loadCookie;
 })(UserData || (UserData = {}));
+//# sourceMappingURL=userData.js.map

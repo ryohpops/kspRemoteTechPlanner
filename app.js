@@ -1,29 +1,51 @@
-﻿var _body;
+﻿/// <reference path="scripts/typings/jquery/jquery.d.ts" />
+/// <reference path="scripts/typings/jquery.validation/jquery.validation.d.ts" />
+/// <reference path="scripts/typings/easeljs/easeljs.d.ts" />
+/// <reference path="scripts/typings/createjs-lib/createjs-lib.d.ts" />
+/// <reference path="scripts/typings/tweenjs/tweenjs.d.ts" />
+/// <reference path="model/body.ts" />
+/// <reference path="model/bodydata.ts" />
+/// <reference path="model/antenna.ts" />
+/// <reference path="model/antennadata.ts" />
+/// <reference path="model/satellites.ts" />
+/// <reference path="model/userdata.ts" />
+/// <reference path="view/entireview.ts" />
+/// <reference path="view/nightview.ts" />
+/// <reference path="view/deltavview.ts" />
+// values
+var _body;
 var _antenna;
 var _satellites;
 
+// Entire View
 var stageEntire;
 var viewEntire;
 
+// Night View
 var stageNight;
 var viewNight;
 
+// Delta-V View
 var stageDeltav;
 var viewDeltav;
 
+// startup
 $(function () {
     init();
 });
 
+// method definitions
 function init() {
+    // init values
     _body = new Body();
     _antenna = new Antenna();
     _satellites = new Satellites();
     _satellites.antenna = _antenna;
     _satellites.body = _body;
 
+    // init views
     stageEntire = new createjs.Stage($("canvas#entire")[0]);
-    viewEntire = new EntireView(stageEntire, 10000, 800);
+    viewEntire = new EntireView(stageEntire, 10000, 840);
     viewEntire.satellites = _satellites;
 
     stageNight = new createjs.Stage($("canvas#night")[0]);
@@ -34,6 +56,7 @@ function init() {
     viewDeltav = new DeltavView(stageDeltav, 5000, 400);
     viewDeltav.satellites = _satellites;
 
+    // load user data
     var cookieExists = UserData.loadCookie();
     if (cookieExists.body) {
         for (var i in UserData.userBodies) {
@@ -46,6 +69,7 @@ function init() {
         }
     }
 
+    // set validator
     $("form#calculator").validate({
         highlight: function (element) {
             $(element).parent("div").addClass("has-error");
@@ -55,45 +79,48 @@ function init() {
         }
     });
 
-    $("select#body").on("change", onBodySelect);
-    $("button.manual-input#body_detail").on("click", function (ev) {
+    // add event handlers
+    $("select#body").change(onBodySelect);
+    $("button.manual-input#body_detail").click(function (ev) {
         $("div.manual-input#manual_body").slideToggle();
     });
-    $("button.manual-input#body_reset").on("click", function (ev) {
+    $("button.manual-input#body_reset").click(function (ev) {
         onBodySelect(ev);
     });
 
-    $("button.manual-input#body_add").on("click", onUserBodyAdd);
-    $("button.manual-input#body_remove").on("click", onUserBodyRemove);
+    $("button.manual-input#body_add").click(onUserBodyAdd);
+    $("button.manual-input#body_remove").click(onUserBodyRemove);
 
-    $("select#antenna").on("change", onAntennaSelect);
-    $("button.manual-input#antenna_detail").on("click", function (ev) {
+    $("select#antenna").change(onAntennaSelect);
+    $("button.manual-input#antenna_detail").click(function (ev) {
         $("div.manual-input#manual_antenna").slideToggle();
     });
-    $("button.manual-input#antenna_reset").on("click", function (ev) {
+    $("button.manual-input#antenna_reset").click(function (ev) {
         onAntennaSelect(ev);
     });
 
-    $("button.manual-input#antenna_add").on("click", onUserAntennaAdd);
-    $("button.manual-input#antenna_remove").on("click", onUserAntennaRemove);
+    $("button.manual-input#antenna_add").click(onUserAntennaAdd);
+    $("button.manual-input#antenna_remove").click(onUserAntennaRemove);
 
-    $("form#calculator").find("input,select").on("keypress", function (ev) {
+    $("form#calculator").find("input,select").keypress(function (ev) {
         if (ev.keyCode == 13 && validate())
             update();
     });
-    $("button#calculate").on("click", function (ev) {
+    $("button#calculate").click(function (ev) {
         if (validate())
             update();
     });
-    $("button#reset").on("click", function (ev) {
+    $("button#reset").click(function (ev) {
         reset();
     });
 
+    // finallize
     reset();
     update();
 }
 
 function update() {
+    // update objects
     updateBody();
     updateAntenna();
 
@@ -102,6 +129,7 @@ function update() {
     _satellites.elcConsumption = parseFloat($("input#elcConsumption").val());
     _satellites.parkingAltitude = parseFloat($("input#parkingAltitude").val());
 
+    // show objects
     viewEntire.innerSize = (_body.radius + _satellites.altitude + _antenna.range) * 2 * 1.05;
 
     viewEntire.show();
@@ -154,12 +182,14 @@ function validateAntenna() {
     return $("div.manual-input#manual_antenna").children("div").children("input").valid();
 }
 
+// event handler
+// retrieve data of selected body.
 function onBodySelect(ev) {
     var b;
     if ($("select#body > optgroup[label='User data']").length == 1)
-        b = UserData.userBodies[$("select#body").val()];
+        b = UserData.userBodies[$("select#body").val()]; // aquire data from UserData first,
     if (b == undefined)
-        b = BodyData.getBody($("select#body").val());
+        b = BodyData.getBody($("select#body").val()); // then from BodyData.
 
     $("input#body_name").val(b.name);
     $("input#body_color").val(b.color);
@@ -167,9 +197,10 @@ function onBodySelect(ev) {
     $("input#body_stdGravParam").val(b.stdGravParam.toString());
     $("input#body_soi").val(b.soi.toString());
 
-    validateBody();
+    validateBody(); // execute validation with loaded value to clear validate state.
 }
 
+// add new data to user's body
 function onUserBodyAdd(ev) {
     if (validateBody())
         updateBody();
@@ -177,7 +208,7 @@ function onUserBodyAdd(ev) {
         return;
 
     if (UserData.userBodies[_body.name] == undefined)
-        addUserDataSelection("body", _body.name);
+        addUserDataSelection("body", _body.name); // add option to body selector.
     $("select#body").val(_body.name);
 
     var b = new Body();
@@ -190,6 +221,7 @@ function onUserBodyAdd(ev) {
     UserData.saveCookie();
 }
 
+// remove user's body data which has the same name as body_name in body_detail.
 function onUserBodyRemove(ev) {
     if ($("input#body_name").valid())
         delete UserData.userBodies[$("input#body_name").val()];
@@ -201,12 +233,13 @@ function onUserBodyRemove(ev) {
     });
 }
 
+// retrieve data of selected antenna.
 function onAntennaSelect(ev) {
     var a;
     if ($("select#antenna > optgroup[label='User data']").length == 1)
-        a = UserData.userAntennas[$("select#antenna").val()];
+        a = UserData.userAntennas[$("select#antenna").val()]; // aquire data from UserData first,
     if (a == undefined)
-        a = AntennaData.getAntenna($("select#antenna").val());
+        a = AntennaData.getAntenna($("select#antenna").val()); // then from AntennaData.
 
     $("input#antenna_name").val(a.name);
     if (a.type == 0 /* omni */) {
@@ -217,9 +250,10 @@ function onAntennaSelect(ev) {
     $("input#antenna_range").val(a.range.toString());
     $("input#antenna_elcConsumption").val(a.elcConsumption.toString());
 
-    validateAntenna();
+    validateAntenna(); // execute validation with loaded value to clear validate state.
 }
 
+// add new data to user's antenna
 function onUserAntennaAdd(ev) {
     if (validateAntenna())
         updateAntenna();
@@ -227,7 +261,7 @@ function onUserAntennaAdd(ev) {
         return;
 
     if (UserData.userAntennas[_antenna.name] == undefined)
-        addUserDataSelection("antenna", _antenna.name);
+        addUserDataSelection("antenna", _antenna.name); // add option to antenna selector.
     $("select#antenna").val(_antenna.name);
 
     var a = new Antenna();
@@ -239,6 +273,7 @@ function onUserAntennaAdd(ev) {
     UserData.saveCookie();
 }
 
+// remove user's antenna data which has the same name as antenna_name in antenna_detail.
 function onUserAntennaRemove(ev) {
     if ($("input#antenna_name").valid())
         delete UserData.userAntennas[$("input#antenna_name").val()];
@@ -250,15 +285,18 @@ function onUserAntennaRemove(ev) {
     });
 }
 
+// add select option for user's data to selector.
 function addUserDataSelection(data, name) {
     if ($("select#" + data + " > optgroup[label='User data']").length == 0)
-        $("select#" + data).append("<optgroup label='User data'></optgroup>");
-    $("select#" + data + " > optgroup[label='User data']").append("<option>" + name + "</option>");
+        $("select#" + data).append("<optgroup label='User data'></optgroup>"); // make one.
+    $("select#" + data + " > optgroup[label='User data']").append("<option>" + name + "</option>"); // add option for user's data to selector.
 }
 
+// remove select option for user's data from selector.
 function removeUserDataSelection(data, name, isDataRemaining) {
     $("optgroup[label='User data'] > option:contains('" + name + "')").remove();
     if (!isDataRemaining()) {
-        $("select#" + data + " > optgroup[label='User data']").remove();
+        $("select#" + data + " > optgroup[label='User data']").remove(); // remove User data option-group.
     }
 }
+//# sourceMappingURL=app.js.map

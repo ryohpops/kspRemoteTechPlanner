@@ -1,4 +1,9 @@
-﻿var Satellites = (function () {
+﻿/// <reference path="../calculator/point.ts" />
+/// <reference path="../calculator/euclidean.ts" />
+/// <reference path="../calculator/orbital.ts" />
+/// <reference path="body.ts" />
+/// <reference path="antenna.ts" />
+var Satellites = (function () {
     function Satellites() {
     }
     Satellites.prototype.satPosition = function (offset) {
@@ -7,11 +12,19 @@
     };
 
     Satellites.prototype.satDistance = function () {
-        return Euclidean.length(this.satPosition(0), this.satPosition(1));
+        return this.satDistanceTo(1);
+    };
+
+    Satellites.prototype.satDistanceTo = function (distance) {
+        return Euclidean.length(this.satPosition(0), this.satPosition(distance));
     };
 
     Satellites.prototype.isNextSatConnectable = function () {
-        return this.count >= 2 && Euclidean.length(this.satPosition(0), this.satPosition(1)) <= this.antenna.range && Euclidean.distanceBetweenPointAndLine(new Point(0, 0), this.satPosition(0), this.satPosition(1)) > this.body.radius;
+        return this.canConnectToSat(1);
+    };
+
+    Satellites.prototype.canConnectToSat = function (distance) {
+        return this.count >= distance + 1 && Euclidean.length(this.satPosition(0), this.satPosition(distance)) <= this.antenna.range && Euclidean.distanceBetweenPointAndLine(new Point(0, 0), this.satPosition(0), this.satPosition(distance)) > this.body.radius;
     };
 
     Satellites.prototype.hasStableArea = function () {
@@ -57,3 +70,4 @@
     };
     return Satellites;
 })();
+//# sourceMappingURL=satellites.js.map
