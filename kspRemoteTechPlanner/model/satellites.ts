@@ -18,13 +18,21 @@ class Satellites {
     }
 
     satDistance(): number {
-        return Euclidean.length(this.satPosition(0), this.satPosition(1));
+        return this.satDistanceTo(1);
+    }
+
+    satDistanceTo(distance: number): number {
+        return Euclidean.length(this.satPosition(0), this.satPosition(distance));
     }
 
     isNextSatConnectable(): boolean {
-        return this.count >= 2 &&                                                                                                // at least 2 satellites needed
-            Euclidean.length(this.satPosition(0), this.satPosition(1)) <= this.antenna.range &&                                  // connection range is enough 
-            Euclidean.distanceBetweenPointAndLine(new Point(0, 0), this.satPosition(0), this.satPosition(1)) > this.body.radius; // connection is not blocked by orbiting body
+        return this.canConnectToSat(1);
+    }
+
+    canConnectToSat(distance: number): boolean {
+        return this.count >= distance + 1 &&                                                                                            // connecting satellite exists
+            Euclidean.length(this.satPosition(0), this.satPosition(distance)) <= this.antenna.range &&                                  // connection range is enough 
+            Euclidean.distanceBetweenPointAndLine(new Point(0, 0), this.satPosition(0), this.satPosition(distance)) > this.body.radius; // connection is not blocked by orbiting body
     }
 
     hasStableArea(): boolean {
