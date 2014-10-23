@@ -1,6 +1,4 @@
-﻿/// <reference path="../scripts/typings/easeljs/easeljs.d.ts" />
-/// <reference path="../scripts/typings/createjs-lib/createjs-lib.d.ts" />
-/// <reference path="../scripts/typings/tweenjs/tweenjs.d.ts" />
+﻿/// <reference path="../references.ts" />
 
 module GraphicsHelper {
     var arrowAngle: number = Math.PI / 6;

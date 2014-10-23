@@ -1,8 +1,4 @@
-﻿/// <reference path="../calculator/point.ts" />
-/// <reference path="../calculator/euclidean.ts" />
-/// <reference path="../calculator/orbital.ts" />
-/// <reference path="body.ts" />
-/// <reference path="antenna.ts" />
+﻿/// <reference path="../references.ts" />
 
 class Satellites {
     body: Body;

@@ -1,7 +1,4 @@
-﻿/// <reference path="../scripts/typings/easeljs/easeljs.d.ts" />
-/// <reference path="../scripts/typings/createjs-lib/createjs-lib.d.ts" />
-/// <reference path="../scripts/typings/tweenjs/tweenjs.d.ts" />
-/// <reference path="../calculator/point.ts" />
+﻿/// <reference path="../references.ts" />
 
 class View {
     static fontSetNormal: string = "16px Arial";

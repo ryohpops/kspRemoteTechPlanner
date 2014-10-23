@@ -1,4 +1,6 @@
-﻿class Point {
+﻿/// <reference path="../references.ts" />
+
+class Point {
     x: number;
     y: number;
 

@@ -1,5 +1,4 @@
-﻿/// <reference path="body.ts" />
-/// <reference path="antenna.ts" />
+﻿/// <reference path="../references.ts" />
 
 module UserData {
     export interface loadCookieResult {

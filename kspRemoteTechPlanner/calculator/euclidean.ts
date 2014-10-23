@@ -1,4 +1,4 @@
-﻿/// <reference path="point.ts" />
+﻿/// <reference path="../references.ts" />
 
 module Euclidean {
     export enum CircleCrossPointMode {

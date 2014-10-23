@@ -1,4 +1,6 @@
-﻿enum AntennaType {
+﻿/// <reference path="../references.ts" />
+
+enum AntennaType {
     omni, dish
 }
 

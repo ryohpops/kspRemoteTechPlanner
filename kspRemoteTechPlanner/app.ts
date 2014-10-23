@@ -1,17 +1,4 @@
-﻿/// <reference path="scripts/typings/jquery/jquery.d.ts" />
-/// <reference path="scripts/typings/jquery.validation/jquery.validation.d.ts" />
-/// <reference path="scripts/typings/easeljs/easeljs.d.ts" />
-/// <reference path="scripts/typings/createjs-lib/createjs-lib.d.ts" />
-/// <reference path="scripts/typings/tweenjs/tweenjs.d.ts" />
-/// <reference path="model/body.ts" />
-/// <reference path="model/bodydata.ts" />
-/// <reference path="model/antenna.ts" />
-/// <reference path="model/antennadata.ts" />
-/// <reference path="model/satellites.ts" />
-/// <reference path="model/userdata.ts" />
-/// <reference path="view/entireview.ts" />
-/// <reference path="view/nightview.ts" />
-/// <reference path="view/deltavview.ts" />
+﻿/// <reference path="references.ts" />
 
 // values
 var _body: Body;

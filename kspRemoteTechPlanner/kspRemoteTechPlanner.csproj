@@ -50,6 +50,8 @@
     <TypeScriptCompile Include="model\body.ts" />
     <TypeScriptCompile Include="calculator\point.ts" />
     <TypeScriptCompile Include="model\userData.ts" />
+    <TypeScriptCompile Include="references.ts" />
+    <TypeScriptCompile Include="Scripts\typings\bootstrap\bootstrap.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery.validation\jquery.validation.d.ts" />
     <TypeScriptCompile Include="view\deltavView.ts" />
     <TypeScriptCompile Include="view\nightView.ts" />

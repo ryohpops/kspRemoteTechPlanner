@@ -1,4 +1,4 @@
-﻿/// <reference path="body.ts" />
+﻿/// <reference path="../references.ts" />
 
 module BodyData {
     var bodies: { [index: string]: Body } = {

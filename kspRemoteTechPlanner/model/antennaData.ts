@@ -1,4 +1,4 @@
-﻿/// <reference path="antenna.ts" />
+﻿/// <reference path="../references.ts" />
 
 module AntennaData {
     var antennas: { [index: string]: Antenna } = {

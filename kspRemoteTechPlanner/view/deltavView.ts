@@ -1,11 +1,4 @@
-﻿/// <reference path="../scripts/typings/easeljs/easeljs.d.ts" />
-/// <reference path="../scripts/typings/createjs-lib/createjs-lib.d.ts" />
-/// <reference path="../scripts/typings/tweenjs/tweenjs.d.ts" />
-/// <reference path="../model/body.ts" />
-/// <reference path="../model/satellites.ts" />
-/// <reference path="../calculator/point.ts" />
-/// <reference path="../view/graphicshelper.ts" />
-/// <reference path="../view/view.ts" />
+﻿/// <reference path="../references.ts" />
 
 class DeltavView extends View {
     private static bodyRadius: number = 20;

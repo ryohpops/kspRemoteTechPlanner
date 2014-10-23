@@ -1,4 +1,6 @@
-﻿class Body {
+﻿/// <reference path="../references.ts" />
+
+class Body {
     name: string;
     color: string;
     radius: number;

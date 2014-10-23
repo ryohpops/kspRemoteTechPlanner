@@ -1,12 +1,4 @@
-﻿/// <reference path="../scripts/typings/easeljs/easeljs.d.ts" />
-/// <reference path="../scripts/typings/createjs-lib/createjs-lib.d.ts" />
-/// <reference path="../scripts/typings/tweenjs/tweenjs.d.ts" />
-/// <reference path="../model/body.ts" />
-/// <reference path="../model/antenna.ts" />
-/// <reference path="../model/satellites.ts" />
-/// <reference path="../calculator/point.ts" />
-/// <reference path="graphicshelper.ts" />
-/// <reference path="view.ts" />
+﻿/// <reference path="../references.ts" />
 
 class EntireView extends View {
     satellites: Satellites;
