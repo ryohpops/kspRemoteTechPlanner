@@ -1,9 +1,9 @@
-﻿/// <reference path="scripts/typings/bootstrap/bootstrap.d.ts" />
-/// <reference path="scripts/typings/createjs-lib/createjs-lib.d.ts" />
-/// <reference path="scripts/typings/tweenjs/tweenjs.d.ts" />
-/// <reference path="scripts/typings/easeljs/easeljs.d.ts" />
-/// <reference path="scripts/typings/jquery/jquery.d.ts" />
-/// <reference path="scripts/typings/jquery.validation/jquery.validation.d.ts" />
+﻿/// <reference path="../scripts/typings/bootstrap/bootstrap.d.ts" />
+/// <reference path="../scripts/typings/createjs-lib/createjs-lib.d.ts" />
+/// <reference path="../scripts/typings/tweenjs/tweenjs.d.ts" />
+/// <reference path="../scripts/typings/easeljs/easeljs.d.ts" />
+/// <reference path="../scripts/typings/jquery/jquery.d.ts" />
+/// <reference path="../scripts/typings/jquery.validation/jquery.validation.d.ts" />
 
 /// <reference path="calculator/point.ts" />
 /// <reference path="calculator/euclidean.ts" />
