@@ -59,6 +59,7 @@ class DeltavView extends View {
         this.shapeOuter.graphics.setStrokeStyle(View.strokeLineWidth);
 
         this.showFigures(this.shapeOuter.graphics, this.satellites, this.satellites.body);
+        this.update();
     }
 
     private showFigures(g: createjs.Graphics, s: Satellites, b: Body) {

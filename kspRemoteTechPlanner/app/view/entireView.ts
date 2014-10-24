@@ -68,6 +68,7 @@ class EntireView extends View {
 
         this.showSatellites(this.shapeInner.graphics, this.satellites, this.satellites.body, this.satellites.antenna);
         this.showBody(this.shapeInner.graphics, this.satellites, this.satellites.body);
+        this.update();
     }
 
     private showBody(g: createjs.Graphics, s: Satellites, b: Body): void {
