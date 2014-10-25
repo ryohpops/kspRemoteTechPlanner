@@ -7,9 +7,9 @@ $(() => {
 
 module App {
     // values
+    var satellites: Satellites;
     var body: Body;
     var antenna: Antenna;
-    var satellites: Satellites;
 
     var viewEntire: EntireView;
     var viewNight: NightView;
@@ -18,11 +18,9 @@ module App {
     // method definitions
     export function init() {
         // init values
-        body = new Body();
-        antenna = new Antenna();
         satellites = new Satellites();
-        satellites.antenna = antenna;
-        satellites.body = body;
+        body = satellites.body;
+        antenna = satellites.antenna;
 
         // init views
         viewEntire = new EntireView(new createjs.Stage($("canvas#entire")[0]), 10000, 840);

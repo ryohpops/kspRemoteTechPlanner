@@ -53,12 +53,14 @@
     <TypeScriptCompile Include="app\model\antennaData.ts" />
     <TypeScriptCompile Include="app\model\body.ts" />
     <TypeScriptCompile Include="app\model\bodyData.ts" />
+    <TypeScriptCompile Include="app\model\cookieConnector.ts" />
     <TypeScriptCompile Include="app\model\satellites.ts" />
     <TypeScriptCompile Include="app\model\userData.ts" />
     <TypeScriptCompile Include="app\references.ts" />
     <TypeScriptCompile Include="app\view\deltavView.ts" />
     <TypeScriptCompile Include="app\view\entireView.ts" />
     <TypeScriptCompile Include="app\view\graphicsHelper.ts" />
+    <TypeScriptCompile Include="app\model\inputData.ts" />
     <TypeScriptCompile Include="app\view\nightView.ts" />
     <TypeScriptCompile Include="app\view\view.ts" />
     <TypeScriptCompile Include="Scripts\typings\bootstrap\bootstrap.d.ts" />

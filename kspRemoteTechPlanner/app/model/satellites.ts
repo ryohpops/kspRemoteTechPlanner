@@ -8,6 +8,11 @@ class Satellites {
     elcConsumption: number;
     parkingAltitude: number;
 
+    constructor() {
+        this.body = new Body();
+        this.antenna = new Antenna();
+    }
+
     satPosition(offset: number): Point {
         var ra: number = this.body.radius + this.altitude;
         return new Point(ra * Math.cos(2 * Math.PI / this.count * offset), + ra * Math.sin(2 * Math.PI / this.count * offset));

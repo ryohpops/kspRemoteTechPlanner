@@ -14,6 +14,8 @@
 /// <reference path="model/body.ts" />
 /// <reference path="model/bodydata.ts" />
 /// <reference path="model/satellites.ts" />
+/// <reference path="model/cookieconnector.ts" />
+/// <reference path="model/inputdata.ts" />
 /// <reference path="model/userdata.ts" />
 
 /// <reference path="view/graphicshelper.ts" />
