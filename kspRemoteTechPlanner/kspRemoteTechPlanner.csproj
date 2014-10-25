@@ -110,7 +110,7 @@
     <TypeScriptRemoveComments>false</TypeScriptRemoveComments>
     <TypeScriptSourceMap>true</TypeScriptSourceMap>
     <TypeScriptModuleKind>none</TypeScriptModuleKind>
-    <TypeScriptOutFile>app.js</TypeScriptOutFile>
+    <TypeScriptOutFile>app/app.js</TypeScriptOutFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
     <TypeScriptTarget>ES5</TypeScriptTarget>
