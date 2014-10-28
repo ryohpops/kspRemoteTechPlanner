@@ -37,17 +37,17 @@ class NightView extends View {
 
         // time of night
         this.txtNightTime = new createjs.Text("", View.fontSetNormal);
-        this.txtNightTime.textAlign = "left";
+        this.txtNightTime.textAlign = "right";
         this.txtNightTime.textBaseline = "bottom";
-        this.txtNightTime.x = this.outerCenter.x;
+        this.txtNightTime.x = this.outerSize - View.marginText;
         this.txtNightTime.y = this.outerCenter.y - NightView.bodyRadius - View.marginText;
         this.texts.addChild(this.txtNightTime);
 
         // required battery capacity
         this.txtRequiredBattery = new createjs.Text("", View.fontSetNormal);
-        this.txtRequiredBattery.textAlign = "left";
+        this.txtRequiredBattery.textAlign = "right";
         this.txtRequiredBattery.textBaseline = "top";
-        this.txtRequiredBattery.x = this.outerCenter.x;
+        this.txtRequiredBattery.x = this.outerSize - View.marginText;
         this.txtRequiredBattery.y = this.outerCenter.y + NightView.bodyRadius + View.marginText;
         this.texts.addChild(this.txtRequiredBattery);
     }
