@@ -7,6 +7,10 @@ class InputData extends CookieConnector {
 
     satellites: Satellites;
 
+    constructor() {
+        super(InputData.cookieKey);
+    }
+
     pull() {
 
     }
@@ -16,10 +20,10 @@ class InputData extends CookieConnector {
     }
 
     save() {
-        this.saveCookie(InputData.cookieKey, this.satellites);
+        this.saveCookie(this.satellites);
     }
 
     restore() {
-        this.satellites = this.loadCookie(InputData.cookieKey);
+        this.satellites = this.loadCookie();
     }
 }
