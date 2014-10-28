@@ -1,8 +1,9 @@
 plugins {
     id "com.eriwen.gradle.js" version "1.12.1"
+    id "com.eriwen.gradle.css" version "1.11.1"
 }
 
-defaultTasks 'deploy', 'minifyJs'
+defaultTasks 'deploy', 'minifyJs', 'minifyCss'
 
 task clear(type: Delete) {
     delete 'deploy'
@@ -11,10 +12,6 @@ task clear(type: Delete) {
 task deploy(type: Copy, dependsOn: clear) {
     from('kspRemoteTechPlanner') {
         include 'index.html'
-    }
-    from('kspRemoteTechPlanner/app') {
-        include 'app.css'
-        into 'app'
     }
     from('kspRemoteTechPlanner/Content') {
         include '*.min.css'
@@ -33,6 +30,11 @@ task deploy(type: Copy, dependsOn: clear) {
 minifyJs {
     source = file('kspRemoteTechPlanner/app/appOut.js')
     dest = file('deploy/app/appOut.js')
+}
+
+minifyCss {
+    source = file('kspRemoteTechPlanner/app/app.css')
+    dest = file('deploy/app/app.css')
 }
 
 task wrapper(type: Wrapper) {
