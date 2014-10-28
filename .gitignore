@@ -1,6 +1,6 @@
 # User specification
-app.js
-app.js.map
+appOut.js
+appOut.js.map
 .zedstate
 
 ## Ignore Visual Studio temporary files, build results, and
