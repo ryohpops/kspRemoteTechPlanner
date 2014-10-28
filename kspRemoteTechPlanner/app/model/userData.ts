@@ -1,6 +1,8 @@
 ﻿/// <reference path="../references.ts" />
 
 module UserData {
+    'use strict';
+
     export interface loadCookieResult {
         body: boolean;
         antenna: boolean;

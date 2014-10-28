@@ -1,13 +1,15 @@
 ﻿/// <reference path="../references.ts" />
 
 module AntennaData {
+    'use strict';
+
     var antennas: { [index: string]: Antenna } = {
-        "Reflectron DP-10": { name: "Reflectron DP-10", type: AntennaType.omni, range: 500, elcConsumption: 0.01 },
-        "Communotron 16": { name: "Communotron 16", type: AntennaType.omni, range: 2500, elcConsumption: 0.13 },
-        "CommTech EXP-VR-2T": { name: "CommTech EXP-VR-2T", type: AntennaType.omni, range: 3000, elcConsumption: 0.18 },
-        "Communotron 32": { name: "Communotron 32", type: AntennaType.omni, range: 5000, elcConsumption: 0.6 },
-        "Comms DTS-M1": { name: "Comms DTS-M1", type: AntennaType.dish, range: 50000, elcConsumption: 0.82 },
-        "Reflectron KR-7": { name: "Reflectron KR-7", type: AntennaType.dish, range: 90000, elcConsumption: 0.82 }
+        "Reflectron DP-10": new Antenna("Reflectron DP-10", AntennaType.omni, 500, 0.01),
+        "Communotron 16": new Antenna("Communotron 16", AntennaType.omni, 2500, 0.13),
+        "CommTech EXP-VR-2T": new Antenna("CommTech EXP-VR-2T", AntennaType.omni, 3000, 0.18),
+        "Communotron 32": new Antenna("Communotron 32", AntennaType.omni, 5000, 0.6),
+        "Comms DTS-M1": new Antenna("Comms DTS-M1", AntennaType.dish, 50000, 0.82),
+        "Reflectron KR-7": new Antenna("Reflectron KR-7", AntennaType.dish, 90000, 0.82)
     };
 
     export function getAntenna(name: string): Antenna {

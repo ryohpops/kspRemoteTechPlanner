@@ -1,6 +1,8 @@
 ﻿/// <reference path="../references.ts" />
 
 class EntireView extends View {
+    'use strict';
+
     satellites: Satellites;
 
     private shapeInner: createjs.Shape;

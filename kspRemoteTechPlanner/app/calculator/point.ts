@@ -1,6 +1,8 @@
 ﻿/// <reference path="../references.ts" />
 
 class Point {
+    'use strict';
+
     x: number;
     y: number;
 

@@ -1,6 +1,8 @@
 ﻿/// <reference path="../references.ts" />
 
 class NightView extends View {
+    'use strict';
+
     private static bodyRadius = 50;
     private static orbitRadius = 150;
 

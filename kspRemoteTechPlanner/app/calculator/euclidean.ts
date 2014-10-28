@@ -1,6 +1,8 @@
 ﻿/// <reference path="../references.ts" />
 
 module Euclidean {
+    'use strict';
+
     export enum CircleCrossPointMode {
         high, low
     }

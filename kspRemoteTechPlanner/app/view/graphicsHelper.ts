@@ -1,6 +1,8 @@
 ﻿/// <reference path="../references.ts" />
 
 module GraphicsHelper {
+    'use strict';
+
     var arrowAngle: number = Math.PI / 6;
 
     export function drawArrow(g: createjs.Graphics, x: number, y: number, directionRad: number, arrowSize: number): createjs.Graphics {

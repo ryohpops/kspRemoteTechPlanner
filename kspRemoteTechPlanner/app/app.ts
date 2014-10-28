@@ -6,6 +6,8 @@ $(() => {
 });
 
 module App {
+    'use strict';
+
     // values
     var satellites: Satellites;
     var body: Body;
@@ -164,12 +166,7 @@ module App {
             addUserDataSelection("body", body.name);     // add option to body selector.
         $("select#body").val(body.name);
 
-        var b: Body = new Body(); // create new instance and put data.
-        b.name = body.name;
-        b.color = body.color;
-        b.radius = body.radius;
-        b.stdGravParam = body.stdGravParam;
-        b.soi = body.soi;
+        var b: Body = new Body(body.name, body.color, body.radius, body.stdGravParam, body.soi); // create new instance and put data.
         UserData.userBodies[body.name] = b;
         UserData.saveCookie();
     }
@@ -215,11 +212,7 @@ module App {
             addUserDataSelection("antenna", antenna.name);    // add option to antenna selector.
         $("select#antenna").val(antenna.name);
 
-        var a: Antenna = new Antenna(); // create new instance and put data.
-        a.name = antenna.name;
-        a.type = antenna.type;
-        a.range = antenna.range;
-        a.elcConsumption = antenna.elcConsumption;
+        var a: Antenna = new Antenna(antenna.name, antenna.type, antenna.range, antenna.elcConsumption); // create new instance and put data.
         UserData.userAntennas[antenna.name] = a;
         UserData.saveCookie();
     }

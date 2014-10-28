@@ -1,6 +1,8 @@
 ﻿/// <reference path="../references.ts" />
 
 class View {
+    'use strict';
+
     static fontSetNormal: string = "16px Arial";
     static fontSetBig: string = "20px Arial";
     static localeSetting: Intl.NumberFormatOptions = { maximumFractionDigits: 3 };

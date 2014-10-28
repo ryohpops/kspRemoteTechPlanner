@@ -1,6 +1,8 @@
 ﻿/// <reference path="../references.ts" />
 
 class Satellites {
+    'use strict';
+
     body: Body;
     antenna: Antenna;
     count: number;
@@ -9,8 +11,8 @@ class Satellites {
     parkingAltitude: number;
 
     constructor() {
-        this.body = new Body();
-        this.antenna = new Antenna();
+        this.body = new Body(undefined, undefined, undefined, undefined, undefined);
+        this.antenna = new Antenna(undefined, undefined, undefined, undefined);
     }
 
     satPosition(offset: number): Point {

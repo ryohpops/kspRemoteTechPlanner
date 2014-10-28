@@ -1,6 +1,8 @@
 ﻿/// <reference path="../references.ts" />
 
 class DeltavView extends View {
+    'use strict';
+
     private static bodyRadius: number = 20;
     private static parkingAltitude: number = 50;
     private static designatedAltitude: number = 150;

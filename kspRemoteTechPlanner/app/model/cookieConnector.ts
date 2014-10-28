@@ -1,6 +1,8 @@
 ﻿/// <reference path="../references.ts" />
 
 class CookieConnector {
+    'use strict';
+
     saveCookie(key: string, data: any, expires: Date = new Date(2030, 12, 31)) {
         var strData: string = JSON.stringify(data);
         if (strData != "{}") {
