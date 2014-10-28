@@ -1,8 +1,8 @@
-task wrapper(type: Wrapper) {
-    gradleVersion = '2.1'
+plugins {
+    id "com.eriwen.gradle.js" version "1.12.1"
 }
 
-defaultTasks 'deploy'
+defaultTasks 'deploy', 'minifyJs'
 
 task clear(type: Delete) {
     delete 'deploy'
@@ -13,7 +13,6 @@ task deploy(type: Copy, dependsOn: clear) {
         include 'index.html'
     }
     from('kspRemoteTechPlanner/app') {
-        include 'appOut.js'
         include 'app.css'
         into 'app'
     }
@@ -29,4 +28,13 @@ task deploy(type: Copy, dependsOn: clear) {
         into 'Scripts'
     }
     into 'deploy'
+}
+
+minifyJs {
+    source = file('kspRemoteTechPlanner/app/appOut.js')
+    dest = file('deploy/app/appOut.js')
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.1'
 }
