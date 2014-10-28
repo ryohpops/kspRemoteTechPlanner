@@ -1,6 +1,8 @@
 # User specification
 appOut.js
 appOut.js.map
+.gradle
+deploy/
 .zedstate
 
 ## Ignore Visual Studio temporary files, build results, and

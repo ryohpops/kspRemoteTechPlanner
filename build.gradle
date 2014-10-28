@@ -1,0 +1,32 @@
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.1'
+}
+
+defaultTasks 'deploy'
+
+task clear(type: Delete) {
+    delete 'deploy'
+}
+
+task deploy(type: Copy, dependsOn: clear) {
+    from('kspRemoteTechPlanner') {
+        include 'index.html'
+    }
+    from('kspRemoteTechPlanner/app') {
+        include 'appOut.js'
+        include 'app.css'
+        into 'app'
+    }
+    from('kspRemoteTechPlanner/Content') {
+        include '*.min.css'
+        into 'Content'
+    }
+    from('kspRemoteTechPlanner/fonts') {
+        into 'fonts'
+    }
+    from('kspRemoteTechPlanner/Scripts') {
+        include '*.min.js'
+        into 'Scripts'
+    }
+    into 'deploy'
+}
