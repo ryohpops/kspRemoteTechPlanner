@@ -12,6 +12,7 @@ module App {
     var satellites: Satellites;
     var body: Body;
     var antenna: Antenna;
+    var input: InputData;
 
     var viewEntire: EntireView;
     var viewNight: NightView;
@@ -23,6 +24,7 @@ module App {
         satellites = new Satellites();
         body = satellites.body;
         antenna = satellites.antenna;
+        input = new InputData(satellites);
 
         // init views
         viewEntire = new EntireView(new createjs.Stage($("canvas#entire")[0]), 10000, 840);
@@ -78,49 +80,18 @@ module App {
     }
 
     function update() {
-        // update objects
-        updateBody();
-        updateAntenna();
+        input.pull();
 
-        satellites.count = parseInt($("input#count").val());
-        satellites.altitude = parseFloat($("input#altitude").val());
-        satellites.elcConsumption = parseFloat($("input#elcConsumption").val());
-        satellites.parkingAltitude = parseFloat($("input#parkingAltitude").val());
-
-        // show objects
         viewEntire.innerSize = (body.radius + satellites.altitude + antenna.range) * 2 * 1.05;
-
         viewEntire.show();
         viewNight.show();
         viewDeltav.show();
     }
 
-    function updateBody() {
-        body.name = $("input#body_name").val();
-        body.color = $("input#body_color").val();
-        body.radius = parseFloat($("input#body_radius").val());
-        body.stdGravParam = parseFloat($("input#body_stdGravParam").val());
-        body.soi = parseFloat($("input#body_soi").val());
-    }
-
-    function updateAntenna() {
-        antenna.name = $("input#antenna_name").val();
-        if ($("select#antenna_type").val() == "omni") {
-            antenna.type = AntennaType.omni;
-        } else if ($("select#antenna_type").val() == "dish") {
-            antenna.type = AntennaType.dish;
-        }
-        antenna.range = parseFloat($("input#antenna_range").val());
-        antenna.elcConsumption = parseFloat($("input#antenna_elcConsumption").val());
-    }
 
     function reset() {
-        $("select#body").val("Kerbin");
-        $("input#count").val((4).toString());
-        $("input#altitude").val((1000).toString());
-        $("input#elcConsumption").val((0.01).toString());
-        $("select#antenna").val("Communotron 16");
-        $("input#parkingAltitude").val((70).toString());
+        input.reset();
+
         onBodySelect(null);
         onAntennaSelect(null);
     }
@@ -158,7 +129,7 @@ module App {
     // add new data to user's body
     function onUserBodyAdd(ev) {
         if (validateBody())
-            updateBody();
+            input.pullBody();
         else
             return;
 
@@ -204,7 +175,7 @@ module App {
     // add new data to user's antenna
     function onUserAntennaAdd(ev) {
         if (validateAntenna())
-            updateAntenna();
+            input.pullAntenna();
         else
             return;
 
