@@ -83,7 +83,7 @@ class InputData extends CookieConnector {
         this.saveCookie(this.satellites);
     }
 
-    restore() {
+    load() {
         this.satellites = this.loadCookie();
     }
 }

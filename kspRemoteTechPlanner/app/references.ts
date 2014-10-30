@@ -9,12 +9,12 @@
 /// <reference path="calculator/euclidean.ts" />
 /// <reference path="calculator/orbital.ts" />
 
+/// <reference path="model/cookieconnector.ts" />
 /// <reference path="model/antenna.ts" />
 /// <reference path="model/antennadata.ts" />
 /// <reference path="model/body.ts" />
 /// <reference path="model/bodydata.ts" />
 /// <reference path="model/satellites.ts" />
-/// <reference path="model/cookieconnector.ts" />
 /// <reference path="model/inputdata.ts" />
 /// <reference path="model/userdata.ts" />
 

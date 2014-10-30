@@ -1,9 +1,11 @@
 ﻿/// <reference path="../references.ts" />
 
-module BodyData {
+class BodyData extends CookieConnector {
     'use strict';
 
-    var bodies: { [index: string]: Body } = {
+    private static cookieKey: string = "userBody";
+
+    bodies: { [index: string]: Body } = {
         "Kerbol": new Body("Kerbol", "rgb(255,242,0)", 261600, 1172332800, Number.POSITIVE_INFINITY),
         "Moho": new Body("Moho", "rgb(185,122,87)", 250, 168.60938, 9646.663),
         "Eve": new Body("Eve", "rgb(163,73,164)", 700, 8171.7302, 85109.365),
@@ -22,8 +24,23 @@ module BodyData {
         "Pol": new Body("Pol", "rgb(206,211,1)", 44, 0.72170208, 1042.1389),
         "Eeloo": new Body("Eeloo", "rgb(221,221,210)", 210, 74.410815, 119082.94)
     };
+    userBodies: { [index: string]: Body } = {};
 
-    export function getBody(name: string): Body {
-        return bodies[name];
+    constructor() {
+        super(BodyData.cookieKey);
+    }
+
+    getBody(name: string): Body {
+        var b: Body = this.bodies[name];
+        if (b == undefined) b = this.userBodies[name];
+        return b;
+    }
+
+    save() {
+        this.saveCookie(this.userBodies);
+    }
+
+    load() {
+        this.userBodies = this.loadCookie();
     }
 }

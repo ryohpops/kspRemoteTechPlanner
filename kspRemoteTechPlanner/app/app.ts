@@ -11,6 +11,8 @@ module App {
     // values
     var satellites: Satellites;
     var input: InputData;
+    var bodies: BodyData;
+    var antennas: AntennaData;
 
     var viewEntire: EntireView;
     var viewNight: NightView;
@@ -21,6 +23,8 @@ module App {
         // init values
         satellites = new Satellites();
         input = new InputData(satellites);
+        bodies = new BodyData();
+        antennas = new AntennaData();
 
         // init views
         viewEntire = new EntireView(new createjs.Stage($("canvas#entire")[0]), 10000, 840);
@@ -78,7 +82,7 @@ module App {
     function update() {
         input.pull();
 
-        viewEntire.innerSize = (this.satellites.body.radius + satellites.altitude + this.satellites.antenna.range) * 2 * 1.05;
+        viewEntire.innerSize = (satellites.body.radius + satellites.altitude + satellites.antenna.range) * 2 * 1.05;
         viewEntire.show();
         viewNight.show();
         viewDeltav.show();
@@ -110,7 +114,7 @@ module App {
         if ($("select#body > optgroup[label='User data']").length == 1) // when option group User data exists,
             b = UserData.userBodies[$("select#body").val()];            // aquire data from UserData first,
         if (b == undefined)                               // if undefined there or option group User data not exists,
-            b = BodyData.getBody($("select#body").val()); // then from BodyData.
+            b = bodies.getBody($("select#body").val()); // then from BodyData.
 
         satellites.body.name = b.name;
         satellites.body.color = b.color;
@@ -129,13 +133,13 @@ module App {
         else
             return;
 
-        if (UserData.userBodies[this.satellites.body.name] == undefined) // if the same name body is not defined yet,
-            addUserDataSelection("body", this.satellites.body.name);     // add option to body selector.
-        $("select#body").val(this.satellites.body.name);
+        if (UserData.userBodies[satellites.body.name] == undefined) // if the same name body is not defined yet,
+            addUserDataSelection("body", satellites.body.name);     // add option to body selector.
+        $("select#body").val(satellites.body.name);
 
-        var b: Body = new Body(this.satellites.body.name, this.satellites.body.color, this.satellites.body.radius,
-            this.satellites.body.stdGravParam, this.satellites.body.soi); // create new instance and put data.
-        UserData.userBodies[this.satellites.body.name] = b;
+        var b: Body = new Body(satellites.body.name, satellites.body.color, satellites.body.radius,
+            satellites.body.stdGravParam, satellites.body.soi); // create new instance and put data.
+        UserData.userBodies[satellites.body.name] = b;
         UserData.saveCookie();
     }
 
@@ -155,7 +159,7 @@ module App {
         if ($("select#antenna > optgroup[label='User data']").length == 1) // when option group User data exists,
             a = UserData.userAntennas[$("select#antenna").val()];          // aquire data from UserData first,
         if (a == undefined)                                        // if undefined there or option group User data not exists,
-            a = AntennaData.getAntenna($("select#antenna").val()); // then from AntennaData.
+            a = antennas.getAntenna($("select#antenna").val()); // then from AntennaData.
 
         satellites.antenna.name = a.name;
         satellites.antenna.type = a.type;
@@ -173,13 +177,13 @@ module App {
         else
             return;
 
-        if (UserData.userAntennas[this.satellites.antenna.name] == undefined) // if the same name antenna is not defined yet,
-            addUserDataSelection("antenna", this.satellites.antenna.name);    // add option to antenna selector.
-        $("select#antenna").val(this.satellites.antenna.name);
+        if (UserData.userAntennas[satellites.antenna.name] == undefined) // if the same name antenna is not defined yet,
+            addUserDataSelection("antenna", satellites.antenna.name);    // add option to antenna selector.
+        $("select#antenna").val(satellites.antenna.name);
 
-        var a: Antenna = new Antenna(this.satellites.antenna.name, this.satellites.antenna.type,
-            this.satellites.antenna.range, this.satellites.antenna.elcConsumption); // create new instance and put data.
-        UserData.userAntennas[this.satellites.antenna.name] = a;
+        var a: Antenna = new Antenna(satellites.antenna.name, satellites.antenna.type,
+            satellites.antenna.range, satellites.antenna.elcConsumption); // create new instance and put data.
+        UserData.userAntennas[satellites.antenna.name] = a;
         UserData.saveCookie();
     }
 
