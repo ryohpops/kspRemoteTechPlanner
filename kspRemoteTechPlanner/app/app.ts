@@ -117,11 +117,12 @@ module App {
         if (b == undefined)                               // if undefined there or option group User data not exists,
             b = BodyData.getBody($("select#body").val()); // then from BodyData.
 
-        $("input#body_name").val(b.name);
-        $("input#body_color").val(b.color);
-        $("input#body_radius").val(b.radius.toString());
-        $("input#body_stdGravParam").val(b.stdGravParam.toString());
-        $("input#body_soi").val(b.soi.toString());
+        satellites.body.name = b.name;
+        satellites.body.color = b.color;
+        satellites.body.radius = b.radius;
+        satellites.body.stdGravParam = b.stdGravParam;
+        satellites.body.soi = b.soi;
+        input.pushBody();
 
         validateBody(); // execute validation with loaded value to clear validate state.
     }
@@ -160,14 +161,11 @@ module App {
         if (a == undefined)                                        // if undefined there or option group User data not exists,
             a = AntennaData.getAntenna($("select#antenna").val()); // then from AntennaData.
 
-        $("input#antenna_name").val(a.name);
-        if (a.type == AntennaType.omni) {
-            $("select#antenna_type").val("omni");
-        } else if (a.type == AntennaType.dish) {
-            $("select#antenna_type").val("dish");
-        }
-        $("input#antenna_range").val(a.range.toString());
-        $("input#antenna_elcConsumption").val(a.elcConsumption.toString());
+        satellites.antenna.name = a.name;
+        satellites.antenna.type = a.type;
+        satellites.antenna.range = a.range;
+        satellites.antenna.elcConsumption = a.elcConsumption;
+        input.pushAntenna();
 
         validateAntenna(); // execute validation with loaded value to clear validate state.
     }
