@@ -10,8 +10,6 @@ module App {
 
     // values
     var satellites: Satellites;
-    var body: Body;
-    var antenna: Antenna;
     var input: InputData;
 
     var viewEntire: EntireView;
@@ -22,8 +20,6 @@ module App {
     export function init() {
         // init values
         satellites = new Satellites();
-        body = satellites.body;
-        antenna = satellites.antenna;
         input = new InputData(satellites);
 
         // init views
@@ -70,8 +66,8 @@ module App {
         $("button.manual-input#antenna_add").click(onUserAntennaAdd);
         $("button.manual-input#antenna_remove").click(onUserAntennaRemove);
 
-        $("form#calculator").find("input,select").keypress((ev) => { if (ev.keyCode == 13 && validate()) update() });
-        $("button#calculate").click((ev) => { if (validate()) update() });
+        $("form#calculator").find("input,select").keypress((ev) => { if (ev.keyCode == 13 && validAll()) update() });
+        $("button#calculate").click((ev) => { if (validAll()) update() });
         $("button#reset").click((ev) => { reset() });
 
         // finallize
@@ -82,12 +78,11 @@ module App {
     function update() {
         input.pull();
 
-        viewEntire.innerSize = (body.radius + satellites.altitude + antenna.range) * 2 * 1.05;
+        viewEntire.innerSize = (this.satellites.body.radius + satellites.altitude + this.satellites.antenna.range) * 2 * 1.05;
         viewEntire.show();
         viewNight.show();
         viewDeltav.show();
     }
-
 
     function reset() {
         input.reset();
@@ -96,15 +91,15 @@ module App {
         onAntennaSelect(null);
     }
 
-    function validate(): boolean {
-        return validateBody() && validateAntenna() && $("input#count,input#altitude,input#elcConsumption").valid();
+    function validAll(): boolean {
+        return validBody() && validAntenna() && $("input#count,input#altitude,input#elcConsumption").valid();
     }
 
-    function validateBody(): boolean {
+    function validBody(): boolean {
         return $("div.manual-input#manual_body").children("div").children("input").valid();
     }
 
-    function validateAntenna(): boolean {
+    function validAntenna(): boolean {
         return $("div.manual-input#manual_antenna").children("div").children("input").valid();
     }
 
@@ -124,22 +119,23 @@ module App {
         satellites.body.soi = b.soi;
         input.pushBody();
 
-        validateBody(); // execute validation with loaded value to clear validate state.
+        validBody(); // execute validation with loaded value to clear validate state.
     }
 
     // add new data to user's body
     function onUserBodyAdd(ev) {
-        if (validateBody())
+        if (validBody())
             input.pullBody();
         else
             return;
 
-        if (UserData.userBodies[body.name] == undefined) // if the same name body is not defined yet,
-            addUserDataSelection("body", body.name);     // add option to body selector.
-        $("select#body").val(body.name);
+        if (UserData.userBodies[this.satellites.body.name] == undefined) // if the same name body is not defined yet,
+            addUserDataSelection("body", this.satellites.body.name);     // add option to body selector.
+        $("select#body").val(this.satellites.body.name);
 
-        var b: Body = new Body(body.name, body.color, body.radius, body.stdGravParam, body.soi); // create new instance and put data.
-        UserData.userBodies[body.name] = b;
+        var b: Body = new Body(this.satellites.body.name, this.satellites.body.color, this.satellites.body.radius,
+            this.satellites.body.stdGravParam, this.satellites.body.soi); // create new instance and put data.
+        UserData.userBodies[this.satellites.body.name] = b;
         UserData.saveCookie();
     }
 
@@ -167,22 +163,23 @@ module App {
         satellites.antenna.elcConsumption = a.elcConsumption;
         input.pushAntenna();
 
-        validateAntenna(); // execute validation with loaded value to clear validate state.
+        validAntenna(); // execute validation with loaded value to clear validate state.
     }
 
     // add new data to user's antenna
     function onUserAntennaAdd(ev) {
-        if (validateAntenna())
+        if (validAntenna())
             input.pullAntenna();
         else
             return;
 
-        if (UserData.userAntennas[antenna.name] == undefined) // if the same name antenna is not defined yet,
-            addUserDataSelection("antenna", antenna.name);    // add option to antenna selector.
-        $("select#antenna").val(antenna.name);
+        if (UserData.userAntennas[this.satellites.antenna.name] == undefined) // if the same name antenna is not defined yet,
+            addUserDataSelection("antenna", this.satellites.antenna.name);    // add option to antenna selector.
+        $("select#antenna").val(this.satellites.antenna.name);
 
-        var a: Antenna = new Antenna(antenna.name, antenna.type, antenna.range, antenna.elcConsumption); // create new instance and put data.
-        UserData.userAntennas[antenna.name] = a;
+        var a: Antenna = new Antenna(this.satellites.antenna.name, this.satellites.antenna.type,
+            this.satellites.antenna.range, this.satellites.antenna.elcConsumption); // create new instance and put data.
+        UserData.userAntennas[this.satellites.antenna.name] = a;
         UserData.saveCookie();
     }
 
