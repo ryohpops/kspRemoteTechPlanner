@@ -5,7 +5,7 @@ class AntennaData extends CookieConnector {
 
     private static cookieKey: string = "userAntenna";
 
-    antennas: { [index: string]: Antenna } = {
+    stockAntennas: { [index: string]: Antenna } = {
         "Reflectron DP-10": new Antenna("Reflectron DP-10", AntennaType.omni, 500, 0.01),
         "Communotron 16": new Antenna("Communotron 16", AntennaType.omni, 2500, 0.13),
         "CommTech EXP-VR-2T": new Antenna("CommTech EXP-VR-2T", AntennaType.omni, 3000, 0.18),
@@ -20,7 +20,7 @@ class AntennaData extends CookieConnector {
     }
 
     getAntenna(name: string): Antenna {
-        var a: Antenna = this.antennas[name];
+        var a: Antenna = this.stockAntennas[name];
         if (a == undefined)
             a = this.userAntennas[name];
         return a;
@@ -30,7 +30,13 @@ class AntennaData extends CookieConnector {
         this.saveCookie(this.userAntennas);
     }
 
-    load() {
+    load(): boolean {
         this.userAntennas = this.loadCookie();
+        if (this.userAntennas == undefined) {
+            this.userAntennas = {};
+            return false;
+        } else {
+            return true;
+        }
     }
 }

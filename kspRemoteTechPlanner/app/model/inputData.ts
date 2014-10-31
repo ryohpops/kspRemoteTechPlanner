@@ -52,6 +52,7 @@ class InputData extends CookieConnector {
     }
 
     pushBody() {
+        $("select#body").val(this.satellites.body.name);
         $("input#body_name").val(this.satellites.body.name);
         $("input#body_color").val(this.satellites.body.color);
         $("input#body_radius").val(this.satellites.body.radius.toString());
@@ -60,6 +61,7 @@ class InputData extends CookieConnector {
     }
 
     pushAntenna() {
+        $("select#antenna").val(this.satellites.antenna.name);
         $("input#antenna_name").val(this.satellites.antenna.name);
         if (this.satellites.antenna.type == AntennaType.omni) {
             $("select#antenna_type").val("omni");
@@ -83,7 +85,18 @@ class InputData extends CookieConnector {
         this.saveCookie(this.satellites);
     }
 
-    load() {
-        this.satellites = this.loadCookie();
+    load(): boolean {
+        var sat: Satellites = this.loadCookie();
+        if (sat == undefined) {
+            return false;
+        } else {
+            this.satellites.body = sat.body;
+            this.satellites.count = sat.count;
+            this.satellites.altitude = sat.altitude;
+            this.satellites.antenna = sat.antenna;
+            this.satellites.elcConsumption = sat.elcConsumption;
+            this.satellites.parkingAltitude = sat.parkingAltitude;
+            return true;
+        }
     }
 }

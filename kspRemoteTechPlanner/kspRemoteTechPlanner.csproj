@@ -53,7 +53,6 @@
     <TypeScriptCompile Include="app\model\bodyData.ts" />
     <TypeScriptCompile Include="app\model\cookieConnector.ts" />
     <TypeScriptCompile Include="app\model\satellites.ts" />
-    <TypeScriptCompile Include="app\model\userData.ts" />
     <TypeScriptCompile Include="app\references.ts" />
     <TypeScriptCompile Include="app\view\deltavView.ts" />
     <TypeScriptCompile Include="app\view\entireView.ts" />

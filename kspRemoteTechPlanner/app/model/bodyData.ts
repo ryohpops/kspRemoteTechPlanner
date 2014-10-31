@@ -5,7 +5,7 @@ class BodyData extends CookieConnector {
 
     private static cookieKey: string = "userBody";
 
-    bodies: { [index: string]: Body } = {
+    stockBodies: { [index: string]: Body } = {
         "Kerbol": new Body("Kerbol", "rgb(255,242,0)", 261600, 1172332800, Number.POSITIVE_INFINITY),
         "Moho": new Body("Moho", "rgb(185,122,87)", 250, 168.60938, 9646.663),
         "Eve": new Body("Eve", "rgb(163,73,164)", 700, 8171.7302, 85109.365),
@@ -31,7 +31,7 @@ class BodyData extends CookieConnector {
     }
 
     getBody(name: string): Body {
-        var b: Body = this.bodies[name];
+        var b: Body = this.stockBodies[name];
         if (b == undefined) b = this.userBodies[name];
         return b;
     }
@@ -40,7 +40,13 @@ class BodyData extends CookieConnector {
         this.saveCookie(this.userBodies);
     }
 
-    load() {
+    load(): boolean {
         this.userBodies = this.loadCookie();
+        if (this.userBodies == undefined) {
+            this.userBodies = {};
+            return false;
+        } else {
+            return true;
+        }
     }
 }

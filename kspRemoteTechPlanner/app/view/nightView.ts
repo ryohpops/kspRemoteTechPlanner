@@ -14,8 +14,9 @@ class NightView extends View {
     private txtNightTime: createjs.Text;
     private txtRequiredBattery: createjs.Text;
 
-    constructor(stage: createjs.Stage, innerSize: number, outerSize: number) {
+    constructor(stage: createjs.Stage, innerSize: number, outerSize: number, satellites: Satellites) {
         super(stage, innerSize, outerSize);
+        this.satellites = satellites;
 
         // shape for drawing in outer coordinates
         this.shapeOuter = new createjs.Shape();

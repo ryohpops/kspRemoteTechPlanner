@@ -27,25 +27,19 @@ module App {
         antennas = new AntennaData();
 
         // init views
-        viewEntire = new EntireView(new createjs.Stage($("canvas#entire")[0]), 10000, 840);
-        viewEntire.satellites = satellites;
-
-        viewNight = new NightView(new createjs.Stage($("canvas#night")[0]), 5000, 400);
-        viewNight.satellites = satellites;
-
-        viewDeltav = new DeltavView(new createjs.Stage($("canvas#deltav")[0]), 5000, 400);
-        viewDeltav.satellites = satellites;
+        viewEntire = new EntireView(new createjs.Stage($("canvas#entire")[0]), 10000, 840, satellites);
+        viewNight = new NightView(new createjs.Stage($("canvas#night")[0]), 5000, 400, satellites);
+        viewDeltav = new DeltavView(new createjs.Stage($("canvas#deltav")[0]), 5000, 400, satellites);
 
         // load user data
-        var cookieExists: UserData.loadCookieResult = UserData.loadCookie();
-        if (cookieExists.body) {
-            for (var i in UserData.userBodies) {
-                addUserDataSelection("body", UserData.userBodies[i].name);
+        if (bodies.load()) {
+            for (var bodyName in bodies.userBodies) {
+                addUserDataSelection("body", bodies.getBody(bodyName).name);
             }
         }
-        if (cookieExists.antenna) {
-            for (var i in UserData.userAntennas) {
-                addUserDataSelection("antenna", UserData.userAntennas[i].name);
+        if (antennas.load()) {
+            for (var antennaName in antennas.userAntennas) {
+                addUserDataSelection("antenna", antennas.getAntenna(antennaName).name);
             }
         }
 
@@ -72,27 +66,27 @@ module App {
 
         $("form#calculator").find("input,select").keypress((ev) => { if (ev.keyCode == 13 && validAll()) update() });
         $("button#calculate").click((ev) => { if (validAll()) update() });
-        $("button#reset").click((ev) => { reset() });
+        $("button#reset").click((ev) => { });
 
         // finallize
-        reset();
+        if (input.load()) {
+            input.push();
+        } else {
+            input.reset();
+            onBodySelect(null);
+            onAntennaSelect(null);
+        }
         update();
     }
 
     function update() {
         input.pull();
+        input.save();
 
         viewEntire.innerSize = (satellites.body.radius + satellites.altitude + satellites.antenna.range) * 2 * 1.05;
         viewEntire.show();
         viewNight.show();
         viewDeltav.show();
-    }
-
-    function reset() {
-        input.reset();
-
-        onBodySelect(null);
-        onAntennaSelect(null);
     }
 
     function validAll(): boolean {
@@ -110,105 +104,90 @@ module App {
     // event handler
     // retrieve data of selected body.
     function onBodySelect(ev) {
-        var b: Body;
-        if ($("select#body > optgroup[label='User data']").length == 1) // when option group User data exists,
-            b = UserData.userBodies[$("select#body").val()];            // aquire data from UserData first,
-        if (b == undefined)                               // if undefined there or option group User data not exists,
-            b = bodies.getBody($("select#body").val()); // then from BodyData.
-
+        var b: Body = bodies.getBody($("select#body").val());
         satellites.body.name = b.name;
         satellites.body.color = b.color;
         satellites.body.radius = b.radius;
         satellites.body.stdGravParam = b.stdGravParam;
         satellites.body.soi = b.soi;
-        input.pushBody();
 
+        input.pushBody();
         validBody(); // execute validation with loaded value to clear validate state.
     }
 
     // add new data to user's body
     function onUserBodyAdd(ev) {
-        if (validBody())
+        if (validBody()) {
             input.pullBody();
-        else
-            return;
 
-        if (UserData.userBodies[satellites.body.name] == undefined) // if the same name body is not defined yet,
-            addUserDataSelection("body", satellites.body.name);     // add option to body selector.
-        $("select#body").val(satellites.body.name);
+            if (bodies.stockBodies[satellites.body.name] == undefined) {
+                if (bodies.userBodies[satellites.body.name] == undefined)   // if the same name body is not defined yet,
+                    addUserDataSelection("body", satellites.body.name);     // add option to body selector.
+                $("select#body").val(satellites.body.name);
 
-        var b: Body = new Body(satellites.body.name, satellites.body.color, satellites.body.radius,
-            satellites.body.stdGravParam, satellites.body.soi); // create new instance and put data.
-        UserData.userBodies[satellites.body.name] = b;
-        UserData.saveCookie();
+                bodies.userBodies[satellites.body.name] = new Body(satellites.body.name, satellites.body.color, satellites.body.radius,
+                    satellites.body.stdGravParam, satellites.body.soi); // create or update current body.
+                bodies.save();
+            }
+        }
     }
 
     // remove user's body data which has the same name as body_name in body_detail.
     function onUserBodyRemove(ev) {
-        if ($("input#body_name").valid())
-            delete UserData.userBodies[$("input#body_name").val()];
-        else
-            return;
-        UserData.saveCookie();
-        removeUserDataSelection("body", $("input#body_name").val(), () => { return UserData.loadCookie().body });
+        if ($("input#body_name").valid()) {
+            delete bodies.userBodies[$("input#body_name").val()];
+            bodies.save();
+
+            removeUserDataSelection("body", $("input#body_name").val());
+        }
     }
 
     // retrieve data of selected antenna.
     function onAntennaSelect(ev) {
-        var a: Antenna;
-        if ($("select#antenna > optgroup[label='User data']").length == 1) // when option group User data exists,
-            a = UserData.userAntennas[$("select#antenna").val()];          // aquire data from UserData first,
-        if (a == undefined)                                        // if undefined there or option group User data not exists,
-            a = antennas.getAntenna($("select#antenna").val()); // then from AntennaData.
-
+        var a: Antenna = antennas.getAntenna($("select#antenna").val());
         satellites.antenna.name = a.name;
         satellites.antenna.type = a.type;
         satellites.antenna.range = a.range;
         satellites.antenna.elcConsumption = a.elcConsumption;
-        input.pushAntenna();
 
+        input.pushAntenna();
         validAntenna(); // execute validation with loaded value to clear validate state.
     }
 
     // add new data to user's antenna
     function onUserAntennaAdd(ev) {
-        if (validAntenna())
+        if (validAntenna()) {
             input.pullAntenna();
-        else
-            return;
 
-        if (UserData.userAntennas[satellites.antenna.name] == undefined) // if the same name antenna is not defined yet,
-            addUserDataSelection("antenna", satellites.antenna.name);    // add option to antenna selector.
-        $("select#antenna").val(satellites.antenna.name);
+            if (antennas.stockAntennas[satellites.antenna.name] == undefined) {
+                if (antennas.userAntennas[satellites.antenna.name] == undefined) // if the same name antenna is not defined yet,
+                    addUserDataSelection("antenna", satellites.antenna.name);    // add option to antenna selector.
+                $("select#antenna").val(satellites.antenna.name);
 
-        var a: Antenna = new Antenna(satellites.antenna.name, satellites.antenna.type,
-            satellites.antenna.range, satellites.antenna.elcConsumption); // create new instance and put data.
-        UserData.userAntennas[satellites.antenna.name] = a;
-        UserData.saveCookie();
+                antennas.userAntennas[satellites.antenna.name] = new Antenna(satellites.antenna.name, satellites.antenna.type,
+                    satellites.antenna.range, satellites.antenna.elcConsumption); // create new instance and put data.
+                antennas.save();
+            }
+        }
     }
 
     // remove user's antenna data which has the same name as antenna_name in antenna_detail.
     function onUserAntennaRemove(ev) {
-        if ($("input#antenna_name").valid())
-            delete UserData.userAntennas[$("input#antenna_name").val()];
-        else
-            return;
-        UserData.saveCookie();
-        removeUserDataSelection("antenna", $("input#antenna_name").val(), () => {return UserData.loadCookie().antenna });
+        if ($("input#antenna_name").valid()) {
+            delete antennas.userAntennas[$("input#antenna_name").val()];
+            antennas.save();
+
+            removeUserDataSelection("antenna", $("input#antenna_name").val());
+        }
     }
 
     // add select option for user's data to selector.
-    function addUserDataSelection(data: string, name: string) {
-        if ($("select#" + data + " > optgroup[label='User data']").length == 0)    // if there isn't User data option-group,
-            $("select#" + data).append("<optgroup label='User data'></optgroup>"); // make one.
-        $("select#" + data + " > optgroup[label='User data']").append("<option>" + name + "</option>"); // add option for user's data to selector.
+    function addUserDataSelection(dataType: string, name: string) {
+        $("select#" + dataType + " > optgroup[label='User data']").append("<option>" + name + "</option>");
     }
 
     // remove select option for user's data from selector.
-    function removeUserDataSelection(data: string, name: string, isDataRemaining: () => boolean) {
+    function removeUserDataSelection(dataType: string, name: string) {
         $("optgroup[label='User data'] > option:contains('" + name + "')").remove();
-        if (!isDataRemaining()) {                                            // if there are no user's data left,
-            $("select#" + data + " > optgroup[label='User data']").remove(); // remove User data option-group.
-        }
     }
 }

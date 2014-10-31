@@ -21,9 +21,10 @@ class CookieConnector {
     }
 
     loadCookie(): any {
-        for (var item in document.cookie.split(";")) {
-            if (item.indexOf(this.key) == 0) {
-                return JSON.parse(decodeURIComponent(item.split("=")[1]));
+        var spl: string[] = document.cookie.split(";");
+        for (var i = 0; i < spl.length; i++) {
+            if (spl[i].indexOf(this.key) != -1) {
+                return JSON.parse(decodeURIComponent(spl[i].split("=")[1]));
             }
         }
     }

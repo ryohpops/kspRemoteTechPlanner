@@ -16,7 +16,6 @@
 /// <reference path="model/bodydata.ts" />
 /// <reference path="model/satellites.ts" />
 /// <reference path="model/inputdata.ts" />
-/// <reference path="model/userdata.ts" />
 
 /// <reference path="view/graphicshelper.ts" />
 /// <reference path="view/view.ts" />

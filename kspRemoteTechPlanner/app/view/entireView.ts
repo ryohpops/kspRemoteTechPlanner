@@ -13,8 +13,9 @@ class EntireView extends View {
     private txtCommDistance2: createjs.Text;
     private txtCommStableRange: createjs.Text;
 
-    constructor(stage: createjs.Stage, innerSize: number, outerSize: number) {
+    constructor(stage: createjs.Stage, innerSize: number, outerSize: number, satellites: Satellites) {
         super(stage, innerSize, outerSize);
+        this.satellites = satellites;
 
         // shape for drawing in inner coordinates
         this.shapeInner = new createjs.Shape();
