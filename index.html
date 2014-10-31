@@ -6,27 +6,13 @@
     <title>Visual RemoteTech Planner for KSP</title>
 
     <link href="Content/bootstrap.min.css" rel="stylesheet" />
-    <link href="app.css" rel="stylesheet" />
+    <link href="app/app.css" rel="stylesheet" />
 
     <script src="Scripts/jquery-2.1.1.min.js"></script>
     <script src="Scripts/jquery.validate.min.js"></script>
     <script src="Scripts/easeljs-0.7.1.min.js"></script>
     <script src="Scripts/bootstrap.min.js"></script>
-    <script src="model/body.js"></script>
-    <script src="model/bodyData.js"></script>
-    <script src="model/antenna.js"></script>
-    <script src="model/antennaData.js"></script>
-    <script src="model/satellites.js"></script>
-    <script src="model/userData.js"></script>
-    <script src="calculator/point.js"></script>
-    <script src="calculator/euclidean.js"></script>
-    <script src="calculator/orbital.js"></script>
-    <script src="view/graphicsHelper.js"></script>
-    <script src="view/view.js"></script>
-    <script src="view/entireView.js"></script>
-    <script src="view/nightView.js"></script>
-    <script src="view/deltavView.js"></script>
-    <script src="app.js"></script>
+    <script src="app/appOut.js"></script>
 </head>
 <body>
     <div class="container">
@@ -35,7 +21,7 @@
         <div class="row">
             <div class="col-md-12">
                 <h2>Description</h2>
-                <a href="http://forum.kerbalspaceprogram.com/threads/83305-Development-Resumed-RemoteTech-2">RemoteTech2</a> is one of the popular MODs for <a href="https://kerbalspaceprogram.com/">Kerbal Space Program</a>.
+                <a href="http://forum.kerbalspaceprogram.com/threads/83305-Development-Resumed-RemoteTech-2">RemoteTech2</a> is one of the popular mods for <a href="https://kerbalspaceprogram.com/">Kerbal Space Program</a>.
                 It provides purposes to launch and operate satellites in the space.<br />
                 Before starting a countdown at the launch pad, how about planning and visualizing the satellite network that you aim at with this web-based planner?<br />
                 Put needed values into Data input, then hit Calculate or press enter key.<br />
@@ -44,7 +30,7 @@
                 and sources are available on <a href="https://github.com/ryohpops/kspRemoteTechPlanner">github</a>.<br />
                 Issues, bug reports, contributers are always welcome.<br />
                 <br />
-                Use of an autopilot MOD such as <a href="http://forum.kerbalspaceprogram.com/threads/12384-PART-0-24-2-Anatid-Robotics-MuMech-MechJeb-Autopilot-v2-3-1">MechJeb</a> is recommended.<br />
+                Use of an autopilot mod such as <a href="http://forum.kerbalspaceprogram.com/threads/12384-PART-0-24-2-Anatid-Robotics-MuMech-MechJeb-Autopilot-v2-3-1">MechJeb</a> is recommended.<br />
                 Data of bodies is based on <a href="http://wiki.kerbalspaceprogram.com/wiki/Main_Page">KSP Wiki</a>,
                 <a href="http://remotetechnologiesgroup.github.io/RemoteTech/">RemoteTech2 manual</a> and
                 <a href="http://forum.kerbalspaceprogram.com/threads/41652-A-more-accurate-delta-v-map">metaphor's Delta-V map</a>.<br />
@@ -109,6 +95,7 @@
                                 <option>Pol</option>
                             </optgroup>
                             <option>Eeloo</option>
+                            <optgroup label="User data"></optgroup>
                         </select>
 
                         <div class="manual-input" id="manual_body">
@@ -179,6 +166,7 @@
                                 <option>Comms DTS-M1</option>
                                 <option>Reflectron KR-7</option>
                             </optgroup>
+                            <optgroup label="User data"></optgroup>
                         </select>
 
                         <div class="manual-input" id="manual_antenna">
@@ -236,21 +224,21 @@
         <div class="row">
             <div class="col-md-12">
                 <h2>How to read figures</h2>
-                Filled circles in the middle of each views mean primary body. The planet or moon which which has SoI your satellites belong to.<br />
-                A yellow circle means sphere of influence. Above this altitude, orbits cannot form themselves. Usually it exists beyond the Entire view's display range.<br />
+                Filled circles in the middle of each views mean primary body, the owner of the SoI that your satellites belong to.<br />
+                A yellow circle means sphere of influence. Any orbits cannot form themselves around the primary body above this altitude. Usually it exists beyond the Entire view's display range.<br />
                 <br />
                 Black circles mean the orbit of satellites and black dots mean each satellite.
-                A Black edged white dot means the spot which your new satellite is going into after hohmann transfer.<br />
-                Red clear circles mean range of antennas on each satellite. Unlike the figure, satellites cannot communicate through the primary body.<br />
+                A Black edged white dot means the spot which your new satellite is going into after it's hohmann transfer.<br />
+                Red clear circles mean range of antennas on each satellite. <b>Attention!</b> Unlike those figures, satellites cannot communicate each other through the primary body.<br />
                 The two-way arrow means distance of these two satellites.<br />
                 If the color of the arrow is blue, all satellites can connect to their next one. It will provides a nice ring for smooth communication.<br />
                 If the color is red, any satellites cannot connect to the others. All satellites are in solitude.<br />
                 When green circle labeled Stable appears, any orbits lower than the Stable altitude never have connection-less flights.<br />
                 <br />
-                Note that only the Entire view is dynamically scaled.<br />
-                <br />
                 Slide angle and Slide time mean same amount in different units.<br />
-                Shifting your hohmann transfer node according to this makes shifting the result of the transfer by 360 / &lt;the number of satellites&gt; degrees.
+                Shifting your hohmann transfer node according to this value makes shifting the result of the transfer by ( 360 / &lt;the number of satellites&gt; ) degrees.<br />
+                <br />
+                Note that only Entire view is dynamically scaled.<br />
             </div>
         </div>
 
