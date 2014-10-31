@@ -1,8 +1,8 @@
-﻿/// <reference path="../scripts/typings/easeljs/easeljs.d.ts" />
-/// <reference path="../scripts/typings/createjs-lib/createjs-lib.d.ts" />
-/// <reference path="../scripts/typings/tweenjs/tweenjs.d.ts" />
+﻿/// <reference path="../references.ts" />
 
 module GraphicsHelper {
+    'use strict';
+
     var arrowAngle: number = Math.PI / 6;
 
     export function drawArrow(g: createjs.Graphics, x: number, y: number, directionRad: number, arrowSize: number): createjs.Graphics {

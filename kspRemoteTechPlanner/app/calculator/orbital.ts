@@ -1,4 +1,8 @@
-﻿module Orbital {
+﻿/// <reference path="../references.ts" />
+
+module Orbital {
+    'use strict';
+
     export function orbitalPeriod(bodyRadius: number, altitude: number, stdGravParam: number) {
         return 2 * Math.PI * Math.sqrt(Math.pow(bodyRadius + altitude, 3) / stdGravParam);
     }

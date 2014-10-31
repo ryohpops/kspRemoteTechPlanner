@@ -7,6 +7,12 @@ Latest release is [here](http://ryohpops.github.io/kspRemoteTechPlanner/) and fo
 
 Version history
 
+- 1.2 : 2014/11/01
+
+ Faster loading of the page.
+ Fix position of labels in Night view.
+ Autosave last calculation.
+
 - 1.1 : 2014/10/16
 
  Show the distance between a satellite and the one after the next.

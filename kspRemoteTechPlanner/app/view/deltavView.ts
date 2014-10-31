@@ -1,13 +1,8 @@
-﻿/// <reference path="../scripts/typings/easeljs/easeljs.d.ts" />
-/// <reference path="../scripts/typings/createjs-lib/createjs-lib.d.ts" />
-/// <reference path="../scripts/typings/tweenjs/tweenjs.d.ts" />
-/// <reference path="../model/body.ts" />
-/// <reference path="../model/satellites.ts" />
-/// <reference path="../calculator/point.ts" />
-/// <reference path="../view/graphicshelper.ts" />
-/// <reference path="../view/view.ts" />
+﻿/// <reference path="../references.ts" />
 
 class DeltavView extends View {
+    'use strict';
+
     private static bodyRadius: number = 20;
     private static parkingAltitude: number = 50;
     private static designatedAltitude: number = 150;
@@ -21,8 +16,9 @@ class DeltavView extends View {
     private txtPhaseAngle: createjs.Text;
     private txtPhaseTime: createjs.Text;
 
-    constructor(stage: createjs.Stage, innerSize: number, outerSize: number) {
+    constructor(stage: createjs.Stage, innerSize: number, outerSize: number, satellites: Satellites) {
         super(stage, innerSize, outerSize);
+        this.satellites = satellites;
 
         // shape for drawing in outer coordinates
         this.shapeOuter = new createjs.Shape();
@@ -66,6 +62,7 @@ class DeltavView extends View {
         this.shapeOuter.graphics.setStrokeStyle(View.strokeLineWidth);
 
         this.showFigures(this.shapeOuter.graphics, this.satellites, this.satellites.body);
+        this.update();
     }
 
     private showFigures(g: createjs.Graphics, s: Satellites, b: Body) {

@@ -1,13 +1,8 @@
-﻿/// <reference path="../scripts/typings/easeljs/easeljs.d.ts" />
-/// <reference path="../scripts/typings/createjs-lib/createjs-lib.d.ts" />
-/// <reference path="../scripts/typings/tweenjs/tweenjs.d.ts" />
-/// <reference path="../model/body.ts" />
-/// <reference path="../model/satellites.ts" />
-/// <reference path="../calculator/point.ts" />
-/// <reference path="graphicshelper.ts" />
-/// <reference path="view.ts" />
+﻿/// <reference path="../references.ts" />
 
 class NightView extends View {
+    'use strict';
+
     private static bodyRadius = 50;
     private static orbitRadius = 150;
 
@@ -19,8 +14,9 @@ class NightView extends View {
     private txtNightTime: createjs.Text;
     private txtRequiredBattery: createjs.Text;
 
-    constructor(stage: createjs.Stage, innerSize: number, outerSize: number) {
+    constructor(stage: createjs.Stage, innerSize: number, outerSize: number, satellites: Satellites) {
         super(stage, innerSize, outerSize);
+        this.satellites = satellites;
 
         // shape for drawing in outer coordinates
         this.shapeOuter = new createjs.Shape();
@@ -44,17 +40,17 @@ class NightView extends View {
 
         // time of night
         this.txtNightTime = new createjs.Text("", View.fontSetNormal);
-        this.txtNightTime.textAlign = "left";
+        this.txtNightTime.textAlign = "right";
         this.txtNightTime.textBaseline = "bottom";
-        this.txtNightTime.x = this.outerCenter.x;
+        this.txtNightTime.x = this.outerSize - View.marginText;
         this.txtNightTime.y = this.outerCenter.y - NightView.bodyRadius - View.marginText;
         this.texts.addChild(this.txtNightTime);
 
         // required battery capacity
         this.txtRequiredBattery = new createjs.Text("", View.fontSetNormal);
-        this.txtRequiredBattery.textAlign = "left";
+        this.txtRequiredBattery.textAlign = "right";
         this.txtRequiredBattery.textBaseline = "top";
-        this.txtRequiredBattery.x = this.outerCenter.x;
+        this.txtRequiredBattery.x = this.outerSize - View.marginText;
         this.txtRequiredBattery.y = this.outerCenter.y + NightView.bodyRadius + View.marginText;
         this.texts.addChild(this.txtRequiredBattery);
     }
@@ -64,6 +60,7 @@ class NightView extends View {
         this.shapeOuter.graphics.setStrokeStyle(View.strokeLineWidth);
 
         this.showFigures(this.shapeOuter.graphics, this.satellites, this.satellites.body)
+        this.update();
     }
 
     private showFigures(g: createjs.Graphics, s: Satellites, b: Body) {

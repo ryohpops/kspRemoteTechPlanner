@@ -17,7 +17,7 @@
     <IISExpressUseClassicPipelineMode />
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="app.css" />
+    <Content Include="app\app.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -43,22 +43,25 @@
     <Content Include="Scripts\jquery-2.1.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="app.ts" />
-    <TypeScriptCompile Include="calculator\orbital.ts" />
-    <TypeScriptCompile Include="model\antenna.ts" />
-    <TypeScriptCompile Include="model\antennaData.ts" />
-    <TypeScriptCompile Include="model\body.ts" />
-    <TypeScriptCompile Include="calculator\point.ts" />
-    <TypeScriptCompile Include="model\userData.ts" />
+    <TypeScriptCompile Include="app\app.ts" />
+    <TypeScriptCompile Include="app\calculator\euclidean.ts" />
+    <TypeScriptCompile Include="app\calculator\orbital.ts" />
+    <TypeScriptCompile Include="app\calculator\point.ts" />
+    <TypeScriptCompile Include="app\model\antenna.ts" />
+    <TypeScriptCompile Include="app\model\antennaData.ts" />
+    <TypeScriptCompile Include="app\model\body.ts" />
+    <TypeScriptCompile Include="app\model\bodyData.ts" />
+    <TypeScriptCompile Include="app\model\cookieConnector.ts" />
+    <TypeScriptCompile Include="app\model\satellites.ts" />
+    <TypeScriptCompile Include="app\references.ts" />
+    <TypeScriptCompile Include="app\view\deltavView.ts" />
+    <TypeScriptCompile Include="app\view\entireView.ts" />
+    <TypeScriptCompile Include="app\view\graphicsHelper.ts" />
+    <TypeScriptCompile Include="app\model\inputData.ts" />
+    <TypeScriptCompile Include="app\view\nightView.ts" />
+    <TypeScriptCompile Include="app\view\view.ts" />
+    <TypeScriptCompile Include="Scripts\typings\bootstrap\bootstrap.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery.validation\jquery.validation.d.ts" />
-    <TypeScriptCompile Include="view\deltavView.ts" />
-    <TypeScriptCompile Include="view\nightView.ts" />
-    <TypeScriptCompile Include="view\entireView.ts" />
-    <TypeScriptCompile Include="model\bodyData.ts" />
-    <TypeScriptCompile Include="calculator\euclidean.ts" />
-    <TypeScriptCompile Include="view\view.ts" />
-    <TypeScriptCompile Include="view\graphicsHelper.ts" />
-    <TypeScriptCompile Include="model\satellites.ts" />
     <TypeScriptCompile Include="Scripts\typings\createjs-lib\createjs-lib.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\easeljs\easeljs.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
@@ -103,7 +106,8 @@
     <TypeScriptTarget>ES5</TypeScriptTarget>
     <TypeScriptRemoveComments>false</TypeScriptRemoveComments>
     <TypeScriptSourceMap>true</TypeScriptSourceMap>
-    <TypeScriptModuleKind>AMD</TypeScriptModuleKind>
+    <TypeScriptModuleKind>none</TypeScriptModuleKind>
+    <TypeScriptOutFile>app/appOut.js</TypeScriptOutFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
     <TypeScriptTarget>ES5</TypeScriptTarget>

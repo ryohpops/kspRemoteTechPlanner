@@ -1,16 +1,19 @@
-﻿/// <reference path="../calculator/point.ts" />
-/// <reference path="../calculator/euclidean.ts" />
-/// <reference path="../calculator/orbital.ts" />
-/// <reference path="body.ts" />
-/// <reference path="antenna.ts" />
+﻿/// <reference path="../references.ts" />
 
 class Satellites {
+    'use strict';
+
     body: Body;
     antenna: Antenna;
     count: number;
     altitude: number;
     elcConsumption: number;
     parkingAltitude: number;
+
+    constructor() {
+        this.body = new Body(undefined, undefined, undefined, undefined, undefined);
+        this.antenna = new Antenna(undefined, undefined, undefined, undefined);
+    }
 
     satPosition(offset: number): Point {
         var ra: number = this.body.radius + this.altitude;

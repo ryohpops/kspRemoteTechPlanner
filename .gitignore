@@ -1,9 +1,8 @@
 # User specification
-*.js
-*.map
-!kspRemoteTechPlanner/Content/*
-!kspRemoteTechPlanner/fonts/*
-!kspRemoteTechPlanner/Scripts/*
+appOut.js
+appOut.js.map
+.gradle
+deploy/
 .zedstate
 
 ## Ignore Visual Studio temporary files, build results, and

@@ -1,9 +1,8 @@
-﻿/// <reference path="../scripts/typings/easeljs/easeljs.d.ts" />
-/// <reference path="../scripts/typings/createjs-lib/createjs-lib.d.ts" />
-/// <reference path="../scripts/typings/tweenjs/tweenjs.d.ts" />
-/// <reference path="../calculator/point.ts" />
+﻿/// <reference path="../references.ts" />
 
 class View {
+    'use strict';
+
     static fontSetNormal: string = "16px Arial";
     static fontSetBig: string = "20px Arial";
     static localeSetting: Intl.NumberFormatOptions = { maximumFractionDigits: 3 };
@@ -13,6 +12,7 @@ class View {
     static dotRadius: number = 4;
     static arrowSize: number = 20;
 
+    stage: createjs.Stage;
     shapes: createjs.Container;
     texts: createjs.Container;
     innerSize: number;
@@ -27,10 +27,11 @@ class View {
     }
 
     constructor(stage: createjs.Stage, innerSize: number, outerSize: number) {
+        this.stage = stage;
         this.shapes = new createjs.Container();
         this.texts = new createjs.Container();
-        stage.addChild(this.shapes);
-        stage.addChild(this.texts);
+        this.stage.addChild(this.shapes);
+        this.stage.addChild(this.texts);
 
         this.innerSize = innerSize;
         this.outerSize = outerSize;
@@ -43,4 +44,8 @@ class View {
     toOuter(valueInner: number): number {
         return valueInner * this.outerSize / this.innerSize;
     }
-} 
+
+    update() {
+        this.stage.update();
+    }
+}

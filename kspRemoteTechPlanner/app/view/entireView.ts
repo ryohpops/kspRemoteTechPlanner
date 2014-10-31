@@ -1,14 +1,8 @@
-﻿/// <reference path="../scripts/typings/easeljs/easeljs.d.ts" />
-/// <reference path="../scripts/typings/createjs-lib/createjs-lib.d.ts" />
-/// <reference path="../scripts/typings/tweenjs/tweenjs.d.ts" />
-/// <reference path="../model/body.ts" />
-/// <reference path="../model/antenna.ts" />
-/// <reference path="../model/satellites.ts" />
-/// <reference path="../calculator/point.ts" />
-/// <reference path="graphicshelper.ts" />
-/// <reference path="view.ts" />
+﻿/// <reference path="../references.ts" />
 
 class EntireView extends View {
+    'use strict';
+
     satellites: Satellites;
 
     private shapeInner: createjs.Shape;
@@ -19,8 +13,9 @@ class EntireView extends View {
     private txtCommDistance2: createjs.Text;
     private txtCommStableRange: createjs.Text;
 
-    constructor(stage: createjs.Stage, innerSize: number, outerSize: number) {
+    constructor(stage: createjs.Stage, innerSize: number, outerSize: number, satellites: Satellites) {
         super(stage, innerSize, outerSize);
+        this.satellites = satellites;
 
         // shape for drawing in inner coordinates
         this.shapeInner = new createjs.Shape();
@@ -76,6 +71,7 @@ class EntireView extends View {
 
         this.showSatellites(this.shapeInner.graphics, this.satellites, this.satellites.body, this.satellites.antenna);
         this.showBody(this.shapeInner.graphics, this.satellites, this.satellites.body);
+        this.update();
     }
 
     private showBody(g: createjs.Graphics, s: Satellites, b: Body): void {
