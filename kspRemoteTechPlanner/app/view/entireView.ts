@@ -142,6 +142,10 @@ class EntireView extends View {
             this.txtCommDistance2.text = "Distance: " + s.satDistanceTo(2).toLocaleString("en", View.localeSetting) + " km";
             this.txtCommDistance2.x = this.outerCenter.x + this.toOuter((s.satPosition(0).x + s.satPosition(2).x) / 2) - View.marginText / 2;
             this.txtCommDistance2.y = this.outerCenter.y + this.toOuter((s.satPosition(0).y + s.satPosition(2).y) / 2) - View.marginText / 2;
+            this.txtCommDistance2.visible = true;
+        } else {
+            // any arrows should not be drawn.
+            this.txtCommDistance2.visible = false;
         }
 
         // stable area
