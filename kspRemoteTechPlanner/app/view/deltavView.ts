@@ -13,6 +13,7 @@ class DeltavView extends View {
     private shapeOuter: createjs.Shape;
     private txtDV1: createjs.Text;
     private txtDV2: createjs.Text;
+    private txtDVTotal: createjs.Text;
     private txtPhaseAngle: createjs.Text;
     private txtPhaseTime: createjs.Text;
 
@@ -39,6 +40,14 @@ class DeltavView extends View {
         this.txtDV2.x = this.outerCenter.x - DeltavView.designatedAltitude + View.marginText;
         this.txtDV2.y = this.outerCenter.y;
         this.texts.addChild(this.txtDV2);
+
+        // start delta-v + finish delta-v
+        this.txtDVTotal = new createjs.Text("", View.fontSetNormal);
+        this.txtDVTotal.textAlign = "center";
+        this.txtDVTotal.textBaseline = "top";
+        this.txtDVTotal.x = this.outerCenter.x;
+        this.txtDVTotal.y = this.outerCenter.y + DeltavView.parkingAltitude + View.marginText;
+        this.texts.addChild(this.txtDVTotal);
 
         // phase angle to insert new satellite into next/previous of satellites chain.
         this.txtPhaseAngle = new createjs.Text("", View.fontSetNormal);
@@ -93,6 +102,8 @@ class DeltavView extends View {
 
         this.txtDV1.text = "Start dV:\n" + (s.hohmannStartDeltaV() * 1000).toLocaleString("en", View.localeSetting) + " m/s";
         this.txtDV2.text = "Finish dV:\n" + (s.hohmannFinishDeltaV() * 1000).toLocaleString("en", View.localeSetting) + " m/s";
+        this.txtDVTotal.text = "Total dV: " + ((s.hohmannStartDeltaV() + s.hohmannFinishDeltaV()) * 1000)
+            .toLocaleString("en", View.localeSetting) + "m/s";
 
         // designated satellite spot
         this.shapeOuter.graphics.beginStroke("black")
