@@ -88,8 +88,8 @@ class InputData extends CookieConnector {
     load(): boolean {
         var sat: Satellites = this.loadCookie();
         if (sat != undefined) {
-            for (var item in sat) {
-                this.satellites[item] = sat[item];
+            for (var property in sat) {
+                this.satellites[property] = sat[property];
             }
             return true;
         } else {
