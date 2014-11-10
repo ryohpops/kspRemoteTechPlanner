@@ -103,11 +103,9 @@ module App {
     // retrieve data of selected body.
     function onBodySelect(ev) {
         var b: Body = bodies.getBody($("select#body").val());
-        input.satellites.body.name = b.name;
-        input.satellites.body.color = b.color;
-        input.satellites.body.radius = b.radius;
-        input.satellites.body.stdGravParam = b.stdGravParam;
-        input.satellites.body.soi = b.soi;
+        for (var property in b) {
+            input.satellites.body[property] = b[property];
+        }
 
         input.pushBody();
         validBody(); // execute validation with loaded value to clear validate state.
@@ -143,10 +141,9 @@ module App {
     // retrieve data of selected antenna.
     function onAntennaSelect(ev) {
         var a: Antenna = antennas.getAntenna($("select#antenna").val());
-        input.satellites.antenna.name = a.name;
-        input.satellites.antenna.type = a.type;
-        input.satellites.antenna.range = a.range;
-        input.satellites.antenna.elcConsumption = a.elcConsumption;
+        for (var property in a) {
+            input.satellites.antenna[property] = a[property];
+        }
 
         input.pushAntenna();
         validAntenna(); // execute validation with loaded value to clear validate state.
