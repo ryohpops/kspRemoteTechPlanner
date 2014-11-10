@@ -42,11 +42,11 @@ class BodyData extends CookieConnector {
 
     load(): boolean {
         this.userBodies = this.loadCookie();
-        if (this.userBodies == undefined) {
+        if (this.userBodies != undefined) {
+            return true;
+        } else {
             this.userBodies = {};
             return false;
-        } else {
-            return true;
         }
     }
 }

@@ -32,11 +32,11 @@ class AntennaData extends CookieConnector {
 
     load(): boolean {
         this.userAntennas = this.loadCookie();
-        if (this.userAntennas == undefined) {
+        if (this.userAntennas != undefined) {
+            return true;
+        } else {
             this.userAntennas = {};
             return false;
-        } else {
-            return true;
         }
     }
 }

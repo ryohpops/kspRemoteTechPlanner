@@ -2,14 +2,13 @@
 
 // startup
 $(() => {
-    App.init();
+    App.run();
 });
 
 module App {
     'use strict';
 
     // values
-    var satellites: Satellites;
     var input: InputData;
     var bodies: BodyData;
     var antennas: AntennaData;
@@ -19,17 +18,16 @@ module App {
     var viewDeltav: DeltavView;
 
     // method definitions
-    export function init() {
+    export function run() {
         // init values
-        satellites = new Satellites();
-        input = new InputData(satellites);
+        input = new InputData();
         bodies = new BodyData();
         antennas = new AntennaData();
 
         // init views
-        viewEntire = new EntireView(new createjs.Stage($("canvas#entire")[0]), 10000, 840, satellites);
-        viewNight = new NightView(new createjs.Stage($("canvas#night")[0]), 5000, 400, satellites);
-        viewDeltav = new DeltavView(new createjs.Stage($("canvas#deltav")[0]), 5000, 400, satellites);
+        viewEntire = new EntireView(new createjs.Stage($("canvas#entire")[0]), 10000, 840, input.satellites);
+        viewNight = new NightView(new createjs.Stage($("canvas#night")[0]), 5000, 400, input.satellites);
+        viewDeltav = new DeltavView(new createjs.Stage($("canvas#deltav")[0]), 5000, 400, input.satellites);
 
         // load user data
         if (bodies.load()) {
@@ -83,7 +81,7 @@ module App {
         input.pull();
         input.save();
 
-        viewEntire.innerSize = (satellites.body.radius + satellites.altitude + satellites.antenna.range) * 2 * 1.05;
+        viewEntire.innerSize = (input.satellites.body.radius + input.satellites.altitude + input.satellites.antenna.range) * 2 * 1.05;
         viewEntire.show();
         viewNight.show();
         viewDeltav.show();
@@ -105,11 +103,11 @@ module App {
     // retrieve data of selected body.
     function onBodySelect(ev) {
         var b: Body = bodies.getBody($("select#body").val());
-        satellites.body.name = b.name;
-        satellites.body.color = b.color;
-        satellites.body.radius = b.radius;
-        satellites.body.stdGravParam = b.stdGravParam;
-        satellites.body.soi = b.soi;
+        input.satellites.body.name = b.name;
+        input.satellites.body.color = b.color;
+        input.satellites.body.radius = b.radius;
+        input.satellites.body.stdGravParam = b.stdGravParam;
+        input.satellites.body.soi = b.soi;
 
         input.pushBody();
         validBody(); // execute validation with loaded value to clear validate state.
@@ -120,13 +118,13 @@ module App {
         if (validBody()) {
             input.pullBody();
 
-            if (bodies.stockBodies[satellites.body.name] == undefined) {
-                if (bodies.userBodies[satellites.body.name] == undefined)   // if the same name body is not defined yet,
-                    addUserDataSelection("body", satellites.body.name);     // add option to body selector.
-                $("select#body").val(satellites.body.name);
+            if (bodies.stockBodies[input.satellites.body.name] == undefined) {
+                if (bodies.userBodies[input.satellites.body.name] == undefined)   // if the same name body is not defined yet,
+                    addUserDataSelection("body", input.satellites.body.name);     // add option to body selector.
+                $("select#body").val(input.satellites.body.name);
 
-                bodies.userBodies[satellites.body.name] = new Body(satellites.body.name, satellites.body.color, satellites.body.radius,
-                    satellites.body.stdGravParam, satellites.body.soi); // create or update current body.
+                bodies.userBodies[input.satellites.body.name] = new Body(input.satellites.body.name, input.satellites.body.color, input.satellites.body.radius,
+                    input.satellites.body.stdGravParam, input.satellites.body.soi); // create or update current body.
                 bodies.save();
             }
         }
@@ -145,10 +143,10 @@ module App {
     // retrieve data of selected antenna.
     function onAntennaSelect(ev) {
         var a: Antenna = antennas.getAntenna($("select#antenna").val());
-        satellites.antenna.name = a.name;
-        satellites.antenna.type = a.type;
-        satellites.antenna.range = a.range;
-        satellites.antenna.elcConsumption = a.elcConsumption;
+        input.satellites.antenna.name = a.name;
+        input.satellites.antenna.type = a.type;
+        input.satellites.antenna.range = a.range;
+        input.satellites.antenna.elcConsumption = a.elcConsumption;
 
         input.pushAntenna();
         validAntenna(); // execute validation with loaded value to clear validate state.
@@ -159,13 +157,13 @@ module App {
         if (validAntenna()) {
             input.pullAntenna();
 
-            if (antennas.stockAntennas[satellites.antenna.name] == undefined) {
-                if (antennas.userAntennas[satellites.antenna.name] == undefined) // if the same name antenna is not defined yet,
-                    addUserDataSelection("antenna", satellites.antenna.name);    // add option to antenna selector.
-                $("select#antenna").val(satellites.antenna.name);
+            if (antennas.stockAntennas[input.satellites.antenna.name] == undefined) {
+                if (antennas.userAntennas[input.satellites.antenna.name] == undefined) // if the same name antenna is not defined yet,
+                    addUserDataSelection("antenna", input.satellites.antenna.name);    // add option to antenna selector.
+                $("select#antenna").val(input.satellites.antenna.name);
 
-                antennas.userAntennas[satellites.antenna.name] = new Antenna(satellites.antenna.name, satellites.antenna.type,
-                    satellites.antenna.range, satellites.antenna.elcConsumption); // create new instance and put data.
+                antennas.userAntennas[input.satellites.antenna.name] = new Antenna(input.satellites.antenna.name, input.satellites.antenna.type,
+                    input.satellites.antenna.range, input.satellites.antenna.elcConsumption); // create new instance and put data.
                 antennas.save();
             }
         }

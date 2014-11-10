@@ -7,9 +7,9 @@ class InputData extends CookieConnector {
 
     satellites: Satellites;
 
-    constructor(satellites: Satellites) {
+    constructor() {
         super(InputData.cookieKey);
-        this.satellites = satellites;
+        this.satellites = new Satellites();
     }
 
     pull() {
@@ -90,12 +90,9 @@ class InputData extends CookieConnector {
         if (sat == undefined) {
             return false;
         } else {
-            this.satellites.body = sat.body;
-            this.satellites.count = sat.count;
-            this.satellites.altitude = sat.altitude;
-            this.satellites.antenna = sat.antenna;
-            this.satellites.elcConsumption = sat.elcConsumption;
-            this.satellites.parkingAltitude = sat.parkingAltitude;
+            for (var item in sat) {
+                this.satellites[item] = sat[item];
+            }
             return true;
         }
     }

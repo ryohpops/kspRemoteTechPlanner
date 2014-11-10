@@ -27,5 +27,6 @@ class CookieConnector {
                 return JSON.parse(decodeURIComponent(spl[i].split("=")[1]));
             }
         }
+        return undefined;
     }
 }
