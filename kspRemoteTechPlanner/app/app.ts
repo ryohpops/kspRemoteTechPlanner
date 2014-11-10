@@ -70,9 +70,8 @@ module App {
         if (input.load()) {
             input.push();
         } else {
-            input.reset();
-            onBodySelect(null);
-            onAntennaSelect(null);
+            input.reset(bodies, antennas);
+            input.push();
         }
         update();
     }

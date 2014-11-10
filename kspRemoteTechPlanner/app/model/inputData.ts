@@ -72,13 +72,13 @@ class InputData extends CookieConnector {
         $("input#antenna_elcConsumption").val(this.satellites.antenna.elcConsumption.toString());
     }
 
-    reset() {
-        $("select#body").val("Kerbin");
-        $("input#count").val((4).toString());
-        $("input#altitude").val((1000).toString());
-        $("input#elcConsumption").val((0.01).toString());
-        $("select#antenna").val("Communotron 16");
-        $("input#parkingAltitude").val((70).toString());
+    reset(bodies: BodyData, antennas: AntennaData) {
+        this.satellites.body = bodies.getBody("Kerbin");
+        this.satellites.count = 4;
+        this.satellites.altitude = 1000;
+        this.satellites.elcConsumption = 0.029;
+        this.satellites.antenna = antennas.getAntenna("Communotron 16");
+        this.satellites.parkingAltitude = 70;
     }
 
     save() {
@@ -87,13 +87,13 @@ class InputData extends CookieConnector {
 
     load(): boolean {
         var sat: Satellites = this.loadCookie();
-        if (sat == undefined) {
-            return false;
-        } else {
+        if (sat != undefined) {
             for (var item in sat) {
                 this.satellites[item] = sat[item];
             }
             return true;
+        } else {
+            return false;
         }
     }
 }
