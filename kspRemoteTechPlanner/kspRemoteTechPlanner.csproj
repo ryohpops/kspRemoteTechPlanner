@@ -17,55 +17,8 @@
     <IISExpressUseClassicPipelineMode />
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="app\app.css" />
-    <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="index.html" />
-    <Content Include="packages.config" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <None Include="Scripts\jquery-2.1.1.intellisense.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\easeljs-0.7.1.min.js" />
-    <Content Include="Scripts\jquery-2.1.1.js" />
-    <Content Include="Scripts\jquery-2.1.1.min.js" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="web.config" />
-    <Content Include="Scripts\jquery-2.1.1.min.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <TypeScriptCompile Include="app\app.ts" />
-    <TypeScriptCompile Include="app\calculator\euclidean.ts" />
-    <TypeScriptCompile Include="app\calculator\orbital.ts" />
-    <TypeScriptCompile Include="app\calculator\point.ts" />
-    <TypeScriptCompile Include="app\model\antenna.ts" />
-    <TypeScriptCompile Include="app\model\antennaData.ts" />
-    <TypeScriptCompile Include="app\model\body.ts" />
-    <TypeScriptCompile Include="app\model\bodyData.ts" />
-    <TypeScriptCompile Include="app\model\cookieConnector.ts" />
-    <TypeScriptCompile Include="app\model\satellites.ts" />
-    <TypeScriptCompile Include="app\references.ts" />
-    <TypeScriptCompile Include="app\view\deltavView.ts" />
-    <TypeScriptCompile Include="app\view\entireView.ts" />
-    <TypeScriptCompile Include="app\view\graphicsHelper.ts" />
-    <TypeScriptCompile Include="app\model\inputData.ts" />
-    <TypeScriptCompile Include="app\view\nightView.ts" />
-    <TypeScriptCompile Include="app\view\view.ts" />
-    <TypeScriptCompile Include="Scripts\typings\bootstrap\bootstrap.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\createjs-lib\createjs-lib.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\easeljs\easeljs.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\jquery.validation\jquery.validation.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
-    <TypeScriptCompile Include="Scripts\typings\tweenjs\tweenjs.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <None Include="web.Debug.config">
@@ -74,6 +27,11 @@
     <None Include="web.Release.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="app\controllers\" />
+    <Folder Include="app\models\" />
+    <Folder Include="app\services\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
