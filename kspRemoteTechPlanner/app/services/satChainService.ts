@@ -5,12 +5,12 @@ module App {
 
         private _satChain: SatChain;
 
-        static $inject = ["$cookieStore", "satChainCookieKey", "calculator.euclidean", "calculator.orbital"];
+        static $inject = ["$cookieStore", "satChainCookieKey", "calc.euclideanServ", "calc.orbitalServ"];
         constructor(
             private $cookieStore: ng.cookies.ICookieStoreService,
             private cookieKey: string,
-            private euclidean: Calculator.EuclideanService,
-            private orbital: Calculator.OrbitalService
+            private euclideanServ: Calculator.EuclideanService,
+            private orbitalServ: Calculator.OrbitalService
             ) {
 
             this._satChain = this.loadOrCreate();
@@ -25,7 +25,7 @@ module App {
             if (sc !== undefined)
                 return sc;
             else
-                return new SatChain(new Body("kerbin", "test", 600, 3531.6, 8000), 4, 1000, 0.029, new Antenna("Communotron 16", AntennaType.omni, 5000, 1), 70);
+                return new SatChain(new Body("Kerbin", "rgb(63,111,40)", 600, 3531.6, 84159.286), 4, 1000, 0.029, new Antenna("Communotron 16", AntennaType.omni, 2500, 0.13), 70);
         }
 
         save() {
@@ -42,7 +42,7 @@ module App {
         }
 
         satDistanceTo(distance: number): number {
-            return this.euclidean.length(this.satPosition(0), this.satPosition(distance));
+            return this.euclideanServ.length(this.satPosition(0), this.satPosition(distance));
         }
 
         isNextSatConnectable(): boolean {
@@ -51,8 +51,8 @@ module App {
 
         canConnectToSat(distance: number): boolean {
             return this.satChain.count >= distance + 1 && // connecting satellite exists
-                this.euclidean.length(this.satPosition(0), this.satPosition(distance)) <= this.satChain.antenna.range && // connection range is enough 
-                this.euclidean.distPointLine(new Calculator.Point(0, 0), this.satPosition(0), this.satPosition(distance))
+                this.euclideanServ.length(this.satPosition(0), this.satPosition(distance)) <= this.satChain.antenna.range && // connection range is enough 
+                this.euclideanServ.distPointLine(new Calculator.Point(0, 0), this.satPosition(0), this.satPosition(distance))
                 > this.satChain.body.radius; // connection is not blocked by primary body
         }
 
@@ -61,16 +61,16 @@ module App {
         }
 
         stableLimitAltitude(): number {
-            return this.euclidean.circleCross(new Calculator.Point(0, 0), this.satPosition(0), this.satPosition(1),
+            return this.euclideanServ.circleCross(new Calculator.Point(0, 0), this.satPosition(0), this.satPosition(1),
                 this.satChain.antenna.range, Calculator.CircleCrossMode.high) - this.satChain.body.radius;
         }
 
         orbitalPeriod(): number {
-            return this.orbital.period(this.satChain.body.radius, this.satChain.altitude, this.satChain.body.stdGravity);
+            return this.orbitalServ.period(this.satChain.body.radius, this.satChain.altitude, this.satChain.body.stdGravity);
         }
 
         nightTime(): number {
-            return this.orbital.nightTime(this.satChain.body.radius, this.satChain.altitude, this.satChain.body.stdGravity);
+            return this.orbitalServ.nightTime(this.satChain.body.radius, this.satChain.altitude, this.satChain.body.stdGravity);
         }
 
         requiredBattery(): number {
@@ -82,21 +82,21 @@ module App {
         }
 
         hohmannStartDeltaV(): number {
-            return this.orbital.hohmannStartDV(this.satChain.body.radius, this.satChain.parkingAlt, this.satChain.altitude, this.satChain.body.stdGravity);
+            return this.orbitalServ.hohmannStartDV(this.satChain.body.radius, this.satChain.parkingAlt, this.satChain.altitude, this.satChain.body.stdGravity);
         }
 
         hohmannFinishDeltaV(): number {
-            return this.orbital.hohmannFinishDV(this.satChain.body.radius, this.satChain.parkingAlt, this.satChain.altitude, this.satChain.body.stdGravity);
+            return this.orbitalServ.hohmannFinishDV(this.satChain.body.radius, this.satChain.parkingAlt, this.satChain.altitude, this.satChain.body.stdGravity);
         }
 
         slidePhaseAngle(): number {
-            var periodLow: number = this.orbital.period(this.satChain.body.radius, this.satChain.parkingAlt, this.satChain.body.stdGravity);
-            var periodHigh: number = this.orbital.period(this.satChain.body.radius, this.satChain.altitude, this.satChain.body.stdGravity);
-            return this.orbital.slidePhaseAngle(360 / this.satChain.count, periodLow, periodHigh);
+            var periodLow: number = this.orbitalServ.period(this.satChain.body.radius, this.satChain.parkingAlt, this.satChain.body.stdGravity);
+            var periodHigh: number = this.orbitalServ.period(this.satChain.body.radius, this.satChain.altitude, this.satChain.body.stdGravity);
+            return this.orbitalServ.slidePhaseAngle(360 / this.satChain.count, periodLow, periodHigh);
         }
 
         slidePhaseTime(): number {
-            return this.slidePhaseAngle() / 360 * this.orbital.period(this.satChain.body.radius, this.satChain.parkingAlt, this.satChain.body.stdGravity);
+            return this.slidePhaseAngle() / 360 * this.orbitalServ.period(this.satChain.body.radius, this.satChain.parkingAlt, this.satChain.body.stdGravity);
         }
     }
 }

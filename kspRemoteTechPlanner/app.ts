@@ -1,11 +1,11 @@
 ﻿/// <reference path="references.ts" />
 module App {
-    angular.module("calculator", [])
-        .service("calculator.euclidean", Calculator.EuclideanService)
-        .service("calculator.orbital", Calculator.OrbitalService);
+    angular.module("calc", [])
+        .service("calc.euclideanServ", Calculator.EuclideanService)
+        .service("calc.orbitalServ", Calculator.OrbitalService);
 
-    angular.module("app", ["ngCookies", "calculator"])
+    angular.module("app", ["ngCookies", "calc"])
         .value("satChainCookieKey", "satChain")
-        .service("satChain", SatChainService)
-        .controller("input", InputController);
+        .service("satChainServ", SatChainService)
+        .controller("inputCtrl", InputController);
 }
