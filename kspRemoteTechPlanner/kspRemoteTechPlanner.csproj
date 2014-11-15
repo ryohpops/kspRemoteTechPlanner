@@ -66,6 +66,8 @@
     <TypeScriptCompile Include="app\models\body.ts" />
     <TypeScriptCompile Include="app\calculator\models\point.ts" />
     <TypeScriptCompile Include="app\models\satChain.ts" />
+    <TypeScriptCompile Include="app\services\antennaStorageService.ts" />
+    <TypeScriptCompile Include="app\services\bodyStorageService.ts" />
     <TypeScriptCompile Include="app\services\satChainService.ts" />
     <TypeScriptCompile Include="app\appReferences.ts" />
     <TypeScriptCompile Include="references.ts" />
