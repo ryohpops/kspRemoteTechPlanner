@@ -72,11 +72,15 @@ module App {
 
         getBody(name: string): Body {
             if (this.existsInStock(name))
-                return this.stockBodies[name];
+                return this.stockBodies[name].clone();
             else if (this.existsInUser(name))
-                return this.userBodies[name];
+                return this.userBodies[name].clone();
             else
                 return undefined;
+        }
+
+        setBody(name: string, data: Body) {
+            this.userBodies[name] = data.clone();
         }
     }
 }

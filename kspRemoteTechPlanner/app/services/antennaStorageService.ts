@@ -50,5 +50,26 @@ module App {
             else
                 this.$cookieStore.remove(this.cookieKey);
         }
+
+        existsInStock(name: string): boolean {
+            return Object.keys(this.stockAntennas).indexOf(name) !== -1;
+        }
+
+        existsInUser(name: string): boolean {
+            return Object.keys(this.userAntennas).indexOf(name) !== -1;
+        }
+
+        getAntenna(name: string): Antenna {
+            if (this.existsInStock(name))
+                return this.stockAntennas[name].clone();
+            else if (this.existsInUser(name))
+                return this.userAntennas[name].clone();
+            else
+                return undefined;
+        }
+
+        setAntenna(name: string, data: Antenna) {
+            this.userAntennas[name] = data.clone();
+        }
     }
 }
