@@ -5,9 +5,11 @@ module App {
 
         satChain: SatChain;
 
-        static $inject = ["satChainServ"];
+        static $inject = ["satChainServ", "bodyStorageServ", "antennaStorageServ"];
         constructor(
-            private satChainServ: SatChainService
+            private satChainServ: SatChainService,
+            private bodies: BodyStorageService,
+            private antennas: AntennaStorageService
             ) {
 
             this.satChain = this.satChainServ.satChain;

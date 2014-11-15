@@ -44,7 +44,7 @@ module App {
                 "Eeloo": new Body("Eeloo", "rgb(221,221,210)", 210, 74.410815, 119082.94)
             };
 
-            this.userBodies = this.loadOrCreate();
+            this._userBodies = this.loadOrCreate();
         }
 
         private loadOrCreate(): BodyDictionary {
