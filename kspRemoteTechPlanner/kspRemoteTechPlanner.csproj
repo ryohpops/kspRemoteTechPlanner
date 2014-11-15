@@ -17,7 +17,7 @@
     <IISExpressUseClassicPipelineMode />
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="app\app.css" />
+    <Content Include="app.css" />
     <Content Include="content\bootstrap-theme.css" />
     <Content Include="content\bootstrap-theme.min.css" />
     <Content Include="content\bootstrap.css" />
@@ -57,10 +57,19 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="app\controllers\" />
-    <Folder Include="app\models\" />
     <Folder Include="app\services\" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="app.ts" />
+    <TypeScriptCompile Include="app\calculator\calculatorReferences.ts" />
+    <TypeScriptCompile Include="app\calculator\services\euclidean.ts" />
+    <TypeScriptCompile Include="app\calculator\services\orbital.ts" />
+    <TypeScriptCompile Include="app\models\antenna.ts" />
+    <TypeScriptCompile Include="app\models\body.ts" />
+    <TypeScriptCompile Include="app\calculator\models\point.ts" />
+    <TypeScriptCompile Include="app\models\satellites.ts" />
+    <TypeScriptCompile Include="app\appReferences.ts" />
+    <TypeScriptCompile Include="references.ts" />
     <TypeScriptCompile Include="scripts\typings\angularjs\angular-animate.d.ts" />
     <TypeScriptCompile Include="scripts\typings\angularjs\angular-cookies.d.ts" />
     <TypeScriptCompile Include="scripts\typings\angularjs\angular-mocks.d.ts" />
@@ -107,7 +116,7 @@
     <TypeScriptRemoveComments>false</TypeScriptRemoveComments>
     <TypeScriptSourceMap>true</TypeScriptSourceMap>
     <TypeScriptModuleKind>none</TypeScriptModuleKind>
-    <TypeScriptOutFile>app/appOut.js</TypeScriptOutFile>
+    <TypeScriptOutFile>appOut.js</TypeScriptOutFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
     <TypeScriptTarget>ES5</TypeScriptTarget>

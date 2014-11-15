@@ -1,6 +1,5 @@
-﻿/// <reference path="../references.ts" />
-
-module Euclidean {
+﻿/// <reference path="../calculatorreferences.ts" />
+module App.Calculator {
     'use strict';
 
     export enum CircleCrossPointMode {

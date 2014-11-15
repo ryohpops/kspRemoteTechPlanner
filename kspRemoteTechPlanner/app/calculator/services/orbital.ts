@@ -1,6 +1,5 @@
-﻿/// <reference path="../references.ts" />
-
-module Orbital {
+﻿/// <reference path="../calculatorreferences.ts" />
+module App.Calculator {
     'use strict';
 
     export function orbitalPeriod(bodyRadius: number, altitude: number, stdGravParam: number) {
