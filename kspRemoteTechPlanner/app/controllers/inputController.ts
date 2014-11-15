@@ -3,12 +3,18 @@ module App {
     export class InputController {
         'use strict';
 
-        static $inject = ["$scope", "satChainServ"];
+        satChain: SatChain;
+
+        static $inject = ["satChainServ"];
         constructor(
-            private $scope: ng.IScope,
             private satChainServ: SatChainService
             ) {
 
+            this.satChain = this.satChainServ.satChain;
+        }
+
+        save() {
+            this.satChainServ.save();
         }
     }
 }
