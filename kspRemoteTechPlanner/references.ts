@@ -7,4 +7,5 @@
 /// <reference path="scripts/typings/easeljs/easeljs.d.ts" />
 
 /// <reference path="app/appreferences.ts" />
+
 /// <reference path="app.ts" />
