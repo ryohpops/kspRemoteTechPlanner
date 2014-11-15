@@ -10,17 +10,17 @@ module App {
         name: string;
         type: AntennaType;
         range: number;
-        elcConsumption: number;
+        elcNeeded: number;
 
-        constructor(name: string, type: AntennaType, range: number, elcConsumption: number) {
+        constructor(name: string, type: AntennaType, range: number, elcNeeded: number) {
             this.name = name;
             this.type = type;
             this.range = range;
-            this.elcConsumption = elcConsumption;
+            this.elcNeeded = elcNeeded;
         }
 
         clone(): Antenna {
-            return new Antenna(this.name, this.type, this.range, this.elcConsumption);
+            return new Antenna(this.name, this.type, this.range, this.elcNeeded);
         }
     }
 }
