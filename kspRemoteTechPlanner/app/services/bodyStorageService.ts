@@ -1,15 +1,19 @@
 ﻿module App {
+    export interface BodyDictionary {
+        [index: string]: Body;
+    }
+
     export class BodyStorageService {
         'use strict';
 
-        private _stockBodies: { [index: string]: Body };
-        private _userBodies: { [index: string]: Body };
+        private _stockBodies: BodyDictionary;
+        private _userBodies: BodyDictionary;
 
-        get stockBodies(): { [index: string]: Body } {
+        get stockBodies(): BodyDictionary {
             return this._stockBodies;
         }
 
-        get userBodies(): { [index: string]: Body } {
+        get userBodies(): BodyDictionary {
             return this._userBodies;
         }
 
@@ -42,8 +46,8 @@
             this.userBodies = this.loadOrCreate();
         }
 
-        private loadOrCreate(): { [index: string]: Body } {
-            var ub: { [index: string]: Body } = this.$cookieStore.get(this.cookieKey);
+        private loadOrCreate(): BodyDictionary {
+            var ub: BodyDictionary = this.$cookieStore.get(this.cookieKey);
             if (ub !== undefined)
                 return ub;
             else
