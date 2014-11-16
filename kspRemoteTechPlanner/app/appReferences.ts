@@ -9,3 +9,4 @@
 /// <reference path="services/satchainservice.ts" />
 
 /// <reference path="controllers/inputcontroller.ts" />
+/// <reference path="controllers/appcontroller.ts" />
