@@ -1,7 +1,8 @@
 ﻿/// <reference path="../appreferences.ts" />
 module App {
     export enum AntennaType {
-        omni, dish
+        omni = 0,
+        dish = 1
     }
 
     export class Antenna {

@@ -19,6 +19,7 @@
     <div class="container">
         <h1>Visual RemoteTech Planner for KSP</h1>
 
+        <!-- intro -->
         <div class="row">
             <div class="col-md-12">
                 <h2>Description</h2>
@@ -40,6 +41,7 @@
             </div>
         </div>
 
+        <!-- three views  -->
         <div class="row">
             <div class="col-md-9">
                 <div class="row">
@@ -66,12 +68,13 @@
                 </div>
             </div>
 
+            <!-- Data input -->
             <div class="col-md-3" ng-controller="inputCtrl as input">
                 <h3>Data input</h3>
-                <form role="form" id="calculator">
+                <form role="form" novalidate>
                     <div class="form-group">
                         <label for="body">Body</label>
-                        <select class="form-control" id="body">
+                        <select class="form-control" ng-model="input.satChain.body.name" ng-change="input.pullBody(input.satChain.body.name) || input.save()">
                             <option>Kerbol</option>
                             <option>Moho</option>
                             <option>Eve</option>
@@ -97,67 +100,73 @@
                                 <option>Pol</option>
                             </optgroup>
                             <option>Eeloo</option>
-                            <optgroup label="User data"></optgroup>
+                            <optgroup label="User data">
+                                <option ng-repeat="body in input.bodies.userBodies">{{body.name}}</option>
+                            </optgroup>
                         </select>
 
-                        <div class="manual-input" id="manual_body">
+                        <!-- manual input for body-->
+                        <div class="manual-input collapse" id="manual_body" ng-init="input.manualBody = false">
                             <div class="form-group">
                                 <label for="body_name">Name</label>
-                                <input type="text" class="form-control" id="body_name" />
+                                <input type="text" class="form-control" id="body_name" ng-model="input.satChain.body.name" required ng-change="input.save()" />
                             </div>
                             <div class="form-group">
                                 <label for="body_color">Color</label>
-                                <input type="text" class="form-control" id="body_color" />
+                                <input type="text" class="form-control" id="body_color" ng-model="input.satChain.body.color" required ng-change="input.save()" />
                             </div>
                             <div class="form-group">
                                 <label for="body_radius">Radius(km)</label>
-                                <input type="number" class="form-control" id="body_radius" />
+                                <input type="number" class="form-control" id="body_radius" ng-model="input.satChain.body.radius" required ng-change="input.save()" />
                             </div>
                             <div class="form-group">
-                                <label for="body_stdGravParam">Standard gravitational parameter<br />(km<sup>3</sup>s<sup>-2</sup>)</label>
-                                <input type="number" class="form-control" id="body_stdGravParam" />
+                                <label for="body_stdGravity">Standard gravitational parameter<br />(km<sup>3</sup>s<sup>-2</sup>)</label>
+                                <input type="number" class="form-control" id="body_stdGravParam" ng-model="input.satChain.body.stdGravity" required ng-change="input.save()" />
                             </div>
                             <div class="form-group">
                                 <label for="body_soi">Sphere of Influence(km)</label>
-                                <input type="number" class="form-control" id="body_soi" />
+                                <input type="number" class="form-control" id="body_soi" ng-model="input.satChain.body.soi" required ng-change="input.save()" />
                             </div>
                         </div>
 
-                        <div class="btn-group btn-group-xs btn-group-justified">
-                            <button type="button" class="btn btn-xs manual-input" id="body_detail">
-                                <span class="glyphicon glyphicon-collapse-up"></span>
-                                <span class="glyphicon glyphicon-collapse-down"></span>
-                            </button>
-                            <button type="button" class="btn btn-xs manual-input" id="body_add">
+                        <!-- manual input buttons for body -->
+                        <button type="button" class="btn btn-xs fluid" ng-hide="input.manualBody" data-toggle="collapse" data-target="#manual_body" ng-click="input.manualBody = true">
+                            <span class="glyphicon glyphicon-collapse-down"></span>
+                        </button>
+                        <div class="btn-group btn-group-xs btn-group-justified" ng-show="input.manualBody">
+                            <button type="button" class="btn btn-xs">
                                 <span class="glyphicon glyphicon-plus"></span>
                             </button>
-                            <button type="button" class="btn btn-xs manual-input" id="body_remove">
+                            <button type="button" class="btn btn-xs">
                                 <span class="glyphicon glyphicon-minus"></span>
                             </button>
-                            <button type="button" class="btn btn-xs manual-input" id="body_reset">
+                            <button type="button" class="btn btn-xs">
                                 <span class="glyphicon glyphicon-repeat"></span>
                             </button>
                         </div>
+                        <button type="button" class="btn btn-xs fluid" ng-show="input.manualBody" data-toggle="collapse" data-target="#manual_body" ng-click="input.manualBody = false">
+                            <span class="glyphicon glyphicon-collapse-up"></span>
+                        </button>
                     </div>
 
                     <div class="form-group">
                         <label for="count">Count</label>
-                        <input type="number" class="form-control" id="count" />
+                        <input type="number" class="form-control" id="count" ng-model="input.satChain.count" required ng-change="input.save()" />
                     </div>
 
                     <div class="form-group">
                         <label for="altitude">Altitude(km)</label>
-                        <input type="number" class="form-control" id="altitude" />
+                        <input type="number" class="form-control" id="altitude" ng-model="input.satChain.altitude" required ng-change="input.save()" />
                     </div>
 
                     <div class="form-group">
-                        <label for="elcConsumption">Probe electricity consumption<br />(exclude antenna's, per sec.)</label>
-                        <input type="number" class="form-control" id="elcConsumption" />
+                        <label for="elcNeeded">Probe electricity consumption<br />(exclude antenna's, per sec.)</label>
+                        <input type="number" class="form-control" id="elcNeeded" ng-model="input.satChain.elcNeeded" required ng-change="input.save()" />
                     </div>
 
                     <div class="form-group">
                         <label for="antenna">Antenna</label>
-                        <select class="form-control" id="antenna">
+                        <select class="form-control" ng-model="input.satChain.antenna.name" ng-change="input.pullAntenna(input.satChain.antenna.name) || input.save()">
                             <optgroup label="Omnidirectional">
                                 <option>Reflectron DP-10</option>
                                 <option>Communotron 16</option>
@@ -168,36 +177,39 @@
                                 <option>Comms DTS-M1</option>
                                 <option>Reflectron KR-7</option>
                             </optgroup>
-                            <optgroup label="User data"></optgroup>
+                            <optgroup label="User data">
+                                <option ng-repeat="antenna in input.antennas.userAntennas">{{antenna.name}}</option>
+                            </optgroup>
                         </select>
 
-                        <div class="manual-input" id="manual_antenna">
+                        <!-- manual input for antenna -->
+                        <div class="manual-input collapse" id="manual_antenna" ng-init="input.manualAntenna = false">
                             <div class="form-group">
                                 <label for="antenna_name">Name</label>
-                                <input type="text" class="form-control" id="antenna_name" />
+                                <input type="text" class="form-control" id="antenna_name" ng-model="input.satChain.antenna.name" required ng-change="input.save()" />
                             </div>
                             <div class="form-group">
                                 <label for="antenna_type">Type</label>
-                                <select class="form-control" id="antenna_type">
-                                    <option>omni</option>
-                                    <option>dish</option>
+                                <select class="form-control" id="antenna_type" required ng-model="input.satChain.antenna.type" ng-change="input.save()">
+                                    <option value="0">omni</option>
+                                    <option value="1">dish</option>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label for="antenna_range">Range(km)</label>
-                                <input type="number" class="form-control" id="antenna_range" />
+                                <input type="number" class="form-control" id="antenna_range" required ng-model="input.satChain.antenna.range" ng-change="input.save()" />
                             </div>
                             <div class="form-group">
-                                <label for="antenna_elcConsumption">Electricity consumption(per sec.)</label>
-                                <input type="number" class="form-control" id="antenna_elcConsumption" />
+                                <label for="antenna_elcNeeded">Electricity consumption(per sec.)</label>
+                                <input type="number" class="form-control" id="antenna_elcNeeded" required ng-model="input.satChain.antenna.elcNeeded" ng-change="input.save()" />
                             </div>
                         </div>
 
-                        <div class="btn-group btn-group-xs btn-group-justified">
-                            <button type="button" class="btn btn-xs manual-input" id="antenna_detail">
-                                <span class="glyphicon glyphicon-collapse-up"></span>
-                                <span class="glyphicon glyphicon-collapse-down"></span>
-                            </button>
+                        <!-- manual input buttons for antenna -->
+                        <button type="button" class="btn btn-xs fluid" ng-hide="input.manualAntenna" data-toggle="collapse" data-target="#manual_antenna" ng-click="input.manualAntenna = true">
+                            <span class="glyphicon glyphicon-collapse-down"></span>
+                        </button>
+                        <div class="btn-group btn-group-xs btn-group-justified" ng-show="input.manualAntenna">
                             <button type="button" class="btn btn-xs manual-input" id="antenna_add">
                                 <span class="glyphicon glyphicon-plus"></span>
                             </button>
@@ -208,21 +220,20 @@
                                 <span class="glyphicon glyphicon-repeat"></span>
                             </button>
                         </div>
+                        <button type="button" class="btn btn-xs fluid" ng-show="input.manualAntenna" data-toggle="collapse" data-target="#manual_antenna" ng-click="input.manualAntenna = false">
+                            <span class="glyphicon glyphicon-collapse-up"></span>
+                        </button>
                     </div>
 
                     <div class="form-group">
-                        <label for="parkingAltitude">Parking altitude on launch(km)</label>
-                        <input type="number" class="form-control" id="parkingAltitude" />
-                    </div>
-
-                    <div class="form-group">
-                        <button type="button" class="btn btn-primary" id="calculate">Calculate</button>
-                        <button type="button" class="btn btn-default" id="reset">Reset</button>
+                        <label for="parkingAlt">Parking altitude on launch(km)</label>
+                        <input type="number" class="form-control" id="parkingAlt" required ng-model="input.satChain.parkingAlt" ng-change="input.save()" />
                     </div>
                 </form>
             </div>
         </div>
 
+        <!-- description -->
         <div class="row">
             <div class="col-md-12">
                 <h2>How to read figures</h2>
@@ -244,6 +255,7 @@
             </div>
         </div>
 
+        <!-- concrete description -->
         <div class="row">
             <div class="col-md-12">
                 <h2>How to use solution</h2>
@@ -267,6 +279,7 @@
             </div>
         </div>
 
+        <!-- footer -->
         <div class="row">
             <div class="col-md-12"><hr /></div>
             <div class="col-md-12">

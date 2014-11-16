@@ -5,22 +5,9 @@
 }
 
 div.manual-input {
-    margin: 5%;
-    display: none;
+    margin: 5% !important;
 }
 
-button.manual-input[id$="_detail"] {
-    width: 70%;
-}
-
-button.manual-input[id$="_add"] {
-    width: 10%;
-}
-
-button.manual-input[id$="_remove"] {
-    width: 10%;
-}
-
-button.manual-input[id$="_reset"] {
-    width: 10%;
+button.fluid {
+    width: 100%;
 }
