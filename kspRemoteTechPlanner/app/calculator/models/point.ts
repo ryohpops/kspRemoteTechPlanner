@@ -1,5 +1,5 @@
 ﻿/// <reference path="../calculatorreferences.ts" />
-module App.Calculator {
+module Calculator {
     export class Point {
         'use strict';
 
