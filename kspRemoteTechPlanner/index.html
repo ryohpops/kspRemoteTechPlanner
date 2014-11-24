@@ -105,47 +105,25 @@
                             </optgroup>
                         </select>
 
-                        <!-- manual input for body-->
-                        <div class="manual-input collapse" id="manual_body" ng-init="input.manualBody = false">
-                            <div class="form-group">
-                                <label for="body_name">Name</label>
-                                <input type="text" class="form-control" id="body_name" ng-model="input.satChain.body.name" required ng-change="input.save()" />
-                            </div>
-                            <div class="form-group">
-                                <label for="body_color">Color</label>
-                                <input type="text" class="form-control" id="body_color" ng-model="input.satChain.body.color" required ng-change="input.save()" />
-                            </div>
-                            <div class="form-group">
-                                <label for="body_radius">Radius(km)</label>
-                                <input type="number" class="form-control" id="body_radius" ng-model="input.satChain.body.radius" required ng-change="input.save()" />
-                            </div>
-                            <div class="form-group">
-                                <label for="body_stdGravity">Standard gravitational parameter<br />(km<sup>3</sup>s<sup>-2</sup>)</label>
-                                <input type="number" class="form-control" id="body_stdGravParam" ng-model="input.satChain.body.stdGravity" required ng-change="input.save()" />
-                            </div>
-                            <div class="form-group">
-                                <label for="body_soi">Sphere of Influence(km)</label>
-                                <input type="number" class="form-control" id="body_soi" ng-model="input.satChain.body.soi" required ng-change="input.save()" />
-                            </div>
+                        <!-- detail for body -->
+                        <div class="detail collapse" id="detail_body">
+                            <dl>
+                                <dt>Name</dt>
+                                <dd>{{input.satChain.body.name}}</dd>
+                                <dt>Color</dt>
+                                <dd>{{input.satChain.body.color}}</dd>
+                                <dt>Radius(km)</dt>
+                                <dd>{{input.satChain.body.radius |number}}</dd>
+                                <dt>Standard gravitational parameter(km<sup>3</sup>s<sup>-2</sup>)</dt>
+                                <dd>{{input.satChain.body.stdGravity |number}}</dd>
+                                <dt>Sphere of Influence(km)</dt>
+                                <dd>{{input.satChain.body.soi |number}}</dd>
+                            </dl>
                         </div>
 
-                        <!-- manual input buttons for body -->
-                        <button type="button" class="btn btn-xs fluid" ng-hide="input.manualBody" data-toggle="collapse" data-target="#manual_body" ng-click="input.manualBody = true">
-                            <span class="glyphicon glyphicon-collapse-down"></span>
-                        </button>
-                        <div class="btn-group btn-group-xs btn-group-justified" ng-show="input.manualBody">
-                            <button type="button" class="btn btn-xs">
-                                <span class="glyphicon glyphicon-plus"></span>
-                            </button>
-                            <button type="button" class="btn btn-xs">
-                                <span class="glyphicon glyphicon-minus"></span>
-                            </button>
-                            <button type="button" class="btn btn-xs">
-                                <span class="glyphicon glyphicon-repeat"></span>
-                            </button>
-                        </div>
-                        <button type="button" class="btn btn-xs fluid" ng-show="input.manualBody" data-toggle="collapse" data-target="#manual_body" ng-click="input.manualBody = false">
+                        <button type="button" class="btn btn-xs fluid" data-toggle="collapse" data-target="#detail_body">
                             <span class="glyphicon glyphicon-collapse-up"></span>
+                            <span class="glyphicon glyphicon-collapse-down"></span>
                         </button>
                     </div>
 
@@ -182,8 +160,22 @@
                             </optgroup>
                         </select>
 
+                        <!-- detail for antenna -->
+                        <div class="detail collapse" id="detail_antenna">
+                            <dl>
+                                <dt>Name</dt>
+                                <dd></dd>
+                                <dt>Type</dt>
+                                <dd></dd>
+                                <dt>Range(km)</dt>
+                                <dd></dd>
+                                <dt>Electricity consumption(per sec.)</dt>
+                                <dd></dd>
+                            </dl>
+                        </div>
+
                         <!-- manual input for antenna -->
-                        <div class="manual-input collapse" id="manual_antenna" ng-init="input.manualAntenna = false">
+                        <div class="manual-input collapse" id="manual_antenna">
                             <div class="form-group">
                                 <label for="antenna_name">Name</label>
                                 <input type="text" class="form-control" id="antenna_name" ng-model="input.satChain.antenna.name" required ng-change="input.save()" />

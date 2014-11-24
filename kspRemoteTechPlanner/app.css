@@ -4,10 +4,14 @@
     border-width: thin;
 }
 
-div.manual-input {
+div.detail {
     margin: 5% !important;
 }
 
 button.fluid {
     width: 100%;
+}
+
+dd {
+    padding-left: 20px;
 }
