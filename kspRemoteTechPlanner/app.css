@@ -8,10 +8,10 @@ div.detail {
     margin: 5% !important;
 }
 
-button.fluid {
-    width: 100%;
+dl.detail > dd {
+    text-align: right;
 }
 
-dd {
-    padding-left: 20px;
+button.fluid {
+    width: 100%;
 }

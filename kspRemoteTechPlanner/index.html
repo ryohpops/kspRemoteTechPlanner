@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 
 <html lang="en" ng-app="app">
 <head>
@@ -107,7 +107,7 @@
 
                         <!-- detail for body -->
                         <div class="detail collapse" id="detail_body">
-                            <dl>
+                            <dl class="detail">
                                 <dt>Name</dt>
                                 <dd>{{input.satChain.body.name}}</dd>
                                 <dt>Color</dt>
@@ -162,58 +162,21 @@
 
                         <!-- detail for antenna -->
                         <div class="detail collapse" id="detail_antenna">
-                            <dl>
+                            <dl class="detail">
                                 <dt>Name</dt>
-                                <dd></dd>
+                                <dd>{{input.satChain.antenna.name}}</dd>
                                 <dt>Type</dt>
-                                <dd></dd>
+                                <dd>{{input.satChain.antenna.typeString()}}</dd>
                                 <dt>Range(km)</dt>
-                                <dd></dd>
+                                <dd>{{input.satChain.antenna.range |number}}</dd>
                                 <dt>Electricity consumption(per sec.)</dt>
-                                <dd></dd>
+                                <dd>{{input.satChain.antenna.elcNeeded |number}}</dd>
                             </dl>
                         </div>
 
-                        <!-- manual input for antenna -->
-                        <div class="manual-input collapse" id="manual_antenna">
-                            <div class="form-group">
-                                <label for="antenna_name">Name</label>
-                                <input type="text" class="form-control" id="antenna_name" ng-model="input.satChain.antenna.name" required ng-change="input.save()" />
-                            </div>
-                            <div class="form-group">
-                                <label for="antenna_type">Type</label>
-                                <select class="form-control" id="antenna_type" required ng-model="input.satChain.antenna.type" ng-change="input.save()">
-                                    <option value="0">omni</option>
-                                    <option value="1">dish</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="antenna_range">Range(km)</label>
-                                <input type="number" class="form-control" id="antenna_range" required ng-model="input.satChain.antenna.range" ng-change="input.save()" />
-                            </div>
-                            <div class="form-group">
-                                <label for="antenna_elcNeeded">Electricity consumption(per sec.)</label>
-                                <input type="number" class="form-control" id="antenna_elcNeeded" required ng-model="input.satChain.antenna.elcNeeded" ng-change="input.save()" />
-                            </div>
-                        </div>
-
-                        <!-- manual input buttons for antenna -->
-                        <button type="button" class="btn btn-xs fluid" ng-hide="input.manualAntenna" data-toggle="collapse" data-target="#manual_antenna" ng-click="input.manualAntenna = true">
-                            <span class="glyphicon glyphicon-collapse-down"></span>
-                        </button>
-                        <div class="btn-group btn-group-xs btn-group-justified" ng-show="input.manualAntenna">
-                            <button type="button" class="btn btn-xs manual-input" id="antenna_add">
-                                <span class="glyphicon glyphicon-plus"></span>
-                            </button>
-                            <button type="button" class="btn btn-xs manual-input" id="antenna_remove">
-                                <span class="glyphicon glyphicon-minus"></span>
-                            </button>
-                            <button type="button" class="btn btn-xs manual-input" id="antenna_reset">
-                                <span class="glyphicon glyphicon-repeat"></span>
-                            </button>
-                        </div>
-                        <button type="button" class="btn btn-xs fluid" ng-show="input.manualAntenna" data-toggle="collapse" data-target="#manual_antenna" ng-click="input.manualAntenna = false">
+                        <button type="button" class="btn btn-xs fluid" data-toggle="collapse" data-target="#detail_antenna">
                             <span class="glyphicon glyphicon-collapse-up"></span>
+                            <span class="glyphicon glyphicon-collapse-down"></span>
                         </button>
                     </div>
 
