@@ -195,55 +195,11 @@
             </ul>
 
             <div class="tab-content">
-                <div role="tabpanel" class="tab-pane fade in active" id="desc">
-                    <!-- description -->
-                    <div class="col-md-12">
-                        <h3>How to read figures</h3>
-                        Filled circles in the middle of each views mean primary body, the owner of the SoI that your satellites belong to.<br />
-                        A yellow circle means sphere of influence. Any orbits cannot form themselves around the primary body above this altitude. Usually it exists beyond the Entire view's display range.<br />
-                        <br />
-                        Black circles mean the orbit of satellites and black dots mean each satellite.
-                        A Black edged white dot means the spot which your new satellite is going into after it's hohmann transfer.<br />
-                        Red clear circles mean range of antennas on each satellite. <b>Attention!</b> Unlike those figures, satellites cannot communicate each other through the primary body.<br />
-                        The two-way arrow means distance of these two satellites.<br />
-                        If the color of the arrow is blue, all satellites can connect to their next one. It will provides a nice ring for smooth communication.<br />
-                        If the color is red, any satellites cannot connect to the others. All satellites are in solitude.<br />
-                        When green circle labeled Stable appears, any orbits lower than the Stable altitude never have connection-less flights.<br />
-                        <br />
-                        Slide angle and Slide time mean same amount in different units.<br />
-                        Shifting your hohmann transfer node according to this value makes shifting the result of the transfer by ( 360 / &lt;the number of satellites&gt; ) degrees.<br />
-                        <br />
-                        Note that only Entire view is dynamically scaled.<br />
-                    </div>
+                <div role="tabpanel" class="tab-pane fade in active" id="desc" ng-include src="'app/views/description.html'"></div>
 
-                    <!-- concrete description -->
-                    <div class="col-md-12">
-                        <h3>How to use solution</h3>
-                        <h4>For MechJeb users</h4>
-                        <ol>
-                            <li>Write down orbital period of the satellite which is at the first spot of your satellite chain.</li>
-                            <li>Target the satellite, open Maneuver Planenr and create (do <b>not</b> execute) hohmann transfer.</li>
-                            <li>Open Maneuver Editor and put Slide time in the Delta-V view into Shift time.</li>
-                            <li>Push + at Shift time and check intersection pointer is shifted properly.</li>
-                            <li>Execute node and do circularize at designated altitude.</li>
-                            <li>Adjust orbital period of the new satellites to the one you written on step 1.</li>
-                        </ol>
+                <div role="tabpanel" class="tab-pane fade" id="body"></div>
 
-                        <h4>For manual control users</h4>
-                        <ol>
-                            <li>Target the satellite which is at the first spot of your satellite chain.</li>
-                            <li>Create a maneuver node to perform hohmann transfer.</li>
-                            <li>Slide the node forward by Slide angle or Slide time in the Delta-v view, and check intersection pointer is shifted properly.</li>
-                            <li>Execute node and do circularize at designated altitude.</li>
-                        </ol>
-                    </div>
-                </div>
-                <div role="tabpanel" class="tab-pane fade" id="body">
-
-                </div>
-                <div role="tabpanel" class="tab-pane fade" id="antenna">
-
-                </div>
+                <div role="tabpanel" class="tab-pane fade" id="antenna"></div>
             </div>
         </div>
 
