@@ -70,6 +70,7 @@
     <TypeScriptCompile Include="app\models\satChain.ts" />
     <TypeScriptCompile Include="app\services\antennaStorageService.ts" />
     <TypeScriptCompile Include="app\services\bodyStorageService.ts" />
+    <TypeScriptCompile Include="app\services\entireView.ts" />
     <TypeScriptCompile Include="app\services\satChainService.ts" />
     <TypeScriptCompile Include="app\appReferences.ts" />
     <TypeScriptCompile Include="references.ts" />
