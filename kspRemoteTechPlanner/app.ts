@@ -14,6 +14,7 @@ module App {
         .service("graphicsHelperServ", GraphicsHelperService)
         .service("entireViewServ", EntireViewService)
         .service("nightViewServ", NightViewService)
+        .service("deltavViewServ", DeltavViewService)
         .controller("inputCtrl", InputController)
         .controller("appCtrl", AppController);
 }

@@ -11,6 +11,7 @@
 /// <reference path="services/viewservice.ts" />
 /// <reference path="services/entireviewservice.ts" />
 /// <reference path="services/nightviewservice.ts" />
+/// <reference path="services/deltavviewservice.ts" />
 
 /// <reference path="controllers/inputcontroller.ts" />
 /// <reference path="controllers/appcontroller.ts" />

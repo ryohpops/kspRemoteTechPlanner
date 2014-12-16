@@ -70,6 +70,7 @@
     <TypeScriptCompile Include="app\models\satChain.ts" />
     <TypeScriptCompile Include="app\services\antennaStorageService.ts" />
     <TypeScriptCompile Include="app\services\bodyStorageService.ts" />
+    <TypeScriptCompile Include="app\services\deltavViewService.ts" />
     <TypeScriptCompile Include="app\services\entireViewService.ts" />
     <TypeScriptCompile Include="app\services\graphicsHelperService.ts" />
     <TypeScriptCompile Include="app\services\nightViewService.ts" />

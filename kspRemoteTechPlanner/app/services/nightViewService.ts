@@ -68,7 +68,8 @@ module App {
         }
 
         private showFigures(g: createjs.Graphics, s: SatChainService) {
-            var b: Body = s.satChain.body;
+            var sc: SatChain = s.satChain;
+            var b: Body = sc.body;
 
             // night area
             this.shapeOuter.graphics.beginFill("rgba(0,0,0,0.2)")
