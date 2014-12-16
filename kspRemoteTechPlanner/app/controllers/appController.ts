@@ -3,15 +3,17 @@ module App {
     export class AppController {
         'use strict';
 
-        static $inject = ["entireViewServ"];
+        static $inject = ["entireViewServ", "nightViewServ"];
         constructor(
-            private entireViewServ: EntireViewService
+            private entireViewServ: EntireViewService,
+            private nightViewServ: NightViewService
             ) {
 
         }
 
         show() {
             this.entireViewServ.show();
+            this.nightViewServ.show();
         }
     }
 }

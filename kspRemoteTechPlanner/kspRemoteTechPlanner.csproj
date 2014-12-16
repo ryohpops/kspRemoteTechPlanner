@@ -72,6 +72,7 @@
     <TypeScriptCompile Include="app\services\bodyStorageService.ts" />
     <TypeScriptCompile Include="app\services\entireViewService.ts" />
     <TypeScriptCompile Include="app\services\graphicsHelperService.ts" />
+    <TypeScriptCompile Include="app\services\nightViewService.ts" />
     <TypeScriptCompile Include="app\services\satChainService.ts" />
     <TypeScriptCompile Include="app\appReferences.ts" />
     <TypeScriptCompile Include="app\services\viewService.ts" />

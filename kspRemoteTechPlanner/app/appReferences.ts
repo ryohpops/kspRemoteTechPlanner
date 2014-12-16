@@ -10,6 +10,7 @@
 /// <reference path="services/graphicshelperservice.ts" />
 /// <reference path="services/viewservice.ts" />
 /// <reference path="services/entireviewservice.ts" />
+/// <reference path="services/nightviewservice.ts" />
 
 /// <reference path="controllers/inputcontroller.ts" />
 /// <reference path="controllers/appcontroller.ts" />
