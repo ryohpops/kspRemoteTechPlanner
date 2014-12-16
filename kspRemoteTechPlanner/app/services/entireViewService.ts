@@ -3,7 +3,7 @@ module App {
     export class EntireViewService extends ViewService {
         'use strict';
 
-        static targetId = "entire";
+        private static targetId: string = "entire";
 
         private shapeInner: createjs.Shape;
         private txtBodyName: createjs.Text;
