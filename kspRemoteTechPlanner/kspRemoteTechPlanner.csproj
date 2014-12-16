@@ -70,9 +70,11 @@
     <TypeScriptCompile Include="app\models\satChain.ts" />
     <TypeScriptCompile Include="app\services\antennaStorageService.ts" />
     <TypeScriptCompile Include="app\services\bodyStorageService.ts" />
-    <TypeScriptCompile Include="app\services\entireView.ts" />
+    <TypeScriptCompile Include="app\services\entireViewService.ts" />
+    <TypeScriptCompile Include="app\services\graphicsHelperService.ts" />
     <TypeScriptCompile Include="app\services\satChainService.ts" />
     <TypeScriptCompile Include="app\appReferences.ts" />
+    <TypeScriptCompile Include="app\services\viewService.ts" />
     <TypeScriptCompile Include="references.ts" />
     <TypeScriptCompile Include="scripts\typings\angularjs\angular-animate.d.ts" />
     <TypeScriptCompile Include="scripts\typings\angularjs\angular-cookies.d.ts" />

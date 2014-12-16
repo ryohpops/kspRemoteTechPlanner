@@ -11,5 +11,7 @@ module App {
         .service("antennaStorageServ", AntennaStorageService)
         .service("bodyStorageServ", BodyStorageService)
         .service("satChainServ", SatChainService)
+        .service("graphicsHelperServ", GraphicsHelperService)
+        .service("entireViewServ", EntireViewService)
         .controller("inputCtrl", InputController);
 }
