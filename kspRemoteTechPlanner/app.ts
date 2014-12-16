@@ -13,5 +13,6 @@ module App {
         .service("satChainServ", SatChainService)
         .service("graphicsHelperServ", GraphicsHelperService)
         .service("entireViewServ", EntireViewService)
-        .controller("inputCtrl", InputController);
+        .controller("inputCtrl", InputController)
+        .controller("appCtrl", AppController);
 }

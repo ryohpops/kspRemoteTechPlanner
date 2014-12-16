@@ -65,9 +65,14 @@ module App {
             this.txtCommStableRange.textBaseline = "bottom";
             this.txtCommStableRange.x = this.outerCenter.x;
             this.texts.addChild(this.txtCommStableRange);
+
+            this.show();
         }
 
         show(): void {
+            var sc: SatChain = this.satChainServ.satChain;
+
+            this.innerSize = (sc.body.radius + sc.altitude + sc.antenna.range) * 2 * 1.05;
             this.shapeInner.scaleX = this.shapeInner.scaleY = this.outerSize / this.innerSize;
 
             this.shapeInner.graphics.clear();

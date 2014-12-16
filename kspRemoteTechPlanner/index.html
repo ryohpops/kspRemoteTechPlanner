@@ -16,7 +16,7 @@
     <script src="appOut.js"></script>
 </head>
 <body>
-    <div class="container">
+    <div class="container" ng-controller="appCtrl as app">
         <h1>Visual RemoteTech Planner for KSP</h1>
 
         <!-- intro -->
@@ -74,7 +74,8 @@
                 <form role="form" novalidate>
                     <div class="form-group">
                         <label for="body">Body</label>
-                        <select class="form-control" ng-model="input.satChain.body.name" ng-change="input.pullBody(input.satChain.body.name) || input.save()">
+                        <select class="form-control" ng-model="input.satChain.body.name"
+                                ng-change="input.pullBody(input.satChain.body.name) || input.save() || app.show()">
                             <option>Kerbol</option>
                             <option>Moho</option>
                             <option>Eve</option>
@@ -127,22 +128,23 @@
 
                     <div class="form-group">
                         <label for="count">Count</label>
-                        <input type="number" class="form-control" id="count" ng-model="input.satChain.count" required ng-change="input.save()" />
+                        <input type="number" class="form-control" id="count" ng-model="input.satChain.count" required ng-change="input.save() || app.show()" />
                     </div>
 
                     <div class="form-group">
                         <label for="altitude">Altitude(km)</label>
-                        <input type="number" class="form-control" id="altitude" ng-model="input.satChain.altitude" required ng-change="input.save()" />
+                        <input type="number" class="form-control" id="altitude" ng-model="input.satChain.altitude" required ng-change="input.save() || app.show()" />
                     </div>
 
                     <div class="form-group">
                         <label for="elcNeeded">Probe electricity consumption<br />(exclude antenna's, per sec.)</label>
-                        <input type="number" class="form-control" id="elcNeeded" ng-model="input.satChain.elcNeeded" required ng-change="input.save()" />
+                        <input type="number" class="form-control" id="elcNeeded" ng-model="input.satChain.elcNeeded" required ng-change="input.save() || app.show()" />
                     </div>
 
                     <div class="form-group">
                         <label for="antenna">Antenna</label>
-                        <select class="form-control" ng-model="input.satChain.antenna.name" ng-change="input.pullAntenna(input.satChain.antenna.name) || input.save()">
+                        <select class="form-control" ng-model="input.satChain.antenna.name"
+                                ng-change="input.pullAntenna(input.satChain.antenna.name) || input.save() || app.show()">
                             <optgroup label="Omnidirectional">
                                 <option>Reflectron DP-10</option>
                                 <option>Communotron 16</option>
@@ -178,7 +180,7 @@
 
                     <div class="form-group">
                         <label for="parkingAlt">Parking altitude on launch(km)</label>
-                        <input type="number" class="form-control" id="parkingAlt" required ng-model="input.satChain.parkingAlt" ng-change="input.save()" />
+                        <input type="number" class="form-control" id="parkingAlt" required ng-model="input.satChain.parkingAlt" ng-change="input.save() || app.show()" />
                     </div>
                 </form>
             </div>
