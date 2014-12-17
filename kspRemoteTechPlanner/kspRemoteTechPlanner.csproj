@@ -19,6 +19,7 @@
   <ItemGroup>
     <Content Include="app.css" />
     <Content Include="app\views\description.html" />
+    <Content Include="app\views\inputData.html" />
     <Content Include="content\bootstrap-theme.css" />
     <Content Include="content\bootstrap-theme.min.css" />
     <Content Include="content\bootstrap.css" />
