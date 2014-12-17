@@ -18,6 +18,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="app.css" />
+    <Content Include="app\views\antennaEdit.html" />
+    <Content Include="app\views\bodyEdit.html" />
     <Content Include="app\views\description.html" />
     <Content Include="app\views\inputData.html" />
     <Content Include="content\bootstrap-theme.css" />
