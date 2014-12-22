@@ -1,1 +1,27 @@
-﻿
+﻿<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Color</th>
+            <th>Radius(km)</th>
+            <th>Standard gravitational parameter(km<sup>3</sup>s<sup>-2</sup>)</th>
+            <th>Sphere of Influence(km)</th>
+            <th>Edit</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="body in bodyEdit.userBodies">
+            <td>{{body.name}}</td>
+            <td>{{body.color}}</td>
+            <td>{{body.radius |number}}</td>
+            <td>{{body.stdGravity |number}}</td>
+            <td>{{body.soi |number}}</td>
+            <td>buttons</td>
+        </tr>
+        <tr>
+            <td colspan="6">
+                <button>Add new</button>
+            </td>
+        </tr>
+    </tbody>
+</table>

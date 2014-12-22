@@ -5,16 +5,17 @@ module App {
         .service("calc.orbitalServ", Calculator.OrbitalService);
 
     angular.module("app", ["ngCookies", "calc"])
-        .value("antennaStorageCookieKey", "userAntenna")
         .value("bodyStorageCookieKey", "userBody")
+        .value("antennaStorageCookieKey", "userAntenna")
         .value("satChainCookieKey", "inputData")
-        .service("antennaStorageServ", AntennaStorageService)
         .service("bodyStorageServ", BodyStorageService)
+        .service("antennaStorageServ", AntennaStorageService)
         .service("satChainServ", SatChainService)
         .service("graphicsHelperServ", GraphicsHelperService)
         .service("entireViewServ", EntireViewService)
         .service("nightViewServ", NightViewService)
         .service("deltavViewServ", DeltavViewService)
         .controller("inputCtrl", InputController)
+        .controller("bodyEditCtrl", BodyEditController)
         .controller("appCtrl", AppController);
 }
