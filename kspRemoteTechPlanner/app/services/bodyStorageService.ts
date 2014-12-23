@@ -70,17 +70,26 @@ module App {
             return Object.keys(this.userBodies).indexOf(name) !== -1;
         }
 
+
+        private clone(body: Body): Body {
+            return new Body(body.name, body.color, body.radius, body.stdGravity, body.soi);
+        }
+
         getBody(name: string): Body {
             if (this.existsInStock(name))
-                return this.stockBodies[name].clone();
+                return this.clone(this.stockBodies[name]);
             else if (this.existsInUser(name))
-                return this.userBodies[name].clone();
+                return this.clone(this.userBodies[name]);
             else
                 return undefined;
         }
 
         setBody(name: string, data: Body) {
-            this.userBodies[name] = data.clone();
+            this.userBodies[name] = this.clone(data);
+        }
+
+        removeBody(name: string) {
+            delete this.userBodies[name];
         }
     }
 }

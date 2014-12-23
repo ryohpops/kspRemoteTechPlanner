@@ -15,3 +15,7 @@ dl.detail > dd {
 button.fluid {
     width: 100%;
 }
+
+table {
+    table-layout: fixed;
+}
