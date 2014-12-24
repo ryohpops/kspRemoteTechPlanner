@@ -1,21 +1,25 @@
-﻿div.wrap-canvas {
+﻿.wrap-canvas {
     display: inline-block;
     border-style: solid;
     border-width: thin;
 }
 
-div.detail {
-    margin: 5% !important;
+.detail {
+    margin: 5%;
 }
 
-dl.detail > dd {
-    text-align: right;
-}
+    .detail > dd {
+        text-align: right;
+    }
 
-button.fluid {
+.fluid {
     width: 100%;
 }
 
-table.fixed {
+.editable {
     table-layout: fixed;
 }
+
+    .editable > tbody > tr > td {
+        vertical-align: middle;
+    }
