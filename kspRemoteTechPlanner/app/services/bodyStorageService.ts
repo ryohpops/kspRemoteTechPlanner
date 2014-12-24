@@ -70,7 +70,6 @@ module App {
             return Object.keys(this.userBodies).indexOf(name) !== -1;
         }
 
-
         private clone(body: Body): Body {
             return new Body(body.name, body.color, body.radius, body.stdGravity, body.soi);
         }

@@ -1,5 +1,6 @@
 ﻿/// <reference path="../appreferences.ts" />
 module App {
+    // virtual
     export class ViewService {
         'use strict';
 

@@ -16,6 +16,6 @@ button.fluid {
     width: 100%;
 }
 
-table {
+table.fixed {
     table-layout: fixed;
 }
