@@ -3,7 +3,6 @@ module App {
     export class NightViewService extends ViewService {
         'use strict';
 
-        private static targetId: string = "night";
         private static bodyRadius: number = 50;
         private static orbitRadius: number = 150;
 
@@ -13,12 +12,13 @@ module App {
         private txtNightTime: createjs.Text;
         private txtRequiredBattery: createjs.Text;
 
-        static $inject = ["satChainServ"];
+        static $inject = ["nightViewTarget", "satChainServ"];
         constructor(
+            private nightViewTarget: string,
             private satChainServ: SatChainService
             ) {
 
-            super(NightViewService.targetId, 5000, 400);
+            super(nightViewTarget, 5000, 400);
 
             // shape for drawing in outer coordinates
             this.shapeOuter = new createjs.Shape();

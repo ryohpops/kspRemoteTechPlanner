@@ -3,8 +3,6 @@ module App {
     export class EntireViewService extends ViewService {
         'use strict';
 
-        private static targetId: string = "entire";
-
         private shapeInner: createjs.Shape;
         private txtBodyName: createjs.Text;
         private txtBodySoI: createjs.Text;
@@ -13,13 +11,14 @@ module App {
         private txtCommDistance2: createjs.Text;
         private txtCommStableRange: createjs.Text;
 
-        static $inject = ["graphicsHelperServ", "satChainServ"];
+        static $inject = ["entireViewTarget", "graphicsHelperServ", "satChainServ"];
         constructor(
+            private entireViewTarget: string,
             private gHelper: GraphicsHelperService,
             private satChainServ: SatChainService
             ) {
 
-            super(EntireViewService.targetId, 10000, 840);
+            super(entireViewTarget, 10000, 840);
 
             // shape for drawing in inner coordinates
             this.shapeInner = new createjs.Shape();

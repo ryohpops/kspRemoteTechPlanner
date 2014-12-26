@@ -41,6 +41,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="content\bootstrap-theme.css.map" />
     <Content Include="content\bootstrap.css.map" />
+    <Content Include="packages.config" />
     <None Include="scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="scripts\jquery-2.1.1.js" />
     <Content Include="scripts\jquery-2.1.1.min.js" />
@@ -49,7 +50,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="scripts\angular.min.js.map" />
-    <Content Include="packages.config" />
     <Content Include="scripts\angular-cookies.min.js.map" />
     <Content Include="scripts\jquery-2.1.1.min.map" />
     <None Include="web.Debug.config">
