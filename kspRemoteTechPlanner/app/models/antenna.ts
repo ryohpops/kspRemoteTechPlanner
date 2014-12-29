@@ -25,9 +25,9 @@ module App {
         }
 
         typeString(): string {
-            if (this.type === AntennaType.omni)
-                return "Omni-directional";
-            else if (this.type === AntennaType.dish)
+            if (this.type == AntennaType.omni)
+                return "Omnidirectional";
+            else if (this.type == AntennaType.dish)
                 return "Dish";
             else
                 return "";
