@@ -1,4 +1,4 @@
-﻿<form role="form" novalidate>
+﻿<form name="bodyEditForm" role="form" novalidate ng-submit="bodyEditForm.$valid && bodyEdit.save()">
     <table class="table table-hover editable">
         <thead>
             <tr>
@@ -29,7 +29,7 @@
                 <td><input type="number" required class="form-control" ng-model="bodyEdit.editData.stdGravity" /></td>
                 <td><input type="number" required class="form-control" ng-model="bodyEdit.editData.soi" /></td>
                 <td>
-                    <button type="button" class="btn btn-primary" ng-click="bodyEdit.save()">Save</button>
+                    <button type="submit" class="btn btn-primary" ng-disabled="bodyEditForm.$invalid">Save</button>
                     <button type="button" class="btn btn-default" ng-click="bodyEdit.cancel()">Cancel</button>
                 </td>
             </tr>
