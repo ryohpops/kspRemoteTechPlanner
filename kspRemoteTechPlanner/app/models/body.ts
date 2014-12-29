@@ -16,5 +16,9 @@ module App {
             this.stdGravity = stdGravity;
             this.soi = soi;
         }
+
+        clone(): Body {
+            return new Body(this.name, this.color, this.radius, this.stdGravity, this.soi);
+        }
     }
 }

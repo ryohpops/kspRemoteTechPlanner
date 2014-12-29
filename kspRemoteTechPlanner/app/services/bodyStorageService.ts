@@ -44,15 +44,19 @@ module App {
                 "Eeloo": new Body("Eeloo", "rgb(221,221,210)", 210, 74.410815, 119082.94)
             };
 
-            this._userBodies = this.loadOrCreate();
+            this.loadUserBodies();
         }
 
-        private loadOrCreate(): BodyDictionary {
-            var ub: BodyDictionary = this.$cookieStore.get(this.cookieKey);
-            if (ub !== undefined)
-                return ub;
-            else
-                return {};
+        private loadUserBodies() {
+            this._userBodies = {};
+
+            var ub: Object = this.$cookieStore.get(this.cookieKey); // pure JS object, functions are not ready
+            if (ub !== undefined) {
+                for (var key in ub) {
+                    var b: Body = ub[key];
+                    this._userBodies[b.name] = new Body(b.name, b.color, b.radius, b.stdGravity, b.soi);
+                }
+            }
         }
 
         save() {
@@ -70,21 +74,17 @@ module App {
             return Object.keys(this.userBodies).indexOf(name) !== -1;
         }
 
-        private clone(body: Body): Body {
-            return new Body(body.name, body.color, body.radius, body.stdGravity, body.soi);
-        }
-
         getBody(name: string): Body {
             if (this.existsInStock(name))
-                return this.clone(this.stockBodies[name]);
+                return this.stockBodies[name].clone();
             else if (this.existsInUser(name))
-                return this.clone(this.userBodies[name]);
+                return this.userBodies[name].clone();
             else
                 return undefined;
         }
 
         setBody(name: string, data: Body) {
-            this.userBodies[name] = this.clone(data);
+            this.userBodies[name] = data.clone();
         }
 
         removeBody(name: string) {
