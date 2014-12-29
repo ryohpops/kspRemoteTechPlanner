@@ -37,15 +37,19 @@ module App {
                 "Reflectron GX-128": new Antenna("Reflectron GX-128", AntennaType.dish, 400000000, 2.8)
             };
 
-            this._userAntennas = this.loadOrCreate();
+            this.loadUserAntennas();
         }
 
-        private loadOrCreate(): AntennaDictionary {
-            var ua: AntennaDictionary = this.$cookieStore.get(this.cookieKey);
-            if (ua !== undefined)
-                return ua;
-            else
-                return {};
+        private loadUserAntennas() {
+            this._userAntennas = {};
+
+            var ua: Object = this.$cookieStore.get(this.cookieKey);
+            if (ua !== undefined) {
+                for (var key in ua) {
+                    var a: Antenna = ua[key];
+                    this._userAntennas[a.name] = new Antenna(a.name, a.type, a.range, a.elcNeeded);
+                }
+            }
         }
 
         save() {
@@ -74,6 +78,10 @@ module App {
 
         setAntenna(name: string, data: Antenna) {
             this.userAntennas[name] = data.clone();
+        }
+
+        removeAntenna(name: string) {
+            delete this.userAntennas[name];
         }
     }
 }

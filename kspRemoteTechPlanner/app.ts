@@ -20,5 +20,6 @@ module App {
         .service("deltavViewServ", DeltavViewService)
         .controller("inputCtrl", InputController)
         .controller("bodyEditCtrl", BodyEditController)
+        .controller("antennaEditCtrl", AntennaEditController)
         .controller("appCtrl", AppController);
 }
