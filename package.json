@@ -3,13 +3,15 @@
     "version": "0.0.0",
     "description": "KSP RemoteTech Planner",
     "devDependencies": {
+        "rimraf": "*",
+        "protractor": "*",
         "gulp": "*",
         "gulp-minify-css": "*",
-        "gulp-uglify": "*",
-        "rimraf": "*"
+        "gulp-uglify": "*"
     },
     "scripts": {
-        "test": "protractor kspRemoteTechPlanner/test/conf.js",
+        "start": "node_modules\\.bin\\webdriver-manager.cmd update",
+        "test": "protractor kspRemoteTechPlanner/tests/conf.js",
         "deploy": "gulp deploy"
     }
 }
