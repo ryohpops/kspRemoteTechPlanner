@@ -48,6 +48,8 @@
     <Content Include="scripts\jquery-2.1.1.js" />
     <Content Include="scripts\jquery-2.1.1.min.js" />
     <Content Include="scripts\npm.js" />
+    <Content Include="test\conf.js" />
+    <Content Include="test\spec.js" />
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>

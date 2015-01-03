@@ -1,11 +1,15 @@
 {
-  "name": "kspRemoteTechPlanner",
-  "version": "0.0.0",
-  "description": "KSP RemoteTech Planner",
-  "devDependencies": {
-    "gulp": "*",
-    "gulp-minify-css": "*",
-    "gulp-uglify": "*",
-    "rimraf": "*"
-  }
+    "name": "kspRemoteTechPlanner",
+    "version": "0.0.0",
+    "description": "KSP RemoteTech Planner",
+    "devDependencies": {
+        "gulp": "*",
+        "gulp-minify-css": "*",
+        "gulp-uglify": "*",
+        "rimraf": "*"
+    },
+    "scripts": {
+        "test": "protractor kspRemoteTechPlanner/test/conf.js",
+        "deploy": "gulp deploy"
+    }
 }

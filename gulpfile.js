@@ -1,9 +1,9 @@
 'use strict';
 
+var rimraf = require("rimraf");
 var gulp = require("gulp");
 var minjs = require("gulp-uglify");
 var mincss = require("gulp-minify-css");
-var rimraf = require("rimraf");
 
 var destDir = "deploy/";
 
