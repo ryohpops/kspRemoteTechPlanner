@@ -3,9 +3,18 @@ kspRemoteTechPlanner
 
 Web-based satellite network planner for the MOD, [RemoteTech2](http://forum.kerbalspaceprogram.com/threads/83305-Development-Resumed-RemoteTech-2).
 
-Latest release is [here](http://ryohpops.github.io/kspRemoteTechPlanner/) and forum is [here](http://forum.kerbalspaceprogram.com/threads/90113-WEB-Visual-RemoteTech-Planner-for-MOD-RemoteTech2).
+Latest release is available [here](http://ryohpops.github.io/kspRemoteTechPlanner/) and forum is [here](http://forum.kerbalspaceprogram.com/threads/90113-WEB-Visual-RemoteTech-Planner-for-MOD-RemoteTech2).
 
 Version history
+
+- 1.3 : 2015/01/03
+ 
+ Move user-data management for body and antenna to tab pages.
+ Views are now rendered on any change within Data Input.
+
+- 1.2.1 : 2014/11/03
+ 
+ Fix label of the second distance.
 
 - 1.2 : 2014/11/01
 
