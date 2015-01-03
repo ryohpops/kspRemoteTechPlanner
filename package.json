@@ -10,7 +10,7 @@
         "gulp-uglify": "*"
     },
     "scripts": {
-        "start": "node_modules\\.bin\\webdriver-manager.cmd update",
+        "postinstall": "node_modules\\.bin\\webdriver-manager.cmd update",
         "test": "protractor kspRemoteTechPlanner/tests/conf.js",
         "deploy": "gulp deploy"
     }
