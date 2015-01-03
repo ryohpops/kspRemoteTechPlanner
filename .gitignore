@@ -3,8 +3,8 @@ appOut.js
 appOut.js.map
 kspRemoteTechPlanner/content/
 kspRemoteTechPlanner/fonts/
-kspRemoteTechPlanner/scripts/
-!kspRemoteTechPlanner/scripts/easeljs-0.7.1.min.js
+kspRemoteTechPlanner/scripts/*
+!kspRemoteTechPlanner/scripts/easeljs-*.min.js
 deploy/
 
 ## Ignore Visual Studio temporary files, build results, and

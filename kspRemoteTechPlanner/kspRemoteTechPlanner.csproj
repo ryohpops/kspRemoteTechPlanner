@@ -35,7 +35,6 @@
     <Content Include="scripts\angular.min.js" />
     <Content Include="scripts\bootstrap.js" />
     <Content Include="scripts\bootstrap.min.js" />
-    <Content Include="scripts\easeljs-0.7.1.min.js" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
@@ -44,16 +43,17 @@
     <Content Include="packages.config" />
     <Content Include="scripts\angular.min.js.map" />
     <Content Include="scripts\angular-cookies.min.js.map" />
-    <None Include="scripts\jquery-2.1.1.intellisense.js" />
-    <Content Include="scripts\jquery-2.1.1.js" />
-    <Content Include="scripts\jquery-2.1.1.min.js" />
+    <None Include="scripts\jquery-2.1.3.intellisense.js" />
+    <Content Include="scripts\easeljs-0.8.0.min.js" />
+    <Content Include="scripts\jquery-2.1.3.js" />
+    <Content Include="scripts\jquery-2.1.3.min.js" />
     <Content Include="scripts\npm.js" />
     <Content Include="test\conf.js" />
     <Content Include="test\spec.js" />
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="scripts\jquery-2.1.1.min.map" />
+    <Content Include="scripts\jquery-2.1.3.min.map" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
