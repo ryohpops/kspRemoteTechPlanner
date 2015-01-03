@@ -3,10 +3,15 @@
 var gulp = require("gulp");
 var minjs = require("gulp-uglify");
 var mincss = require("gulp-minify-css");
+var rimraf = require("rimraf");
 
 var destDir = "deploy/";
 
-gulp.task("deploy", function () {
+gulp.task("clean", function (cb) {
+    rimraf(destDir, cb);
+});
+
+gulp.task("deploy", ["clean"], function () {
     gulp.src("kspRemoteTechPlanner/**/*.html")
     .pipe(gulp.dest(destDir));
 
