@@ -1,0 +1,45 @@
+﻿<form name="antennaEditForm" role="form" novalidate ng-submit="antennaEditForm.$valid && antennaEdit.save()">
+    <table class="table table-hover editable">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Range(km)</th>
+                <th>Electricity consumption(per sec.)</th>
+                <th>Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="antenna in antennaEdit.userAntennas">
+                <td>{{antenna.name}}</td>
+                <td>{{antenna.typeString()}}</td>
+                <td>{{antenna.range |number}}</td>
+                <td>{{antenna.elcNeeded |number}}</td>
+                <td>
+                    <button type="button" class="btn btn-primary" ng-click="antennaEdit.edit(antenna.name)">Edit</button>
+                    <button type="button" class="btn btn-danger" ng-click="antennaEdit.remove(antenna.name)">Remove</button>
+                </td>
+            </tr>
+            <tr ng-show="antennaEdit.isInEdit">
+                <td><input type="text" required class="form-control" ng-model="antennaEdit.editData.name" /></td>
+                <td>
+                    <select required class="form-control" ng-model="antennaEdit.editData.type">
+                        <option value="0">omni</option>
+                        <option value="1">dish</option>
+                    </select>
+                </td>
+                <td><input type="number" required class="form-control" ng-model="antennaEdit.editData.range" /></td>
+                <td><input type="number" required class="form-control" ng-model="antennaEdit.editData.elcNeeded" /></td>
+                <td>
+                    <button type="submit" class="btn btn-primary" ng-disabled="antennaEditForm.$invalid">Save</button>
+                    <button type="button" class="btn btn-default" ng-click="antennaEdit.cancel()">Cancel</button>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="6">
+                    <button type="button" class="btn btn-default" ng-click="antennaEdit.add()">Add new</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</form>
