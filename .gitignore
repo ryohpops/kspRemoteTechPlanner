@@ -3,7 +3,7 @@
 
 # User specification
 kspRemoteTechPlanner/
-.gradle
+node_modules/
 deploy/
 
 # User-specific files
