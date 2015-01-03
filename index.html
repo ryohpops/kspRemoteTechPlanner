@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="utf-8" />
+    <title>Visual RemoteTech Planner for KSP</title>
+
+    <link href="content/bootstrap.min.css" rel="stylesheet" />
+    <link href="app.css" rel="stylesheet" />
+
+    <script src="scripts/jquery-2.1.1.min.js"></script>
+    <script src="scripts/bootstrap.min.js"></script>
+    <script src="scripts/angular.min.js"></script>
+    <script src="scripts/angular-cookies.min.js"></script>
+    <script src="scripts/easeljs-0.8.0.min.js"></script>
+    <script src="appOut.js"></script>
+</head>
+<body>
+    <div class="container" ng-controller="appCtrl as app">
+        <h1>Visual RemoteTech Planner for KSP</h1>
+
+        <!-- intro -->
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Introduction</h2>
+                <a href="http://forum.kerbalspaceprogram.com/threads/83305-Development-Resumed-RemoteTech-2">RemoteTech2</a> is one of the popular mods for <a href="https://kerbalspaceprogram.com/">Kerbal Space Program</a>.
+                It provides purposes to launch and operate satellites in the space.<br />
+                Before starting a countdown at the launch pad, how about planning and visualizing the satellite network that you aim at with this web-based planner?<br />
+                Put needed values into Data input, then hit Calculate or press enter key.<br />
+                <br />
+                Forum is <a href="http://forum.kerbalspaceprogram.com/threads/90113-WEB-Visual-RemoteTech-Planner-for-MOD-RemoteTech2">here</a>
+                and sources are available on <a href="https://github.com/ryohpops/kspRemoteTechPlanner">github</a>.<br />
+                Issues, bug reports, contributers are always welcome.<br />
+                If something goes wrong, try to delete cookies on this website first.<br />
+                <br />
+                Use of an autopilot mod such as <a href="http://forum.kerbalspaceprogram.com/threads/12384-PART-0-24-2-Anatid-Robotics-MuMech-MechJeb-Autopilot-v2-3-1">MechJeb</a> is recommended.<br />
+                Data of bodies is based on <a href="http://wiki.kerbalspaceprogram.com/wiki/Main_Page">KSP Wiki</a>,
+                <a href="http://remotetechnologiesgroup.github.io/RemoteTech/">RemoteTech2 manual</a> and
+                <a href="http://forum.kerbalspaceprogram.com/threads/41652-A-more-accurate-delta-v-map">metaphor's Delta-V map</a>.<br />
+                NO GUARANTEES OF CORRECTNESS.
+            </div>
+        </div>
+
+        <!-- planner -->
+        <div class="row">
+            <!-- three views  -->
+            <div class="col-md-9">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3>Entire View</h3>
+                        <div class="wrap-canvas">
+                            <canvas id="entire" width="840" height="840"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <h3>Night View</h3>
+                        <div class="wrap-canvas">
+                            <canvas id="night" width="400" height="400"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <h3>Delta-V View</h3>
+                        <div class="wrap-canvas">
+                            <canvas id="deltav" width="400" height="400"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Data input -->
+            <div class="col-md-3" ng-controller="inputCtrl as input" ng-include src="'app/views/dataInput.html'"></div>
+        </div>
+
+        <!-- information -->
+        <div role="tabpanel" class="row">
+            <h2>Tools</h2>
+
+            <!-- tab navigation -->
+            <ul class=" nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#desc" aria-controls="desc" role="tab" data-toggle="tab">Description</a></li>
+                <li role="presentation"><a href="#body" aria-controls="body" role="tab" data-toggle="tab">Body Edit</a></li>
+                <li role="presentation"><a href="#antenna" aria-controls="antenna" role="tab" data-toggle="tab">Antenna Edit</a></li>
+            </ul>
+
+            <!-- tab contents -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane fade in active" id="desc">
+                    <div ng-include src="'app/views/description.html'"></div>
+                </div>
+
+                <div role="tabpanel" class="tab-pane fade" id="body">
+                    <div ng-controller="bodyEditCtrl as bodyEdit" ng-include src="'app/views/bodyEdit.html'"></div>
+                </div>
+
+                <div role="tabpanel" class="tab-pane fade" id="antenna">
+                    <div ng-controller="antennaEditCtrl as antennaEdit" ng-include src="'app/views/antennaEdit.html'"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- footer -->
+        <div class="row">
+            <div class="col-md-12"><hr /></div>
+            <div class="col-md-12">
+                Created by ryohpops, © 2014. Forum is <a href="http://forum.kerbalspaceprogram.com/threads/90113-WEB-Visual-RemoteTech-Planner-for-MOD-RemoteTech2">here</a>
+                and github repository is <a href="https://github.com/ryohpops/kspRemoteTechPlanner">here</a>.<br />
+                Built with <a href="https://angularjs.org/">AngularJS</a>, <a href="http://getbootstrap.com/">Bootstrap</a>, <a href="http://glyphicons.com/">GLYPHICONS</a> Halflings and
+                <a href="https://github.com/CreateJS/EaselJS">EaselJS</a>, licensed under <a href="https://github.com/ryohpops/kspRemoteTechPlanner/blob/master/LICENSE">MIT License</a>.<br />
+                <a href="http://forum.kerbalspaceprogram.com/threads/83305-Development-Resumed-RemoteTech-2">RemoteTech2</a> and all the antenna/dish names are property of Remote Technologies Group.<br />
+                <a href="https://kerbalspaceprogram.com/">KSP</a>, Kerbal Space Program and all the planet/moon names are property of <a href="http://www.squad.com.mx/">Squad</a>.
+                <br /><br />
+            </div>
+        </div>
+    </div>
+</body>
+</html>

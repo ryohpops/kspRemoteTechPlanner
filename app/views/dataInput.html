@@ -1,0 +1,117 @@
+<h3>Data input</h3>
+<form role="form" novalidate>
+    <div class="form-group">
+        <label for="body">Body</label>
+        <select class="form-control" ng-model="input.satChain.body.name"
+                ng-change="input.pullBody(input.satChain.body.name) || input.save() || app.show()">
+            <option>Kerbol</option>
+            <option>Moho</option>
+            <option>Eve</option>
+            <optgroup label="Eve's moon:">
+                <option>Gilly</option>
+            </optgroup>
+            <option>Kerbin</option>
+            <optgroup label="Kerbin's moons:">
+                <option>Mun</option>
+                <option>Minmus</option>
+            </optgroup>
+            <option>Duna</option>
+            <optgroup label="Duna's moon:">
+                <option>Ike</option>
+            </optgroup>
+            <option>Dres</option>
+            <option>Jool</option>
+            <optgroup label="Jool's moons:">
+                <option>Laythe</option>
+                <option>Vall</option>
+                <option>Tylo</option>
+                <option>Bop</option>
+                <option>Pol</option>
+            </optgroup>
+            <option>Eeloo</option>
+            <optgroup label="User data">
+                <option ng-repeat="body in input.bodies.userBodies">{{body.name}}</option>
+            </optgroup>
+        </select>
+
+        <!-- detail for body -->
+        <div class="detail collapse" id="detail_body">
+            <dl class="detail">
+                <dt>Color</dt>
+                <dd>{{input.satChain.body.color}}</dd>
+                <dt>Radius</dt>
+                <dd>{{input.satChain.body.radius |number}} km</dd>
+                <dt>Standard gravitational parameter</dt>
+                <dd>{{input.satChain.body.stdGravity |number}} km<sup>3</sup>s<sup>-2</sup></dd>
+                <dt>Sphere of Influence</dt>
+                <dd>{{input.satChain.body.soi |number}} km</dd>
+            </dl>
+        </div>
+
+        <button type="button" class="btn btn-xs fluid" data-toggle="collapse" data-target="#detail_body">
+            <span class="glyphicon glyphicon-collapse-up"></span>
+            <span class="glyphicon glyphicon-collapse-down"></span>
+        </button>
+    </div>
+
+    <div class="form-group">
+        <label for="count">Count</label>
+        <input type="number" class="form-control" id="count" ng-model="input.satChain.count" ng-model-options="{debounce:300}"
+               required ng-change="input.save() || app.show()" />
+    </div>
+
+    <div class="form-group">
+        <label for="altitude">Altitude(km)</label>
+        <input type="number" class="form-control" id="altitude" ng-model="input.satChain.altitude" ng-model-options="{debounce:300}"
+               required ng-change="input.save() || app.show()" />
+    </div>
+
+    <div class="form-group">
+        <label for="elcNeeded">Probe electricity consumption<br />(exclude antenna's, per sec.)</label>
+        <input type="number" class="form-control" id="elcNeeded" ng-model="input.satChain.elcNeeded" ng-model-options="{debounce:300}"
+               required ng-change="input.save() || app.show()" />
+    </div>
+
+    <div class="form-group">
+        <label for="antenna">Antenna</label>
+        <select class="form-control" ng-model="input.satChain.antenna.name"
+                ng-change="input.pullAntenna(input.satChain.antenna.name) || input.save() || app.show()">
+            <optgroup label="Omnidirectional">
+                <option>Reflectron DP-10</option>
+                <option>Communotron 16</option>
+                <option>CommTech EXP-VR-2T</option>
+                <option>Communotron 32</option>
+            </optgroup>
+            <optgroup label="Dish">
+                <option>Comms DTS-M1</option>
+                <option>Reflectron KR-7</option>
+            </optgroup>
+            <optgroup label="User data">
+                <option ng-repeat="antenna in input.antennas.userAntennas">{{antenna.name}}</option>
+            </optgroup>
+        </select>
+
+        <!-- detail for antenna -->
+        <div class="detail collapse" id="detail_antenna">
+            <dl class="detail">
+                <dt>Type</dt>
+                <dd>{{input.satChain.antenna.typeString()}}</dd>
+                <dt>Range</dt>
+                <dd>{{input.satChain.antenna.range |number}} km</dd>
+                <dt>Electricity consumption</dt>
+                <dd>{{input.satChain.antenna.elcNeeded |number}} /sec.</dd>
+            </dl>
+        </div>
+
+        <button type="button" class="btn btn-xs fluid" data-toggle="collapse" data-target="#detail_antenna">
+            <span class="glyphicon glyphicon-collapse-up"></span>
+            <span class="glyphicon glyphicon-collapse-down"></span>
+        </button>
+    </div>
+
+    <div class="form-group">
+        <label for="parkingAlt">Parking altitude on launch(km)</label>
+        <input type="number" class="form-control" id="parkingAlt" required ng-model="input.satChain.parkingAlt" ng-model-options="{debounce:300}"
+               ng-change="input.save() || app.show()" />
+    </div>
+</form>

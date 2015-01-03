@@ -1,0 +1,43 @@
+<form name="bodyEditForm" role="form" novalidate ng-submit="bodyEditForm.$valid && bodyEdit.save()">
+    <table class="table table-hover editable">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Color</th>
+                <th>Radius(km)</th>
+                <th>μ(km<sup>3</sup>s<sup>-2</sup>)</th>
+                <th>Sphere of Influence(km)</th>
+                <th>Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="body in bodyEdit.userBodies">
+                <td>{{body.name}}</td>
+                <td>{{body.color}}</td>
+                <td>{{body.radius |number}}</td>
+                <td>{{body.stdGravity |number}}</td>
+                <td>{{body.soi |number}}</td>
+                <td>
+                    <button type="button" class="btn btn-primary" ng-click="bodyEdit.edit(body.name)">Edit</button>
+                    <button type="button" class="btn btn-danger" ng-click="bodyEdit.remove(body.name)">Remove</button>
+                </td>
+            </tr>
+            <tr ng-show="bodyEdit.isInEdit">
+                <td><input type="text" required class="form-control" ng-model="bodyEdit.editData.name" /></td>
+                <td><input type="color" required class="form-control" ng-model="bodyEdit.editData.color" /></td>
+                <td><input type="number" required class="form-control" ng-model="bodyEdit.editData.radius" /></td>
+                <td><input type="number" required class="form-control" ng-model="bodyEdit.editData.stdGravity" /></td>
+                <td><input type="number" required class="form-control" ng-model="bodyEdit.editData.soi" /></td>
+                <td>
+                    <button type="submit" class="btn btn-primary" ng-disabled="bodyEditForm.$invalid">Save</button>
+                    <button type="button" class="btn btn-default" ng-click="bodyEdit.cancel()">Cancel</button>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="6">
+                    <button type="button" class="btn btn-default" ng-click="bodyEdit.add()">Add new</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</form>
