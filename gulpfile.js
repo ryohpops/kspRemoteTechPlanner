@@ -22,7 +22,4 @@ gulp.task("deploy", ["clean"], function () {
     gulp.src("kspRemoteTechPlanner/**/app.css")
     .pipe(mincss())
     .pipe(gulp.dest(destDir));
-
-    gulp.src(["kspRemoteTechPlanner/**/content/bootstrap.min.css", "kspRemoteTechPlanner/**/fonts/*", "kspRemoteTechPlanner/**/scripts/*.min.js"])
-    .pipe(gulp.dest(destDir));
 });
