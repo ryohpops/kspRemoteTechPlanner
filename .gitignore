@@ -1,10 +1,7 @@
 ## User specification
 appOut.js
 appOut.js.map
-kspRemoteTechPlanner/content/
-kspRemoteTechPlanner/fonts/
-kspRemoteTechPlanner/scripts/*
-!kspRemoteTechPlanner/scripts/easeljs-*.min.js
+kspRemoteTechPlanner/scripts/
 deploy/
 
 ## Ignore Visual Studio temporary files, build results, and
