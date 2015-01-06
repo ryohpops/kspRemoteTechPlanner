@@ -8,5 +8,10 @@
     "gulp-uglify": "^1.0.2",
     "protractor": "^1.5.0",
     "rimraf": "^2.2.8"
+  },
+  "scripts": {
+    "pretest": "node_modules\\.bin\\webdriver-manager update",
+    "test": "node_modules\\.bin\\protractor.cmd kspRemoteTechPlanner/tests/conf.js",
+    "deploy": "node_modules\\.bin\\gulp.cmd deploy"
   }
 }
