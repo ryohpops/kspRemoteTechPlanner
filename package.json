@@ -11,7 +11,7 @@
   },
   "scripts": {
     "pretest": "node_modules\\.bin\\webdriver-manager update",
-    "test": "node_modules\\.bin\\protractor.cmd kspRemoteTechPlanner/tests/conf.js",
+    "test": "node_modules\\.bin\\protractor.cmd kspRemoteTechPlanner/test/conf.js",
     "deploy": "node_modules\\.bin\\gulp.cmd deploy"
   }
 }

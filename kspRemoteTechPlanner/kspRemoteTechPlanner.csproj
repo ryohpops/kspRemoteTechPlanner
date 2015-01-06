@@ -23,8 +23,8 @@
     <Content Include="app\views\description.html" />
     <Content Include="app\views\dataInput.html" />
     <Content Include="index.html" />
-    <Content Include="tests\conf.js" />
-    <Content Include="tests\spec.js" />
+    <Content Include="test\conf.js" />
+    <Content Include="test\spec.js" />
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
