@@ -6,7 +6,7 @@ describe("Data Input", function () {
     var antennaDetailToggle = element(by.xpath("//button[@data-target='#detail_antenna']"));
 
     beforeEach(function () {
-        browser.get("http://localhost:63269/");
+        browser.get("http://localhost:8080/");
     });
 
     describe("selecting body", function () {
