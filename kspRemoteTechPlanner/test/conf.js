@@ -1,10 +1,7 @@
 exports.config = {
     directConnect: true,
     capabilities: {
-        browserName: "chrome",
-        shardTestFiles: true,
-        maxInstances: 4
+        browserName: "chrome"
     },
-
     specs: ["spec_*.js"]
 };
