@@ -3,15 +3,15 @@
 var gulp = require("gulp");
 var minjs = require("gulp-uglify");
 var mincss = require("gulp-minify-css");
-var run = require("gulp-run");
 var connect = require("gulp-connect");
+var shell = require("gulp-shell");
 var rimraf = require("rimraf");
 
 var deployDir = "deploy/";
 
-gulp.task("wdm-update", function (cb) {
-    run("webdriver-manager update").exec(cb);
-});
+gulp.task("wdm-update",
+    shell.task("webdriver-manager update")
+);
 
 gulp.task("server-start", function () {
     connect.server({
@@ -20,9 +20,9 @@ gulp.task("server-start", function () {
     });
 });
 
-gulp.task("protractor", ["wdm-update", "server-start"], function (cb) {
-    run("protractor kspRemoteTechPlanner/test/conf.js").exec(cb);
-});
+gulp.task("protractor", ["wdm-update", "server-start"],
+    shell.task("protractor kspRemoteTechPlanner/test/conf.js", { ignoreErrors: true })
+);
 
 gulp.task("server-stop", ["protractor"], function () {
     connect.serverClose();
