@@ -3,5 +3,5 @@ exports.config = {
     capabilities: {
         browserName: "chrome"
     },
-    specs: ["spec_*.js"]
+    specs: ["spec.js"]
 };

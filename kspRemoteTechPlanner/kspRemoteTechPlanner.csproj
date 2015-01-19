@@ -24,7 +24,7 @@
     <Content Include="app\views\dataInput.html" />
     <Content Include="index.html" />
     <Content Include="test\conf.js" />
-    <Content Include="test\spec_dataInput.js" />
+    <Content Include="test\spec.js" />
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
