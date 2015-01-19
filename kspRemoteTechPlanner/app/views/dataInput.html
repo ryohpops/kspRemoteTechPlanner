@@ -3,7 +3,7 @@
     <div class="form-group">
         <label for="body">Body</label>
         <select class="form-control" ng-model="input.satChain.body.name"
-                ng-change="input.pullBody(input.satChain.body.name) || input.save() || app.show()">
+                ng-change="input.pullBody(input.satChain.body.name) || input.save() || app.updateView()">
             <option>Kerbol</option>
             <option>Moho</option>
             <option>Eve</option>
@@ -57,25 +57,25 @@
     <div class="form-group">
         <label for="count">Count</label>
         <input type="number" class="form-control" id="count" ng-model="input.satChain.count" ng-model-options="{debounce:300}"
-               required ng-change="input.save() || app.show()" />
+               required ng-change="input.save() || app.updateView()" />
     </div>
 
     <div class="form-group">
         <label for="altitude">Altitude(km)</label>
         <input type="number" class="form-control" id="altitude" ng-model="input.satChain.altitude" ng-model-options="{debounce:300}"
-               required ng-change="input.save() || app.show()" />
+               required ng-change="input.save() || app.updateView()" />
     </div>
 
     <div class="form-group">
         <label for="elcNeeded">Probe electricity consumption<br />(exclude antenna's, per sec.)</label>
         <input type="number" class="form-control" id="elcNeeded" ng-model="input.satChain.elcNeeded" ng-model-options="{debounce:300}"
-               required ng-change="input.save() || app.show()" />
+               required ng-change="input.save() || app.updateView()" />
     </div>
 
     <div class="form-group">
         <label for="antenna">Antenna</label>
         <select class="form-control" ng-model="input.satChain.antenna.name"
-                ng-change="input.pullAntenna(input.satChain.antenna.name) || input.save() || app.show()">
+                ng-change="input.pullAntenna(input.satChain.antenna.name) || input.save() || app.updateView()">
             <optgroup label="Omnidirectional">
                 <option>Reflectron DP-10</option>
                 <option>Communotron 16</option>
@@ -116,6 +116,6 @@
     <div class="form-group">
         <label for="parkingAlt">Parking altitude on launch(km)</label>
         <input type="number" class="form-control" id="parkingAlt" required ng-model="input.satChain.parkingAlt" ng-model-options="{debounce:300}"
-               ng-change="input.save() || app.show()" />
+               ng-change="input.save() || app.updateView()" />
     </div>
 </form>
