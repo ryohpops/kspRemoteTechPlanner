@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "kspRemoteTechPlanner", "kspRemoteTechPlanner\kspRemoteTechPlanner.csproj", "{1D72782C-F6D3-439E-AD4A-C50B211C22EC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "kspRemoteTechPlannerTest", "kspRemoteTechPlannerTest\kspRemoteTechPlannerTest.csproj", "{E68C659C-ADA0-488D-8AB4-3B098531CDA0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{1D72782C-F6D3-439E-AD4A-C50B211C22EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D72782C-F6D3-439E-AD4A-C50B211C22EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1D72782C-F6D3-439E-AD4A-C50B211C22EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E68C659C-ADA0-488D-8AB4-3B098531CDA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E68C659C-ADA0-488D-8AB4-3B098531CDA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E68C659C-ADA0-488D-8AB4-3B098531CDA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E68C659C-ADA0-488D-8AB4-3B098531CDA0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

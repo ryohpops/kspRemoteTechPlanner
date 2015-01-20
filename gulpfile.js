@@ -7,6 +7,7 @@ var connect = require("gulp-connect");
 var shell = require("gulp-shell");
 var rimraf = require("rimraf");
 
+var targetConf = "kspRemoteTechPlannerTest/conf.js";
 var deployDir = "deploy/";
 
 gulp.task("wdm-update",
@@ -21,7 +22,7 @@ gulp.task("server-start", function () {
 });
 
 gulp.task("protractor", ["wdm-update", "server-start"],
-    shell.task("protractor kspRemoteTechPlanner/test/conf.js", { ignoreErrors: true })
+    shell.task("protractor " + this.targetConf, { ignoreErrors: true })
 );
 
 gulp.task("server-stop", ["protractor"], function () {
