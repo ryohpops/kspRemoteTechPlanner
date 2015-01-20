@@ -61,48 +61,4 @@ describe("KSP RemoteTech Planner",() => {
             expect(di.parkingAlt.getAttribute("value")).toEqual("100");
         });
     });
-
-    describe("Body Edit",() => {
-        var testBody = {
-            name: "Test1", color: "red", radius: 150, stdGravity: 1000, soi: 30000
-        };
-
-        var name = element(by.xpath("//input[@name='name']"));
-        var color = element(by.xpath("//input[@name='color']"));
-        var radius = element(by.xpath("//input[@name='radius']"));
-        var stdGravity = element(by.xpath("//input[@name='stdGravity']"));
-        var soi = element(by.xpath("//input[@name='soi']"));
-
-        var saveButton = element(by.buttonText("Save"));
-        var cancelButton = element(by.buttonText("Cancel"));
-        var addButton = element(by.buttonText("Add new"));
-
-        var bodySelector = element(by.xpath("//select[@ng-model='input.satChain.body.name']"));
-
-        beforeEach(() => {
-            browser.manage().deleteAllCookies();
-            element(by.xpath("//a[@href='#body']")).click();
-        });
-
-        this.addTestBody = (body) => {
-            addButton.click();
-        };
-
-        it("should add selection to Input Data",() => {
-
-        });
-
-        it("should save new body's data correctly",() => {
-
-        });
-
-        it("should remove selection from Input Data",() => {
-
-        });
-
-        it("should save body data",() => {
-
-        });
-    });
-
 });

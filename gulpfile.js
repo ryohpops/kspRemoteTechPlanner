@@ -22,7 +22,7 @@ gulp.task("server-start", function () {
 });
 
 gulp.task("protractor", ["wdm-update", "server-start"],
-    shell.task("protractor " + this.targetConf, { ignoreErrors: true })
+    shell.task("protractor " + targetConf, { ignoreErrors: true })
 );
 
 gulp.task("server-stop", ["protractor"], function () {

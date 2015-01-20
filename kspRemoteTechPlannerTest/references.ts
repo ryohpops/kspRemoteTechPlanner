@@ -7,3 +7,4 @@
 /// <reference path="objects/antennaedit.ts" />
 
 /// <reference path="specs/datainputspec.ts" />
+/// <reference path="specs/bodyeditspec.ts" />
