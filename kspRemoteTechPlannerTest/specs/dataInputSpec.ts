@@ -1,13 +1,13 @@
 ﻿/// <reference path="../references.ts" />
 
-describe("KSP RemoteTech Planner", () => {
+describe("KSP RemoteTech Planner",() => {
     beforeEach(() => {
         browser.get("http://localhost:8080/");
     });
 
-    describe("Data Input", () => {
-        describe("selecting body", () => {
-            it("should load body's detail", () => {
+    describe("Data Input",() => {
+        describe("selecting body",() => {
+            it("should load body's detail",() => {
                 var di = new DataInput();
                 di.selectBody("Moho");
                 di.openBodyDetail();
@@ -19,8 +19,8 @@ describe("KSP RemoteTech Planner", () => {
             });
         });
 
-        describe("selecting antenna", () => {
-            it("should load omni-antenna's detail", () => {
+        describe("selecting antenna",() => {
+            it("should load omni-antenna's detail",() => {
                 var di = new DataInput();
                 di.selectAntenna("Communotron 32")
                 di.openAntennaDetail();
@@ -30,7 +30,7 @@ describe("KSP RemoteTech Planner", () => {
                 expect(di.antennaElcNeeded.getText()).toEqual("0.6 /sec.");
             });
 
-            it("should load dish-antenna's detail", () => {
+            it("should load dish-antenna's detail",() => {
                 var di = new DataInput();
                 di.selectAntenna("Reflectron KR-7");
                 di.openAntennaDetail();
@@ -41,7 +41,7 @@ describe("KSP RemoteTech Planner", () => {
             })
         });
 
-        it("should remember last input", () => {
+        it("should remember last input",() => {
             var di = new DataInput();
             di.selectBody("Eve");
             di.count.sendKeys(protractor.Key.chord(protractor.Key.CONTROL, "a"), "6");
@@ -62,8 +62,10 @@ describe("KSP RemoteTech Planner", () => {
         });
     });
 
-    describe("Body Edit", () => {
-        var testBody: App.Body = new App.Body("Test1", "red", 150, 1000, 30000);
+    describe("Body Edit",() => {
+        var testBody = {
+            name: "Test1", color: "red", radius: 150, stdGravity: 1000, soi: 30000
+        };
 
         var name = element(by.xpath("//input[@name='name']"));
         var color = element(by.xpath("//input[@name='color']"));
@@ -86,19 +88,19 @@ describe("KSP RemoteTech Planner", () => {
             addButton.click();
         };
 
-        it("should add selection to Input Data", () => {
+        it("should add selection to Input Data",() => {
 
         });
 
-        it("should save new body's data correctly", () => {
+        it("should save new body's data correctly",() => {
 
         });
 
-        it("should remove selection from Input Data", () => {
+        it("should remove selection from Input Data",() => {
 
         });
 
-        it("should save body data", () => {
+        it("should save body data",() => {
 
         });
     });
