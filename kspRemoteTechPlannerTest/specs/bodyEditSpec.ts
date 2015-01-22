@@ -3,7 +3,7 @@
 describe("Body Edit",() => {
     beforeEach(() => {
         browser.get("http://localhost:8080/");
-        element(by.xpath("//a[@href='#body']")).click();
+        Index.navBodyEdit.click();
     });
 
     it("should add selection to Input Data",() => {
