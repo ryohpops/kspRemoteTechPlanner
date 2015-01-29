@@ -7,6 +7,10 @@ Latest release is available [here](http://ryohpops.github.io/kspRemoteTechPlanne
 
 Version history
 
+- 1.4 : 2015/01/29
+
+ Add remaining four dishes.
+
 - 1.3.1 : 2015/01/03
 
  Fix file reference.
