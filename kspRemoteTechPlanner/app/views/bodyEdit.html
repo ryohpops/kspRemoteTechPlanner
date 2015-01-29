@@ -23,11 +23,31 @@
                 </td>
             </tr>
             <tr ng-show="bodyEdit.isInEdit">
-                <td><input type="text" required class="form-control" ng-model="bodyEdit.editData.name" /></td>
-                <td><input type="color" required class="form-control" ng-model="bodyEdit.editData.color" /></td>
-                <td><input type="number" required class="form-control" ng-model="bodyEdit.editData.radius" /></td>
-                <td><input type="number" required class="form-control" ng-model="bodyEdit.editData.stdGravity" /></td>
-                <td><input type="number" required class="form-control" ng-model="bodyEdit.editData.soi" /></td>
+                <td>
+                    <div ng-class="{'has-error': bodyEditForm.name.$touched && bodyEditForm.name.$invalid}">
+                        <input name="name" type="text" required class="form-control" ng-model="bodyEdit.editData.name" ng-trim="false" />
+                    </div>
+                </td>
+                <td>
+                    <div ng-class="{'has-error': bodyEditForm.color.$touched && bodyEditForm.color.$invalid}">
+                        <input name="color" type="text" required class="form-control" ng-model="bodyEdit.editData.color" ng-trim="false" />
+                    </div>
+                </td>
+                <td>
+                    <div ng-class="{'has-error': bodyEditForm.radius.$touched && bodyEditForm.radius.$invalid}">
+                        <input name="radius" type="number" required class="form-control" ng-model="bodyEdit.editData.radius" ng-trim="false" />
+                    </div>
+                </td>
+                <td>
+                    <div ng-class="{'has-error': bodyEditForm.stdGravity.$touched && bodyEditForm.stdGravity.$invalid}">
+                        <input name="stdGravity" type="number" required class="form-control" ng-model="bodyEdit.editData.stdGravity" ng-trim="false" />
+                    </div>
+                </td>
+                <td>
+                    <div ng-class="{'has-error': bodyEditForm.soi.$touched && bodyEditForm.soi.$invalid}">
+                        <input name="soi" type="number" required class="form-control" ng-model="bodyEdit.editData.soi" ng-trim="false" />
+                    </div>
+                </td>
                 <td>
                     <button type="submit" class="btn btn-primary" ng-disabled="bodyEditForm.$invalid">Save</button>
                     <button type="button" class="btn btn-default" ng-click="bodyEdit.cancel()">Cancel</button>

@@ -12,7 +12,7 @@ module App {
 
         }
 
-        show() {
+        updateView() {
             this.entireViewServ.show();
             this.nightViewServ.show();
             this.deltavViewServ.show();
