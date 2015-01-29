@@ -3,6 +3,7 @@
 
 # User specification
 kspRemoteTechPlanner/
+kspRemoteTechPlannerTest/
 node_modules/
 deploy/
 

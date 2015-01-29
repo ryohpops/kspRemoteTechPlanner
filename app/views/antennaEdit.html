@@ -21,15 +21,27 @@
                 </td>
             </tr>
             <tr ng-show="antennaEdit.isInEdit">
-                <td><input type="text" required class="form-control" ng-model="antennaEdit.editData.name" /></td>
+                <td>
+                    <div ng-class="{'has-error': antennaEditForm.name.$touched && antennaEditForm.name.$invalid}">
+                        <input name="name" type="text" required class="form-control" ng-model="antennaEdit.editData.name" />
+                    </div>
+                </td>
                 <td>
                     <select required class="form-control" ng-model="antennaEdit.editData.type">
                         <option value="0">omni</option>
                         <option value="1">dish</option>
                     </select>
                 </td>
-                <td><input type="number" required class="form-control" ng-model="antennaEdit.editData.range" /></td>
-                <td><input type="number" required class="form-control" ng-model="antennaEdit.editData.elcNeeded" /></td>
+                <td>
+                    <div ng-class="{'has-error': antennaEditForm.range.$touched && antennaEditForm.range.$invalid}">
+                        <input name="range" type="number" required class="form-control" ng-model="antennaEdit.editData.range" />
+                    </div>
+                </td>
+                <td>
+                    <div ng-class="{'has-error': antennaEditForm.elcNeeded.$touched && antennaEditForm.elcNeeded.$invalid}">
+                        <input name="elcNeeded" type="number" required class="form-control" ng-model="antennaEdit.editData.elcNeeded" />
+                    </div>
+                </td>
                 <td>
                     <button type="submit" class="btn btn-primary" ng-disabled="antennaEditForm.$invalid">Save</button>
                     <button type="button" class="btn btn-default" ng-click="antennaEdit.cancel()">Cancel</button>
