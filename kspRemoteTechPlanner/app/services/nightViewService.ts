@@ -28,32 +28,32 @@ module App {
             this.txtOrbitalPeriod = new createjs.Text("", ViewService.fontSetNormal);
             this.txtOrbitalPeriod.textAlign = "center";
             this.txtOrbitalPeriod.textBaseline = "bottom";
-            this.txtOrbitalPeriod.x = this.outerCenter.x;
-            this.txtOrbitalPeriod.y = this.outerCenter.y - NightViewService.orbitRadius - ViewService.marginText;
+            this.txtOrbitalPeriod.x = this.realCenter.x;
+            this.txtOrbitalPeriod.y = this.realCenter.y - NightViewService.orbitRadius - ViewService.marginText;
             this.textContainer.addChild(this.txtOrbitalPeriod);
 
             // required generation amount of electricity
             this.txtRequiredGenerator = new createjs.Text("", ViewService.fontSetNormal);
             this.txtRequiredGenerator.textAlign = "center";
             this.txtRequiredGenerator.textBaseline = "top";
-            this.txtRequiredGenerator.x = this.outerCenter.x;
-            this.txtRequiredGenerator.y = this.outerCenter.y + NightViewService.orbitRadius + ViewService.marginText;
+            this.txtRequiredGenerator.x = this.realCenter.x;
+            this.txtRequiredGenerator.y = this.realCenter.y + NightViewService.orbitRadius + ViewService.marginText;
             this.textContainer.addChild(this.txtRequiredGenerator);
 
             // time of night
             this.txtNightTime = new createjs.Text("", ViewService.fontSetNormal);
             this.txtNightTime.textAlign = "right";
             this.txtNightTime.textBaseline = "bottom";
-            this.txtNightTime.x = this.outerSize - ViewService.marginText;
-            this.txtNightTime.y = this.outerCenter.y - NightViewService.bodyRadius - ViewService.marginText;
+            this.txtNightTime.x = this.realSize - ViewService.marginText;
+            this.txtNightTime.y = this.realCenter.y - NightViewService.bodyRadius - ViewService.marginText;
             this.textContainer.addChild(this.txtNightTime);
 
             // required battery capacity
             this.txtRequiredBattery = new createjs.Text("", ViewService.fontSetNormal);
             this.txtRequiredBattery.textAlign = "right";
             this.txtRequiredBattery.textBaseline = "top";
-            this.txtRequiredBattery.x = this.outerSize - ViewService.marginText;
-            this.txtRequiredBattery.y = this.outerCenter.y + NightViewService.bodyRadius + ViewService.marginText;
+            this.txtRequiredBattery.x = this.realSize - ViewService.marginText;
+            this.txtRequiredBattery.y = this.realCenter.y + NightViewService.bodyRadius + ViewService.marginText;
             this.textContainer.addChild(this.txtRequiredBattery);
 
             this.show();
@@ -73,17 +73,17 @@ module App {
 
             // night area
             this.shapeOuter.graphics.beginFill("rgba(0,0,0,0.2)")
-                .drawRect(this.outerCenter.x, this.outerCenter.y - NightViewService.bodyRadius, this.outerSize / 2, NightViewService.bodyRadius * 2)
+                .drawRect(this.realCenter.x, this.realCenter.y - NightViewService.bodyRadius, this.realSize / 2, NightViewService.bodyRadius * 2)
                 .endFill();
 
             // planet
             this.shapeOuter.graphics.beginFill(b.color)
-                .drawCircle(this.outerCenter.x, this.outerCenter.y, NightViewService.bodyRadius)
+                .drawCircle(this.realCenter.x, this.realCenter.y, NightViewService.bodyRadius)
                 .endFill();
 
             // orbit
             this.shapeOuter.graphics.beginStroke("gray")
-                .drawCircle(this.outerCenter.x, this.outerCenter.y, NightViewService.orbitRadius)
+                .drawCircle(this.realCenter.x, this.realCenter.y, NightViewService.orbitRadius)
                 .endStroke();
 
             // orbital period
