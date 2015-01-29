@@ -1,6 +1,6 @@
 ﻿/// <reference path="../appreferences.ts" />
 module App {
-    // virtual
+    // abstruct
     export class ViewService {
         'use strict';
 
@@ -14,8 +14,8 @@ module App {
         static arrowSize: number = 20;
 
         stage: createjs.Stage;
-        shapes: createjs.Container;
-        texts: createjs.Container;
+        shapeContainer: createjs.Container;
+        textContainer: createjs.Container;
         innerSize: number;
         outerSize: number;
 
@@ -29,10 +29,10 @@ module App {
 
         constructor(target: String, innerSize: number, outerSize: number) {
             this.stage = new createjs.Stage(target);
-            this.shapes = new createjs.Container();
-            this.texts = new createjs.Container();
-            this.stage.addChild(this.shapes);
-            this.stage.addChild(this.texts);
+            this.shapeContainer = new createjs.Container();
+            this.textContainer = new createjs.Container();
+            this.stage.addChild(this.shapeContainer);
+            this.stage.addChild(this.textContainer);
 
             this.innerSize = innerSize;
             this.outerSize = outerSize;

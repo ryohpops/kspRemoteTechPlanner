@@ -22,7 +22,7 @@ module App {
 
             // shape for drawing in inner coordinates
             this.shapeInner = new createjs.Shape();
-            this.shapes.addChild(this.shapeInner);
+            this.shapeContainer.addChild(this.shapeInner);
 
             // name of orbiting body
             this.txtBodyName = new createjs.Text("", ViewService.fontSetBig);
@@ -30,40 +30,40 @@ module App {
             this.txtBodyName.textBaseline = "middle";
             this.txtBodyName.x = this.outerCenter.x;
             this.txtBodyName.y = this.outerCenter.y;
-            this.texts.addChild(this.txtBodyName);
+            this.textContainer.addChild(this.txtBodyName);
 
             // sphere of influence
             this.txtBodySoI = new createjs.Text("", ViewService.fontSetNormal);
             this.txtBodySoI.textAlign = "center";
             this.txtBodySoI.textBaseline = "top";
             this.txtBodySoI.x = this.outerCenter.x;
-            this.texts.addChild(this.txtBodySoI);
+            this.textContainer.addChild(this.txtBodySoI);
 
             // altitude of satChainServ
             this.txtSatAltitude = new createjs.Text("", ViewService.fontSetNormal);
             this.txtSatAltitude.textAlign = "center";
             this.txtSatAltitude.textBaseline = "top";
             this.txtSatAltitude.x = this.outerCenter.x;
-            this.texts.addChild(this.txtSatAltitude);
+            this.textContainer.addChild(this.txtSatAltitude);
 
             // distance between one of satChainServ and next one
             this.txtCommDistance = new createjs.Text("", ViewService.fontSetNormal);
             this.txtCommDistance.textAlign = "left";
             this.txtCommDistance.textBaseline = "top";
-            this.texts.addChild(this.txtCommDistance);
+            this.textContainer.addChild(this.txtCommDistance);
 
             // distance between one of satChainServ and the one after the next
             this.txtCommDistance2 = new createjs.Text("", ViewService.fontSetNormal);
             this.txtCommDistance2.textAlign = "right";
             this.txtCommDistance2.textBaseline = "down";
-            this.texts.addChild(this.txtCommDistance2);
+            this.textContainer.addChild(this.txtCommDistance2);
 
             // upper limit to obtain stable connection
             this.txtCommStableRange = new createjs.Text("", ViewService.fontSetNormal);
             this.txtCommStableRange.textAlign = "center";
             this.txtCommStableRange.textBaseline = "bottom";
             this.txtCommStableRange.x = this.outerCenter.x;
-            this.texts.addChild(this.txtCommStableRange);
+            this.textContainer.addChild(this.txtCommStableRange);
 
             this.show();
         }

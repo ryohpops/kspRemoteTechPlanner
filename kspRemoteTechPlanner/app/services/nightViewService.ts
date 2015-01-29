@@ -22,7 +22,7 @@ module App {
 
             // shape for drawing in outer coordinates
             this.shapeOuter = new createjs.Shape();
-            this.shapes.addChild(this.shapeOuter);
+            this.shapeContainer.addChild(this.shapeOuter);
 
             // orbital period
             this.txtOrbitalPeriod = new createjs.Text("", ViewService.fontSetNormal);
@@ -30,7 +30,7 @@ module App {
             this.txtOrbitalPeriod.textBaseline = "bottom";
             this.txtOrbitalPeriod.x = this.outerCenter.x;
             this.txtOrbitalPeriod.y = this.outerCenter.y - NightViewService.orbitRadius - ViewService.marginText;
-            this.texts.addChild(this.txtOrbitalPeriod);
+            this.textContainer.addChild(this.txtOrbitalPeriod);
 
             // required generation amount of electricity
             this.txtRequiredGenerator = new createjs.Text("", ViewService.fontSetNormal);
@@ -38,7 +38,7 @@ module App {
             this.txtRequiredGenerator.textBaseline = "top";
             this.txtRequiredGenerator.x = this.outerCenter.x;
             this.txtRequiredGenerator.y = this.outerCenter.y + NightViewService.orbitRadius + ViewService.marginText;
-            this.texts.addChild(this.txtRequiredGenerator);
+            this.textContainer.addChild(this.txtRequiredGenerator);
 
             // time of night
             this.txtNightTime = new createjs.Text("", ViewService.fontSetNormal);
@@ -46,7 +46,7 @@ module App {
             this.txtNightTime.textBaseline = "bottom";
             this.txtNightTime.x = this.outerSize - ViewService.marginText;
             this.txtNightTime.y = this.outerCenter.y - NightViewService.bodyRadius - ViewService.marginText;
-            this.texts.addChild(this.txtNightTime);
+            this.textContainer.addChild(this.txtNightTime);
 
             // required battery capacity
             this.txtRequiredBattery = new createjs.Text("", ViewService.fontSetNormal);
@@ -54,7 +54,7 @@ module App {
             this.txtRequiredBattery.textBaseline = "top";
             this.txtRequiredBattery.x = this.outerSize - ViewService.marginText;
             this.txtRequiredBattery.y = this.outerCenter.y + NightViewService.bodyRadius + ViewService.marginText;
-            this.texts.addChild(this.txtRequiredBattery);
+            this.textContainer.addChild(this.txtRequiredBattery);
 
             this.show();
         }

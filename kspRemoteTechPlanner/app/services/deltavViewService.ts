@@ -26,7 +26,7 @@ module App {
 
             // shape for drawing in outer coordinates
             this.shapeOuter = new createjs.Shape();
-            this.shapes.addChild(this.shapeOuter);
+            this.shapeContainer.addChild(this.shapeOuter);
 
             // delta-v to start hohmann transfer
             this.txtDV1 = new createjs.Text("", ViewService.fontSetNormal);
@@ -34,7 +34,7 @@ module App {
             this.txtDV1.textBaseline = "middle";
             this.txtDV1.x = this.outerCenter.x + DeltavViewService.parkingAltitude + ViewService.marginText;
             this.txtDV1.y = this.outerCenter.y;
-            this.texts.addChild(this.txtDV1);
+            this.textContainer.addChild(this.txtDV1);
 
             // delta-v to finish hohmann transfer
             this.txtDV2 = new createjs.Text("", ViewService.fontSetNormal);
@@ -42,7 +42,7 @@ module App {
             this.txtDV2.textBaseline = "middle";
             this.txtDV2.x = this.outerCenter.x - DeltavViewService.designatedAltitude + ViewService.marginText;
             this.txtDV2.y = this.outerCenter.y;
-            this.texts.addChild(this.txtDV2);
+            this.textContainer.addChild(this.txtDV2);
 
             // start delta-v + finish delta-v
             this.txtDVTotal = new createjs.Text("", ViewService.fontSetNormal);
@@ -50,7 +50,7 @@ module App {
             this.txtDVTotal.textBaseline = "top";
             this.txtDVTotal.x = this.outerCenter.x;
             this.txtDVTotal.y = this.outerCenter.y + DeltavViewService.parkingAltitude + ViewService.marginText;
-            this.texts.addChild(this.txtDVTotal);
+            this.textContainer.addChild(this.txtDVTotal);
 
             // phase angle to insert new satellite into next/previous of satellites chain.
             this.txtPhaseAngle = new createjs.Text("", ViewService.fontSetNormal);
@@ -58,7 +58,7 @@ module App {
             this.txtPhaseAngle.textBaseline = "bottom";
             this.txtPhaseAngle.x = this.outerCenter.x;
             this.txtPhaseAngle.y = this.outerCenter.y - DeltavViewService.designatedAltitude - ViewService.marginText;
-            this.texts.addChild(this.txtPhaseAngle);
+            this.textContainer.addChild(this.txtPhaseAngle);
 
             // phase angle measured as time
             this.txtPhaseTime = new createjs.Text("", ViewService.fontSetNormal);
@@ -66,7 +66,7 @@ module App {
             this.txtPhaseTime.textBaseline = "top";
             this.txtPhaseTime.x = this.outerCenter.x;
             this.txtPhaseTime.y = this.outerCenter.y + DeltavViewService.designatedAltitude + ViewService.marginText;
-            this.texts.addChild(this.txtPhaseTime);
+            this.textContainer.addChild(this.txtPhaseTime);
 
             this.show();
         }
