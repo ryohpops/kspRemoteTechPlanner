@@ -9,9 +9,9 @@ module App {
         static localeSetting: Intl.NumberFormatOptions = { maximumFractionDigits: 3 };
         static marginText: number = 8;
         static marginTextPushed: number = 24;
-        static strokeLineWidth: number = 0.8;
+        static strokeLineWidth: number = 1;
         static dotRadius: number = 4;
-        static arrowSize: number = 20;
+        static arrowSize: number = 16;
 
         stage: createjs.Stage;
         shapeContainer: createjs.Container;
@@ -19,11 +19,7 @@ module App {
         virtualSize: number;
         realSize: number;
 
-        get virtualCenter(): Calculator.Point {
-            return new Calculator.Point(this.virtualSize / 2, this.virtualSize / 2);
-        }
-
-        get realCenter(): Calculator.Point {
+        get center(): Calculator.Point {
             return new Calculator.Point(this.realSize / 2, this.realSize / 2);
         }
 
@@ -36,10 +32,6 @@ module App {
 
             this.virtualSize = virtualSize;
             this.realSize = realSize;
-        }
-
-        toVirtual(real: number): number {
-            return real * this.virtualSize / this.realSize;
         }
 
         toReal(virtual: number): number {
