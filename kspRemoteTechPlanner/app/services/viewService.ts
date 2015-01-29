@@ -1,6 +1,6 @@
 ﻿/// <reference path="../appreferences.ts" />
 module App {
-    // virtual
+    // abstruct
     export class ViewService {
         'use strict';
 
@@ -9,41 +9,33 @@ module App {
         static localeSetting: Intl.NumberFormatOptions = { maximumFractionDigits: 3 };
         static marginText: number = 8;
         static marginTextPushed: number = 24;
-        static strokeLineWidth: number = 0.8;
+        static strokeLineWidth: number = 1;
         static dotRadius: number = 4;
-        static arrowSize: number = 20;
+        static arrowSize: number = 16;
 
         stage: createjs.Stage;
-        shapes: createjs.Container;
-        texts: createjs.Container;
-        innerSize: number;
-        outerSize: number;
+        shapeContainer: createjs.Container;
+        textContainer: createjs.Container;
+        virtualSize: number;
+        realSize: number;
 
-        get innerCenter(): Calculator.Point {
-            return new Calculator.Point(this.innerSize / 2, this.innerSize / 2);
+        get center(): Calculator.Point {
+            return new Calculator.Point(this.realSize / 2, this.realSize / 2);
         }
 
-        get outerCenter(): Calculator.Point {
-            return new Calculator.Point(this.outerSize / 2, this.outerSize / 2);
-        }
-
-        constructor(target: String, innerSize: number, outerSize: number) {
+        constructor(target: String, virtualSize: number, realSize: number) {
             this.stage = new createjs.Stage(target);
-            this.shapes = new createjs.Container();
-            this.texts = new createjs.Container();
-            this.stage.addChild(this.shapes);
-            this.stage.addChild(this.texts);
+            this.shapeContainer = new createjs.Container();
+            this.textContainer = new createjs.Container();
+            this.stage.addChild(this.shapeContainer);
+            this.stage.addChild(this.textContainer);
 
-            this.innerSize = innerSize;
-            this.outerSize = outerSize;
+            this.virtualSize = virtualSize;
+            this.realSize = realSize;
         }
 
-        toInner(valueOuter: number): number {
-            return valueOuter * this.innerSize / this.outerSize;
-        }
-
-        toOuter(valueInner: number): number {
-            return valueInner * this.outerSize / this.innerSize;
+        toReal(virtual: number): number {
+            return virtual * this.realSize / this.virtualSize;
         }
 
         update() {
