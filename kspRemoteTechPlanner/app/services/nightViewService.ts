@@ -1,4 +1,5 @@
 ﻿/// <reference path="../appreferences.ts" />
+
 module App {
     export class NightViewService extends ViewService {
         'use strict';

@@ -1,4 +1,5 @@
 ﻿/// <reference path="../appreferences.ts" />
+
 module App {
     export enum AntennaType {
         omni = 0,

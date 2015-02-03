@@ -1,4 +1,5 @@
 ﻿/// <reference path="references.ts" />
+
 module App {
     angular.module("calc", [])
         .service("calc.euclideanServ", Calculator.EuclideanService)
