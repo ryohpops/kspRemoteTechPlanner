@@ -2,38 +2,38 @@
 
 'use strict';
 
-var gulp = require("gulp");
-var sequence = require("run-sequence");
-var minjs = require("gulp-uglify");
-var mincss = require("gulp-minify-css");
-var rimraf = require("rimraf");
+var gulp: gulp.Gulp = require("gulp");
+var sequence: Function = require("run-sequence");
+var minjs: IGulpPlugin = require("gulp-uglify");
+var mincss: IGulpPlugin = require("gulp-minify-css");
+var rimraf: Function = require("rimraf");
 
-var sourceHTML = "../kspRemoteTechPlanner/**/*.html";
-var sourceJS = "../kspRemoteTechPlanner/**/appOut.js";
-var sourceCSS = "../kspRemoteTechPlanner/**/app.css";
-var deployDir = "../deploy/";
+var sourceHTML: string = "../kspRemoteTechPlanner/**/*.html";
+var sourceJS: string = "../kspRemoteTechPlanner/**/appOut.js";
+var sourceCSS: string = "../kspRemoteTechPlanner/**/app.css";
+var deployDir: string = "../deploy/";
 
-gulp.task("clean", function (cb) {
+gulp.task("deploy:clean",(cb) => {
     rimraf(deployDir, cb);
 });
 
-gulp.task("copy-html", function () {
+gulp.task("deploy:copy-html",() => {
     return gulp.src(sourceHTML)
         .pipe(gulp.dest(deployDir));
 });
 
-gulp.task("minify-js", function () {
+gulp.task("deploy:minify-js",() => {
     return gulp.src(sourceJS)
         .pipe(minjs())
         .pipe(gulp.dest(deployDir));
 });
 
-gulp.task("minify-css", function () {
+gulp.task("deploy:minify-css",() => {
     return gulp.src(sourceCSS)
         .pipe(mincss())
         .pipe(gulp.dest(deployDir));
 });
 
-gulp.task("deploy", function (cb) {
-    sequence("clean", ["copy-html", "minify-js", "minify-css"], cb);
+gulp.task("deploy",(cb) => {
+    sequence("deploy:clean", ["deploy:copy-html", "deploy:minify-js", "deploy:minify-css"], cb);
 });

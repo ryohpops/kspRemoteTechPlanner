@@ -3,7 +3,4 @@
 'use strict';
 
 var requireDir = require("require-dir");
-
-var taskDir = "tasks/";
-
-var tasks = requireDir(taskDir);
+var tasks = requireDir("tasks/");

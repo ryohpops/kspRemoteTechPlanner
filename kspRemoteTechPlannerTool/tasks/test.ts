@@ -2,33 +2,33 @@
 
 'use strict';
 
-var gulp = require("gulp");
-var sequence = require("run-sequence");
-var connect = require("gulp-connect");
-var shell = require("gulp-shell");
+var gulp: gulp.Gulp = require("gulp");
+var sequence: Function = require("run-sequence");
+var connect: any = require("gulp-connect");
+var shell: any = require("gulp-shell");
 
-var targetRoot = "../kspRemoteTechPlanner/";
-var targetConf = "../kspRemoteTechPlannerTest/conf.js";
+var targetRoot: string = "../kspRemoteTechPlanner/";
+var targetConf: string = "../kspRemoteTechPlannerTest/conf.js";
 
-gulp.task("wdm-update",
+gulp.task("test:wdm-update",
     shell.task("webdriver-manager update")
     );
 
-gulp.task("server-start", function () {
+gulp.task("test:server-start",() => {
     connect.server({
         root: targetRoot,
         port: 8080
     });
 });
 
-gulp.task("server-stop", function () {
+gulp.task("test:server-stop",() => {
     connect.serverClose();
 });
 
-gulp.task("protractor",
+gulp.task("test:protractor",
     shell.task("protractor " + targetConf, { ignoreErrors: true })
     );
 
-gulp.task("test", function (cb) {
-    sequence(["wdm-update", "server-start"], "protractor", "server-stop", cb);
+gulp.task("test",(cb) => {
+    sequence(["test:wdm-update", "test:server-start"], "test:protractor", "test:server-stop", cb);
 });
