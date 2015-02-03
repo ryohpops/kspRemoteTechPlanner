@@ -1,15 +1,19 @@
 'use strict';
 
 var gulp = require("gulp");
-var minjs = require("gulp-uglify");
-var mincss = require("gulp-minify-css");
+var sequence = require("run-sequence");
+
 var connect = require("gulp-connect");
 var shell = require("gulp-shell");
-var sequence = require("run-sequence");
 var rimraf = require("rimraf");
-
 var targetConf = "kspRemoteTechPlannerTest/conf.js";
+
+var minjs = require("gulp-uglify");
+var mincss = require("gulp-minify-css");
 var deployDir = "deploy/";
+var sourceHTML = "kspRemoteTechPlanner/**/*.html";
+var sourceJS = "kspRemoteTechPlanner/**/appOut.js";
+var sourceCSS = "kspRemoteTechPlanner/**/app.css";
 
 gulp.task("wdm-update",
     shell.task("webdriver-manager update")
@@ -39,18 +43,18 @@ gulp.task("clean", function (cb) {
 });
 
 gulp.task("copy-html", function () {
-    return gulp.src("kspRemoteTechPlanner/**/*.html")
+    return gulp.src(sourceHTML)
     .pipe(gulp.dest(deployDir));
 });
 
 gulp.task("minify-js", function () {
-    return gulp.src("kspRemoteTechPlanner/**/appOut.js")
+    return gulp.src(sourceJS)
     .pipe(minjs())
     .pipe(gulp.dest(deployDir));
 });
 
 gulp.task("minify-css", function () {
-    return gulp.src("kspRemoteTechPlanner/**/app.css")
+    return gulp.src(sourceCSS)
     .pipe(mincss())
     .pipe(gulp.dest(deployDir));
 });
