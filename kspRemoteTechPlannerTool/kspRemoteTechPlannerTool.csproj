@@ -58,7 +58,6 @@
     <TypeScriptCompile Include="gulpfile.ts" />
     <TypeScriptCompile Include="scripts\typings\node\node.d.ts" />
     <TypeScriptCompile Include="tasks\deploy.ts" />
-    <TypeScriptCompile Include="tasks\make-readme.ts" />
     <TypeScriptCompile Include="tasks\test.ts" />
     <TypeScriptCompile Include="references.ts" />
     <TypeScriptCompile Include="scripts\typings\gulp\gulp.d.ts" />

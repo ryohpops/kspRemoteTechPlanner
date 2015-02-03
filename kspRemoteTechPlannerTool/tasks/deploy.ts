@@ -13,7 +13,7 @@ var sourceJS: string = "../kspRemoteTechPlanner/**/appOut.js";
 var sourceCSS: string = "../kspRemoteTechPlanner/**/app.css";
 var deployDir: string = "../deploy/";
 
-gulp.task("deploy:clean",(cb) => {
+gulp.task("deploy:clean",(cb: gulp.ITaskCallback) => {
     rimraf(deployDir, cb);
 });
 
@@ -34,6 +34,6 @@ gulp.task("deploy:minify-css",() => {
         .pipe(gulp.dest(deployDir));
 });
 
-gulp.task("deploy",(cb) => {
+gulp.task("deploy",(cb: gulp.ITaskCallback) => {
     sequence("deploy:clean", ["deploy:copy-html", "deploy:minify-js", "deploy:minify-css"], cb);
 });

@@ -29,6 +29,6 @@ gulp.task("test:protractor",
     shell.task("protractor " + targetConf, { ignoreErrors: true })
     );
 
-gulp.task("test",(cb) => {
+gulp.task("test",(cb: gulp.ITaskCallback) => {
     sequence(["test:wdm-update", "test:server-start"], "test:protractor", "test:server-stop", cb);
 });
