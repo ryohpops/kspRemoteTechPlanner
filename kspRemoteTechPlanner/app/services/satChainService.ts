@@ -1,6 +1,8 @@
 ﻿/// <reference path="../appreferences.ts" />
 
 module App {
+    import Point = Calculator.Point;
+
     export class SatChainService {
         'use strict';
 
@@ -33,9 +35,9 @@ module App {
             this.$cookieStore.put(this.cookieKey, this.satChain);
         }
 
-        satPosition(offset: number): Calculator.Point {
+        satPosition(offset: number): Point {
             var ra: number = this.satChain.body.radius + this.satChain.altitude;
-            return new Calculator.Point(ra * Math.cos(2 * Math.PI / this.satChain.count * offset), + ra * Math.sin(2 * Math.PI / this.satChain.count * offset));
+            return new Point(ra * Math.cos(2 * Math.PI / this.satChain.count * offset), + ra * Math.sin(2 * Math.PI / this.satChain.count * offset));
         }
 
         satDistance(): number {
@@ -53,7 +55,7 @@ module App {
         canConnectToSat(distance: number): boolean {
             return this.satChain.count >= distance + 1 && // connecting satellite exists
                 this.euclideanServ.length(this.satPosition(0), this.satPosition(distance)) <= this.satChain.antenna.range && // connection range is enough 
-                this.euclideanServ.distPointLine(new Calculator.Point(0, 0), this.satPosition(0), this.satPosition(distance))
+                this.euclideanServ.distPointLine(new Point(0, 0), this.satPosition(0), this.satPosition(distance))
                 > this.satChain.body.radius; // connection is not blocked by primary body
         }
 
@@ -62,7 +64,7 @@ module App {
         }
 
         stableLimitAltitude(): number {
-            return this.euclideanServ.circleCross(new Calculator.Point(0, 0), this.satPosition(0), this.satPosition(1),
+            return this.euclideanServ.circleCross(new Point(0, 0), this.satPosition(0), this.satPosition(1),
                 this.satChain.antenna.range, Calculator.CircleCrossMode.high) - this.satChain.body.radius;
         }
 
