@@ -6,6 +6,7 @@
 /// <reference path="scripts/typings/tweenjs/tweenjs.d.ts" />
 /// <reference path="scripts/typings/easeljs/easeljs.d.ts" />
 
+/// <reference path="calculator/calculatorreferences.ts" />
 /// <reference path="app/appreferences.ts" />
 
 /// <reference path="app.ts" />
