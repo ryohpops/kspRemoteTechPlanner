@@ -57,6 +57,40 @@ describe("Data Input",() => {
             expect(di.antennaRange.getText()).toEqual("90,000 km");
             expect(di.antennaElcNeeded.getText()).toEqual("0.82 /sec.");
         });
+
+        it("should load user omni-antenna's detail",() => {
+            var testOmni: any = { name: "Omni1", antennaType: "0", range: 6000, elcNeeded: 0.99 };
+
+            Index.navAntennaEdit.click();
+
+            var ae: AntennaEdit = new AntennaEdit();
+            ae.addAntenna(testOmni);
+
+            var di: DataInput = new DataInput();
+            di.selectAntenna(testOmni.name)
+            di.openAntennaDetail();
+
+            expect(di.antennaType.getText()).toEqual("Omnidirectional");
+            expect(di.antennaRange.getText()).toEqual("6,000 km");
+            expect(di.antennaElcNeeded.getText()).toEqual("0.99 /sec.");
+        });
+
+        it("should load user dish-antenna's detail",() => {
+            var testDish: any = { name: "Dish1", antennaType: "1", range: 12000, elcNeeded: 1.25 };
+
+            Index.navAntennaEdit.click();
+
+            var ae: AntennaEdit = new AntennaEdit();
+            ae.addAntenna(testDish);
+
+            var di: DataInput = new DataInput();
+            di.selectAntenna(testDish.name);
+            di.openAntennaDetail();
+
+            expect(di.antennaType.getText()).toEqual("Dish");
+            expect(di.antennaRange.getText()).toEqual("12,000 km");
+            expect(di.antennaElcNeeded.getText()).toEqual("1.25 /sec.");
+        });
     });
 
     it("should remember last input",() => {
