@@ -6,10 +6,10 @@ class DataInput {
     bodySelector: protractor.ElementFinder = element(by.xpath("//select[@ng-model='input.satChain.body.name']"));
     bodyDetailToggle: protractor.ElementFinder = element(by.xpath("//button[@data-target='#detail_body']"));
 
-    bodyColor: protractor.ElementFinder = null;
-    bodyRadius: protractor.ElementFinder = null;
-    bodyStdGravity: protractor.ElementFinder = null;
-    bodySoi: protractor.ElementFinder = null;
+    bodyColor: protractor.ElementFinder;
+    bodyRadius: protractor.ElementFinder;
+    bodyStdGravity: protractor.ElementFinder;
+    bodySoi: protractor.ElementFinder;
 
     count: protractor.ElementFinder = element(by.xpath("//input[@ng-model='input.satChain.count']"));
     altitude: protractor.ElementFinder = element(by.xpath("//input[@ng-model='input.satChain.altitude']"));
@@ -18,9 +18,9 @@ class DataInput {
     antennaSelector: protractor.ElementFinder = element(by.xpath("//select[@ng-model='input.satChain.antenna.name']"));
     antennaDetailToggle: protractor.ElementFinder = element(by.xpath("//button[@data-target='#detail_antenna']"));
 
-    antennaType: protractor.ElementFinder = null;
-    antennaRange: protractor.ElementFinder = null;
-    antennaElcNeeded: protractor.ElementFinder = null;
+    antennaType: protractor.ElementFinder;
+    antennaRange: protractor.ElementFinder;
+    antennaElcNeeded: protractor.ElementFinder;
 
     parkingAlt: protractor.ElementFinder = element(by.xpath("//input[@ng-model='input.satChain.parkingAlt']"));
 

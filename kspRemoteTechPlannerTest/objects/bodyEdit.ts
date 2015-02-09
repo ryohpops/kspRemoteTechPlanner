@@ -3,15 +3,16 @@
 class BodyEdit {
     'use strict';
 
-    name: protractor.ElementFinder = element(by.xpath("//form[@name='bodyEditForm']//input[@name='name']"));
-    color: protractor.ElementFinder = element(by.xpath("//form[@name='bodyEditForm']//input[@name='color']"));
-    radius: protractor.ElementFinder = element(by.xpath("//form[@name='bodyEditForm']//input[@name='radius']"));
-    stdGravity: protractor.ElementFinder = element(by.xpath("//form[@name='bodyEditForm']//input[@name='stdGravity']"));
-    soi: protractor.ElementFinder = element(by.xpath("//form[@name='bodyEditForm']//input[@name='soi']"));
+    form: protractor.ElementFinder = element(by.xpath("//form[@name='bodyEditForm']"));
+    name: protractor.ElementFinder = this.form.element(by.xpath(".//input[@name='name']"));
+    color: protractor.ElementFinder = this.form.element(by.xpath(".//input[@name='color']"));
+    radius: protractor.ElementFinder = this.form.element(by.xpath(".//input[@name='radius']"));
+    stdGravity: protractor.ElementFinder = this.form.element(by.xpath(".//input[@name='stdGravity']"));
+    soi: protractor.ElementFinder = this.form.element(by.xpath(".//input[@name='soi']"));
 
-    saveButton: protractor.ElementFinder = element(by.xpath("//form[@name='bodyEditForm']")).element(by.buttonText("Save"));
-    cancelButton: protractor.ElementFinder = element(by.xpath("//form[@name='bodyEditForm']")).element(by.buttonText("Cancel"));
-    addButton: protractor.ElementFinder = element(by.xpath("//form[@name='bodyEditForm']")).element(by.buttonText("Add new"));
+    saveButton: protractor.ElementFinder = this.form.element(by.buttonText("Save"));
+    cancelButton: protractor.ElementFinder = this.form.element(by.buttonText("Cancel"));
+    addButton: protractor.ElementFinder = this.form.element(by.buttonText("Add new"));
 
     addBody(body) {
         this.addButton.click();
