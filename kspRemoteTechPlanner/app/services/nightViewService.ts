@@ -19,7 +19,11 @@ module App {
             private satChainServ: SatChainService
             ) {
 
-            super(nightViewTarget, 5000, 400);
+            super();
+        }
+
+        init() {
+            super.init(this.nightViewTarget, 5000, 400);
 
             // shape for drawing in outer coordinates
             this.shapeOuter = new createjs.Shape();

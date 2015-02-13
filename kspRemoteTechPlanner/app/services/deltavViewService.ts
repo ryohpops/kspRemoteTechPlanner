@@ -23,7 +23,11 @@ module App {
             private satChainServ: SatChainService
             ) {
 
-            super(deltavViewTarget, 5000, 400);
+            super();
+        }
+
+        init() {
+            super.init(this.deltavViewTarget, 5000, 400);
 
             // shape for drawing in outer coordinates
             this.shapeOuter = new createjs.Shape();
@@ -105,7 +109,7 @@ module App {
                 (DeltavViewService.parkingAltitude + DeltavViewService.designatedAltitude) / 2, 0, Math.PI, true)
                 .endStroke();
             this.shapeOuter.graphics.beginStroke("green")
-        this.gHelper.drawArrow(this.shapeOuter.graphics, this.center.x + (DeltavViewService.parkingAltitude - DeltavViewService.designatedAltitude) / 2,
+            this.gHelper.drawArrow(this.shapeOuter.graphics, this.center.x + (DeltavViewService.parkingAltitude - DeltavViewService.designatedAltitude) / 2,
                 this.center.y - (DeltavViewService.parkingAltitude + DeltavViewService.designatedAltitude) / 2, 0, ViewService.arrowSize)
                 .endStroke();
 

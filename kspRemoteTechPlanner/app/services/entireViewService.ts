@@ -19,7 +19,11 @@ module App {
             private satChainServ: SatChainService
             ) {
 
-            super(entireViewTarget, 10000, 840);
+            super();
+        }
+
+        init() {
+            super.init(this.entireViewTarget, 10000, 850);
 
             this.shape = new createjs.Shape();
             this.shapeContainer.addChild(this.shape);

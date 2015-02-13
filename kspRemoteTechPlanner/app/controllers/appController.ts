@@ -13,6 +13,12 @@ module App {
 
         }
 
+        initView() {
+            this.entireViewServ.init();
+            this.nightViewServ.init();
+            this.deltavViewServ.init();
+        }
+
         updateView() {
             this.entireViewServ.show();
             this.nightViewServ.show();

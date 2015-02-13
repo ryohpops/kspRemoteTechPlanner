@@ -26,7 +26,11 @@ module App {
             return new Point(this.realSize / 2, this.realSize / 2);
         }
 
-        constructor(target: String, virtualSize: number, realSize: number) {
+        constructor() {
+
+        }
+
+        init(target: String, virtualSize: number, realSize: number) {
             this.stage = new createjs.Stage(target);
             this.shapeContainer = new createjs.Container();
             this.textContainer = new createjs.Container();

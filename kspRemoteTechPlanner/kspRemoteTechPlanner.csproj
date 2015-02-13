@@ -22,6 +22,7 @@
     <Content Include="app\views\bodyEdit.html" />
     <Content Include="app\views\description.html" />
     <Content Include="app\views\dataInput.html" />
+    <Content Include="app\views\planner.html" />
     <Content Include="index.html" />
   </ItemGroup>
   <ItemGroup>
