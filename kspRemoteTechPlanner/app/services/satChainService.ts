@@ -24,7 +24,7 @@ module App {
         }
 
         private loadOrCreate(): SatChain {
-            var sc: SatChain = this.$cookieStore.get(this.cookieKey);
+            var sc: any = this.$cookieStore.get(this.cookieKey); // JSON object
             if (sc !== undefined)
                 return sc;
             else

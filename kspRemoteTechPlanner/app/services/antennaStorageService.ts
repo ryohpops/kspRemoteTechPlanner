@@ -44,7 +44,7 @@ module App {
         private loadUserAntennas() {
             this._userAntennas = {};
 
-            var ua: Object = this.$cookieStore.get(this.cookieKey);
+            var ua: any = this.$cookieStore.get(this.cookieKey); // JSON object, functions are not ready
             if (ua !== undefined) {
                 for (var key in ua) {
                     var a: Antenna = ua[key];

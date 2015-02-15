@@ -51,7 +51,7 @@ module App {
         private loadUserBodies() {
             this._userBodies = {};
 
-            var ub: Object = this.$cookieStore.get(this.cookieKey); // pure JS object, functions are not ready
+            var ub: any = this.$cookieStore.get(this.cookieKey); // JSON object, functions are not ready
             if (ub !== undefined) {
                 for (var key in ub) {
                     var b: Body = ub[key];
