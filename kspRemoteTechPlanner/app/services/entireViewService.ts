@@ -75,7 +75,7 @@ module App {
         show(): void {
             var sc: SatChain = this.satChainServ.satChain;
 
-            this.virtualSize = (sc.body.radius + sc.altitude + sc.antenna.range) * 2 * 1.05;
+            this.virtualSize = (sc.body.radius + sc.altitude + sc.selectedAntenna.range) * 2 * 1.05;
 
             this.shape.graphics.clear();
             this.shape.graphics.setStrokeStyle(ViewService.strokeLineWidth);
@@ -116,7 +116,7 @@ module App {
         private showSatChain(g: createjs.Graphics, s: SatChainService): void {
             var sc: SatChain = s.satChain;
             var b: Body = sc.body;
-            var a: Antenna = sc.antenna;
+            var a: Antenna = sc.selectedAntenna;
 
             // orbit
             g.beginStroke("black")

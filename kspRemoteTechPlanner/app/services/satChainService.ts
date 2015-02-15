@@ -25,10 +25,21 @@ module App {
 
         private loadOrCreate(): SatChain {
             var sc: any = this.$cookieStore.get(this.cookieKey); // JSON object
-            if (sc !== undefined)
-                return sc;
-            else
-                return new SatChain(new Body("Kerbin", "rgb(63,111,40)", 600, 3531.6, 84159.286), 4, 1000, 0.029, new Antenna("Communotron 16", AntennaType.omni, 2500, 0.13), 70);
+            if (sc !== undefined) {
+                if (sc.antennaIndex === undefined) { // update from ver 1.4
+                    sc.antenna = [sc.antenna];
+                    sc.antennaIndex = 0;
+                }
+
+                var antenna: Antenna[] = new Array<Antenna>();
+                for (var a in sc.antenna) {
+                    antenna.push(new Antenna(a.name, a.type, a.range, a.elcNeeded));
+                }
+                return new SatChain(new Body(sc.body.name, sc.body.color, sc.body.radius, sc.body.stdGravity, sc.body.soi), sc.count, sc.altitude, sc.elcNeeded,
+                    antenna, sc.antennaIndex, sc.parkingAlt);
+            } else {
+                return new SatChain(new Body("Kerbin", "rgb(63,111,40)", 600, 3531.6, 84159.286), 4, 1000, 0.029, [new Antenna("Communotron 16", AntennaType.omni, 2500, 0.13)], 0, 70);
+            }
         }
 
         save() {
@@ -54,7 +65,7 @@ module App {
 
         canConnectToSat(distance: number): boolean {
             return this.satChain.count >= distance + 1 && // connecting satellite exists
-                this.euclideanServ.length(this.satPosition(0), this.satPosition(distance)) <= this.satChain.antenna.range && // connection range is enough 
+                this.euclideanServ.length(this.satPosition(0), this.satPosition(distance)) <= this.satChain.selectedAntenna.range && // connection range is enough 
                 this.euclideanServ.distPointLine(new Point(0, 0), this.satPosition(0), this.satPosition(distance))
                 > this.satChain.body.radius; // connection is not blocked by primary body
         }
@@ -65,7 +76,7 @@ module App {
 
         stableLimitAltitude(): number {
             return this.euclideanServ.circleCross(new Point(0, 0), this.satPosition(0), this.satPosition(1),
-                this.satChain.antenna.range, Calculator.CircleCrossMode.high) - this.satChain.body.radius;
+                this.satChain.selectedAntenna.range, Calculator.CircleCrossMode.high) - this.satChain.body.radius;
         }
 
         orbitalPeriod(): number {
@@ -77,11 +88,11 @@ module App {
         }
 
         requiredBattery(): number {
-            return (this.satChain.elcNeeded + this.satChain.antenna.elcNeeded) * this.nightTime();
+            return (this.satChain.elcNeeded + this.satChain.selectedAntenna.elcNeeded) * this.nightTime();
         }
 
         requiredGenerator(): number {
-            return (this.satChain.elcNeeded + this.satChain.antenna.elcNeeded) * this.orbitalPeriod() / (this.orbitalPeriod() - this.nightTime());
+            return (this.satChain.elcNeeded + this.satChain.selectedAntenna.elcNeeded) * this.orbitalPeriod() / (this.orbitalPeriod() - this.nightTime());
         }
 
         hohmannStartDeltaV(): number {

@@ -27,7 +27,7 @@ module App {
         }
 
         pullAntenna(name: string) {
-            this.satChain.antenna = this.antennas.getAntenna(name);
+            this.satChain.selectedAntenna = this.antennas.getAntenna(name);
         }
     }
 }
