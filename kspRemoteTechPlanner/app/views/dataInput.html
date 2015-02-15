@@ -30,7 +30,7 @@
             </optgroup>
             <option>Eeloo</option>
             <optgroup label="User data">
-                <option ng-repeat="body in input.bodies.userBodies">{{body.name}}</option>
+                <option ng-repeat="userBody in input.bodies.userBodies">{{userBody.name}}</option>
             </optgroup>
         </select>
 
@@ -74,43 +74,43 @@
 
     <div class="form-group">
         <label for="antenna">Antenna</label>
-        <select class="form-control" ng-model="input.satChain.antenna.name"
-                ng-change="input.pullAntenna(input.satChain.antenna.name) || input.save() || app.updateView()">
-            <optgroup label="Omnidirectional">
-                <option>Reflectron DP-10</option>
-                <option>Communotron 16</option>
-                <option>CommTech EXP-VR-2T</option>
-                <option>Communotron 32</option>
-            </optgroup>
-            <optgroup label="Dish">
-                <option>Comms DTS-M1</option>
-                <option>Reflectron KR-7</option>
-                <option>Communotron 88-88</option>
-                <option>Reflectron KR-14</option>
-                <option>CommTech-1</option>
-                <option>Reflectron GX-128</option>
-            </optgroup>
-            <optgroup label="User data">
-                <option ng-repeat="antenna in input.antennas.userAntennas">{{antenna.name}}</option>
-            </optgroup>
-        </select>
+        <div ng-repeat="antenna in input.satChain.antennas">
+            <select class="form-control" ng-model="antenna.name" ng-change="input.pullAntenna($index, antenna.name) || input.save() || app.updateView()">
+                <optgroup label="Omnidirectional">
+                    <option>Reflectron DP-10</option>
+                    <option>Communotron 16</option>
+                    <option>CommTech EXP-VR-2T</option>
+                    <option>Communotron 32</option>
+                </optgroup>
+                <optgroup label="Dish">
+                    <option>Comms DTS-M1</option>
+                    <option>Reflectron KR-7</option>
+                    <option>Communotron 88-88</option>
+                    <option>Reflectron KR-14</option>
+                    <option>CommTech-1</option>
+                    <option>Reflectron GX-128</option>
+                </optgroup>
+                <optgroup label="User data">
+                    <option ng-repeat="userAntenna in input.antennas.userAntennas">{{userAntenna.name}}</option>
+                </optgroup>
+            </select>
 
-        <!-- detail for antenna -->
-        <div class="detail collapse" id="detail_antenna">
-            <dl class="detail">
-                <dt>Type</dt>
-                <dd>{{input.satChain.antenna.typeString()}}</dd>
-                <dt>Range</dt>
-                <dd>{{input.satChain.antenna.range |number}} km</dd>
-                <dt>Electricity consumption</dt>
-                <dd>{{input.satChain.antenna.elcNeeded |number}} /sec.</dd>
-            </dl>
+            <!-- detail for antenna -->
+            <div class="detail collapse" id="detail_antenna">
+                <dl class="detail">
+                    <dt>Type</dt>
+                    <dd>{{antenna.typeString()}}</dd>
+                    <dt>Range</dt>
+                    <dd>{{antenna.range |number}} km</dd>
+                    <dt>Electricity consumption</dt>
+                    <dd>{{antenna.elcNeeded |number}} /sec.</dd>
+                </dl>
+            </div>
+            <button type="button" class="btn btn-xs fluid" data-toggle="collapse" data-target="#detail_antenna">
+                <span class="glyphicon glyphicon-collapse-up"></span>
+                <span class="glyphicon glyphicon-collapse-down"></span>
+            </button>
         </div>
-
-        <button type="button" class="btn btn-xs fluid" data-toggle="collapse" data-target="#detail_antenna">
-            <span class="glyphicon glyphicon-collapse-up"></span>
-            <span class="glyphicon glyphicon-collapse-down"></span>
-        </button>
     </div>
 
     <div class="form-group">

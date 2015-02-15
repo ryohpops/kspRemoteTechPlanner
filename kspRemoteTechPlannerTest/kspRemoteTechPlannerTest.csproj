@@ -32,7 +32,6 @@
     <TypeScriptCompile Include="scripts\typings\angular-protractor\angular-protractor.d.ts" />
     <TypeScriptCompile Include="scripts\typings\jasmine\jasmine.d.ts" />
     <TypeScriptCompile Include="scripts\typings\selenium-webdriver\selenium-webdriver.d.ts" />
-    <TypeScriptCompile Include="specs\bodyEditSpec.ts" />
     <TypeScriptCompile Include="specs\dataInputSpec.ts" />
   </ItemGroup>
   <PropertyGroup>

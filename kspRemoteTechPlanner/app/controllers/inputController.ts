@@ -26,8 +26,8 @@ module App {
             this.satChain.body = this.bodies.getBody(name);
         }
 
-        pullAntenna(name: string) {
-            this.satChain.selectedAntenna = this.antennas.getAntenna(name);
+        pullAntenna(index: number, name: string) {
+            this.satChain.antennas[index] = this.antennas.getAntenna(name);
         }
     }
 }

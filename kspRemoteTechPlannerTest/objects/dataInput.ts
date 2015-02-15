@@ -15,7 +15,7 @@ class DataInput {
     altitude: protractor.ElementFinder = element(by.xpath("//input[@ng-model='input.satChain.altitude']"));
     elcNeeded: protractor.ElementFinder = element(by.xpath("//input[@ng-model='input.satChain.elcNeeded']"));
 
-    antennaSelector: protractor.ElementFinder = element(by.xpath("//select[@ng-model='input.satChain.antenna.name']"));
+    antennaSelector: protractor.ElementFinder = element(by.xpath("//select[@ng-model='antenna.name']"));
     antennaDetailToggle: protractor.ElementFinder = element(by.xpath("//button[@data-target='#detail_antenna']"));
 
     antennaType: protractor.ElementFinder;
@@ -42,8 +42,8 @@ class DataInput {
 
     openAntennaDetail() {
         this.antennaDetailToggle.click();
-        this.antennaType = element(by.binding("input.satChain.antenna.typeString()"));
-        this.antennaRange = element(by.binding("input.satChain.antenna.range"));
-        this.antennaElcNeeded = element(by.binding("input.satChain.antenna.elcNeeded"));
+        this.antennaType = element(by.binding("antenna.typeString()"));
+        this.antennaRange = element(by.binding("antenna.range"));
+        this.antennaElcNeeded = element(by.binding("antenna.elcNeeded"));
     }
 }

@@ -8,6 +8,10 @@ module App {
 
         private _satChain: SatChain;
 
+        get satChain(): SatChain {
+            return this._satChain;
+        }
+
         static $inject = ["$cookieStore", "satChainCookieKey", "calc.euclideanServ", "calc.orbitalServ"];
         constructor(
             private $cookieStore: ng.cookies.ICookieStoreService,
@@ -19,24 +23,21 @@ module App {
             this._satChain = this.loadOrCreate();
         }
 
-        get satChain(): SatChain {
-            return this._satChain;
-        }
-
         private loadOrCreate(): SatChain {
             var sc: any = this.$cookieStore.get(this.cookieKey); // JSON object
             if (sc !== undefined) {
                 if (sc.antennaIndex === undefined) { // update from ver 1.4
-                    sc.antenna = [sc.antenna];
+                    sc.antennas = [sc.antenna];
                     sc.antennaIndex = 0;
                 }
 
-                var antenna: Antenna[] = new Array<Antenna>();
-                for (var a in sc.antenna) {
-                    antenna.push(new Antenna(a.name, a.type, a.range, a.elcNeeded));
+                var antennas: Antenna[] = new Array<Antenna>();
+                for (var idx in sc.antennas) {
+                    var a: any = sc.antennas[idx];
+                    antennas.push(new Antenna(a.name, a.type, a.range, a.elcNeeded));
                 }
                 return new SatChain(new Body(sc.body.name, sc.body.color, sc.body.radius, sc.body.stdGravity, sc.body.soi), sc.count, sc.altitude, sc.elcNeeded,
-                    antenna, sc.antennaIndex, sc.parkingAlt);
+                    antennas, sc.antennaIndex, sc.parkingAlt);
             } else {
                 return new SatChain(new Body("Kerbin", "rgb(63,111,40)", 600, 3531.6, 84159.286), 4, 1000, 0.029, [new Antenna("Communotron 16", AntennaType.omni, 2500, 0.13)], 0, 70);
             }

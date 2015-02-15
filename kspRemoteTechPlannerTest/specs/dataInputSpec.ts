@@ -26,6 +26,8 @@ describe("Data Input",() => {
             var be: BodyEdit = new BodyEdit();
             be.addBody(testBody);
 
+            Index.navPlanner.click();
+
             var di: DataInput = new DataInput();
             di.selectBody(testBody.name);
             di.openBodyDetail();
@@ -66,6 +68,8 @@ describe("Data Input",() => {
             var ae: AntennaEdit = new AntennaEdit();
             ae.addAntenna(testOmni);
 
+            Index.navPlanner.click();
+
             var di: DataInput = new DataInput();
             di.selectAntenna(testOmni.name)
             di.openAntennaDetail();
@@ -82,6 +86,8 @@ describe("Data Input",() => {
 
             var ae: AntennaEdit = new AntennaEdit();
             ae.addAntenna(testDish);
+
+            Index.navPlanner.click();
 
             var di: DataInput = new DataInput();
             di.selectAntenna(testDish.name);
