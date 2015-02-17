@@ -2,8 +2,7 @@
 <form role="form" novalidate>
     <div class="form-group">
         <label for="body">Body</label>
-        <select class="form-control" ng-model="input.satChain.body.name"
-                ng-change="input.pullBody(input.satChain.body.name) || input.save() || app.updateView()">
+        <select class="form-control" ng-model="input.satChain.body.name" ng-change="input.updateBody() || input.save() || app.updateView()">
             <option>Kerbol</option>
             <option>Moho</option>
             <option>Eve</option>
@@ -75,7 +74,7 @@
     <div class="form-group">
         <label for="antenna">Antenna</label>
         <div ng-repeat="antenna in input.satChain.antennas">
-            <select class="form-control" ng-model="antenna.name" ng-change="input.pullAntenna($index, antenna.name) || input.save() || app.updateView()">
+            <select class="form-control" ng-model="antenna.name" ng-change="input.updateAntenna($index) || input.save() || app.updateView()">
                 <optgroup label="Omnidirectional">
                     <option>Reflectron DP-10</option>
                     <option>Communotron 16</option>
