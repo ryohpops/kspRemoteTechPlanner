@@ -4,6 +4,10 @@
     border-width: thin;
 }
 
+.wrap-detail {
+    border-left: 1px solid #808080;
+}
+
 .detail {
     margin: 5%;
 }
@@ -11,10 +15,6 @@
     .detail > dd {
         text-align: right;
     }
-
-.fluid {
-    width: 100%;
-}
 
 .editable {
     table-layout: fixed;

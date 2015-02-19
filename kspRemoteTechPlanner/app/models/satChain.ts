@@ -8,15 +8,21 @@ module App {
         count: number;
         altitude: number;
         elcNeeded: number;
-        antenna: Antenna;
+        antennas: Antenna[];
+        antennaIndex: number;
         parkingAlt: number;
 
-        constructor(body: Body, count: number, altitude: number, elcNeeded: number, antenna: Antenna, parkingAlt: number) {
+        get selectedAntenna(): Antenna {
+            return this.antennas[this.antennaIndex];
+        }
+
+        constructor(body: Body, count: number, altitude: number, elcNeeded: number, antennas: Antenna[], antennaIndex: number, parkingAlt: number) {
             this.body = body;
             this.count = count;
             this.altitude = altitude;
             this.elcNeeded = elcNeeded;
-            this.antenna = antenna;
+            this.antennas = antennas;
+            this.antennaIndex = antennaIndex;
             this.parkingAlt = parkingAlt;
         }
     }

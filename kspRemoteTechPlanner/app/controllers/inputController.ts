@@ -5,7 +5,8 @@ module App {
         'use strict';
 
         satChain: SatChain;
-        antennaType: typeof AntennaType;
+        bodyDetailVisible: boolean;
+        antennaDetailVisible: boolean[];
 
         static $inject = ["satChainServ", "bodyStorageServ", "antennaStorageServ"];
         constructor(
@@ -15,19 +16,43 @@ module App {
             ) {
 
             this.satChain = this.satChainServ.satChain;
-            this.antennaType = AntennaType;
+            this.bodyDetailVisible = false;
+            this.antennaDetailVisible = new Array<boolean>();
         }
 
         save() {
             this.satChainServ.save();
         }
 
-        pullBody(name: string) {
-            this.satChain.body = this.bodies.getBody(name);
+        updateBody() {
+            var b: Body = this.bodies.getBody(this.satChain.body.name);
+            this.satChain.body.color = b.color;
+            this.satChain.body.radius = b.radius;
+            this.satChain.body.stdGravity = b.stdGravity;
+            this.satChain.body.soi = b.soi;
         }
 
-        pullAntenna(name: string) {
-            this.satChain.antenna = this.antennas.getAntenna(name);
+        updateAntenna(index: number) {
+            var a: Antenna = this.antennas.getAntenna(this.satChain.antennas[index].name);
+            this.satChain.antennas[index].type = a.type;
+            this.satChain.antennas[index].range = a.range;
+            this.satChain.antennas[index].elcNeeded = a.elcNeeded;
+        }
+
+        isSelectedAntenna(index: number) {
+            return this.satChain.antennaIndex === index;
+        }
+
+        setAntennaIndex(index: number) {
+            this.satChain.antennaIndex = index;
+        }
+
+        addNewAntenna() {
+            this.satChain.antennas.push(this.antennas.getAntenna("Reflectron DP-10"));
+        }
+
+        removeSelectedAntenna() {
+            this.satChain.antennas.splice(this.satChain.antennaIndex, 1);
         }
     }
 }
