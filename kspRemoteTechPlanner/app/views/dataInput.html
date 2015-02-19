@@ -47,10 +47,12 @@
             </dl>
         </div>
 
-        <button type="button" class="btn btn-xs fluid" data-toggle="collapse" data-target="#detail_body">
-            <span class="glyphicon glyphicon-collapse-up"></span>
-            <span class="glyphicon glyphicon-collapse-down"></span>
-        </button>
+        <div class="btn-group btn-group-xs btn-group-justified" role="group">
+            <button type="button" class="btn" data-toggle="collapse" data-target="#detail_body">
+                <span class="glyphicon glyphicon-collapse-up"></span>
+                <span class="glyphicon glyphicon-collapse-down"></span>
+            </button>
+        </div>
     </div>
 
     <div class="form-group">
@@ -74,7 +76,7 @@
     <div class="form-group">
         <label for="antenna">Antenna</label>
         <div ng-repeat="antenna in input.satChain.antennas">
-            <select class="form-control" ng-model="antenna.name" ng-change="input.updateAntenna($index) || input.save() || app.updateView()">
+            <select class="form-control" ng-model="antenna.name" ng-change="input.updateAntenna($index) || (input.satChain.antennaIndex === $index && app.updateView()) || input.save()">
                 <optgroup label="Omnidirectional">
                     <option>Reflectron DP-10</option>
                     <option>Communotron 16</option>
@@ -105,10 +107,23 @@
                     <dd>{{antenna.elcNeeded |number}} /sec.</dd>
                 </dl>
             </div>
-            <button type="button" class="btn btn-xs fluid" data-toggle="collapse" data-target="#detail_antenna">
-                <span class="glyphicon glyphicon-collapse-up"></span>
-                <span class="glyphicon glyphicon-collapse-down"></span>
-            </button>
+
+            <div class="btn-group btn-group-xs btn-group-justified" role="group">
+                <button type="button" class="btn" ng-class="{'btn-success': input.satChain.antennaIndex === $index}"
+                        ng-click="input.setAntennaIndex($index) || input.save() || app.updateView()">
+                    Show
+                </button>
+                <button type="button" class="btn" data-toggle="collapse" data-target="#detail_antenna">
+                    <span class="glyphicon glyphicon-collapse-up"></span>
+                    <span class="glyphicon glyphicon-collapse-down"></span>
+                </button>
+            </div>
+            <br /><br />
+        </div>
+
+        <div class="btn-group btn-group-xs btn-group-justified" role="group">
+            <button class="btn btn-default" ng-click="input.addNewAntenna()">Add after the last</button>
+            <button class="btn btn-default" ng-click="input.removeSelectedAntenna()">Remove selected</button>
         </div>
     </div>
 

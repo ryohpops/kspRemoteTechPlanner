@@ -21,11 +21,30 @@ module App {
         }
 
         updateBody() {
-            this.satChain.body = this.bodies.getBody(this.satChain.body.name);
+            var b: Body = this.bodies.getBody(this.satChain.body.name);
+            this.satChain.body.color = b.color;
+            this.satChain.body.radius = b.radius;
+            this.satChain.body.stdGravity = b.stdGravity;
+            this.satChain.body.soi = b.soi;
         }
 
         updateAntenna(index: number) {
-            this.satChain.antennas[index] = this.antennas.getAntenna(this.satChain.antennas[index].name);
+            var a: Antenna = this.antennas.getAntenna(this.satChain.antennas[index].name);
+            this.satChain.antennas[index].type = a.type;
+            this.satChain.antennas[index].range = a.range;
+            this.satChain.antennas[index].elcNeeded = a.elcNeeded;
+        }
+
+        setAntennaIndex(index: number) {
+            this.satChain.antennaIndex = index;
+        }
+
+        addNewAntenna() {
+            this.satChain.antennas.push(this.antennas.getAntenna("Reflectron DP-10"));
+        }
+
+        removeSelectedAntenna() {
+            this.satChain.antennas.splice(this.satChain.antennaIndex, 1);
         }
     }
 }

@@ -12,10 +12,6 @@
         text-align: right;
     }
 
-.fluid {
-    width: 100%;
-}
-
 .editable {
     table-layout: fixed;
 }
