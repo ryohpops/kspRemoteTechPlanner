@@ -8,6 +8,7 @@ module App {
     export class AntennaStorageService {
         'use strict';
 
+        private static cookieKey: string = "userAntenna";
         private _stockAntennas: AntennaDictionary;
         private _userAntennas: AntennaDictionary;
 
@@ -19,10 +20,9 @@ module App {
             return this._userAntennas;
         }
 
-        static $inject = ["$cookieStore", "antennaStorageCookieKey"];
+        static $inject = ["$cookieStore"];
         constructor(
-            private $cookieStore: ng.cookies.ICookieStoreService,
-            private cookieKey: string
+            private $cookieStore: ng.cookies.ICookieStoreService
             ) {
 
             this._stockAntennas = {
@@ -44,7 +44,7 @@ module App {
         private loadUserAntennas() {
             this._userAntennas = {};
 
-            var ua: any = this.$cookieStore.get(this.cookieKey); // JSON object, functions are not ready
+            var ua: any = this.$cookieStore.get(AntennaStorageService.cookieKey); // JSON object, functions are not ready
             if (ua !== undefined) {
                 if (Object.keys(ua).length > 0) { // update from ver 1.4
                     for (var key in ua) {
@@ -64,9 +64,9 @@ module App {
 
         save() {
             if (Object.keys(this.userAntennas).length > 0)
-                this.$cookieStore.put(this.cookieKey, this.userAntennas);
+                this.$cookieStore.put(AntennaStorageService.cookieKey, this.userAntennas);
             else
-                this.$cookieStore.remove(this.cookieKey);
+                this.$cookieStore.remove(AntennaStorageService.cookieKey);
         }
 
         existsInStock(name: string): boolean {

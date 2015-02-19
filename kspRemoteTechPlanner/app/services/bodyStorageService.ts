@@ -8,6 +8,7 @@ module App {
     export class BodyStorageService {
         'use strict';
 
+        private static cookieKey: string = "userBody";
         private _stockBodies: BodyDictionary;
         private _userBodies: BodyDictionary;
 
@@ -19,10 +20,9 @@ module App {
             return this._userBodies;
         }
 
-        static $inject = ["$cookieStore", "bodyStorageCookieKey"];
+        static $inject = ["$cookieStore"];
         constructor(
-            private $cookieStore: ng.cookies.ICookieStoreService,
-            private cookieKey: string
+            private $cookieStore: ng.cookies.ICookieStoreService
             ) {
 
             this._stockBodies = {
@@ -51,7 +51,7 @@ module App {
         private loadUserBodies() {
             this._userBodies = {};
 
-            var ub: any = this.$cookieStore.get(this.cookieKey); // JSON object, functions are not ready
+            var ub: any = this.$cookieStore.get(BodyStorageService.cookieKey); // JSON object, functions are not ready
             if (ub !== undefined) {
                 for (var key in ub) {
                     var b: Body = ub[key];
@@ -62,9 +62,9 @@ module App {
 
         save() {
             if (Object.keys(this.userBodies).length > 0)
-                this.$cookieStore.put(this.cookieKey, this.userBodies);
+                this.$cookieStore.put(BodyStorageService.cookieKey, this.userBodies);
             else
-                this.$cookieStore.remove(this.cookieKey);
+                this.$cookieStore.remove(BodyStorageService.cookieKey);
         }
 
         existsInStock(name: string): boolean {

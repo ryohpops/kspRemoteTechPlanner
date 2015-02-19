@@ -6,16 +6,16 @@ module App {
     export class SatChainService {
         'use strict';
 
+        private static cookieKey: string = "inputData";
         private _satChain: SatChain;
 
         get satChain(): SatChain {
             return this._satChain;
         }
 
-        static $inject = ["$cookieStore", "satChainCookieKey", "calc.euclideanServ", "calc.orbitalServ"];
+        static $inject = ["$cookieStore", "calc.euclideanServ", "calc.orbitalServ"];
         constructor(
             private $cookieStore: ng.cookies.ICookieStoreService,
-            private cookieKey: string,
             private euclideanServ: Calculator.EuclideanService,
             private orbitalServ: Calculator.OrbitalService
             ) {
@@ -24,7 +24,7 @@ module App {
         }
 
         private loadOrCreate(): SatChain {
-            var sc: any = this.$cookieStore.get(this.cookieKey); // JSON object
+            var sc: any = this.$cookieStore.get(SatChainService.cookieKey); // JSON object
             if (sc !== undefined) {
                 if (sc.antennaIndex === undefined) { // update from ver 1.4
                     sc.antennas = [sc.antenna];
@@ -44,7 +44,7 @@ module App {
         }
 
         save() {
-            this.$cookieStore.put(this.cookieKey, this.satChain);
+            this.$cookieStore.put(SatChainService.cookieKey, this.satChain);
         }
 
         satPosition(offset: number): Point {

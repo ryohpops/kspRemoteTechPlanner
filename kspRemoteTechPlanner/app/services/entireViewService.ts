@@ -4,6 +4,7 @@ module App {
     export class EntireViewService extends ViewService {
         'use strict';
 
+        private static targetCanvas: string = "entire";
         private shape: createjs.Shape;
         private txtBodyName: createjs.Text;
         private txtBodySoI: createjs.Text;
@@ -12,9 +13,8 @@ module App {
         private txtCommDistance2: createjs.Text;
         private txtCommStableRange: createjs.Text;
 
-        static $inject = ["entireViewTarget", "graphicsHelperServ", "satChainServ"];
+        static $inject = ["graphicsHelperServ", "satChainServ"];
         constructor(
-            private entireViewTarget: string,
             private gHelper: GraphicsHelperService,
             private satChainServ: SatChainService
             ) {
@@ -23,7 +23,7 @@ module App {
         }
 
         init() {
-            super.init(this.entireViewTarget, 10000, 850);
+            super.init(EntireViewService.targetCanvas, 10000, 850);
 
             this.shape = new createjs.Shape();
             this.shapeContainer.addChild(this.shape);

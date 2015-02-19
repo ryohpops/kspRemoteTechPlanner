@@ -4,6 +4,7 @@ module App {
     export class DeltavViewService extends ViewService {
         'use strict';
 
+        private static targetCanvas: string = "deltav";
         private static bodyRadius: number = 20;
         private static parkingAltitude: number = 50;
         private static designatedAltitude: number = 150;
@@ -16,9 +17,8 @@ module App {
         private txtPhaseAngle: createjs.Text;
         private txtPhaseTime: createjs.Text;
 
-        static $inject = ["deltavViewTarget", "graphicsHelperServ", "satChainServ"];
+        static $inject = ["graphicsHelperServ", "satChainServ"];
         constructor(
-            private deltavViewTarget: string,
             private gHelper: GraphicsHelperService,
             private satChainServ: SatChainService
             ) {
@@ -27,7 +27,7 @@ module App {
         }
 
         init() {
-            super.init(this.deltavViewTarget, 5000, 400);
+            super.init(DeltavViewService.targetCanvas, 5000, 400);
 
             // shape for drawing in outer coordinates
             this.shapeOuter = new createjs.Shape();
