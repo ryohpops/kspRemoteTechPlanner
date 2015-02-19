@@ -18,3 +18,5 @@
 /// <reference path="controllers/inputcontroller.ts" />
 
 /// <reference path="filters/antennatype.ts" />
+
+/// <reference path="app.ts" />

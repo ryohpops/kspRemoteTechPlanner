@@ -32,8 +32,9 @@
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="app.ts" />
+    <TypeScriptCompile Include="app\app.ts" />
     <TypeScriptCompile Include="app\filters\antennaType.ts" />
+    <TypeScriptCompile Include="calculator\calculator.ts" />
     <TypeScriptCompile Include="calculator\calculatorReferences.ts" />
     <TypeScriptCompile Include="calculator\services\euclideanService.ts" />
     <TypeScriptCompile Include="calculator\services\orbitalService.ts" />
@@ -54,7 +55,7 @@
     <TypeScriptCompile Include="app\services\satChainService.ts" />
     <TypeScriptCompile Include="app\appReferences.ts" />
     <TypeScriptCompile Include="app\services\viewService.ts" />
-    <TypeScriptCompile Include="references.ts" />
+    <TypeScriptCompile Include="_references.ts" />
     <TypeScriptCompile Include="scripts\typings\angularjs\angular-animate.d.ts" />
     <TypeScriptCompile Include="scripts\typings\angularjs\angular-cookies.d.ts" />
     <TypeScriptCompile Include="scripts\typings\angularjs\angular-mocks.d.ts" />

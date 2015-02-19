@@ -1,10 +1,6 @@
-﻿/// <reference path="references.ts" />
+﻿/// <reference path="appreferences.ts" />
 
 module App {
-    angular.module("calc", [])
-        .service("calc.euclideanServ", Calculator.EuclideanService)
-        .service("calc.orbitalServ", Calculator.OrbitalService);
-
     angular.module("app", ["ngCookies", "calc"])
         .service("bodyStorageServ", BodyStorageService)
         .service("antennaStorageServ", AntennaStorageService)
