@@ -89,11 +89,19 @@ module App {
         }
 
         requiredBattery(): number {
-            return (this.satChain.elcNeeded + this.satChain.selectedAntenna.elcNeeded) * this.nightTime();
+            var elc: number = this.satChain.elcNeeded;
+            for (var index in this.satChain.antennas) {
+                elc += this.satChain.antennas[index].elcNeeded;
+            }
+            return elc * this.nightTime();
         }
 
         requiredGenerator(): number {
-            return (this.satChain.elcNeeded + this.satChain.selectedAntenna.elcNeeded) * this.orbitalPeriod() / (this.orbitalPeriod() - this.nightTime());
+            var elc: number = this.satChain.elcNeeded;
+            for (var index in this.satChain.antennas) {
+                elc += this.satChain.antennas[index].elcNeeded;
+            }
+            return elc * this.orbitalPeriod() / (this.orbitalPeriod() - this.nightTime());
         }
 
         hohmannStartDeltaV(): number {
