@@ -7,17 +7,6 @@ describe("Data Input",() => {
     });
 
     describe("selecting a body",() => {
-        it("should load detail of the stock body",() => {
-            var di: DataInput = new DataInput();
-            di.selectBody("Moho");
-            di.openBodyDetail();
-
-            expect(di.bodyColor.getText()).toEqual("rgb(185,122,87)");
-            expect(di.bodyRadius.getText()).toEqual("250 km");
-            expect(di.bodyStdGravity.getText()).toEqual("168.609 km3s-2");
-            expect(di.bodySoi.getText()).toEqual("9,646.663 km");
-        });
-
         it("should load detail of the user's body",() => {
             var testBody: any = { name: "Test1", color: "red", radius: 150, stdGravity: 1000, soi: 30000 };
 
@@ -30,7 +19,9 @@ describe("Data Input",() => {
 
             var di: DataInput = new DataInput();
             di.selectBody(testBody.name);
-            di.openBodyDetail();
+
+            di.bodyDetailToggle.click();
+            di.getBodyDetail();
 
             expect(di.bodyColor.getText()).toEqual("red");
             expect(di.bodyRadius.getText()).toEqual("150 km");
@@ -40,46 +31,7 @@ describe("Data Input",() => {
     });
 
     describe("selecting antenna",() => {
-        it("should load stock omni-antenna's detail",() => {
-            var di: DataInput = new DataInput();
-            di.selectAntenna("Communotron 32")
-            di.openAntennaDetail();
-
-            expect(di.antennaType.getText()).toEqual("Omnidirectional");
-            expect(di.antennaRange.getText()).toEqual("5,000 km");
-            expect(di.antennaElcNeeded.getText()).toEqual("0.6 /sec.");
-        });
-
-        it("should load stock dish-antenna's detail",() => {
-            var di: DataInput = new DataInput();
-            di.selectAntenna("Reflectron KR-7");
-            di.openAntennaDetail();
-
-            expect(di.antennaType.getText()).toEqual("Dish");
-            expect(di.antennaRange.getText()).toEqual("90,000 km");
-            expect(di.antennaElcNeeded.getText()).toEqual("0.82 /sec.");
-        });
-
-        it("should load user omni-antenna's detail",() => {
-            var testOmni: any = { name: "Omni1", antennaType: "0", range: 6000, elcNeeded: 0.99 };
-
-            Index.navAntennaEdit.click();
-
-            var ae: AntennaEdit = new AntennaEdit();
-            ae.addAntenna(testOmni);
-
-            Index.navPlanner.click();
-
-            var di: DataInput = new DataInput();
-            di.selectAntenna(testOmni.name)
-            di.openAntennaDetail();
-
-            expect(di.antennaType.getText()).toEqual("Omnidirectional");
-            expect(di.antennaRange.getText()).toEqual("6,000 km");
-            expect(di.antennaElcNeeded.getText()).toEqual("0.99 /sec.");
-        });
-
-        it("should load user dish-antenna's detail",() => {
+        it("should load user dish-antenna's detail at first spot",() => {
             var testDish: any = { name: "Dish1", antennaType: "1", range: 12000, elcNeeded: 1.25 };
 
             Index.navAntennaEdit.click();
@@ -90,12 +42,39 @@ describe("Data Input",() => {
             Index.navPlanner.click();
 
             var di: DataInput = new DataInput();
-            di.selectAntenna(testDish.name);
-            di.openAntennaDetail();
+            di.getAntennas();
+            di.selectAntenna(di.antennaSelector.get(0), testDish.name);
 
-            expect(di.antennaType.getText()).toEqual("Dish");
-            expect(di.antennaRange.getText()).toEqual("12,000 km");
-            expect(di.antennaElcNeeded.getText()).toEqual("1.25 /sec.");
+            di.antennaDetailToggle.get(0).click();
+            di.getAntennaDetails();
+
+            expect(di.antennaType.get(0).getText()).toEqual("Dish");
+            expect(di.antennaRange.get(0).getText()).toEqual("12,000 km");
+            expect(di.antennaElcNeeded.get(0).getText()).toEqual("1.25 /sec.");
+        });
+
+        it("should load user dish-antenna's detail at third spot",() => {
+            var testDish: any = { name: "Dish2", antennaType: "1", range: 15000, elcNeeded: 2.25 };
+
+            Index.navAntennaEdit.click();
+
+            var ae: AntennaEdit = new AntennaEdit();
+            ae.addAntenna(testDish);
+
+            Index.navPlanner.click();
+
+            var di: DataInput = new DataInput();
+            di.antennaAdd.click();
+            di.antennaAdd.click();
+            di.getAntennas();
+            di.selectAntenna(di.antennaSelector.get(2), testDish.name);
+
+            di.antennaDetailToggle.get(2).click();
+            di.getAntennaDetails();
+
+            expect(di.antennaType.get(2).getText()).toEqual("Dish");
+            expect(di.antennaRange.get(2).getText()).toEqual("15,000 km");
+            expect(di.antennaElcNeeded.get(2).getText()).toEqual("2.25 /sec.");
         });
     });
 
@@ -105,7 +84,11 @@ describe("Data Input",() => {
         di.count.sendKeys(protractor.Key.chord(protractor.Key.CONTROL, "a"), "6");
         di.altitude.sendKeys(protractor.Key.chord(protractor.Key.CONTROL, "a"), "500");
         di.elcNeeded.sendKeys(protractor.Key.chord(protractor.Key.CONTROL, "a"), "0.88");
-        di.selectAntenna("CommTech EXP-VR-2T");
+        di.antennaAdd.click();
+        di.getAntennas();
+        di.selectAntenna(di.antennaSelector.get(0), "CommTech EXP-VR-2T");
+        di.selectAntenna(di.antennaSelector.get(1), "Reflectron KR-14");
+        di.antennaShow.get(1).click();
         di.parkingAlt.sendKeys(protractor.Key.chord(protractor.Key.CONTROL, "a"), "100");
         browser.waitForAngular();
 
@@ -115,7 +98,9 @@ describe("Data Input",() => {
         expect(di.count.getAttribute("value")).toEqual("6");
         expect(di.altitude.getAttribute("value")).toEqual("500");
         expect(di.elcNeeded.getAttribute("value")).toEqual("0.88");
-        expect(di.antennaSelector.getAttribute("value")).toEqual("CommTech EXP-VR-2T");
+        expect(di.antennaSelector.get(0).getAttribute("value")).toEqual("CommTech EXP-VR-2T");
+        expect(di.antennaSelector.get(1).getAttribute("value")).toEqual("Reflectron KR-14");
+        expect(di.antennaShow.get(1).getAttribute("class")).toContain("btn-success");
         expect(di.parkingAlt.getAttribute("value")).toEqual("100");
     });
 });
