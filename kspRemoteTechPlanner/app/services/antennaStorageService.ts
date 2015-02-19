@@ -46,6 +46,15 @@ module App {
 
             var ua: any = this.$cookieStore.get(this.cookieKey); // JSON object, functions are not ready
             if (ua !== undefined) {
+                if (Object.keys(ua).length > 0) { // update from ver 1.4
+                    for (var key in ua) {
+                        if (ua[key].type == 0)
+                            ua[key].type = "0";
+                        else if (ua[key].type == 1)
+                            ua[key].type = "1";
+                    }
+                }
+
                 for (var key in ua) {
                     var a: Antenna = ua[key];
                     this._userAntennas[a.name] = new Antenna(a.name, a.type, a.range, a.elcNeeded);

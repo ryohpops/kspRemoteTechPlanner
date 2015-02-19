@@ -17,9 +17,9 @@ class AntennaEdit {
     addAntenna(antenna) {
         this.addButton.click();
         this.name.sendKeys(antenna.name);
-        if (antenna.antennaType == 0)
+        if (antenna.antennaType === "0")
             this.typeOmni.click();
-        else
+        else if (antenna.antennaType === "1")
             this.typeDish.click();
         this.range.sendKeys(antenna.range);
         this.elcNeeded.sendKeys(antenna.elcNeeded);

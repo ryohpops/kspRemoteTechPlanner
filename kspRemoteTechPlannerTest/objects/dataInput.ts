@@ -50,7 +50,7 @@ class DataInput {
     }
 
     getAntennaDetails() {
-        this.antennaType = element.all(by.binding("antenna.typeString()"));
+        this.antennaType = element.all(by.binding("antenna.type"));
         this.antennaRange = element.all(by.binding("antenna.range"));
         this.antennaElcNeeded = element.all(by.binding("antenna.elcNeeded"));
     }
