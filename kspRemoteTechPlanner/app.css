@@ -4,6 +4,10 @@
     border-width: thin;
 }
 
+.wrap-detail {
+    border-left: 1px solid #808080;
+}
+
 .detail {
     margin: 5%;
 }

@@ -5,6 +5,8 @@ module App {
         'use strict';
 
         satChain: SatChain;
+        bodyDetailVisible: boolean;
+        antennaDetailVisible: boolean[];
 
         static $inject = ["satChainServ", "bodyStorageServ", "antennaStorageServ"];
         constructor(
@@ -14,6 +16,8 @@ module App {
             ) {
 
             this.satChain = this.satChainServ.satChain;
+            this.bodyDetailVisible = false;
+            this.antennaDetailVisible = new Array<boolean>();
         }
 
         save() {
@@ -33,6 +37,10 @@ module App {
             this.satChain.antennas[index].type = a.type;
             this.satChain.antennas[index].range = a.range;
             this.satChain.antennas[index].elcNeeded = a.elcNeeded;
+        }
+
+        isSelectedAntenna(index: number) {
+            return this.satChain.antennaIndex === index;
         }
 
         setAntennaIndex(index: number) {

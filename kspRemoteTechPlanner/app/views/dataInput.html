@@ -34,7 +34,7 @@
         </select>
 
         <!-- detail for body -->
-        <div class="detail collapse" id="detail_body">
+        <div class="wrap-detail" ng-show="input.bodyDetailVisible">
             <dl class="detail">
                 <dt>Color</dt>
                 <dd>{{input.satChain.body.color}}</dd>
@@ -48,7 +48,7 @@
         </div>
 
         <div class="btn-group btn-group-xs btn-group-justified" role="group">
-            <button type="button" class="btn" data-toggle="collapse" data-target="#detail_body">
+            <button type="button" class="btn" ng-click="input.bodyDetailVisible = !input.bodyDetailVisible">
                 <span class="glyphicon glyphicon-collapse-up"></span>
                 <span class="glyphicon glyphicon-collapse-down"></span>
             </button>
@@ -76,7 +76,7 @@
     <div class="form-group">
         <label for="antenna">Antenna</label>
         <div ng-repeat="antenna in input.satChain.antennas">
-            <select class="form-control" ng-model="antenna.name" ng-change="input.updateAntenna($index) || (input.satChain.antennaIndex === $index && app.updateView()) || input.save()">
+            <select class="form-control" ng-model="antenna.name" ng-change="input.updateAntenna($index) || input.save() || (input.isSelectedAntenna($index) && app.updateView())">
                 <optgroup label="Omnidirectional">
                     <option>Reflectron DP-10</option>
                     <option>Communotron 16</option>
@@ -97,7 +97,7 @@
             </select>
 
             <!-- detail for antenna -->
-            <div class="detail collapse" id="detail_antenna">
+            <div class="wrap-detail" ng-show="input.antennaDetailVisible[$index]">
                 <dl class="detail">
                     <dt>Type</dt>
                     <dd>{{antenna.typeString()}}</dd>
@@ -109,11 +109,11 @@
             </div>
 
             <div class="btn-group btn-group-xs btn-group-justified" role="group">
-                <button type="button" class="btn" ng-class="{'btn-success': input.satChain.antennaIndex === $index}"
+                <button type="button" class="btn" ng-class="{'btn-success': input.isSelectedAntenna($index)}"
                         ng-click="input.setAntennaIndex($index) || input.save() || app.updateView()">
                     Show
                 </button>
-                <button type="button" class="btn" data-toggle="collapse" data-target="#detail_antenna">
+                <button type="button" class="btn" ng-click="input.antennaDetailVisible[$index] = !input.antennaDetailVisible[$index]">
                     <span class="glyphicon glyphicon-collapse-up"></span>
                     <span class="glyphicon glyphicon-collapse-down"></span>
                 </button>
