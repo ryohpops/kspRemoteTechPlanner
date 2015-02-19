@@ -16,3 +16,5 @@
 /// <reference path="controllers/bodyeditcontroller.ts" />
 /// <reference path="controllers/antennaeditcontroller.ts" />
 /// <reference path="controllers/inputcontroller.ts" />
+
+/// <reference path="filters/antennatype.ts" />

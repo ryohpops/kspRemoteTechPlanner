@@ -24,14 +24,5 @@ module App {
         clone(): Antenna {
             return new Antenna(this.name, this.type, this.range, this.elcNeeded);
         }
-
-        typeString(): string {
-            if (this.type == AntennaType.omni)
-                return "Omnidirectional";
-            else if (this.type == AntennaType.dish)
-                return "Dish";
-            else
-                return "";
-        }
     }
 }

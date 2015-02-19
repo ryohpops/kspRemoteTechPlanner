@@ -22,5 +22,6 @@ module App {
         .controller("inputCtrl", InputController)
         .controller("bodyEditCtrl", BodyEditController)
         .controller("antennaEditCtrl", AntennaEditController)
-        .controller("appCtrl", AppController);
+        .controller("appCtrl", AppController)
+        .filter("antennaType", antennaType);
 }

@@ -33,6 +33,7 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="app.ts" />
+    <TypeScriptCompile Include="app\filters\antennaType.ts" />
     <TypeScriptCompile Include="calculator\calculatorReferences.ts" />
     <TypeScriptCompile Include="calculator\services\euclideanService.ts" />
     <TypeScriptCompile Include="calculator\services\orbitalService.ts" />
