@@ -8,7 +8,10 @@ module App {
     export class AntennaStorageService {
         'use strict';
 
-        private static cookieKey: string = "userAntenna";
+        private static dataKey: string = "userAntenna";
+        private static versionKey: string = "userAntennaVersion";
+        private static modelVersion: number = 1;
+
         private _stockAntennas: AntennaDictionary;
         private _userAntennas: AntennaDictionary;
 
@@ -38,15 +41,16 @@ module App {
                 "Reflectron GX-128": new Antenna("Reflectron GX-128", AntennaType.dish, 400000000, 2.8)
             };
 
-            this.loadUserAntennas();
+            this._userAntennas = this.loadUserAntennas();
+            this.$cookieStore.put(AntennaStorageService.versionKey, AntennaStorageService.modelVersion);
         }
 
-        private loadUserAntennas() {
-            this._userAntennas = {};
+        private loadUserAntennas(): AntennaDictionary {
+            var ua: any = this.$cookieStore.get(AntennaStorageService.dataKey); // JSON object, functions are not ready
+            var version: number = this.$cookieStore.get(AntennaStorageService.versionKey);
 
-            var ua: any = this.$cookieStore.get(AntennaStorageService.cookieKey); // JSON object, functions are not ready
             if (ua !== undefined) {
-                if (Object.keys(ua).length > 0) { // update from ver 1.4
+                if (version === undefined) { // update to ver 1.5
                     for (var key in ua) {
                         if (ua[key].type == 0)
                             ua[key].type = "0";
@@ -55,18 +59,22 @@ module App {
                     }
                 }
 
+                var retDict: AntennaDictionary = {};
                 for (var key in ua) {
                     var a: Antenna = ua[key];
-                    this._userAntennas[a.name] = new Antenna(a.name, a.type, a.range, a.elcNeeded);
+                    retDict[a.name] = new Antenna(a.name, a.type, a.range, a.elcNeeded);
                 }
+                return retDict;
+            } else {
+                return {};
             }
         }
 
         save() {
             if (Object.keys(this.userAntennas).length > 0)
-                this.$cookieStore.put(AntennaStorageService.cookieKey, this.userAntennas);
+                this.$cookieStore.put(AntennaStorageService.dataKey, this.userAntennas);
             else
-                this.$cookieStore.remove(AntennaStorageService.cookieKey);
+                this.$cookieStore.remove(AntennaStorageService.dataKey);
         }
 
         existsInStock(name: string): boolean {

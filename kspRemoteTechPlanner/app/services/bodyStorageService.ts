@@ -8,7 +8,10 @@ module App {
     export class BodyStorageService {
         'use strict';
 
-        private static cookieKey: string = "userBody";
+        private static dataKey: string = "userBody";
+        private static versionKey: string = "userBodyVersion";
+        private static modelVersion: number = 1;
+
         private _stockBodies: BodyDictionary;
         private _userBodies: BodyDictionary;
 
@@ -45,26 +48,31 @@ module App {
                 "Eeloo": new Body("Eeloo", "rgb(221,221,210)", 210, 74.410815, 119082.94)
             };
 
-            this.loadUserBodies();
+            this._userBodies = this.loadUserBodies();
+            this.$cookieStore.put(BodyStorageService.versionKey, BodyStorageService.modelVersion);
         }
 
-        private loadUserBodies() {
-            this._userBodies = {};
+        private loadUserBodies(): BodyDictionary {
+            var ub: any = this.$cookieStore.get(BodyStorageService.dataKey); // JSON object, functions are not ready
+            var version: number = this.$cookieStore.get(BodyStorageService.versionKey);
 
-            var ub: any = this.$cookieStore.get(BodyStorageService.cookieKey); // JSON object, functions are not ready
             if (ub !== undefined) {
+                var retDict: BodyDictionary = {};
                 for (var key in ub) {
                     var b: Body = ub[key];
-                    this._userBodies[b.name] = new Body(b.name, b.color, b.radius, b.stdGravity, b.soi);
+                    retDict[b.name] = new Body(b.name, b.color, b.radius, b.stdGravity, b.soi);
                 }
+                return retDict;
+            } else {
+                return {};
             }
         }
 
         save() {
             if (Object.keys(this.userBodies).length > 0)
-                this.$cookieStore.put(BodyStorageService.cookieKey, this.userBodies);
+                this.$cookieStore.put(BodyStorageService.dataKey, this.userBodies);
             else
-                this.$cookieStore.remove(BodyStorageService.cookieKey);
+                this.$cookieStore.remove(BodyStorageService.dataKey);
         }
 
         existsInStock(name: string): boolean {

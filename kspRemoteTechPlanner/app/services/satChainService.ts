@@ -6,7 +6,10 @@ module App {
     export class SatChainService {
         'use strict';
 
-        private static cookieKey: string = "inputData";
+        private static dataKey: string = "inputData";
+        private static versionKey: string = "inputDataVersion";
+        private static modelVersion: number = 1;
+
         private _satChain: SatChain;
 
         get satChain(): SatChain {
@@ -21,12 +24,15 @@ module App {
             ) {
 
             this._satChain = this.loadOrCreate();
+            this.$cookieStore.put(SatChainService.versionKey, SatChainService.modelVersion);
         }
 
         private loadOrCreate(): SatChain {
-            var sc: any = this.$cookieStore.get(SatChainService.cookieKey); // JSON object
+            var sc: any = this.$cookieStore.get(SatChainService.dataKey); // JSON object
+            var version: number = this.$cookieStore.get(SatChainService.versionKey);
+
             if (sc !== undefined) {
-                if (sc.antennaIndex === undefined) { // update from ver 1.4
+                if (version === undefined) { // update to ver 1.5
                     sc.antennas = [sc.antenna];
                     sc.antennaIndex = 0;
                 }
@@ -44,7 +50,7 @@ module App {
         }
 
         save() {
-            this.$cookieStore.put(SatChainService.cookieKey, this.satChain);
+            this.$cookieStore.put(SatChainService.dataKey, this.satChain);
         }
 
         satPosition(offset: number): Point {
