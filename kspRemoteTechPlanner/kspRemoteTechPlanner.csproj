@@ -55,7 +55,6 @@
     <TypeScriptCompile Include="app\services\satChainService.ts" />
     <TypeScriptCompile Include="app\appReferences.ts" />
     <TypeScriptCompile Include="app\services\viewService.ts" />
-    <TypeScriptCompile Include="_references.ts" />
     <TypeScriptCompile Include="scripts\typings\angularjs\angular-animate.d.ts" />
     <TypeScriptCompile Include="scripts\typings\angularjs\angular-cookies.d.ts" />
     <TypeScriptCompile Include="scripts\typings\angularjs\angular-mocks.d.ts" />
@@ -63,10 +62,11 @@
     <TypeScriptCompile Include="scripts\typings\angularjs\angular-route.d.ts" />
     <TypeScriptCompile Include="scripts\typings\angularjs\angular-sanitize.d.ts" />
     <TypeScriptCompile Include="scripts\typings\angularjs\angular.d.ts" />
+    <TypeScriptCompile Include="scripts\typings\jquery\jquery.d.ts" />
+    <TypeScriptCompile Include="_references.ts" />
     <TypeScriptCompile Include="scripts\typings\bootstrap\bootstrap.d.ts" />
     <TypeScriptCompile Include="scripts\typings\createjs-lib\createjs-lib.d.ts" />
     <TypeScriptCompile Include="scripts\typings\easeljs\easeljs.d.ts" />
-    <TypeScriptCompile Include="scripts\typings\jquery\jquery.d.ts" />
     <TypeScriptCompile Include="scripts\typings\tweenjs\tweenjs.d.ts" />
   </ItemGroup>
   <ItemGroup>

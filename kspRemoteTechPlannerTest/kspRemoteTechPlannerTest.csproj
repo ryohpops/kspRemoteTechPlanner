@@ -25,12 +25,12 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="objects\index.ts" />
+    <TypeScriptCompile Include="scripts\typings\jasmine\jasmine.d.ts" />
     <TypeScriptCompile Include="_references.ts" />
     <TypeScriptCompile Include="objects\antennaEdit.ts" />
     <TypeScriptCompile Include="objects\bodyEdit.ts" />
     <TypeScriptCompile Include="objects\dataInput.ts" />
     <TypeScriptCompile Include="scripts\typings\angular-protractor\angular-protractor.d.ts" />
-    <TypeScriptCompile Include="scripts\typings\jasmine\jasmine.d.ts" />
     <TypeScriptCompile Include="scripts\typings\selenium-webdriver\selenium-webdriver.d.ts" />
     <TypeScriptCompile Include="specs\dataInputSpec.ts" />
   </ItemGroup>
