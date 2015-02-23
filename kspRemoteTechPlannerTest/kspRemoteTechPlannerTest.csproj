@@ -25,7 +25,7 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="objects\index.ts" />
-    <TypeScriptCompile Include="references.ts" />
+    <TypeScriptCompile Include="_references.ts" />
     <TypeScriptCompile Include="objects\antennaEdit.ts" />
     <TypeScriptCompile Include="objects\bodyEdit.ts" />
     <TypeScriptCompile Include="objects\dataInput.ts" />

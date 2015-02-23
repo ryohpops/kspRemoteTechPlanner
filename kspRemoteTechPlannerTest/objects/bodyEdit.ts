@@ -1,4 +1,4 @@
-﻿/// <reference path="../references.ts" />
+﻿/// <reference path="../_references.ts" />
 
 class BodyEdit {
     'use strict';
