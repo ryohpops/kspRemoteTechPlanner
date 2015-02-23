@@ -2,7 +2,7 @@
 
 'use strict';
 
-var gulp: gulp.Gulp = require("gulp");
+import gulp = require("gulp");
 var sequence: Function = require("run-sequence");
 var connect: any = require("gulp-connect");
 var shell: any = require("gulp-shell");

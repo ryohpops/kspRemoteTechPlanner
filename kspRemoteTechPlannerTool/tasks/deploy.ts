@@ -2,18 +2,18 @@
 
 'use strict';
 
-var gulp: gulp.Gulp = require("gulp");
+import gulp = require("gulp");
 var sequence: Function = require("run-sequence");
 var minjs: IGulpPlugin = require("gulp-uglify");
 var mincss: IGulpPlugin = require("gulp-minify-css");
-var rimraf: Function = require("rimraf");
+import rimraf = require("rimraf");
 
 var sourceHTML: string = "../kspRemoteTechPlanner/**/*.html";
 var sourceJS: string = "../kspRemoteTechPlanner/**/appOut.js";
 var sourceCSS: string = "../kspRemoteTechPlanner/**/app.css";
 var deployDir: string = "../deploy/";
 
-gulp.task("deploy:clean",(cb: gulp.ITaskCallback) => {
+gulp.task("deploy:clean",(cb: (error: Error) => void) => {
     rimraf(deployDir, cb);
 });
 

@@ -57,6 +57,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="gulpfile.ts" />
     <TypeScriptCompile Include="scripts\typings\node\node.d.ts" />
+    <TypeScriptCompile Include="scripts\typings\rimraf\rimraf.d.ts" />
     <TypeScriptCompile Include="tasks\deploy.ts" />
     <TypeScriptCompile Include="tasks\test.ts" />
     <TypeScriptCompile Include="_references.ts" />
@@ -65,6 +66,8 @@
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
-  <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <TypeScriptModuleKind>commonjs</TypeScriptModuleKind>
+  </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
 </Project>
