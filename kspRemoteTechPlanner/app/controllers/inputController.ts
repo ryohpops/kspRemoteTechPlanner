@@ -18,6 +18,8 @@ module App {
             this.satChain = this.satChainServ.satChain;
             this.bodyDetailVisible = false;
             this.antennaDetailVisible = new Array<boolean>();
+            for (var i: number = 0; i < this.satChain.antennas.length; i++)
+                this.antennaDetailVisible.push(false);
         }
 
         save() {
@@ -49,10 +51,14 @@ module App {
 
         addNewAntenna() {
             this.satChain.antennas.push(this.antennas.getAntenna("Reflectron DP-10"));
+            this.antennaDetailVisible.push(false);
         }
 
         removeSelectedAntenna() {
+            if (this.satChain.antennaIndex === this.satChain.antennas.length - 1)
+                this.satChain.antennaIndex--;
             this.satChain.antennas.splice(this.satChain.antennaIndex, 1);
+            this.antennaDetailVisible.splice(this.satChain.antennaIndex, 1);
         }
     }
 }
