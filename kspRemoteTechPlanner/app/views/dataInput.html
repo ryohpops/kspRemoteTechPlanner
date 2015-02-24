@@ -47,6 +47,7 @@
             </dl>
         </div>
 
+        <!-- body detail toggle -->
         <div class="btn-group btn-group-justified" role="group">
             <div class="btn-group btn-group-xs" role="group">
                 <button type="button" class="btn" ng-click="input.bodyDetailVisible = !input.bodyDetailVisible">
@@ -110,13 +111,8 @@
                 </dl>
             </div>
 
+            <!-- antenna detail toggle -->
             <div class="btn-group btn-group-justified" role="group">
-                <div class="btn-group btn-group-xs" role="group">
-                    <button type="button" class="btn" ng-class="{'btn-success': input.isSelectedAntenna($index)}"
-                            ng-click="input.setAntennaIndex($index) || input.save() || app.updateView()">
-                        Show
-                    </button>
-                </div>
                 <div class="btn-group btn-group-xs" role="group">
                     <button type="button" class="btn" ng-click="input.antennaDetailVisible[$index] = !input.antennaDetailVisible[$index]">
                         <span class="glyphicon glyphicon-collapse-up"></span>
@@ -124,14 +120,34 @@
                     </button>
                 </div>
             </div>
+
+            <!-- primary-antenna selector and antenna quantity-->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="btn-group btn-group-justified" role="group">
+                        <div class="btn-group btn-group-sm" role="group">
+                            <button type="button" class="btn btn-default" ng-class="{'btn-success': input.isSelectedAntenna($index)}"
+                                    ng-click="input.setAntennaIndex($index) || input.save() || app.updateView()">
+                                Show
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon">quantity</span>
+                        <input type="number" class="form-control" />
+                    </div>
+                </div>
+            </div>
             <br />
         </div>
 
         <div class="btn-group btn-group-justified" role="group">
-            <div class="btn-group btn-group-xs" role="group">
+            <div class="btn-group btn-group-sm" role="group">
                 <button class="btn btn-default" ng-click="input.addNewAntenna() || input.save() || app.updateView()">Add after the last</button>
             </div>
-            <div class="btn-group btn-group-xs" role="group">
+            <div class="btn-group btn-group-sm" role="group">
                 <button class="btn btn-default" ng-click="input.removeSelectedAntenna() || input.save() || app.updateView()">Remove selected</button>
             </div>
         </div>
