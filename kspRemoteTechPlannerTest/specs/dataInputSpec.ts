@@ -11,11 +11,13 @@ describe("Data Input",() => {
             var testBody: any = { name: "Test1", color: "red", radius: 150, stdGravity: 1000, soi: 30000 };
 
             Index.navBodyEdit.click();
+            browser.sleep(250);
 
             var be: BodyEdit = new BodyEdit();
             be.addBody(testBody);
 
             Index.navPlanner.click();
+            browser.sleep(250);
 
             var di: DataInput = new DataInput();
             di.selectBody(testBody.name);
@@ -35,11 +37,13 @@ describe("Data Input",() => {
             var testDish: any = { name: "Dish1", antennaType: "1", range: 12000, elcNeeded: 1.25 };
 
             Index.navAntennaEdit.click();
+            browser.sleep(250);
 
             var ae: AntennaEdit = new AntennaEdit();
             ae.addAntenna(testDish);
 
             Index.navPlanner.click();
+            browser.sleep(250);
 
             var di: DataInput = new DataInput();
             di.getAntennas();
@@ -57,11 +61,13 @@ describe("Data Input",() => {
             var testDish: any = { name: "Dish2", antennaType: "1", range: 15000, elcNeeded: 2.25 };
 
             Index.navAntennaEdit.click();
+            browser.sleep(250);
 
             var ae: AntennaEdit = new AntennaEdit();
             ae.addAntenna(testDish);
 
             Index.navPlanner.click();
+            browser.sleep(250);
 
             var di: DataInput = new DataInput();
             di.antennaAdd.click();
@@ -87,7 +93,9 @@ describe("Data Input",() => {
         di.antennaAdd.click();
         di.getAntennas();
         di.selectAntenna(di.antennaSelector.get(0), "CommTech EXP-VR-2T");
+        di.antennaQuantity.get(0).sendKeys(protractor.Key.chord(protractor.Key.CONTROL, "a"), "4");
         di.selectAntenna(di.antennaSelector.get(1), "Reflectron KR-14");
+        di.antennaQuantity.get(1).sendKeys(protractor.Key.chord(protractor.Key.CONTROL, "a"), "2");
         di.antennaShow.get(1).click();
         di.parkingAlt.sendKeys(protractor.Key.chord(protractor.Key.CONTROL, "a"), "100");
         browser.waitForAngular();
@@ -99,7 +107,9 @@ describe("Data Input",() => {
         expect(di.altitude.getAttribute("value")).toEqual("500");
         expect(di.elcNeeded.getAttribute("value")).toEqual("0.88");
         expect(di.antennaSelector.get(0).getAttribute("value")).toEqual("CommTech EXP-VR-2T");
+        expect(di.antennaQuantity.get(0).getAttribute("value")).toEqual("4");
         expect(di.antennaSelector.get(1).getAttribute("value")).toEqual("Reflectron KR-14");
+        expect(di.antennaQuantity.get(1).getAttribute("value")).toEqual("2");
         expect(di.antennaShow.get(1).getAttribute("class")).toContain("btn-success");
         expect(di.parkingAlt.getAttribute("value")).toEqual("100");
     });
