@@ -35,6 +35,7 @@
     <TypeScriptCompile Include="app\app.ts" />
     <TypeScriptCompile Include="app\filters\antennaType.ts" />
     <TypeScriptCompile Include="app\models\antennaEquipment.ts" />
+    <TypeScriptCompile Include="app\serviceUpdaters\satChainServiceUpdater.ts" />
     <TypeScriptCompile Include="calculator\calculator.ts" />
     <TypeScriptCompile Include="calculator\calculatorReferences.ts" />
     <TypeScriptCompile Include="calculator\services\euclideanService.ts" />

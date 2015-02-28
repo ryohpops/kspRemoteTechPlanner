@@ -32,18 +32,15 @@ module App {
             var version: number = this.$cookieStore.get(SatChainService.versionKey);
 
             if (sc !== undefined) {
-                if (version === undefined) { // update to ver 1.5
-                    sc.antennas = [new AntennaEquipment(sc.antenna, 1)];
-                    sc.antennaIndex = 0;
-                }
+                var satChain: SatChain = satChainServiceUpdater(sc, version);
 
                 var antennas: AntennaEquipment[] = new Array<AntennaEquipment>();
-                for (var index in sc.antennas) {
-                    var ae: any = sc.antennas[index];
+                for (var index in satChain.antennas) {
+                    var ae: any = satChain.antennas[index];
                     antennas.push(new AntennaEquipment(new Antenna(ae.antenna.name, ae.antenna.type, ae.antenna.range, ae.antenna.elcNeeded), ae.quantity));
                 }
-                return new SatChain(new Body(sc.body.name, sc.body.color, sc.body.radius, sc.body.stdGravity, sc.body.soi), sc.count, sc.altitude, sc.elcNeeded,
-                    antennas, sc.antennaIndex, sc.parkingAlt);
+                return new SatChain(new Body(satChain.body.name, satChain.body.color, satChain.body.radius, satChain.body.stdGravity, satChain.body.soi),
+                    satChain.count, satChain.altitude, satChain.elcNeeded, antennas, satChain.antennaIndex, satChain.parkingAlt);
             } else {
                 return new SatChain(new Body("Kerbin", "rgb(63,111,40)", 600, 3531.6, 84159.286), 4, 1000, 0.029,
                     [new AntennaEquipment(new Antenna("Communotron 16", AntennaType.omni, 2500, 0.13), 1)], 0, 70);
