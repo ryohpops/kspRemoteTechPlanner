@@ -47,6 +47,7 @@
             </dl>
         </div>
 
+        <!-- body detail toggle -->
         <div class="btn-group btn-group-justified" role="group">
             <div class="btn-group btn-group-xs" role="group">
                 <button type="button" class="btn" ng-click="input.bodyDetailVisible = !input.bodyDetailVisible">
@@ -77,8 +78,8 @@
 
     <div class="form-group">
         <label for="antenna">Antenna</label>
-        <div ng-repeat="antenna in input.satChain.antennas">
-            <select class="form-control" ng-model="antenna.name" ng-change="input.updateAntenna($index) || input.save() || app.updateView()">
+        <div ng-repeat="antennaEquipment in input.satChain.antennas">
+            <select class="form-control" ng-model="antennaEquipment.antenna.name" ng-change="input.updateAntenna($index) || input.save() || app.updateView()">
                 <optgroup label="Omnidirectional">
                     <option>Reflectron DP-10</option>
                     <option>Communotron 16</option>
@@ -102,21 +103,16 @@
             <div class="wrap-detail" ng-show="input.antennaDetailVisible[$index]">
                 <dl class="detail">
                     <dt>Type</dt>
-                    <dd>{{antenna.type |antennaType}}</dd>
+                    <dd>{{antennaEquipment.antenna.type |antennaType}}</dd>
                     <dt>Range</dt>
-                    <dd>{{antenna.range |number}} km</dd>
+                    <dd>{{antennaEquipment.antenna.range |number}} km</dd>
                     <dt>Electricity consumption</dt>
-                    <dd>{{antenna.elcNeeded |number}} /sec.</dd>
+                    <dd>{{antennaEquipment.antenna.elcNeeded |number}} /sec.</dd>
                 </dl>
             </div>
 
+            <!-- antenna detail toggle -->
             <div class="btn-group btn-group-justified" role="group">
-                <div class="btn-group btn-group-xs" role="group">
-                    <button type="button" class="btn" ng-class="{'btn-success': input.isSelectedAntenna($index)}"
-                            ng-click="input.setAntennaIndex($index) || input.save() || app.updateView()">
-                        Show
-                    </button>
-                </div>
                 <div class="btn-group btn-group-xs" role="group">
                     <button type="button" class="btn" ng-click="input.antennaDetailVisible[$index] = !input.antennaDetailVisible[$index]">
                         <span class="glyphicon glyphicon-collapse-up"></span>
@@ -124,15 +120,40 @@
                     </button>
                 </div>
             </div>
+
+            <!-- primary-antenna selector and antenna quantity-->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="btn-group btn-group-justified" role="group">
+                        <div class="btn-group btn-group-sm" role="group">
+                            <button type="button" class="btn btn-default" ng-class="{'btn-success': input.isSelectedAntenna($index)}"
+                                    ng-click="input.setAntennaIndex($index) || input.save() || app.updateView()">
+                                Show
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon">quantity</span>
+                        <input type="number" class="form-control" required ng-model="antennaEquipment.quantity" ng-model-options="{debounce:300}"
+                               ng-change="input.save() || app.updateView()" />
+                    </div>
+                </div>
+            </div>
             <br />
         </div>
 
+        <!-- antenna list controller -->
         <div class="btn-group btn-group-justified" role="group">
-            <div class="btn-group btn-group-xs" role="group">
+            <div class="btn-group btn-group-sm" role="group">
                 <button class="btn btn-default" ng-click="input.addNewAntenna() || input.save() || app.updateView()">Add after the last</button>
             </div>
-            <div class="btn-group btn-group-xs" role="group">
-                <button class="btn btn-default" ng-click="input.removeSelectedAntenna() || input.save() || app.updateView()">Remove selected</button>
+            <div class="btn-group btn-group-sm" role="group">
+                <button class="btn btn-default" ng-enabled="input.satChain.antennas.length > 1"
+                        ng-click="input.removeSelectedAntenna() || input.save() || app.updateView()">
+                    Remove selected
+                </button>
             </div>
         </div>
     </div>

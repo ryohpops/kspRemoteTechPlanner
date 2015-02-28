@@ -1,6 +1,9 @@
 ﻿/// <reference path="models/antenna.ts" />
+/// <reference path="models/antennaequipment.ts" />
 /// <reference path="models/body.ts" />
 /// <reference path="models/satchain.ts" />
+
+/// <reference path="serviceupdaters/satchainserviceupdater.ts" />
 
 /// <reference path="services/viewservice.ts" />
 

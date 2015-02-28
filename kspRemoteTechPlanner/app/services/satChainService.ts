@@ -32,20 +32,18 @@ module App {
             var version: number = this.$cookieStore.get(SatChainService.versionKey);
 
             if (sc !== undefined) {
-                if (version === undefined) { // update to ver 1.5
-                    sc.antennas = [sc.antenna];
-                    sc.antennaIndex = 0;
-                }
+                var satChain: SatChain = satChainServiceUpdater(sc, version);
 
-                var antennas: Antenna[] = new Array<Antenna>();
-                for (var idx in sc.antennas) {
-                    var a: any = sc.antennas[idx];
-                    antennas.push(new Antenna(a.name, a.type, a.range, a.elcNeeded));
+                var antennas: AntennaEquipment[] = new Array<AntennaEquipment>();
+                for (var index in satChain.antennas) {
+                    var ae: any = satChain.antennas[index];
+                    antennas.push(new AntennaEquipment(new Antenna(ae.antenna.name, ae.antenna.type, ae.antenna.range, ae.antenna.elcNeeded), ae.quantity));
                 }
-                return new SatChain(new Body(sc.body.name, sc.body.color, sc.body.radius, sc.body.stdGravity, sc.body.soi), sc.count, sc.altitude, sc.elcNeeded,
-                    antennas, sc.antennaIndex, sc.parkingAlt);
+                return new SatChain(new Body(satChain.body.name, satChain.body.color, satChain.body.radius, satChain.body.stdGravity, satChain.body.soi),
+                    satChain.count, satChain.altitude, satChain.elcNeeded, antennas, satChain.antennaIndex, satChain.parkingAlt);
             } else {
-                return new SatChain(new Body("Kerbin", "rgb(63,111,40)", 600, 3531.6, 84159.286), 4, 1000, 0.029, [new Antenna("Communotron 16", AntennaType.omni, 2500, 0.13)], 0, 70);
+                return new SatChain(new Body("Kerbin", "rgb(63,111,40)", 600, 3531.6, 84159.286), 4, 1000, 0.029,
+                    [new AntennaEquipment(new Antenna("Communotron 16", AntennaType.omni, 2500, 0.13), 1)], 0, 70);
             }
         }
 
@@ -94,20 +92,20 @@ module App {
             return this.orbitalServ.nightTime(this.satChain.body.radius, this.satChain.altitude, this.satChain.body.stdGravity);
         }
 
-        requiredBattery(): number {
+        private totalElcNeeded(): number {
             var elc: number = this.satChain.elcNeeded;
             for (var index in this.satChain.antennas) {
                 elc += this.satChain.antennas[index].elcNeeded;
             }
-            return elc * this.nightTime();
+            return elc;
+        }
+
+        requiredBattery(): number {
+            return this.totalElcNeeded() * this.nightTime();
         }
 
         requiredGenerator(): number {
-            var elc: number = this.satChain.elcNeeded;
-            for (var index in this.satChain.antennas) {
-                elc += this.satChain.antennas[index].elcNeeded;
-            }
-            return elc * this.orbitalPeriod() / (this.orbitalPeriod() - this.nightTime());
+            return this.totalElcNeeded() * this.orbitalPeriod() / (this.orbitalPeriod() - this.nightTime());
         }
 
         hohmannStartDeltaV(): number {

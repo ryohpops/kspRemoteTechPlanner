@@ -16,8 +16,9 @@ class DataInput {
     elcNeeded: protractor.ElementFinder = element(by.xpath("//input[@ng-model='input.satChain.elcNeeded']"));
 
     antennaSelector: protractor.ElementArrayFinder;
-    antennaShow: protractor.ElementArrayFinder;
     antennaDetailToggle: protractor.ElementArrayFinder;
+    antennaShow: protractor.ElementArrayFinder;
+    antennaQuantity: protractor.ElementArrayFinder;
 
     antennaAdd: protractor.ElementFinder = element(by.buttonText("Add after the last"));
     antennaRemove: protractor.ElementFinder = element(by.buttonText("Remove selected"));
@@ -40,9 +41,10 @@ class DataInput {
     }
 
     getAntennas() {
-        this.antennaSelector = element.all(by.xpath("//select[@ng-model='antenna.name']"));
-        this.antennaShow = element.all(by.xpath("//button[@ng-click='input.setAntennaIndex($index) || input.save() || app.updateView()']"));
+        this.antennaSelector = element.all(by.xpath("//select[@ng-model='antennaEquipment.antenna.name']"));
         this.antennaDetailToggle = element.all(by.xpath("//button[@ng-click='input.antennaDetailVisible[$index] = !input.antennaDetailVisible[$index]']"));
+        this.antennaShow = element.all(by.xpath("//button[@ng-click='input.setAntennaIndex($index) || input.save() || app.updateView()']"));
+        this.antennaQuantity = element.all(by.xpath("//input[@ng-model='antennaEquipment.quantity']"));
     }
 
     selectAntenna(selector: protractor.ElementFinder, name: string) {
