@@ -35,10 +35,10 @@ module App {
         }
 
         updateAntenna(index: number) {
-            var a: Antenna = this.antennas.getAntenna(this.satChain.antennas[index].name);
-            this.satChain.antennas[index].type = a.type;
-            this.satChain.antennas[index].range = a.range;
-            this.satChain.antennas[index].elcNeeded = a.elcNeeded;
+            var a: Antenna = this.antennas.getAntenna(this.satChain.antennas[index].antenna.name);
+            this.satChain.antennas[index].antenna.type = a.type;
+            this.satChain.antennas[index].antenna.range = a.range;
+            this.satChain.antennas[index].antenna.elcNeeded = a.elcNeeded;
         }
 
         isSelectedAntenna(index: number) {
@@ -50,7 +50,7 @@ module App {
         }
 
         addNewAntenna() {
-            this.satChain.antennas.push(this.antennas.getAntenna("Reflectron DP-10"));
+            this.satChain.antennas.push(new AntennaEquipment(this.antennas.getAntenna("Reflectron DP-10"), 1));
             this.antennaDetailVisible.push(false);
         }
 

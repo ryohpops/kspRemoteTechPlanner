@@ -78,8 +78,8 @@
 
     <div class="form-group">
         <label for="antenna">Antenna</label>
-        <div ng-repeat="antenna in input.satChain.antennas">
-            <select class="form-control" ng-model="antenna.name" ng-change="input.updateAntenna($index) || input.save() || app.updateView()">
+        <div ng-repeat="antennaEquipment in input.satChain.antennas">
+            <select class="form-control" ng-model="antennaEquipment.antenna.name" ng-change="input.updateAntenna($index) || input.save() || app.updateView()">
                 <optgroup label="Omnidirectional">
                     <option>Reflectron DP-10</option>
                     <option>Communotron 16</option>
@@ -103,11 +103,11 @@
             <div class="wrap-detail" ng-show="input.antennaDetailVisible[$index]">
                 <dl class="detail">
                     <dt>Type</dt>
-                    <dd>{{antenna.type |antennaType}}</dd>
+                    <dd>{{antennaEquipment.antenna.type |antennaType}}</dd>
                     <dt>Range</dt>
-                    <dd>{{antenna.range |number}} km</dd>
+                    <dd>{{antennaEquipment.antenna.range |number}} km</dd>
                     <dt>Electricity consumption</dt>
-                    <dd>{{antenna.elcNeeded |number}} /sec.</dd>
+                    <dd>{{antennaEquipment.antenna.elcNeeded |number}} /sec.</dd>
                 </dl>
             </div>
 
@@ -136,7 +136,8 @@
                 <div class="col-md-6">
                     <div class="input-group input-group-sm">
                         <span class="input-group-addon">quantity</span>
-                        <input type="number" class="form-control" />
+                        <input type="number" class="form-control" required ng-model="antennaEquipment.quantity" ng-model-options="{debounce:300}"
+                               ng-change="input.save() || app.updateView()" />
                     </div>
                 </div>
             </div>
