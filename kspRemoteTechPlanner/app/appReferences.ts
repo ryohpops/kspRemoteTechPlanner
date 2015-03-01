@@ -8,6 +8,7 @@
 /// <reference path="models/body.ts" />
 /// <reference path="models/satchain.ts" />
 
+/// <reference path="serviceupdaters/antennastorageserviceupdater.ts" />
 /// <reference path="serviceupdaters/satchainserviceupdater.ts" />
 
 /// <reference path="services/viewservice.ts" />
