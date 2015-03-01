@@ -1,7 +1,11 @@
 ﻿/// <reference path="appreferences.ts" />
 
 module App {
-    angular.module("app", ["ngCookies", "calc"])
+    angular.module("app", ["ngCookies", "LocalStorageModule", "calc"])
+        .config(
+        ["localStorageServiceProvider", (lssp: ng.local.storage.ILocalStorageServiceProvider) => {
+            lssp.setPrefix("kspRemoteTechPlanner");
+        }])
         .service("bodyStorageServ", BodyStorageService)
         .service("antennaStorageServ", AntennaStorageService)
         .service("satChainServ", SatChainService)
