@@ -1,7 +1,7 @@
 ﻿/// <reference path="../appreferences.ts" />
 
 module App {
-    export class SatChain {
+    export class SatChain implements ISatChain {
         'use strict';
 
         body: Body;

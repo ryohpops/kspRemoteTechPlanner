@@ -6,7 +6,7 @@ module App {
         static dish: string = "1";
     }
 
-    export class Antenna {
+    export class Antenna implements IAntenna {
         'use strict';
 
         name: string;

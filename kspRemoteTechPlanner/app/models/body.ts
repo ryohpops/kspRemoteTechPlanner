@@ -1,7 +1,7 @@
 ﻿/// <reference path="../appreferences.ts" />
 
 module App {
-    export class Body {
+    export class Body implements IBody {
         'use strict';
 
         name: string;

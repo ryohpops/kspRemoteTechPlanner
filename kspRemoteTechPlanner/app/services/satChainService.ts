@@ -28,19 +28,22 @@ module App {
         }
 
         private loadOrCreate(): SatChain {
-            var sc: any = this.$cookieStore.get(SatChainService.dataKey); // JSON object
+            var data: any = this.$cookieStore.get(SatChainService.dataKey); // JSON object, potential of old-version model
             var version: number = this.$cookieStore.get(SatChainService.versionKey);
 
-            if (sc !== undefined) {
-                var satChain: SatChain = satChainServiceUpdater(sc, version);
+            if (data !== undefined) {
+                var scStored: ISatChain = satChainServiceUpdater(data, version);
+                var bStored: IBody = scStored.body;
 
                 var antennas: AntennaEquipment[] = new Array<AntennaEquipment>();
-                for (var index in satChain.antennas) {
-                    var ae: any = satChain.antennas[index];
-                    antennas.push(new AntennaEquipment(new Antenna(ae.antenna.name, ae.antenna.type, ae.antenna.range, ae.antenna.elcNeeded), ae.quantity));
+                for (var index in scStored.antennas) {
+                    var aeStored: IAntennaEquipment = scStored.antennas[index];
+                    var aStored: IAntenna = aeStored.antenna;
+                    antennas.push(new AntennaEquipment(new Antenna(aStored.name, aStored.type, aStored.range, aStored.elcNeeded), aeStored.quantity));
                 }
-                return new SatChain(new Body(satChain.body.name, satChain.body.color, satChain.body.radius, satChain.body.stdGravity, satChain.body.soi),
-                    satChain.count, satChain.altitude, satChain.elcNeeded, antennas, satChain.antennaIndex, satChain.parkingAlt);
+
+                return new SatChain(new Body(bStored.name, bStored.color, bStored.radius, bStored.stdGravity, bStored.soi),
+                    scStored.count, scStored.altitude, scStored.elcNeeded, antennas, scStored.antennaIndex, scStored.parkingAlt);
             } else {
                 return new SatChain(new Body("Kerbin", "rgb(63,111,40)", 600, 3531.6, 84159.286), 4, 1000, 0.029,
                     [new AntennaEquipment(new Antenna("Communotron 16", AntennaType.omni, 2500, 0.13), 1)], 0, 70);

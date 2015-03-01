@@ -53,14 +53,14 @@ module App {
         }
 
         private loadUserBodies(): BodyDictionary {
-            var ub: any = this.$cookieStore.get(BodyStorageService.dataKey); // JSON object, functions are not ready
+            var data: any = this.$cookieStore.get(BodyStorageService.dataKey); // JSON object, potential of old-version model
             var version: number = this.$cookieStore.get(BodyStorageService.versionKey);
 
-            if (ub !== undefined) {
+            if (data !== undefined) {
                 var retDict: BodyDictionary = {};
-                for (var key in ub) {
-                    var b: Body = ub[key];
-                    retDict[b.name] = new Body(b.name, b.color, b.radius, b.stdGravity, b.soi);
+                for (var key in data) {
+                    var bStored: IBody = data[key];
+                    retDict[bStored.name] = new Body(bStored.name, bStored.color, bStored.radius, bStored.stdGravity, bStored.soi);
                 }
                 return retDict;
             } else {

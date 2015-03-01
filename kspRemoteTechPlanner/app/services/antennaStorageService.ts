@@ -46,23 +46,23 @@ module App {
         }
 
         private loadUserAntennas(): AntennaDictionary {
-            var ua: any = this.$cookieStore.get(AntennaStorageService.dataKey); // JSON object, functions are not ready
+            var data: any = this.$cookieStore.get(AntennaStorageService.dataKey); // JSON object, potential of old-version model
             var version: number = this.$cookieStore.get(AntennaStorageService.versionKey);
 
-            if (ua !== undefined) {
+            if (data !== undefined) {
                 if (version === undefined) { // update to ver 1.5
-                    for (var key in ua) {
-                        if (ua[key].type == 0)
-                            ua[key].type = "0";
-                        else if (ua[key].type == 1)
-                            ua[key].type = "1";
+                    for (var key in data) {
+                        if (data[key].type == 0)
+                            data[key].type = "0";
+                        else if (data[key].type == 1)
+                            data[key].type = "1";
                     }
                 }
 
                 var retDict: AntennaDictionary = {};
-                for (var key in ua) {
-                    var a: Antenna = ua[key];
-                    retDict[a.name] = new Antenna(a.name, a.type, a.range, a.elcNeeded);
+                for (var key in data) {
+                    var aStored: IAntenna = data[key];
+                    retDict[aStored.name] = new Antenna(aStored.name, aStored.type, aStored.range, aStored.elcNeeded);
                 }
                 return retDict;
             } else {

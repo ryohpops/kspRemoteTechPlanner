@@ -1,7 +1,7 @@
 ﻿/// <reference path="../appreferences.ts" />
  
 module App {
-    export class AntennaEquipment {
+    export class AntennaEquipment implements IAntennaEquipment{
         antenna: Antenna;
         quantity: number;
 
