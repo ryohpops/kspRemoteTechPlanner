@@ -16,20 +16,25 @@ module App {
             return this._satChain;
         }
 
-        static $inject = ["$cookieStore", "calc.euclideanServ", "calc.orbitalServ"];
+        static $inject = ["$cookieStore", "localStorageService", "calc.euclideanServ", "calc.orbitalServ"];
         constructor(
             private $cookieStore: ng.cookies.ICookieStoreService,
+            private localStorage: ng.local.storage.ILocalStorageService<any>,
             private euclideanServ: Calculator.EuclideanService,
             private orbitalServ: Calculator.OrbitalService
             ) {
 
             this._satChain = this.loadOrCreate();
-            this.$cookieStore.put(SatChainService.versionKey, SatChainService.modelVersion);
+            this.localStorage.set(SatChainService.versionKey, SatChainService.modelVersion);
         }
 
         private loadOrCreate(): SatChain {
-            var data: any = this.$cookieStore.get(SatChainService.dataKey); // JSON object, potential of old-version model
-            var version: number = this.$cookieStore.get(SatChainService.versionKey);
+            var data: any = this.localStorage.get(SatChainService.dataKey); // JSON object, potential of old-version model
+            if (!data) {
+                data = this.$cookieStore.get(SatChainService.dataKey); // deprecated, will be deleted in the near future.
+                this.$cookieStore.remove(SatChainService.dataKey);
+            }
+            var version: number = this.localStorage.get(SatChainService.versionKey);
 
             if (data !== undefined) {
                 var scStored: ISatChain = satChainServiceUpdater(data, version);
@@ -51,7 +56,7 @@ module App {
         }
 
         save() {
-            this.$cookieStore.put(SatChainService.dataKey, this.satChain);
+            this.localStorage.set(SatChainService.dataKey, this.satChain);
         }
 
         satPosition(offset: number): Point {

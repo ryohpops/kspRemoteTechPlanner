@@ -23,9 +23,10 @@ module App {
             return this._userAntennas;
         }
 
-        static $inject = ["$cookieStore"];
+        static $inject = ["$cookieStore", "localStorageService"];
         constructor(
-            private $cookieStore: ng.cookies.ICookieStoreService
+            private $cookieStore: ng.cookies.ICookieStoreService,
+            private localStorage: ng.local.storage.ILocalStorageService<any>
             ) {
 
             this._stockAntennas = {
@@ -42,12 +43,16 @@ module App {
             };
 
             this._userAntennas = this.loadUserAntennas();
-            this.$cookieStore.put(AntennaStorageService.versionKey, AntennaStorageService.modelVersion);
+            this.localStorage.set(AntennaStorageService.versionKey, AntennaStorageService.modelVersion);
         }
 
         private loadUserAntennas(): AntennaDictionary {
-            var data: any = this.$cookieStore.get(AntennaStorageService.dataKey); // JSON object, potential of old-version model
-            var version: number = this.$cookieStore.get(AntennaStorageService.versionKey);
+            var data: any = this.localStorage.get(AntennaStorageService.dataKey); // JSON object, potential of old-version model
+            if (!data) {
+                data = this.$cookieStore.get(AntennaStorageService.dataKey); // deprecated, will be deleted in the near future.
+                this.$cookieStore.remove(AntennaStorageService.dataKey);
+            }
+            var version: number = this.localStorage.get(AntennaStorageService.versionKey);
 
             if (data !== undefined) {
                 var uaStored: IAntennaDictionary = antennaStorageServiceUpdater(data, version);
@@ -65,9 +70,9 @@ module App {
 
         save() {
             if (Object.keys(this.userAntennas).length > 0)
-                this.$cookieStore.put(AntennaStorageService.dataKey, this.userAntennas);
+                this.localStorage.set(AntennaStorageService.dataKey, this.userAntennas);
             else
-                this.$cookieStore.remove(AntennaStorageService.dataKey);
+                this.localStorage.remove(AntennaStorageService.dataKey);
         }
 
         existsInStock(name: string): boolean {

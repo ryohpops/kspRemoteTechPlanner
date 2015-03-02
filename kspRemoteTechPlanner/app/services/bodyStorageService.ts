@@ -23,9 +23,10 @@ module App {
             return this._userBodies;
         }
 
-        static $inject = ["$cookieStore"];
+        static $inject = ["$cookieStore", "localStorageService"];
         constructor(
-            private $cookieStore: ng.cookies.ICookieStoreService
+            private $cookieStore: ng.cookies.ICookieStoreService,
+            private localStorage: ng.local.storage.ILocalStorageService<any>
             ) {
 
             this._stockBodies = {
@@ -49,12 +50,16 @@ module App {
             };
 
             this._userBodies = this.loadUserBodies();
-            this.$cookieStore.put(BodyStorageService.versionKey, BodyStorageService.modelVersion);
+            this.localStorage.set(BodyStorageService.versionKey, BodyStorageService.modelVersion);
         }
 
         private loadUserBodies(): BodyDictionary {
-            var data: any = this.$cookieStore.get(BodyStorageService.dataKey); // JSON object, potential of old-version model
-            var version: number = this.$cookieStore.get(BodyStorageService.versionKey);
+            var data: any = this.localStorage.get(BodyStorageService.dataKey); // JSON object, potential of old-version model
+            if (!data) {
+                data = this.$cookieStore.get(BodyStorageService.dataKey); // deprecated, will be deleted in the near future.
+                this.$cookieStore.remove(BodyStorageService.dataKey);
+            }
+            var version: number = this.localStorage.get(BodyStorageService.versionKey);
 
             if (data !== undefined) {
                 var retDict: BodyDictionary = {};
@@ -70,9 +75,9 @@ module App {
 
         save() {
             if (Object.keys(this.userBodies).length > 0)
-                this.$cookieStore.put(BodyStorageService.dataKey, this.userBodies);
+                this.localStorage.set(BodyStorageService.dataKey, this.userBodies);
             else
-                this.$cookieStore.remove(BodyStorageService.dataKey);
+                this.localStorage.remove(BodyStorageService.dataKey);
         }
 
         existsInStock(name: string): boolean {
