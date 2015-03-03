@@ -1,3 +1,6 @@
+- 1.5.1 : 2015/03/03
+ * Fix some problems.
+
 - 1.5 : 2015/03/03
  * Support multiple pair of antenna and quantity.
  * Fix autosave feature with local storage. Last input and user's bodies/antennas will be saved and restored automatically.
