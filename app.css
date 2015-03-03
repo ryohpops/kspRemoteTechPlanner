@@ -1,1 +1,1 @@
-.wrap-canvas{display:inline-block;border-style:solid;border-width:thin}.detail{margin:5%}.detail>dd{text-align:right}.fluid{width:100%}.editable{table-layout:fixed}.editable>tbody>tr>td{vertical-align:middle}
+.wrap-canvas{display:inline-block;border-style:solid;border-width:thin}.wrap-detail{border-left:1px solid grey}.detail{margin:5%}.detail>dd{text-align:right}.editable{table-layout:fixed}.editable>tbody>tr>td{vertical-align:middle}

@@ -4,7 +4,7 @@
 # User specification
 kspRemoteTechPlanner/
 kspRemoteTechPlannerTest/
-node_modules/
+kspRemoteTechPlannerTool/
 deploy/
 
 # User-specific files
