@@ -7,8 +7,9 @@ var sequence: Function = require("run-sequence");
 var connect: any = require("gulp-connect");
 var shell: any = require("gulp-shell");
 
-var targetRoot: string = "../kspRemoteTechPlanner/";
 var targetConf: string = "../kspRemoteTechPlannerTest/conf.js";
+var targetRoot: string = "../kspRemoteTechPlanner/";
+var targetMinifiedRoot: string = "../deploy";
 
 gulp.task("test:wdm-update",
     shell.task("webdriver-manager update")
@@ -17,6 +18,13 @@ gulp.task("test:wdm-update",
 gulp.task("test:server-start",() => {
     connect.server({
         root: targetRoot,
+        port: 8080
+    });
+});
+
+gulp.task("test-minified:server-start",() => {
+    connect.server({
+        root: targetMinifiedRoot,
         port: 8080
     });
 });
@@ -31,4 +39,8 @@ gulp.task("test:protractor",
 
 gulp.task("test",(cb: gulp.ITaskCallback) => {
     sequence(["test:wdm-update", "test:server-start"], "test:protractor", "test:server-stop", cb);
+});
+
+gulp.task("test-minified",(cb: gulp.ITaskCallback) => {
+    sequence(["test:wdm-update", "test-minified:server-start"], "test:protractor", "test:server-stop", cb);
 });

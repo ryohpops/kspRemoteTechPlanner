@@ -1,3 +1,7 @@
+- 1.5 : 2015/03/03
+ * Support multiple pair of antenna and quantity.
+ * Fix autosave feature with local storage. Last input and user's bodies/antennas will be saved and restored automatically.
+
 - 1.4 : 2015/01/29
  * Add remaining four dishes.
 
