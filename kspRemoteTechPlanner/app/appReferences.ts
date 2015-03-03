@@ -1,8 +1,15 @@
-﻿/// <reference path="calculator/calculatorreferences.ts" />
+﻿/// <reference path="modelinterfaces/iantenna.ts" />
+/// <reference path="modelinterfaces/iantennaequipment.ts" />
+/// <reference path="modelinterfaces/ibody.ts" />
+/// <reference path="modelinterfaces/isatchainjson.ts" />
 
 /// <reference path="models/antenna.ts" />
+/// <reference path="models/antennaequipment.ts" />
 /// <reference path="models/body.ts" />
 /// <reference path="models/satchain.ts" />
+
+/// <reference path="serviceupdaters/antennastorageserviceupdater.ts" />
+/// <reference path="serviceupdaters/satchainserviceupdater.ts" />
 
 /// <reference path="services/viewservice.ts" />
 
@@ -18,3 +25,7 @@
 /// <reference path="controllers/bodyeditcontroller.ts" />
 /// <reference path="controllers/antennaeditcontroller.ts" />
 /// <reference path="controllers/inputcontroller.ts" />
+
+/// <reference path="filters/antennatype.ts" />
+
+/// <reference path="app.ts" />

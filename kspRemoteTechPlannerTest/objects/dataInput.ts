@@ -1,26 +1,31 @@
-﻿/// <reference path="../references.ts" />
+﻿/// <reference path="../_references.ts" />
 
 class DataInput {
     'use strict';
 
     bodySelector: protractor.ElementFinder = element(by.xpath("//select[@ng-model='input.satChain.body.name']"));
-    bodyDetailToggle: protractor.ElementFinder = element(by.xpath("//button[@data-target='#detail_body']"));
+    bodyDetailToggle: protractor.ElementFinder = element(by.xpath("//button[@ng-click='input.bodyDetailVisible = !input.bodyDetailVisible']"));
 
-    bodyColor: protractor.ElementFinder = null;
-    bodyRadius: protractor.ElementFinder = null;
-    bodyStdGravity: protractor.ElementFinder = null;
-    bodySoi: protractor.ElementFinder = null;
+    bodyColor: protractor.ElementFinder;
+    bodyRadius: protractor.ElementFinder;
+    bodyStdGravity: protractor.ElementFinder;
+    bodySoi: protractor.ElementFinder;
 
     count: protractor.ElementFinder = element(by.xpath("//input[@ng-model='input.satChain.count']"));
     altitude: protractor.ElementFinder = element(by.xpath("//input[@ng-model='input.satChain.altitude']"));
     elcNeeded: protractor.ElementFinder = element(by.xpath("//input[@ng-model='input.satChain.elcNeeded']"));
 
-    antennaSelector: protractor.ElementFinder = element(by.xpath("//select[@ng-model='input.satChain.antenna.name']"));
-    antennaDetailToggle: protractor.ElementFinder = element(by.xpath("//button[@data-target='#detail_antenna']"));
+    antennaSelector: protractor.ElementArrayFinder;
+    antennaDetailToggle: protractor.ElementArrayFinder;
+    antennaShow: protractor.ElementArrayFinder;
+    antennaQuantity: protractor.ElementArrayFinder;
 
-    antennaType: protractor.ElementFinder = null;
-    antennaRange: protractor.ElementFinder = null;
-    antennaElcNeeded: protractor.ElementFinder = null;
+    antennaAdd: protractor.ElementFinder = element(by.buttonText("Add after the last"));
+    antennaRemove: protractor.ElementFinder = element(by.buttonText("Remove selected"));
+
+    antennaType: protractor.ElementArrayFinder;
+    antennaRange: protractor.ElementArrayFinder;
+    antennaElcNeeded: protractor.ElementArrayFinder;
 
     parkingAlt: protractor.ElementFinder = element(by.xpath("//input[@ng-model='input.satChain.parkingAlt']"));
 
@@ -28,22 +33,27 @@ class DataInput {
         this.bodySelector.element(by.xpath("//option[text()='" + name + "']")).click();
     }
 
-    openBodyDetail() {
-        this.bodyDetailToggle.click();
+    getBodyDetail() {
         this.bodyColor = element(by.binding("input.satChain.body.color"));
         this.bodyRadius = element(by.binding("input.satChain.body.radius"));
         this.bodyStdGravity = element(by.binding("input.satChain.body.stdGravity"));
         this.bodySoi = element(by.binding("input.satChain.body.soi"));
     }
 
-    selectAntenna(name: string) {
-        this.antennaSelector.element(by.xpath("//option[text()='" + name + "']")).click();
+    getAntennas() {
+        this.antennaSelector = element.all(by.xpath("//select[@ng-model='antennaEquipment.antenna.name']"));
+        this.antennaDetailToggle = element.all(by.xpath("//button[@ng-click='input.antennaDetailVisible[$index] = !input.antennaDetailVisible[$index]']"));
+        this.antennaShow = element.all(by.xpath("//button[@ng-click='input.setAntennaIndex($index) || input.save() || app.updateView()']"));
+        this.antennaQuantity = element.all(by.xpath("//input[@ng-model='antennaEquipment.quantity']"));
     }
 
-    openAntennaDetail() {
-        this.antennaDetailToggle.click();
-        this.antennaType = element(by.binding("input.satChain.antenna.typeString()"));
-        this.antennaRange = element(by.binding("input.satChain.antenna.range"));
-        this.antennaElcNeeded = element(by.binding("input.satChain.antenna.elcNeeded"));
+    selectAntenna(selector: protractor.ElementFinder, name: string) {
+        selector.element(by.xpath(".//option[text()='" + name + "']")).click();
+    }
+
+    getAntennaDetails() {
+        this.antennaType = element.all(by.binding("antenna.type"));
+        this.antennaRange = element.all(by.binding("antenna.range"));
+        this.antennaElcNeeded = element.all(by.binding("antenna.elcNeeded"));
     }
 }

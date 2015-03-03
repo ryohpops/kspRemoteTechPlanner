@@ -1,4 +1,5 @@
 ﻿/// <reference path="../appreferences.ts" />
+
 module App {
     export interface BodyDictionary {
         [index: string]: Body;
@@ -6,6 +7,10 @@ module App {
 
     export class BodyStorageService {
         'use strict';
+
+        private static dataKey: string = "userBody";
+        private static versionKey: string = "userBodyVersion";
+        private static modelVersion: number = 1;
 
         private _stockBodies: BodyDictionary;
         private _userBodies: BodyDictionary;
@@ -18,10 +23,10 @@ module App {
             return this._userBodies;
         }
 
-        static $inject = ["$cookieStore", "bodyStorageCookieKey"];
+        static $inject = ["$cookieStore", "localStorageService"];
         constructor(
             private $cookieStore: ng.cookies.ICookieStoreService,
-            private cookieKey: string
+            private localStorage: ng.local.storage.ILocalStorageService<any>
             ) {
 
             this._stockBodies = {
@@ -44,26 +49,35 @@ module App {
                 "Eeloo": new Body("Eeloo", "rgb(221,221,210)", 210, 74.410815, 119082.94)
             };
 
-            this.loadUserBodies();
+            this._userBodies = this.loadUserBodies();
+            this.localStorage.set(BodyStorageService.versionKey, BodyStorageService.modelVersion);
         }
 
-        private loadUserBodies() {
-            this._userBodies = {};
+        private loadUserBodies(): BodyDictionary {
+            var data: any = this.localStorage.get(BodyStorageService.dataKey); // JSON object, potential of old-version model
+            if (!data) {
+                data = this.$cookieStore.get(BodyStorageService.dataKey); // deprecated, will be deleted in the near future.
+                this.$cookieStore.remove(BodyStorageService.dataKey);
+            }
+            var version: number = this.localStorage.get(BodyStorageService.versionKey);
 
-            var ub: Object = this.$cookieStore.get(this.cookieKey); // pure JS object, functions are not ready
-            if (ub !== undefined) {
-                for (var key in ub) {
-                    var b: Body = ub[key];
-                    this._userBodies[b.name] = new Body(b.name, b.color, b.radius, b.stdGravity, b.soi);
+            if (data !== undefined) {
+                var retDict: BodyDictionary = {};
+                for (var key in data) {
+                    var bStored: IBody = data[key];
+                    retDict[bStored.name] = new Body(bStored.name, bStored.color, bStored.radius, bStored.stdGravity, bStored.soi);
                 }
+                return retDict;
+            } else {
+                return {};
             }
         }
 
         save() {
             if (Object.keys(this.userBodies).length > 0)
-                this.$cookieStore.put(this.cookieKey, this.userBodies);
+                this.localStorage.set(BodyStorageService.dataKey, this.userBodies);
             else
-                this.$cookieStore.remove(this.cookieKey);
+                this.localStorage.remove(BodyStorageService.dataKey);
         }
 
         existsInStock(name: string): boolean {

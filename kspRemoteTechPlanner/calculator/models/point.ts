@@ -1,4 +1,5 @@
 ﻿/// <reference path="../calculatorreferences.ts" />
+
 module Calculator {
     export class Point {
         'use strict';

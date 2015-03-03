@@ -12,7 +12,7 @@
         <tbody>
             <tr ng-repeat="antenna in antennaEdit.userAntennas">
                 <td>{{antenna.name}}</td>
-                <td>{{antenna.typeString()}}</td>
+                <td>{{antenna.type |antennaType}}</td>
                 <td>{{antenna.range |number}}</td>
                 <td>{{antenna.elcNeeded |number}}</td>
                 <td>

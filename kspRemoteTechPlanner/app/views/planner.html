@@ -1,0 +1,30 @@
+﻿<div class="row">
+    <!-- three views  -->
+    <div class="col-md-9">
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Entire View</h3>
+                <div class="wrap-canvas">
+                    <canvas id="entire" width="850" height="850"></canvas>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <h3>Night View</h3>
+                <div class="wrap-canvas">
+                    <canvas id="night" width="400" height="400"></canvas>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <h3>Delta-V View</h3>
+                <div class="wrap-canvas">
+                    <canvas id="deltav" width="400" height="400"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Data input -->
+    <div class="col-md-3" ng-controller="inputCtrl as input" ng-include src="'app/views/dataInput.html'"></div>
+</div>

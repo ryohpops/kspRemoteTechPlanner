@@ -3,7 +3,7 @@
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <ProjectGuid>{E68C659C-ADA0-488D-8AB4-3B098531CDA0}</ProjectGuid>
+    <ProjectGuid>{B6E28416-06C4-4FE6-A469-08ACA45A8E99}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <OutputPath>bin</OutputPath>
@@ -17,28 +17,11 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
   </PropertyGroup>
-  <ItemGroup>
-    <Content Include="conf.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <TypeScriptCompile Include="objects\index.ts" />
-    <TypeScriptCompile Include="scripts\typings\jasmine\jasmine.d.ts" />
-    <TypeScriptCompile Include="_references.ts" />
-    <TypeScriptCompile Include="objects\antennaEdit.ts" />
-    <TypeScriptCompile Include="objects\bodyEdit.ts" />
-    <TypeScriptCompile Include="objects\dataInput.ts" />
-    <TypeScriptCompile Include="scripts\typings\angular-protractor\angular-protractor.d.ts" />
-    <TypeScriptCompile Include="scripts\typings\selenium-webdriver\selenium-webdriver.d.ts" />
-    <TypeScriptCompile Include="specs\dataInputSpec.ts" />
-  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>
   </PropertyGroup>
   <PropertyGroup>
-    <RootNamespace>kspRemoteTechPlannerTest</RootNamespace>
+    <RootNamespace>kspRemoteTechPlannerTool</RootNamespace>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\WebApplications\Microsoft.WebApplication.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\WebApplications\Microsoft.WebApplication.targets')" />
@@ -48,9 +31,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>50259</DevelopmentServerPort>
+          <DevelopmentServerPort>50798</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:50259/</IISUrl>
+          <IISUrl>http://localhost:50798/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
@@ -63,12 +46,30 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
     <TypeScriptRemoveComments>false</TypeScriptRemoveComments>
     <TypeScriptSourceMap>true</TypeScriptSourceMap>
-    <TypeScriptOutFile>spec.js</TypeScriptOutFile>
-    <TypeScriptModuleKind>none</TypeScriptModuleKind>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
     <TypeScriptRemoveComments>true</TypeScriptRemoveComments>
     <TypeScriptSourceMap>false</TypeScriptSourceMap>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="package.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="gulpfile.ts" />
+    <TypeScriptCompile Include="scripts\typings\gulp-rename\gulp-rename.d.ts" />
+    <TypeScriptCompile Include="scripts\typings\node\node.d.ts" />
+    <TypeScriptCompile Include="scripts\typings\rimraf\rimraf.d.ts" />
+    <TypeScriptCompile Include="tasks\deploy.ts" />
+    <TypeScriptCompile Include="tasks\make-readme.ts" />
+    <TypeScriptCompile Include="tasks\test.ts" />
+    <TypeScriptCompile Include="_references.ts" />
+    <TypeScriptCompile Include="scripts\typings\gulp\gulp.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <TypeScriptModuleKind>commonjs</TypeScriptModuleKind>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
 </Project>

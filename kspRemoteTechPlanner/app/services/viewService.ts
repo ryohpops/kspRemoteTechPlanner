@@ -1,5 +1,8 @@
 ﻿/// <reference path="../appreferences.ts" />
+
 module App {
+    import Point = Calculator.Point;
+
     // abstruct
     export class ViewService {
         'use strict';
@@ -19,11 +22,15 @@ module App {
         virtualSize: number;
         realSize: number;
 
-        get center(): Calculator.Point {
-            return new Calculator.Point(this.realSize / 2, this.realSize / 2);
+        get center(): Point {
+            return new Point(this.realSize / 2, this.realSize / 2);
         }
 
-        constructor(target: String, virtualSize: number, realSize: number) {
+        constructor() {
+
+        }
+
+        init(target: String, virtualSize: number, realSize: number) {
             this.stage = new createjs.Stage(target);
             this.shapeContainer = new createjs.Container();
             this.textContainer = new createjs.Container();

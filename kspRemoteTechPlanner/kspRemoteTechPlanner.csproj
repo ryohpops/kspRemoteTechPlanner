@@ -22,31 +22,36 @@
     <Content Include="app\views\bodyEdit.html" />
     <Content Include="app\views\description.html" />
     <Content Include="app\views\dataInput.html" />
+    <Content Include="app\views\planner.html" />
     <Content Include="index.html" />
-    <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <None Include="web.Debug.config">
-      <DependentUpon>web.config</DependentUpon>
-    </None>
-    <None Include="web.Release.config">
-      <DependentUpon>web.config</DependentUpon>
-    </None>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <TypeScriptCompile Include="app.ts" />
-    <TypeScriptCompile Include="app\calculator\calculatorReferences.ts" />
-    <TypeScriptCompile Include="app\calculator\services\euclideanService.ts" />
-    <TypeScriptCompile Include="app\calculator\services\orbitalService.ts" />
+    <Content Include="web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="app\app.ts" />
+    <TypeScriptCompile Include="app\filters\antennaType.ts" />
+    <TypeScriptCompile Include="app\modelInterfaces\iAntenna.ts" />
+    <TypeScriptCompile Include="app\modelInterfaces\iBody.ts" />
+    <TypeScriptCompile Include="app\models\antennaEquipment.ts" />
+    <TypeScriptCompile Include="app\modelInterfaces\iAntennaEquipment.ts" />
+    <TypeScriptCompile Include="app\modelInterfaces\iSatChainJson.ts" />
+    <TypeScriptCompile Include="app\serviceUpdaters\antennaStorageServiceUpdater.ts" />
+    <TypeScriptCompile Include="app\serviceUpdaters\satChainServiceUpdater.ts" />
+    <TypeScriptCompile Include="calculator\calculator.ts" />
+    <TypeScriptCompile Include="calculator\calculatorReferences.ts" />
+    <TypeScriptCompile Include="calculator\services\euclideanService.ts" />
+    <TypeScriptCompile Include="calculator\services\orbitalService.ts" />
     <TypeScriptCompile Include="app\controllers\antennaEditController.ts" />
     <TypeScriptCompile Include="app\controllers\appController.ts" />
     <TypeScriptCompile Include="app\controllers\bodyEditController.ts" />
     <TypeScriptCompile Include="app\controllers\inputController.ts" />
     <TypeScriptCompile Include="app\models\antenna.ts" />
     <TypeScriptCompile Include="app\models\body.ts" />
-    <TypeScriptCompile Include="app\calculator\models\point.ts" />
+    <TypeScriptCompile Include="calculator\models\point.ts" />
     <TypeScriptCompile Include="app\models\satChain.ts" />
     <TypeScriptCompile Include="app\services\antennaStorageService.ts" />
     <TypeScriptCompile Include="app\services\bodyStorageService.ts" />
@@ -57,7 +62,7 @@
     <TypeScriptCompile Include="app\services\satChainService.ts" />
     <TypeScriptCompile Include="app\appReferences.ts" />
     <TypeScriptCompile Include="app\services\viewService.ts" />
-    <TypeScriptCompile Include="references.ts" />
+    <TypeScriptCompile Include="scripts\typings\angular-local-storage\angular-local-storage.d.ts" />
     <TypeScriptCompile Include="scripts\typings\angularjs\angular-animate.d.ts" />
     <TypeScriptCompile Include="scripts\typings\angularjs\angular-cookies.d.ts" />
     <TypeScriptCompile Include="scripts\typings\angularjs\angular-mocks.d.ts" />
@@ -65,11 +70,20 @@
     <TypeScriptCompile Include="scripts\typings\angularjs\angular-route.d.ts" />
     <TypeScriptCompile Include="scripts\typings\angularjs\angular-sanitize.d.ts" />
     <TypeScriptCompile Include="scripts\typings\angularjs\angular.d.ts" />
+    <TypeScriptCompile Include="scripts\typings\jquery\jquery.d.ts" />
+    <TypeScriptCompile Include="_references.ts" />
     <TypeScriptCompile Include="scripts\typings\bootstrap\bootstrap.d.ts" />
     <TypeScriptCompile Include="scripts\typings\createjs-lib\createjs-lib.d.ts" />
     <TypeScriptCompile Include="scripts\typings\easeljs\easeljs.d.ts" />
-    <TypeScriptCompile Include="scripts\typings\jquery\jquery.d.ts" />
     <TypeScriptCompile Include="scripts\typings\tweenjs\tweenjs.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="web.Debug.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
+    <None Include="web.Release.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -103,6 +117,7 @@
     <TypeScriptRemoveComments>false</TypeScriptRemoveComments>
     <TypeScriptSourceMap>true</TypeScriptSourceMap>
     <TypeScriptModuleKind>none</TypeScriptModuleKind>
+    <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
     <TypeScriptOutFile>appOut.js</TypeScriptOutFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">

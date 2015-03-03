@@ -1,8 +1,10 @@
 ﻿/// <reference path="../appreferences.ts" />
+
 module App {
     export class DeltavViewService extends ViewService {
         'use strict';
 
+        private static targetCanvas: string = "deltav";
         private static bodyRadius: number = 20;
         private static parkingAltitude: number = 50;
         private static designatedAltitude: number = 150;
@@ -15,14 +17,17 @@ module App {
         private txtPhaseAngle: createjs.Text;
         private txtPhaseTime: createjs.Text;
 
-        static $inject = ["deltavViewTarget", "graphicsHelperServ", "satChainServ"];
+        static $inject = ["graphicsHelperServ", "satChainServ"];
         constructor(
-            private deltavViewTarget: string,
             private gHelper: GraphicsHelperService,
             private satChainServ: SatChainService
             ) {
 
-            super(deltavViewTarget, 5000, 400);
+            super();
+        }
+
+        init() {
+            super.init(DeltavViewService.targetCanvas, 5000, 400);
 
             // shape for drawing in outer coordinates
             this.shapeOuter = new createjs.Shape();
@@ -104,7 +109,7 @@ module App {
                 (DeltavViewService.parkingAltitude + DeltavViewService.designatedAltitude) / 2, 0, Math.PI, true)
                 .endStroke();
             this.shapeOuter.graphics.beginStroke("green")
-        this.gHelper.drawArrow(this.shapeOuter.graphics, this.center.x + (DeltavViewService.parkingAltitude - DeltavViewService.designatedAltitude) / 2,
+            this.gHelper.drawArrow(this.shapeOuter.graphics, this.center.x + (DeltavViewService.parkingAltitude - DeltavViewService.designatedAltitude) / 2,
                 this.center.y - (DeltavViewService.parkingAltitude + DeltavViewService.designatedAltitude) / 2, 0, ViewService.arrowSize)
                 .endStroke();
 

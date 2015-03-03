@@ -1,4 +1,5 @@
 ﻿/// <reference path="../appreferences.ts" />
+
 module App {
     export interface AntennaDictionary {
         [index: string]: Antenna;
@@ -6,6 +7,10 @@ module App {
 
     export class AntennaStorageService {
         'use strict';
+
+        private static dataKey: string = "userAntenna";
+        private static versionKey: string = "userAntennaVersion";
+        private static modelVersion: number = 1;
 
         private _stockAntennas: AntennaDictionary;
         private _userAntennas: AntennaDictionary;
@@ -18,10 +23,10 @@ module App {
             return this._userAntennas;
         }
 
-        static $inject = ["$cookieStore", "antennaStorageCookieKey"];
+        static $inject = ["$cookieStore", "localStorageService"];
         constructor(
             private $cookieStore: ng.cookies.ICookieStoreService,
-            private cookieKey: string
+            private localStorage: ng.local.storage.ILocalStorageService<any>
             ) {
 
             this._stockAntennas = {
@@ -37,26 +42,37 @@ module App {
                 "Reflectron GX-128": new Antenna("Reflectron GX-128", AntennaType.dish, 400000000, 2.8)
             };
 
-            this.loadUserAntennas();
+            this._userAntennas = this.loadUserAntennas();
+            this.localStorage.set(AntennaStorageService.versionKey, AntennaStorageService.modelVersion);
         }
 
-        private loadUserAntennas() {
-            this._userAntennas = {};
+        private loadUserAntennas(): AntennaDictionary {
+            var data: any = this.localStorage.get(AntennaStorageService.dataKey); // JSON object, potential of old-version model
+            if (!data) {
+                data = this.$cookieStore.get(AntennaStorageService.dataKey); // deprecated, will be deleted in the near future.
+                this.$cookieStore.remove(AntennaStorageService.dataKey);
+            }
+            var version: number = this.localStorage.get(AntennaStorageService.versionKey);
 
-            var ua: Object = this.$cookieStore.get(this.cookieKey);
-            if (ua !== undefined) {
-                for (var key in ua) {
-                    var a: Antenna = ua[key];
-                    this._userAntennas[a.name] = new Antenna(a.name, a.type, a.range, a.elcNeeded);
+            if (data !== undefined) {
+                var uaStored: IAntennaDictionary = antennaStorageServiceUpdater(data, version);
+
+                var retDict: AntennaDictionary = {};
+                for (var key in uaStored) {
+                    var aStored: IAntenna = data[key];
+                    retDict[aStored.name] = new Antenna(aStored.name, aStored.type, aStored.range, aStored.elcNeeded);
                 }
+                return retDict;
+            } else {
+                return {};
             }
         }
 
         save() {
             if (Object.keys(this.userAntennas).length > 0)
-                this.$cookieStore.put(this.cookieKey, this.userAntennas);
+                this.localStorage.set(AntennaStorageService.dataKey, this.userAntennas);
             else
-                this.$cookieStore.remove(this.cookieKey);
+                this.localStorage.remove(AntennaStorageService.dataKey);
         }
 
         existsInStock(name: string): boolean {

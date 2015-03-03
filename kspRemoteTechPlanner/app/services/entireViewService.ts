@@ -1,8 +1,10 @@
 ﻿/// <reference path="../appreferences.ts" />
+
 module App {
     export class EntireViewService extends ViewService {
         'use strict';
 
+        private static targetCanvas: string = "entire";
         private shape: createjs.Shape;
         private txtBodyName: createjs.Text;
         private txtBodySoI: createjs.Text;
@@ -11,14 +13,17 @@ module App {
         private txtCommDistance2: createjs.Text;
         private txtCommStableRange: createjs.Text;
 
-        static $inject = ["entireViewTarget", "graphicsHelperServ", "satChainServ"];
+        static $inject = ["graphicsHelperServ", "satChainServ"];
         constructor(
-            private entireViewTarget: string,
             private gHelper: GraphicsHelperService,
             private satChainServ: SatChainService
             ) {
 
-            super(entireViewTarget, 10000, 840);
+            super();
+        }
+
+        init() {
+            super.init(EntireViewService.targetCanvas, 10000, 850);
 
             this.shape = new createjs.Shape();
             this.shapeContainer.addChild(this.shape);
@@ -70,7 +75,7 @@ module App {
         show(): void {
             var sc: SatChain = this.satChainServ.satChain;
 
-            this.virtualSize = (sc.body.radius + sc.altitude + sc.antenna.range) * 2 * 1.05;
+            this.virtualSize = (sc.body.radius + sc.altitude + sc.selectedAntenna.range) * 2 * 1.05;
 
             this.shape.graphics.clear();
             this.shape.graphics.setStrokeStyle(ViewService.strokeLineWidth);
@@ -111,7 +116,7 @@ module App {
         private showSatChain(g: createjs.Graphics, s: SatChainService): void {
             var sc: SatChain = s.satChain;
             var b: Body = sc.body;
-            var a: Antenna = sc.antenna;
+            var a: Antenna = sc.selectedAntenna;
 
             // orbit
             g.beginStroke("black")
