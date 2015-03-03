@@ -55,10 +55,10 @@ module App {
         }
 
         removeSelectedAntenna() {
-            if (this.satChain.antennaIndex === this.satChain.antennas.length - 1)
-                this.satChain.antennaIndex--;
             this.satChain.antennas.splice(this.satChain.antennaIndex, 1);
             this.antennaDetailVisible.splice(this.satChain.antennaIndex, 1);
+            if (this.satChain.antennaIndex === this.satChain.antennas.length)
+                this.satChain.antennaIndex--;
         }
     }
 }
