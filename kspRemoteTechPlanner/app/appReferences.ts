@@ -1,7 +1,7 @@
 ﻿/// <reference path="modelinterfaces/iantenna.ts" />
 /// <reference path="modelinterfaces/iantennaequipment.ts" />
 /// <reference path="modelinterfaces/ibody.ts" />
-/// <reference path="modelinterfaces/isatchainjson.ts" />
+/// <reference path="modelinterfaces/isatchain.ts" />
 
 /// <reference path="models/antenna.ts" />
 /// <reference path="models/antennaequipment.ts" />
