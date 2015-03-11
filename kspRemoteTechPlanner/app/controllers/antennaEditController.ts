@@ -5,21 +5,29 @@ module App {
         'use strict';
 
         userAntennas: AntennaDictionary;
+        satChain: SatChain;
         isInEdit: boolean;
         editData: Antenna;
 
-        static $inject = ["antennaStorageServ"];
+        static $inject = ["antennaStorageServ", "satChainServ"];
         constructor(
-            private antennaStorageServ: AntennaStorageService
+            private antennaStorageServ: AntennaStorageService,
+            private satChainServ: SatChainService
             ) {
 
             this.userAntennas = antennaStorageServ.userAntennas;
+            this.satChain = satChainServ.satChain;
             this.isInEdit = false;
             this.editData = undefined;
         }
 
-        exists(name: string): boolean {
-            return this.antennaStorageServ.existsInStock(name) || this.antennaStorageServ.existsInUser(name);
+        isUsed(name: string): boolean {
+            var ret: boolean = false;
+            for (var index in this.satChain.antennas) {
+                if (this.satChain.antennas[index].antenna.name === name)
+                    ret = true;
+            }
+            return ret;
         }
 
         add() {

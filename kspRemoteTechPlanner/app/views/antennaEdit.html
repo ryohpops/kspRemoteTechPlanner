@@ -17,7 +17,10 @@
                 <td>{{antenna.elcNeeded |number}}</td>
                 <td>
                     <button type="button" class="btn btn-primary" ng-click="antennaEdit.edit(antenna.name)">Edit</button>
-                    <button type="button" class="btn btn-danger" ng-click="antennaEdit.remove(antenna.name)">Remove</button>
+                    <button type="button" class="btn btn-danger" ng-disabled="antennaEdit.isUsed(antenna.name)"
+                            ng-click="antennaEdit.remove(antenna.name)">
+                        Remove
+                    </button>
                 </td>
             </tr>
             <tr ng-show="antennaEdit.isInEdit">
