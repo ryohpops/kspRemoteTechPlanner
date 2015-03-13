@@ -5,21 +5,24 @@ module App {
         'use strict';
 
         userBodies: BodyDictionary;
+        satChain: SatChain;
         isInEdit: boolean;
         editData: Body;
 
-        static $inject = ["bodyStorageServ"];
+        static $inject = ["bodyStorageServ", "satChainServ"];
         constructor(
-            private bodyStorageServ: BodyStorageService
+            private bodyStorageServ: BodyStorageService,
+            private satChainServ: SatChainService
             ) {
 
             this.userBodies = bodyStorageServ.userBodies;
+            this.satChain = satChainServ.satChain;
             this.isInEdit = false;
             this.editData = undefined;
         }
 
-        exists(name: string): boolean {
-            return this.bodyStorageServ.existsInStock(name) || this.bodyStorageServ.existsInUser(name);
+        isUsed(name: string): boolean {
+            return this.satChain.body.name === name;
         }
 
         add() {
