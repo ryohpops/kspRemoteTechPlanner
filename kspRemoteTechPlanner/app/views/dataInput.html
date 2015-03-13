@@ -37,13 +37,13 @@
         <div class="wrap-detail" ng-show="input.bodyDetailVisible">
             <dl class="detail">
                 <dt>Color</dt>
-                <dd>{{input.bodies.getBody(input.satChain.body.name).color}}</dd>
+                <dd>{{input.satChain.body.color}}</dd>
                 <dt>Radius</dt>
-                <dd>{{input.bodies.getBody(input.satChain.body.name).radius |number}} km</dd>
+                <dd>{{input.satChain.body.radius |number}} km</dd>
                 <dt>Standard gravitational parameter</dt>
-                <dd>{{input.bodies.getBody(input.satChain.body.name).stdGravity |number}} km<sup>3</sup>s<sup>-2</sup></dd>
+                <dd>{{input.satChain.body.stdGravity |number}} km<sup>3</sup>s<sup>-2</sup></dd>
                 <dt>Sphere of Influence</dt>
-                <dd>{{input.bodies.getBody(input.satChain.body.name).soi |number}} km</dd>
+                <dd>{{input.satChain.body.soi |number}} km</dd>
             </dl>
         </div>
 
@@ -103,11 +103,11 @@
             <div class="wrap-detail" ng-show="input.antennaDetailVisible[$index]">
                 <dl class="detail">
                     <dt>Type</dt>
-                    <dd>{{input.antennas.getAntenna(antennaEquipment.antenna.name).type |antennaType}}</dd>
+                    <dd>{{antennaEquipment.antenna.type |antennaType}}</dd>
                     <dt>Range</dt>
-                    <dd>{{input.antennas.getAntenna(antennaEquipment.antenna.name).range |number}} km</dd>
+                    <dd>{{antennaEquipment.antenna.range |number}} km</dd>
                     <dt>Electricity consumption</dt>
-                    <dd>{{input.antennas.getAntenna(antennaEquipment.antenna.name).elcNeeded |number}} /sec.</dd>
+                    <dd>{{antennaEquipment.antenna.elcNeeded |number}} /sec.</dd>
                 </dl>
             </div>
 
