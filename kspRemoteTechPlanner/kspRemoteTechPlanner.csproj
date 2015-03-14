@@ -39,6 +39,8 @@
     <TypeScriptCompile Include="app\models\antennaEquipment.ts" />
     <TypeScriptCompile Include="app\modelInterfaces\iAntennaEquipment.ts" />
     <TypeScriptCompile Include="app\modelInterfaces\iSatChain.ts" />
+    <TypeScriptCompile Include="app\services\dataService.ts" />
+    <TypeScriptCompile Include="app\services\duplexDataService.ts" />
     <TypeScriptCompile Include="app\serviceUpdaters\antennaStorageServiceUpdater.ts" />
     <TypeScriptCompile Include="app\serviceUpdaters\satChainServiceUpdater.ts" />
     <TypeScriptCompile Include="calculator\calculator.ts" />

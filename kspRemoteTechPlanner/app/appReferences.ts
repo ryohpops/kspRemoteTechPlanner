@@ -11,6 +11,8 @@
 /// <reference path="serviceupdaters/antennastorageserviceupdater.ts" />
 /// <reference path="serviceupdaters/satchainserviceupdater.ts" />
 
+/// <reference path="services/dataservice.ts" />
+/// <reference path="services/duplexdataservice.ts" />
 /// <reference path="services/viewservice.ts" />
 
 /// <reference path="services/antennastorageservice.ts" />
