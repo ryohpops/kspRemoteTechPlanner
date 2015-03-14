@@ -1,13 +1,14 @@
 ﻿/// <reference path="../calculatorreferences.ts" />
 
 module Calculator {
-    'use strict';
 
     export enum CircleCrossMode {
         high, low
     }
 
     export class EuclideanService {
+        'use strict';
+
         circleCross(origin: Point, center1: Point, center2: Point, radius: number, mode: CircleCrossMode): number {
             var dist: number = this.length(center1, center2);
             var rad1: number = Math.atan2(center2.y - center1.y, center2.x - center1.x);
@@ -25,9 +26,9 @@ module Calculator {
             return Math.sqrt(Math.pow(p2.x - p1.x, 2) + Math.pow(p2.y - p1.y, 2));
         }
 
-        // warning, this calculation is simplified for lmited use case
-        distPointLine(point: Point, onLine1: Point, onLine2: Point): number {
-            var h: Point = new Point(onLine1.x + (onLine2.x - onLine1.x) / 2, onLine1.y + (onLine2.y - onLine1.y) / 2);
+        // warning, this calculation is only valid if a point is equidistant from the ends of a line
+        distPointLine(point: Point, lineEnd1: Point, lineEnd2: Point): number {
+            var h: Point = new Point(lineEnd1.x + (lineEnd2.x - lineEnd1.x) / 2, lineEnd1.y + (lineEnd2.y - lineEnd1.y) / 2);
             return this.length(point, h);
         }
     }
