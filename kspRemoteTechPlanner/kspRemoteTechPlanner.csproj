@@ -34,11 +34,10 @@
   <ItemGroup>
     <TypeScriptCompile Include="app\app.ts" />
     <TypeScriptCompile Include="app\filters\antennaType.ts" />
-    <TypeScriptCompile Include="app\modelInterfaces\iAntenna.ts" />
-    <TypeScriptCompile Include="app\modelInterfaces\iBody.ts" />
+    <TypeScriptCompile Include="app\models\antenna.ts" />
+    <TypeScriptCompile Include="app\models\body.ts" />
     <TypeScriptCompile Include="app\models\antennaEquipment.ts" />
-    <TypeScriptCompile Include="app\modelInterfaces\iAntennaEquipment.ts" />
-    <TypeScriptCompile Include="app\modelInterfaces\iSatChain.ts" />
+    <TypeScriptCompile Include="app\models\satChain.ts" />
     <TypeScriptCompile Include="app\services\dataService.ts" />
     <TypeScriptCompile Include="app\services\duplexDataService.ts" />
     <TypeScriptCompile Include="app\serviceUpdaters\antennaStorageServiceUpdater.ts" />
@@ -51,10 +50,7 @@
     <TypeScriptCompile Include="app\controllers\appController.ts" />
     <TypeScriptCompile Include="app\controllers\bodyEditController.ts" />
     <TypeScriptCompile Include="app\controllers\inputController.ts" />
-    <TypeScriptCompile Include="app\models\antenna.ts" />
-    <TypeScriptCompile Include="app\models\body.ts" />
     <TypeScriptCompile Include="calculator\models\point.ts" />
-    <TypeScriptCompile Include="app\models\satChain.ts" />
     <TypeScriptCompile Include="app\services\antennaStorageService.ts" />
     <TypeScriptCompile Include="app\services\bodyStorageService.ts" />
     <TypeScriptCompile Include="app\services\deltavViewService.ts" />
