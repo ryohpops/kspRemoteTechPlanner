@@ -5,7 +5,7 @@ module App {
         [index: string]: Antenna;
     }
 
-    export class AntennaStorageService {
+    export class AntennaStorageService extends DuplexDataService<AntennaDictionary>{
         'use strict';
 
         private static dataKey: string = "userAntenna";
@@ -13,90 +13,55 @@ module App {
         private static modelVersion: number = 1;
 
         private _stockAntennas: AntennaDictionary;
+        get stockAntennas(): AntennaDictionary { return this._stockAntennas; }
+
         private _userAntennas: AntennaDictionary;
-
-        get stockAntennas(): AntennaDictionary {
-            return this._stockAntennas;
-        }
-
-        get userAntennas(): AntennaDictionary {
-            return this._userAntennas;
-        }
+        get userAntennas(): AntennaDictionary { return this._userAntennas; }
 
         static $inject = ["$cookieStore", "localStorageService"];
         constructor(
-            private $cookieStore: ng.cookies.ICookieStoreService,
-            private localStorage: ng.local.storage.ILocalStorageService<any>
+            $cookieStore: ng.cookies.ICookieStoreService,
+            localStorage: ng.local.storage.ILocalStorageService<any>
             ) {
 
-            this._stockAntennas = {
-                "Reflectron DP-10": new Antenna("Reflectron DP-10", AntennaType.omni, 500, 0.01),
-                "Communotron 16": new Antenna("Communotron 16", AntennaType.omni, 2500, 0.13),
-                "CommTech EXP-VR-2T": new Antenna("CommTech EXP-VR-2T", AntennaType.omni, 3000, 0.18),
-                "Communotron 32": new Antenna("Communotron 32", AntennaType.omni, 5000, 0.6),
-                "Comms DTS-M1": new Antenna("Comms DTS-M1", AntennaType.dish, 50000, 0.82),
-                "Reflectron KR-7": new Antenna("Reflectron KR-7", AntennaType.dish, 90000, 0.82),
-                "Communotron 88-88": new Antenna("Communotron 88-88", AntennaType.dish, 40000000, 0.93),
-                "Reflectron KR-14": new Antenna("Reflectron KR-14", AntennaType.dish, 60000000, 0.93),
-                "CommTech-1": new Antenna("CommTech-1", AntennaType.dish, 350000000, 2.6),
-                "Reflectron GX-128": new Antenna("Reflectron GX-128", AntennaType.dish, 400000000, 2.8)
-            };
+            super($cookieStore, localStorage,
+                {
+                    "Reflectron DP-10": { name: "Reflectron DP-10", type: AntennaType.omni, range: 500, elcNeeded: 0.01 },
+                    "Communotron 16": { name: "Communotron 16", type: AntennaType.omni, range: 2500, elcNeeded: 0.13 },
+                    "CommTech EXP-VR-2T": { name: "CommTech EXP-VR-2T", type: AntennaType.omni, range: 3000, elcNeeded: 0.18 },
+                    "Communotron 32": { name: "Communotron 32", type: AntennaType.omni, range: 5000, elcNeeded: 0.6 },
+                    "Comms DTS-M1": { name: "Comms DTS-M1", type: AntennaType.dish, range: 50000, elcNeeded: 0.82 },
+                    "Reflectron KR-7": { name: "Reflectron KR-7", type: AntennaType.dish, range: 90000, elcNeeded: 0.82 },
+                    "Communotron 88-88": { name: "Communotron 88-88", type: AntennaType.dish, range: 40000000, elcNeeded: 0.93 },
+                    "Reflectron KR-14": { name: "Reflectron KR-14", type: AntennaType.dish, range: 60000000, elcNeeded: 0.93 },
+                    "CommTech-1": { name: "CommTech-1", type: AntennaType.dish, range: 350000000, elcNeeded: 2.6 },
+                    "Reflectron GX-128": { name: "Reflectron GX-128", type: AntennaType.dish, range: 400000000, elcNeeded: 2.8 }
 
-            this._userAntennas = this.loadUserAntennas();
-            this.localStorage.set(AntennaStorageService.versionKey, AntennaStorageService.modelVersion);
+                }, {},
+                AntennaStorageService.dataKey, AntennaStorageService.versionKey, AntennaStorageService.modelVersion, antennaStorageServiceUpdater);
+
+            this._stockAntennas = this.static;
+            this._userAntennas = this.dynamic;
         }
 
-        private loadUserAntennas(): AntennaDictionary {
-            var data: any = this.localStorage.get(AntennaStorageService.dataKey); // JSON object, potential of old-version model
-            if (!data) {
-                data = this.$cookieStore.get(AntennaStorageService.dataKey); // deprecated, will be deleted in the near future.
-                this.$cookieStore.remove(AntennaStorageService.dataKey);
-            }
-            var version: number = this.localStorage.get(AntennaStorageService.versionKey);
-
-            if (data !== undefined) {
-                var uaStored: IAntennaDictionary = antennaStorageServiceUpdater(data, version);
-
-                var retDict: AntennaDictionary = {};
-                for (var key in uaStored) {
-                    var aStored: IAntenna = data[key];
-                    retDict[aStored.name] = new Antenna(aStored.name, aStored.type, aStored.range, aStored.elcNeeded);
-                }
-                return retDict;
-            } else {
-                return {};
-            }
+        private clone(antenna: Antenna): Antenna {
+            return { name: antenna.name, type: antenna.type, range: antenna.range, elcNeeded: antenna.elcNeeded };
         }
 
-        save() {
-            if (Object.keys(this.userAntennas).length > 0)
-                this.localStorage.set(AntennaStorageService.dataKey, this.userAntennas);
-            else
-                this.localStorage.remove(AntennaStorageService.dataKey);
-        }
-
-        existsInStock(name: string): boolean {
-            return Object.keys(this.stockAntennas).indexOf(name) !== -1;
-        }
-
-        existsInUser(name: string): boolean {
-            return Object.keys(this.userAntennas).indexOf(name) !== -1;
-        }
-
-        getAntenna(name: string): Antenna {
-            if (this.existsInStock(name))
-                return this.stockAntennas[name].clone();
-            else if (this.existsInUser(name))
-                return this.userAntennas[name].clone();
+        get(name: string): Antenna {
+            if (Object.keys(this.stockAntennas).indexOf(name) !== -1)
+                return this.clone(this.stockAntennas[name]);
+            else if (Object.keys(this.userAntennas).indexOf(name) !== -1)
+                return this.clone(this.userAntennas[name]);
             else
                 return undefined;
         }
 
-        setAntenna(name: string, data: Antenna) {
-            this.userAntennas[name] = data.clone();
+        set(name: string, antenna: Antenna) {
+            this.userAntennas[name] = this.clone(antenna);
         }
 
-        removeAntenna(name: string) {
+        remove(name: string) {
             delete this.userAntennas[name];
         }
     }

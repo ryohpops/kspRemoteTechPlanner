@@ -5,7 +5,7 @@ module App {
         [index: string]: Body;
     }
 
-    export class BodyStorageService {
+    export class BodyStorageService extends DuplexDataService<BodyDictionary>{
         'use strict';
 
         private static dataKey: string = "userBody";
@@ -13,95 +13,61 @@ module App {
         private static modelVersion: number = 1;
 
         private _stockBodies: BodyDictionary;
+        get stockBodies(): BodyDictionary { return this._stockBodies; }
+
         private _userBodies: BodyDictionary;
-
-        get stockBodies(): BodyDictionary {
-            return this._stockBodies;
-        }
-
-        get userBodies(): BodyDictionary {
-            return this._userBodies;
-        }
+        get userBodies(): BodyDictionary { return this._userBodies; }
 
         static $inject = ["$cookieStore", "localStorageService"];
         constructor(
-            private $cookieStore: ng.cookies.ICookieStoreService,
-            private localStorage: ng.local.storage.ILocalStorageService<any>
+            $cookieStore: ng.cookies.ICookieStoreService,
+            localStorage: ng.local.storage.ILocalStorageService<any>
             ) {
 
-            this._stockBodies = {
-                "Kerbol": new Body("Kerbol", "rgb(255,242,0)", 261600, 1172332800, Number.POSITIVE_INFINITY),
-                "Moho": new Body("Moho", "rgb(185,122,87)", 250, 168.60938, 9646.663),
-                "Eve": new Body("Eve", "rgb(163,73,164)", 700, 8171.7302, 85109.365),
-                "Gilly": new Body("Gilly", "rgb(239,228,176)", 13, 0.0082894498, 126.12327),
-                "Kerbin": new Body("Kerbin", "rgb(63,111,40)", 600, 3531.6, 84159.286),
-                "Mun": new Body("Mun", "rgb(127,127,127)", 200, 65.138398, 2429.5591),
-                "Minmus": new Body("Minmus", "rgb(153,217,234)", 60, 1.7658, 2247.4284),
-                "Duna": new Body("Duna", "rgb(237,28,36)", 320, 301.36321, 47921.949),
-                "Ike": new Body("Ike", "rgb(127,127,127)", 130, 18.568369, 1049.5989),
-                "Dres": new Body("Dres", "rgb(195,195,195)", 138, 21.484489, 32832.84),
-                "Jool": new Body("Jool", "rgb(92,231,58)", 6000, 282528, 2455985.2),
-                "Laythe": new Body("Laythe", "rgb(25,55,98)", 500, 1962, 3723.6458),
-                "Vall": new Body("Vall", "rgb(82,133,141)", 300, 207.48150, 2406.4014),
-                "Tylo": new Body("Tylo", "rgb(195,195,195)", 600, 4523.8934, 10856.518),
-                "Bop": new Body("Bop", "rgb(142,106,51)", 65, 2.4868349, 1221.0609),
-                "Pol": new Body("Pol", "rgb(206,211,1)", 44, 0.72170208, 1042.1389),
-                "Eeloo": new Body("Eeloo", "rgb(221,221,210)", 210, 74.410815, 119082.94)
-            };
+            super($cookieStore, localStorage,
+                {
+                    "Kerbol": { name: "Kerbol", color: "rgb(255,242,0)", radius: 261600, stdGravity: 1172332800, soi: Number.POSITIVE_INFINITY },
+                    "Moho": { name: "Moho", color: "rgb(185,122,87)", radius: 250, stdGravity: 168.60938, soi: 9646.663 },
+                    "Eve": { name: "Eve", color: "rgb(163,73,164)", radius: 700, stdGravity: 8171.7302, soi: 85109.365 },
+                    "Gilly": { name: "Gilly", color: "rgb(239,228,176)", radius: 13, stdGravity: 0.0082894498, soi: 126.12327 },
+                    "Kerbin": { name: "Kerbin", color: "rgb(63,111,40)", radius: 600, stdGravity: 3531.6, soi: 84159.286 },
+                    "Mun": { name: "Mun", color: "rgb(127,127,127)", radius: 200, stdGravity: 65.138398, soi: 2429.5591 },
+                    "Minmus": { name: "Minmus", color: "rgb(153,217,234)", radius: 60, stdGravity: 1.7658, soi: 2247.4284 },
+                    "Duna": { name: "Duna", color: "rgb(237,28,36)", radius: 320, stdGravity: 301.36321, soi: 47921.949 },
+                    "Ike": { name: "Ike", color: "rgb(127,127,127)", radius: 130, stdGravity: 18.568369, soi: 1049.5989 },
+                    "Dres": { name: "Dres", color: "rgb(195,195,195)", radius: 138, stdGravity: 21.484489, soi: 32832.84 },
+                    "Jool": { name: "Jool", color: "rgb(92,231,58)", radius: 6000, stdGravity: 282528, soi: 2455985.2 },
+                    "Laythe": { name: "Laythe", color: "rgb(25,55,98)", radius: 500, stdGravity: 1962, soi: 3723.6458 },
+                    "Vall": { name: "Vall", color: "rgb(82,133,141)", radius: 300, stdGravity: 207.48150, soi: 2406.4014 },
+                    "Tylo": { name: "Tylo", color: "rgb(195,195,195)", radius: 600, stdGravity: 4523.8934, soi: 10856.518 },
+                    "Bop": { name: "Bop", color: "rgb(142,106,51)", radius: 65, stdGravity: 2.4868349, soi: 1221.0609 },
+                    "Pol": { name: "Pol", color: "rgb(206,211,1)", radius: 44, stdGravity: 0.72170208, soi: 1042.1389 },
+                    "Eeloo": { name: "Eeloo", color: "rgb(221,221,210)", radius: 210, stdGravity: 74.410815, soi: 119082.94 }
+                }, {},
+                BodyStorageService.dataKey, BodyStorageService.versionKey, BodyStorageService.modelVersion, bodyStorageServiceUpdater);
 
-            this._userBodies = this.loadUserBodies();
-            this.localStorage.set(BodyStorageService.versionKey, BodyStorageService.modelVersion);
+            this._stockBodies = this.static;
+            this._userBodies = this.dynamic;
         }
 
-        private loadUserBodies(): BodyDictionary {
-            var data: any = this.localStorage.get(BodyStorageService.dataKey); // JSON object, potential of old-version model
-            if (!data) {
-                data = this.$cookieStore.get(BodyStorageService.dataKey); // deprecated, will be deleted in the near future.
-                this.$cookieStore.remove(BodyStorageService.dataKey);
-            }
-            var version: number = this.localStorage.get(BodyStorageService.versionKey);
-
-            if (data !== undefined) {
-                var retDict: BodyDictionary = {};
-                for (var key in data) {
-                    var bStored: IBody = data[key];
-                    retDict[bStored.name] = new Body(bStored.name, bStored.color, bStored.radius, bStored.stdGravity, bStored.soi);
-                }
-                return retDict;
-            } else {
-                return {};
-            }
+        private clone(body: Body): Body {
+            return { name: body.name, color: body.color, radius: body.radius, stdGravity: body.stdGravity, soi: body.soi };
         }
 
-        save() {
-            if (Object.keys(this.userBodies).length > 0)
-                this.localStorage.set(BodyStorageService.dataKey, this.userBodies);
-            else
-                this.localStorage.remove(BodyStorageService.dataKey);
-        }
-
-        existsInStock(name: string): boolean {
-            return Object.keys(this.stockBodies).indexOf(name) !== -1;
-        }
-
-        existsInUser(name: string): boolean {
-            return Object.keys(this.userBodies).indexOf(name) !== -1;
-        }
-
-        getBody(name: string): Body {
-            if (this.existsInStock(name))
-                return this.stockBodies[name].clone();
-            else if (this.existsInUser(name))
-                return this.userBodies[name].clone();
+        get(name: string): Body {
+            if (Object.keys(this.stockBodies).indexOf(name) !== -1)
+                return this.clone(this.stockBodies[name]);
+            else if (Object.keys(this.userBodies).indexOf(name) !== -1)
+                return this.clone(this.userBodies[name]);
             else
                 return undefined;
         }
 
-        setBody(name: string, data: Body) {
-            this.userBodies[name] = data.clone();
+        set(name: string, body: Body) {
+            this.userBodies[name] = this.clone(body);
         }
 
-        removeBody(name: string) {
+        remove(name: string) {
             delete this.userBodies[name];
         }
     }
