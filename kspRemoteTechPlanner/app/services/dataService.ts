@@ -55,7 +55,10 @@ module App {
         }
 
         save() {
-            this.localStorage.set(this.dataKey, this.data);
+            if (Object.keys(this.data).length > 0)
+                this.localStorage.set(this.dataKey, this.data);
+            else
+                this.localStorage.remove(this.dataKey);
         }
     }
 }
