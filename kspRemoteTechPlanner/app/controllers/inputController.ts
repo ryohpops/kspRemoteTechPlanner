@@ -8,11 +8,11 @@ module App {
         bodyDetailVisible: boolean;
         antennaDetailVisible: boolean[];
 
-        static $inject = ["satChainServ", "bodyStorageServ", "antennaStorageServ"];
+        static $inject = ["satChainServ", "bodyDictionaryServ", "antennaDictionaryServ"];
         constructor(
             private satChainServ: SatChainService,
-            private bodies: BodyStorageService,
-            private antennas: AntennaStorageService
+            private bodies: BodyDictionaryService,
+            private antennas: AntennaDictionaryService
             ) {
 
             this.satChain = this.satChainServ.satChain;
@@ -27,7 +27,7 @@ module App {
         }
 
         updateBody() {
-            var b: Body = this.bodies.getBody(this.satChain.body.name);
+            var b: Body = this.bodies.get(this.satChain.body.name);
             this.satChain.body.color = b.color;
             this.satChain.body.radius = b.radius;
             this.satChain.body.stdGravity = b.stdGravity;
@@ -35,7 +35,7 @@ module App {
         }
 
         updateAntenna(index: number) {
-            var a: Antenna = this.antennas.getAntenna(this.satChain.antennas[index].antenna.name);
+            var a: Antenna = this.antennas.get(this.satChain.antennas[index].antenna.name);
             this.satChain.antennas[index].antenna.type = a.type;
             this.satChain.antennas[index].antenna.range = a.range;
             this.satChain.antennas[index].antenna.elcNeeded = a.elcNeeded;
@@ -50,7 +50,7 @@ module App {
         }
 
         addNewAntenna() {
-            this.satChain.antennas.push(new AntennaEquipment(this.antennas.getAntenna("Reflectron DP-10"), 1));
+            this.satChain.antennas.push({ antenna: this.antennas.get("Reflectron DP-10"), quantity: 1 });
             this.antennaDetailVisible.push(false);
         }
 

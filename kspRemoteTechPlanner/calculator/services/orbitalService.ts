@@ -1,9 +1,10 @@
 ﻿/// <reference path="../calculatorreferences.ts" />
 
 module Calculator {
-    'use strict';
 
     export class OrbitalService {
+        'use strict';
+
         period(bodyRadius: number, altitude: number, stdGravParam: number) {
             return 2 * Math.PI * Math.sqrt(Math.pow(bodyRadius + altitude, 3) / stdGravParam);
         }

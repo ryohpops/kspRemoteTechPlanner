@@ -6,8 +6,8 @@ module App {
         ["localStorageServiceProvider", (lssp: ng.local.storage.ILocalStorageServiceProvider) => {
             lssp.setPrefix("kspRemoteTechPlanner");
         }])
-        .service("bodyStorageServ", BodyStorageService)
-        .service("antennaStorageServ", AntennaStorageService)
+        .service("bodyDictionaryServ", BodyDictionaryService)
+        .service("antennaDictionaryServ", AntennaDictionaryService)
         .service("satChainServ", SatChainService)
         .service("graphicsHelperServ", GraphicsHelperService)
         .service("entireViewServ", EntireViewService)

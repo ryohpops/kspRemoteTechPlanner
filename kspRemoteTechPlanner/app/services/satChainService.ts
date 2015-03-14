@@ -3,65 +3,44 @@
 module App {
     import Point = Calculator.Point;
 
-    export class SatChainService {
+    export class SatChainService extends DataService<SatChain> {
         'use strict';
 
+        private static defaultData: SatChain = {
+            body: { name: "Kerbin", color: "rgb(63,111,40)", radius: 600, stdGravity: 3531.6, soi: 84159.286 },
+            count: 4, altitude: 1000, elcNeeded: 0.029,
+            antennas: [{ antenna: { name: "Communotron 16", type: AntennaType.omni, range: 2500, elcNeeded: 0.13 }, quantity: 1 }],
+            antennaIndex: 0, parkingAlt: 70
+        };
         private static dataKey: string = "inputData";
         private static versionKey: string = "inputDataVersion";
         private static modelVersion: number = 1;
 
         private _satChain: SatChain;
-
-        get satChain(): SatChain {
-            return this._satChain;
-        }
+        get satChain(): SatChain { return this._satChain; }
 
         static $inject = ["$cookieStore", "localStorageService", "calc.euclideanServ", "calc.orbitalServ"];
         constructor(
-            private $cookieStore: ng.cookies.ICookieStoreService,
-            private localStorage: ng.local.storage.ILocalStorageService<any>,
+            $cookieStore: ng.cookies.ICookieStoreService,
+            localStorage: ng.local.storage.ILocalStorageService<any>,
             private euclideanServ: Calculator.EuclideanService,
             private orbitalServ: Calculator.OrbitalService
             ) {
 
-            this._satChain = this.loadOrCreate();
-            this.localStorage.set(SatChainService.versionKey, SatChainService.modelVersion);
+            super($cookieStore, localStorage, SatChainService.defaultData, SatChainService.dataKey,
+                SatChainService.versionKey, SatChainService.modelVersion, satChainServiceUpdater);
+            this._satChain = this.data;
         }
 
-        private loadOrCreate(): SatChain {
-            var data: any = this.localStorage.get(SatChainService.dataKey); // JSON object, potential of old-version model
-            if (!data) {
-                data = this.$cookieStore.get(SatChainService.dataKey); // deprecated, will be deleted in the near future.
-                this.$cookieStore.remove(SatChainService.dataKey);
-            }
-            var version: number = this.localStorage.get(SatChainService.versionKey);
-
-            if (data !== undefined) {
-                var scStored: ISatChain = satChainServiceUpdater(data, version);
-                var bStored: IBody = scStored.body;
-
-                var antennas: AntennaEquipment[] = new Array<AntennaEquipment>();
-                for (var index in scStored.antennas) {
-                    var aeStored: IAntennaEquipment = scStored.antennas[index];
-                    var aStored: IAntenna = aeStored.antenna;
-                    antennas.push(new AntennaEquipment(new Antenna(aStored.name, aStored.type, aStored.range, aStored.elcNeeded), aeStored.quantity));
-                }
-
-                return new SatChain(new Body(bStored.name, bStored.color, bStored.radius, bStored.stdGravity, bStored.soi),
-                    scStored.count, scStored.altitude, scStored.elcNeeded, antennas, scStored.antennaIndex, scStored.parkingAlt);
-            } else {
-                return new SatChain(new Body("Kerbin", "rgb(63,111,40)", 600, 3531.6, 84159.286), 4, 1000, 0.029,
-                    [new AntennaEquipment(new Antenna("Communotron 16", AntennaType.omni, 2500, 0.13), 1)], 0, 70);
-            }
+        get selectedAntenna(): Antenna {
+            return this.satChain.antennas[this.satChain.antennaIndex].antenna;
         }
 
-        save() {
-            this.localStorage.set(SatChainService.dataKey, this.satChain);
-        }
+        // Functions below here should be moved into any of view controller after refactoring of view services
 
         satPosition(offset: number): Point {
             var ra: number = this.satChain.body.radius + this.satChain.altitude;
-            return new Point(ra * Math.cos(2 * Math.PI / this.satChain.count * offset), + ra * Math.sin(2 * Math.PI / this.satChain.count * offset));
+            return new Point(ra * Math.cos(2 * Math.PI / this.satChain.count * offset), ra * Math.sin(2 * Math.PI / this.satChain.count * offset));
         }
 
         satDistance(): number {
@@ -78,7 +57,7 @@ module App {
 
         canConnectToSat(distance: number): boolean {
             return this.satChain.count >= distance + 1 && // connecting satellite exists
-                this.euclideanServ.length(this.satPosition(0), this.satPosition(distance)) <= this.satChain.selectedAntenna.range && // connection range is enough 
+                this.euclideanServ.length(this.satPosition(0), this.satPosition(distance)) <= this.selectedAntenna.range && // connection range is enough 
                 this.euclideanServ.distPointLine(new Point(0, 0), this.satPosition(0), this.satPosition(distance))
                 > this.satChain.body.radius; // connection is not blocked by primary body
         }
@@ -89,7 +68,7 @@ module App {
 
         stableLimitAltitude(): number {
             return this.euclideanServ.circleCross(new Point(0, 0), this.satPosition(0), this.satPosition(1),
-                this.satChain.selectedAntenna.range, Calculator.CircleCrossMode.high) - this.satChain.body.radius;
+                this.selectedAntenna.range, Calculator.CircleCrossMode.high) - this.satChain.body.radius;
         }
 
         orbitalPeriod(): number {
@@ -103,7 +82,8 @@ module App {
         private totalElcNeeded(): number {
             var elc: number = this.satChain.elcNeeded;
             for (var index in this.satChain.antennas) {
-                elc += this.satChain.antennas[index].elcNeeded;
+                var a: AntennaEquipment = this.satChain.antennas[index];
+                elc += a.antenna.elcNeeded * a.quantity;
             }
             return elc;
         }

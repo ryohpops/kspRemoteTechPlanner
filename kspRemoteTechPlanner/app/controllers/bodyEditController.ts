@@ -9,13 +9,13 @@ module App {
         isInEdit: boolean;
         editData: Body;
 
-        static $inject = ["bodyStorageServ", "satChainServ"];
+        static $inject = ["bodyDictionaryServ", "satChainServ"];
         constructor(
-            private bodyStorageServ: BodyStorageService,
+            private bodyDictionaryServ: BodyDictionaryService,
             private satChainServ: SatChainService
             ) {
 
-            this.userBodies = bodyStorageServ.userBodies;
+            this.userBodies = bodyDictionaryServ.userBodies;
             this.satChain = satChainServ.satChain;
             this.isInEdit = false;
             this.editData = undefined;
@@ -26,25 +26,25 @@ module App {
         }
 
         add() {
-            this.editData = new Body("", "", 0, 0, 0);
+            this.editData = { name: "", color: "", radius: 0, stdGravity: 0, soi: 0 };
             this.isInEdit = true;
         }
 
         edit(name: string) {
-            this.editData = this.bodyStorageServ.getBody(name);
+            this.editData = this.bodyDictionaryServ.get(name);
             this.isInEdit = true;
         }
 
         remove(name: string) {
             this.isInEdit = false;
-            this.bodyStorageServ.removeBody(name);
-            this.bodyStorageServ.save();
+            this.bodyDictionaryServ.remove(name);
+            this.bodyDictionaryServ.save();
         }
 
         save() {
             this.isInEdit = false;
-            this.bodyStorageServ.setBody(this.editData.name, this.editData);
-            this.bodyStorageServ.save();
+            this.bodyDictionaryServ.set(this.editData.name, this.editData);
+            this.bodyDictionaryServ.save();
         }
 
         cancel() {

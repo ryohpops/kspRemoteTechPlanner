@@ -1,20 +1,18 @@
-﻿/// <reference path="modelinterfaces/iantenna.ts" />
-/// <reference path="modelinterfaces/iantennaequipment.ts" />
-/// <reference path="modelinterfaces/ibody.ts" />
-/// <reference path="modelinterfaces/isatchain.ts" />
-
-/// <reference path="models/antenna.ts" />
+﻿/// <reference path="models/antenna.ts" />
 /// <reference path="models/antennaequipment.ts" />
 /// <reference path="models/body.ts" />
 /// <reference path="models/satchain.ts" />
 
 /// <reference path="serviceupdaters/antennastorageserviceupdater.ts" />
+/// <reference path="serviceupdaters/bodystorageserviceupdater.ts" />
 /// <reference path="serviceupdaters/satchainserviceupdater.ts" />
 
+/// <reference path="services/dataservice.ts" />
+/// <reference path="services/duplexdataservice.ts" />
 /// <reference path="services/viewservice.ts" />
 
-/// <reference path="services/antennastorageservice.ts" />
-/// <reference path="services/bodystorageservice.ts" />
+/// <reference path="services/antennadictionaryservice.ts" />
+/// <reference path="services/bodydictionaryservice.ts" />
 /// <reference path="services/deltavviewservice.ts" />
 /// <reference path="services/entireviewservice.ts" />
 /// <reference path="services/graphicshelperservice.ts" />
