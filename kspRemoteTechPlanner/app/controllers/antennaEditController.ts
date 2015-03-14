@@ -31,7 +31,7 @@ module App {
         }
 
         add() {
-            this.editData = new Antenna("", AntennaType.omni, 0, 0);
+            this.editData = { name: "", type: AntennaType.omni, range: 0, elcNeeded: 0 };
             this.isInEdit = true;
         }
 
