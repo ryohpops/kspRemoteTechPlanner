@@ -5,6 +5,7 @@ module App {
         (savedData: any, oldVersion: number): T;
     }
 
+    // virtual
     export class DataService<T> {
         'use strict';
 
@@ -46,10 +47,10 @@ module App {
             }
             var savedVersion: number = this.localStorage.get(this.versionKey);
 
-            if (!savedData) {
-                return undefined;
-            } else {
+            if (savedData) {
                 return updater(savedData, savedVersion);
+            } else {
+                return undefined;
             }
         }
 
