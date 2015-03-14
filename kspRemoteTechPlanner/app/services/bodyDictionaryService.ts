@@ -5,7 +5,7 @@ module App {
         [index: string]: Body;
     }
 
-    export class BodyStorageService extends DuplexDataService<BodyDictionary>{
+    export class BodyDictionaryService extends DuplexDataService<BodyDictionary>{
         'use strict';
 
         private static dataKey: string = "userBody";
@@ -44,7 +44,7 @@ module App {
                     "Pol": { name: "Pol", color: "rgb(206,211,1)", radius: 44, stdGravity: 0.72170208, soi: 1042.1389 },
                     "Eeloo": { name: "Eeloo", color: "rgb(221,221,210)", radius: 210, stdGravity: 74.410815, soi: 119082.94 }
                 }, {},
-                BodyStorageService.dataKey, BodyStorageService.versionKey, BodyStorageService.modelVersion, bodyStorageServiceUpdater);
+                BodyDictionaryService.dataKey, BodyDictionaryService.versionKey, BodyDictionaryService.modelVersion, bodyStorageServiceUpdater);
 
             this._stockBodies = this.static;
             this._userBodies = this.dynamic;

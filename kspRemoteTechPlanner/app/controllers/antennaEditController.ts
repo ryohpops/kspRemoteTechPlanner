@@ -9,13 +9,13 @@ module App {
         isInEdit: boolean;
         editData: Antenna;
 
-        static $inject = ["antennaStorageServ", "satChainServ"];
+        static $inject = ["antennaDictionaryServ", "satChainServ"];
         constructor(
-            private antennaStorageServ: AntennaStorageService,
+            private antennaDictionaryServ: AntennaDictionaryService,
             private satChainServ: SatChainService
             ) {
 
-            this.userAntennas = antennaStorageServ.userAntennas;
+            this.userAntennas = antennaDictionaryServ.userAntennas;
             this.satChain = satChainServ.satChain;
             this.isInEdit = false;
             this.editData = undefined;
@@ -36,20 +36,20 @@ module App {
         }
 
         edit(name: string) {
-            this.editData = this.antennaStorageServ.getAntenna(name);
+            this.editData = this.antennaDictionaryServ.get(name);
             this.isInEdit = true;
         }
 
         remove(name: string) {
             this.isInEdit = false;
-            this.antennaStorageServ.removeAntenna(name);
-            this.antennaStorageServ.save();
+            this.antennaDictionaryServ.remove(name);
+            this.antennaDictionaryServ.save();
         }
 
         save() {
             this.isInEdit = false;
-            this.antennaStorageServ.setAntenna(this.editData.name, this.editData);
-            this.antennaStorageServ.save();
+            this.antennaDictionaryServ.set(this.editData.name, this.editData);
+            this.antennaDictionaryServ.save();
         }
 
         cancel() {

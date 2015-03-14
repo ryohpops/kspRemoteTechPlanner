@@ -8,11 +8,11 @@ module App {
         bodyDetailVisible: boolean;
         antennaDetailVisible: boolean[];
 
-        static $inject = ["satChainServ", "bodyStorageServ", "antennaStorageServ"];
+        static $inject = ["satChainServ", "bodyDictionaryServ", "antennaDictionaryServ"];
         constructor(
             private satChainServ: SatChainService,
-            private bodies: BodyStorageService,
-            private antennas: AntennaStorageService
+            private bodies: BodyDictionaryService,
+            private antennas: AntennaDictionaryService
             ) {
 
             this.satChain = this.satChainServ.satChain;

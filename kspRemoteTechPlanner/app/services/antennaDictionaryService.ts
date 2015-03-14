@@ -5,7 +5,7 @@ module App {
         [index: string]: Antenna;
     }
 
-    export class AntennaStorageService extends DuplexDataService<AntennaDictionary>{
+    export class AntennaDictionaryService extends DuplexDataService<AntennaDictionary>{
         'use strict';
 
         private static dataKey: string = "userAntenna";
@@ -38,7 +38,7 @@ module App {
                     "Reflectron GX-128": { name: "Reflectron GX-128", type: AntennaType.dish, range: 400000000, elcNeeded: 2.8 }
 
                 }, {},
-                AntennaStorageService.dataKey, AntennaStorageService.versionKey, AntennaStorageService.modelVersion, antennaStorageServiceUpdater);
+                AntennaDictionaryService.dataKey, AntennaDictionaryService.versionKey, AntennaDictionaryService.modelVersion, antennaStorageServiceUpdater);
 
             this._stockAntennas = this.static;
             this._userAntennas = this.dynamic;

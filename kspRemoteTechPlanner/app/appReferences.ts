@@ -11,8 +11,8 @@
 /// <reference path="services/duplexdataservice.ts" />
 /// <reference path="services/viewservice.ts" />
 
-/// <reference path="services/antennastorageservice.ts" />
-/// <reference path="services/bodystorageservice.ts" />
+/// <reference path="services/antennadictionaryservice.ts" />
+/// <reference path="services/bodydictionaryservice.ts" />
 /// <reference path="services/deltavviewservice.ts" />
 /// <reference path="services/entireviewservice.ts" />
 /// <reference path="services/graphicshelperservice.ts" />
