@@ -48,7 +48,7 @@ module App {
                     "RSS Reflectron GX-128": { name: "RSS Reflectron GX-128", type: AntennaType.dish, range: 8000000000, elcNeeded: 0.65 }
 
                 }, {},
-                AntennaDictionaryService.dataKey, AntennaDictionaryService.versionKey, AntennaDictionaryService.modelVersion, antennaStorageServiceUpdater);
+                AntennaDictionaryService.dataKey, AntennaDictionaryService.versionKey, AntennaDictionaryService.modelVersion, AntennaDictionaryService.updater);
 
             this._stockAntennas = this.static;
             this._userAntennas = this.dynamic;
@@ -73,6 +73,19 @@ module App {
 
         remove(name: string) {
             delete this.userAntennas[name];
+        }
+
+        private static updater(userAntennas: any, oldVersion: number): AntennaDictionary {
+            if (oldVersion === undefined) { // update to ver 1.5
+                for (var key in userAntennas) {
+                    if (userAntennas[key].type == 0)
+                        userAntennas[key].type = "0";
+                    else if (userAntennas[key].type == 1)
+                        userAntennas[key].type = "1";
+                }
+            }
+
+            return userAntennas;
         }
     }
 }

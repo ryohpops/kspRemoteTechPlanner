@@ -40,9 +40,6 @@
     <TypeScriptCompile Include="app\models\satChain.ts" />
     <TypeScriptCompile Include="app\services\dataService.ts" />
     <TypeScriptCompile Include="app\services\duplexDataService.ts" />
-    <TypeScriptCompile Include="app\serviceUpdaters\antennaStorageServiceUpdater.ts" />
-    <TypeScriptCompile Include="app\serviceUpdaters\bodyStorageServiceUpdater.ts" />
-    <TypeScriptCompile Include="app\serviceUpdaters\satChainServiceUpdater.ts" />
     <TypeScriptCompile Include="calculator\calculator.ts" />
     <TypeScriptCompile Include="calculator\calculatorReferences.ts" />
     <TypeScriptCompile Include="calculator\services\euclideanService.ts" />

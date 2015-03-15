@@ -60,7 +60,7 @@ module App {
                     "Uranus": { name: "Uranus", color: "rgb(153,217,234)", radius: 25559, stdGravity: 5790000, soi: 51686225 },
                     "Pluto": { name: "Pluto", color: "rgb(82,133,141)", radius: 1143, stdGravity: 870.44, soi: 3116132 }
                 }, {},
-                BodyDictionaryService.dataKey, BodyDictionaryService.versionKey, BodyDictionaryService.modelVersion, bodyStorageServiceUpdater);
+                BodyDictionaryService.dataKey, BodyDictionaryService.versionKey, BodyDictionaryService.modelVersion, BodyDictionaryService.updater);
 
             this._stockBodies = this.static;
             this._userBodies = this.dynamic;
@@ -85,6 +85,10 @@ module App {
 
         remove(name: string) {
             delete this.userBodies[name];
+        }
+
+        private static updater(userBodies: any, oldVersion: number): BodyDictionary {
+            return userBodies;
         }
     }
 }

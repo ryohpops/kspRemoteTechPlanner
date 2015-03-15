@@ -28,12 +28,21 @@ module App {
             ) {
 
             super($cookieStore, localStorage, SatChainService.defaultData, SatChainService.dataKey,
-                SatChainService.versionKey, SatChainService.modelVersion, satChainServiceUpdater);
+                SatChainService.versionKey, SatChainService.modelVersion, SatChainService.updater);
             this._satChain = this.data;
         }
 
         get selectedAntenna(): Antenna {
             return this.satChain.antennas[this.satChain.antennaIndex].antenna;
+        }
+
+        private static updater(satChain: any, oldVersion: number): SatChain {
+            if (oldVersion === undefined) { // update to ver 1.5
+                satChain.antennas = [{ antenna: satChain.antenna, quantity: 1 }];
+                satChain.antennaIndex = 0;
+            }
+
+            return satChain;
         }
 
         // Functions below here should be moved into any of view controller after refactoring of view services
