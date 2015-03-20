@@ -35,7 +35,17 @@ module App {
                     "Communotron 88-88": { name: "Communotron 88-88", type: AntennaType.dish, range: 40000000, elcNeeded: 0.93 },
                     "Reflectron KR-14": { name: "Reflectron KR-14", type: AntennaType.dish, range: 60000000, elcNeeded: 0.93 },
                     "CommTech-1": { name: "CommTech-1", type: AntennaType.dish, range: 350000000, elcNeeded: 2.6 },
-                    "Reflectron GX-128": { name: "Reflectron GX-128", type: AntennaType.dish, range: 400000000, elcNeeded: 2.8 }
+                    "Reflectron GX-128": { name: "Reflectron GX-128", type: AntennaType.dish, range: 400000000, elcNeeded: 2.8 },
+                    "RSS Reflectron DP-10": { name: "RSS Reflectron DP-10", type: AntennaType.omni, range: 1000000000, elcNeeded: 0.005 },
+                    "RSS Communotron 16": { name: "RSS Communotron 16", type: AntennaType.omni, range: 4000000000, elcNeeded: 0.002 },
+                    "RSS CommTech EXP-VR-2T": { name: "RSS CommTech EXP-VR-2T", type: AntennaType.omni, range: 10000000000, elcNeeded: 0.02 },
+                    "RSS Communotron 32": { name: "RSS Communotron 32", type: AntennaType.omni, range: 8000000000, elcNeeded: 0.004 },
+                    "RSS Comms DTS-M1": { name: "RSS Comms DTS-M1", type: AntennaType.dish, range: 400000, elcNeeded: 0.02 },
+                    "RSS Reflectron KR-7": { name: "RSS Reflectron KR-7", type: AntennaType.dish, range: 200000000, elcNeeded: 0.18 },
+                    "RSS Communotron 88-88": { name: "RSS Communotron 88-88", type: AntennaType.dish, range: 1500000000, elcNeeded: 0.35 },
+                    "RSS Reflectron KR-14": { name: "RSS Reflectron KR-14", type: AntennaType.dish, range: 1000000000, elcNeeded: 0.2 },
+                    "RSS CommTech-1": { name: "RSS CommTech-1", type: AntennaType.dish, range: 4000000000, elcNeeded: 0.2 },
+                    "RSS Reflectron GX-128": { name: "RSS Reflectron GX-128", type: AntennaType.dish, range: 8000000000, elcNeeded: 0.65 }
 
                 }, {},
                 AntennaDictionaryService.dataKey, AntennaDictionaryService.versionKey, AntennaDictionaryService.modelVersion, antennaStorageServiceUpdater);
