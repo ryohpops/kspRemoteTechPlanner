@@ -5,43 +5,51 @@ module App {
         'use strict';
 
         userAntennas: AntennaDictionary;
+        satChain: SatChain;
         isInEdit: boolean;
         editData: Antenna;
 
-        static $inject = ["antennaStorageServ"];
+        static $inject = ["antennaDictionaryServ", "satChainServ"];
         constructor(
-            private antennaStorageServ: AntennaStorageService
+            private antennaDictionaryServ: AntennaDictionaryService,
+            private satChainServ: SatChainService
             ) {
 
-            this.userAntennas = antennaStorageServ.userAntennas;
+            this.userAntennas = antennaDictionaryServ.userAntennas;
+            this.satChain = satChainServ.satChain;
             this.isInEdit = false;
             this.editData = undefined;
         }
 
-        exists(name: string): boolean {
-            return this.antennaStorageServ.existsInStock(name) || this.antennaStorageServ.existsInUser(name);
+        isUsed(name: string): boolean {
+            var ret: boolean = false;
+            for (var index in this.satChain.antennas) {
+                if (this.satChain.antennas[index].antenna.name === name)
+                    ret = true;
+            }
+            return ret;
         }
 
         add() {
-            this.editData = new Antenna("", AntennaType.omni, 0, 0);
+            this.editData = { name: "", type: AntennaType.omni, range: 0, elcNeeded: 0 };
             this.isInEdit = true;
         }
 
         edit(name: string) {
-            this.editData = this.antennaStorageServ.getAntenna(name);
+            this.editData = this.antennaDictionaryServ.get(name);
             this.isInEdit = true;
         }
 
         remove(name: string) {
             this.isInEdit = false;
-            this.antennaStorageServ.removeAntenna(name);
-            this.antennaStorageServ.save();
+            this.antennaDictionaryServ.remove(name);
+            this.antennaDictionaryServ.save();
         }
 
         save() {
             this.isInEdit = false;
-            this.antennaStorageServ.setAntenna(this.editData.name, this.editData);
-            this.antennaStorageServ.save();
+            this.antennaDictionaryServ.set(this.editData.name, this.editData);
+            this.antennaDictionaryServ.save();
         }
 
         cancel() {

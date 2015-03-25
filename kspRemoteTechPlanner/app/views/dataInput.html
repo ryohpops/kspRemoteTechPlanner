@@ -3,24 +3,25 @@
     <div class="form-group">
         <label for="body">Body</label>
         <select class="form-control" ng-model="input.satChain.body.name" ng-change="input.updateBody() || input.save() || app.updateView()">
+            <optgroup label="---- Stock ----"></optgroup>
             <option>Kerbol</option>
             <option>Moho</option>
             <option>Eve</option>
-            <optgroup label="Eve's moon:">
+            <optgroup label="Eve's moon">
                 <option>Gilly</option>
             </optgroup>
             <option>Kerbin</option>
-            <optgroup label="Kerbin's moons:">
+            <optgroup label="Kerbin's moons">
                 <option>Mun</option>
                 <option>Minmus</option>
             </optgroup>
             <option>Duna</option>
-            <optgroup label="Duna's moon:">
+            <optgroup label="Duna's moon">
                 <option>Ike</option>
             </optgroup>
             <option>Dres</option>
             <option>Jool</option>
-            <optgroup label="Jool's moons:">
+            <optgroup label="Jool's moons">
                 <option>Laythe</option>
                 <option>Vall</option>
                 <option>Tylo</option>
@@ -28,9 +29,37 @@
                 <option>Pol</option>
             </optgroup>
             <option>Eeloo</option>
-            <optgroup label="User data">
-                <option ng-repeat="userBody in input.bodies.userBodies">{{userBody.name}}</option>
+            <optgroup label=""></optgroup>
+
+            <optgroup label="---- Real Solar System ----"></optgroup>
+            <option>Mercury</option>
+            <option>Venus</option>
+            <option>Earth</option>
+            <optgroup label="Earth's moo:">
+                <option>Moon</option>
             </optgroup>
+            <option>Mars</option>
+            <optgroup label="Mars's moons">
+                <option>Phobos</option>
+                <option>Deimos</option>
+            </optgroup>
+            <option>Jupiter</option>
+            <optgroup label="Jupiter's moons">
+                <option>Io</option>
+                <option>Europa</option>
+                <option>Ganymede</option>
+                <option>Callisto</option>
+            </optgroup>
+            <option>Saturn</option>
+            <optgroup label="Saturn's moon">
+                <option>Titan</option>
+            </optgroup>
+            <option>Uranus</option>
+            <option>Pluto</option>
+            <optgroup label=""></optgroup>
+
+            <optgroup label="---- User data ----"></optgroup>
+            <option ng-repeat="userBody in input.bodies.userBodies">{{userBody.name}}</option>
         </select>
 
         <!-- detail for body -->
@@ -80,6 +109,7 @@
         <label for="antenna">Antenna</label>
         <div ng-repeat="antennaEquipment in input.satChain.antennas">
             <select class="form-control" ng-model="antennaEquipment.antenna.name" ng-change="input.updateAntenna($index) || input.save() || app.updateView()">
+                <optgroup label="---- RemoteTech ----"></optgroup>
                 <optgroup label="Omnidirectional">
                     <option>Reflectron DP-10</option>
                     <option>Communotron 16</option>
@@ -94,7 +124,26 @@
                     <option>CommTech-1</option>
                     <option>Reflectron GX-128</option>
                 </optgroup>
-                <optgroup label="User data">
+                <optgroup label=""></optgroup>
+
+                <optgroup label="---- Real Solar System ----"></optgroup>
+                <optgroup label="Omnidirectional">
+                    <option>RSS Reflectron DP-10</option>
+                    <option>RSS Communotron 16</option>
+                    <option>RSS CommTech EXP-VR-2T</option>
+                    <option>RSS Communotron 32</option>
+                </optgroup>
+                <optgroup label="Dish">
+                    <option>RSS Comms DTS-M1</option>
+                    <option>RSS Reflectron KR-7</option>
+                    <option>RSS Communotron 88-88</option>
+                    <option>RSS Reflectron KR-14</option>
+                    <option>RSS CommTech-1</option>
+                    <option>RSS Reflectron GX-128</option>
+                </optgroup>
+                <optgroup label=""></optgroup>
+
+                <optgroup label="---- User data ----">
                     <option ng-repeat="userAntenna in input.antennas.userAntennas">{{userAntenna.name}}</option>
                 </optgroup>
             </select>
@@ -123,7 +172,7 @@
 
             <!-- primary-antenna selector and antenna quantity-->
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-sm-12 col-md-4">
                     <div class="btn-group btn-group-justified" role="group">
                         <div class="btn-group btn-group-sm" role="group">
                             <button type="button" class="btn btn-default" ng-class="{'btn-success': input.isSelectedAntenna($index)}"
@@ -133,7 +182,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-sm-12 col-md-8">
                     <div class="input-group input-group-sm">
                         <span class="input-group-addon">quantity</span>
                         <input type="number" class="form-control" required ng-model="antennaEquipment.quantity" ng-model-options="{debounce:300}"

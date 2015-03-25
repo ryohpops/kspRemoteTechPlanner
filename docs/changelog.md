@@ -1,9 +1,13 @@
+- 1.5.2 : 2015/03/26
+ * Add data for Real Solar System. (dirtcrusher)
+ * Views shrink on small window.
+
 - 1.5.1 : 2015/03/03
  * Fix some problems.
 
 - 1.5 : 2015/03/03
  * Support multiple pair of antenna and quantity.
- * Fix autosave feature with local storage. Last input and user's bodies/antennas will be saved and restored automatically.
+ * Fix autosave feature with local storage. Last input and user's bodies/antennas will be saved and restored automatically. (westamastaflash)
 
 - 1.4 : 2015/01/29
  * Add remaining four dishes.
