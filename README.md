@@ -5,5 +5,6 @@ Web-based satellite network planner for the MOD, [RemoteTech](http://forum.kerba
 
 Latest release is available [here](http://ryohpops.github.io/kspRemoteTechPlanner/) and forum is [here](http://forum.kerbalspaceprogram.com/threads/90113).
 
-- 1.5.1 : 2015/03/03
- * Fix some problems.
+- 1.5.2 : 2015/03/26
+ * Add data for Real Solar System. (dirtcrusher)
+ * Views shrink on small window.
