@@ -1,4 +1,4 @@
-<form name="bodyEditForm" role="form" novalidate ng-submit="bodyEditForm.$valid && bodyEdit.save()">
+<form name="bodyEditForm" role="form" novalidate ng-submit="bodyEditForm.$valid && (bodyEdit.save() || app.updateView())">
     <table class="table table-hover editable">
         <thead>
             <tr>
@@ -19,7 +19,10 @@
                 <td>{{body.soi |number}}</td>
                 <td>
                     <button type="button" class="btn btn-primary" ng-click="bodyEdit.edit(body.name)">Edit</button>
-                    <button type="button" class="btn btn-danger" ng-click="bodyEdit.remove(body.name)">Remove</button>
+                    <button type="button" class="btn btn-danger" ng-disabled="bodyEdit.isUsed(body.name)"
+                            ng-click="bodyEdit.remove(body.name)">
+                        Remove
+                    </button>
                 </td>
             </tr>
             <tr ng-show="bodyEdit.isInEdit">
