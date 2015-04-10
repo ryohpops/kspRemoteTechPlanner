@@ -20,6 +20,7 @@
     <Content Include="app.css" />
     <Content Include="app\views\antennaEdit.html" />
     <Content Include="app\views\bodyEdit.html" />
+    <Content Include="app\views\deltavView.html" />
     <Content Include="app\views\description.html" />
     <Content Include="app\views\dataInput.html" />
     <Content Include="app\views\entireView.html" />
@@ -34,6 +35,7 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="app\app.ts" />
+    <TypeScriptCompile Include="app\controllers\deltavViewController.ts" />
     <TypeScriptCompile Include="app\controllers\entireViewController.ts" />
     <TypeScriptCompile Include="app\controllers\nightViewController.ts" />
     <TypeScriptCompile Include="app\filters\antennaType.ts" />
@@ -55,7 +57,6 @@
     <TypeScriptCompile Include="calculator\models\point.ts" />
     <TypeScriptCompile Include="app\services\antennaDictionaryService.ts" />
     <TypeScriptCompile Include="app\services\bodyDictionaryService.ts" />
-    <TypeScriptCompile Include="app\services\deltavViewService.ts" />
     <TypeScriptCompile Include="app\services\graphicsHelperService.ts" />
     <TypeScriptCompile Include="app\services\satChainService.ts" />
     <TypeScriptCompile Include="app\appReferences.ts" />
