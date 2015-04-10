@@ -11,11 +11,12 @@ module App {
         .service("antennaDictionaryServ", AntennaDictionaryService)
         .service("satChainServ", SatChainService)
         .service("graphicsHelperServ", GraphicsHelperService)
-        .service("entireViewServ", EntireViewService)
         .service("nightViewServ", NightViewService)
         .service("deltavViewServ", DeltavViewService)
         .controller("inputCtrl", InputController)
+        .controller("entireViewCtrl", EntireViewController)
         .controller("bodyEditCtrl", BodyEditController)
         .controller("antennaEditCtrl", AntennaEditController)
-        .filter("antennaType", antennaType);
+        .filter("antennaType", antennaType)
+        .filter("scale", scale);
 }
