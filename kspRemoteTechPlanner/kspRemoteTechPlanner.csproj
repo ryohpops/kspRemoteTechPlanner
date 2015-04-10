@@ -57,10 +57,8 @@
     <TypeScriptCompile Include="calculator\models\point.ts" />
     <TypeScriptCompile Include="app\services\antennaDictionaryService.ts" />
     <TypeScriptCompile Include="app\services\bodyDictionaryService.ts" />
-    <TypeScriptCompile Include="app\services\graphicsHelperService.ts" />
     <TypeScriptCompile Include="app\services\satChainService.ts" />
     <TypeScriptCompile Include="app\appReferences.ts" />
-    <TypeScriptCompile Include="app\services\viewService.ts" />
     <TypeScriptCompile Include="calculator\services\satelliteService.ts" />
     <TypeScriptCompile Include="scripts\typings\angular-local-storage\angular-local-storage.d.ts" />
     <TypeScriptCompile Include="scripts\typings\angularjs\angular-animate.d.ts" />

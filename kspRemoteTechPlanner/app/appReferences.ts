@@ -5,11 +5,9 @@
 
 /// <reference path="services/dataservice.ts" />
 /// <reference path="services/duplexdataservice.ts" />
-/// <reference path="services/viewservice.ts" />
 
 /// <reference path="services/antennadictionaryservice.ts" />
 /// <reference path="services/bodydictionaryservice.ts" />
-/// <reference path="services/graphicshelperservice.ts" />
 /// <reference path="services/satchainservice.ts" />
 
 /// <reference path="controllers/antennaeditcontroller.ts" />

@@ -10,7 +10,6 @@ module App {
         .service("bodyDictionaryServ", BodyDictionaryService)
         .service("antennaDictionaryServ", AntennaDictionaryService)
         .service("satChainServ", SatChainService)
-        .service("graphicsHelperServ", GraphicsHelperService)
         .controller("inputCtrl", InputController)
         .controller("entireViewCtrl", EntireViewController)
         .controller("nightViewCtrl", NightViewController)
