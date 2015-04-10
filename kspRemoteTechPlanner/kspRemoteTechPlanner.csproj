@@ -35,6 +35,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="app\app.ts" />
     <TypeScriptCompile Include="app\controllers\entireViewController.ts" />
+    <TypeScriptCompile Include="app\controllers\nightViewController.ts" />
     <TypeScriptCompile Include="app\filters\antennaType.ts" />
     <TypeScriptCompile Include="app\filters\scale.ts" />
     <TypeScriptCompile Include="app\models\antenna.ts" />
@@ -43,6 +44,7 @@
     <TypeScriptCompile Include="app\models\satChain.ts" />
     <TypeScriptCompile Include="app\services\dataService.ts" />
     <TypeScriptCompile Include="app\services\duplexDataService.ts" />
+    <Content Include="app\views\nightView.html" />
     <TypeScriptCompile Include="calculator\calculator.ts" />
     <TypeScriptCompile Include="calculator\calculatorReferences.ts" />
     <TypeScriptCompile Include="calculator\services\euclideanService.ts" />
@@ -55,7 +57,6 @@
     <TypeScriptCompile Include="app\services\bodyDictionaryService.ts" />
     <TypeScriptCompile Include="app\services\deltavViewService.ts" />
     <TypeScriptCompile Include="app\services\graphicsHelperService.ts" />
-    <TypeScriptCompile Include="app\services\nightViewService.ts" />
     <TypeScriptCompile Include="app\services\satChainService.ts" />
     <TypeScriptCompile Include="app\appReferences.ts" />
     <TypeScriptCompile Include="app\services\viewService.ts" />
