@@ -4,6 +4,24 @@
     border: solid 1px #000000;
 }
 
+.wrap-svg {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+}
+
+.spacer-svg {
+    margin-top: 100%;
+}
+
+svg {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
 .wrap-detail {
     border-left: 1px solid #808080;
 }

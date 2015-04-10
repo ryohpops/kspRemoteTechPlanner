@@ -1,0 +1,14 @@
+﻿<div class="spacer-svg"></div>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-200 -200 400 400"
+     stroke-width="1" text-anchor="middle" font-family="Arial" font-size="14">
+    <rect x="0" y="-50" width="200" height="100" fill="black" fill-opacity="0.2"></rect>
+    <circle cx="0" cy="0" r="150" fill="none" stroke="black" stroke-opacity="0.2"></circle>
+    <circle cx="0" cy="0" r="50" ng-attr-fill="{{night.body.color}}"></circle>
+
+    <text x="0" y="-150" dy="-0.4em">Orbital period: {{night.period |number}} sec.</text>
+    <text x="190" y="-50" dy="-0.4em" text-anchor="end">Night time: {{night.nightTime |number}} sec.</text>
+    <text x="0" y="150" dy="1.2em">Required generator: {{night.reqGen |number:3}} per sec.</text>
+    <text x="190" y="50" dy="1.2em" text-anchor="end">Required Battery: {{night.reqBatt |number:3}}</text>
+
+    <rect x="-200" y="-200" width="400" height="400" fill="none" stroke="black"></rect>
+</svg>
