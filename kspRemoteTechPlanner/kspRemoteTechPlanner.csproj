@@ -71,9 +71,6 @@
     <TypeScriptCompile Include="scripts\typings\jquery\jquery.d.ts" />
     <TypeScriptCompile Include="_references.ts" />
     <TypeScriptCompile Include="scripts\typings\bootstrap\bootstrap.d.ts" />
-    <TypeScriptCompile Include="scripts\typings\createjs-lib\createjs-lib.d.ts" />
-    <TypeScriptCompile Include="scripts\typings\easeljs\easeljs.d.ts" />
-    <TypeScriptCompile Include="scripts\typings\tweenjs\tweenjs.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <None Include="web.Debug.config">
