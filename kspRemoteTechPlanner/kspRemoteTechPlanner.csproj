@@ -45,7 +45,6 @@
     <TypeScriptCompile Include="calculator\services\euclideanService.ts" />
     <TypeScriptCompile Include="calculator\services\orbitalService.ts" />
     <TypeScriptCompile Include="app\controllers\antennaEditController.ts" />
-    <TypeScriptCompile Include="app\controllers\appController.ts" />
     <TypeScriptCompile Include="app\controllers\bodyEditController.ts" />
     <TypeScriptCompile Include="app\controllers\inputController.ts" />
     <TypeScriptCompile Include="calculator\models\point.ts" />

@@ -15,7 +15,6 @@
 /// <reference path="services/nightviewservice.ts" />
 /// <reference path="services/satchainservice.ts" />
 
-/// <reference path="controllers/appcontroller.ts" />
 /// <reference path="controllers/bodyeditcontroller.ts" />
 /// <reference path="controllers/antennaeditcontroller.ts" />
 /// <reference path="controllers/inputcontroller.ts" />

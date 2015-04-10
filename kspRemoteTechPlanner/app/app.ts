@@ -6,6 +6,7 @@ module App {
         ["localStorageServiceProvider", (lssp: ng.local.storage.ILocalStorageServiceProvider) => {
             lssp.setPrefix("kspRemoteTechPlanner");
         }])
+        .value("updateViewEvent", "updateView")
         .service("bodyDictionaryServ", BodyDictionaryService)
         .service("antennaDictionaryServ", AntennaDictionaryService)
         .service("satChainServ", SatChainService)
@@ -16,6 +17,5 @@ module App {
         .controller("inputCtrl", InputController)
         .controller("bodyEditCtrl", BodyEditController)
         .controller("antennaEditCtrl", AntennaEditController)
-        .controller("appCtrl", AppController)
         .filter("antennaType", antennaType);
 }
