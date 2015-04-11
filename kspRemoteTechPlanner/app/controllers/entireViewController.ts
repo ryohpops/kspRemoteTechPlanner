@@ -17,10 +17,10 @@ module App {
         connection: boolean[];
         distance: number[];
         get hasStable(): boolean {
-            return this.satelliteServ.hasStableArea(this.body.radius, this.sc.count, this.sc.altitude, this.satChainServ.selectedAntenna.range);
+            return this.satelliteServ.hasStableArea(this.body.radius, this.sc.count, this.body.radius + this.sc.altitude, this.satChainServ.selectedAntenna.range);
         }
         get stableAltitude(): number {
-            return this.satelliteServ.stableLimitAltitude(this.body.radius, this.sc.count, this.sc.altitude, this.satChainServ.selectedAntenna.range);
+            return this.satelliteServ.stableLimitAltitude(this.sc.count, this.body.radius + this.sc.altitude, this.satChainServ.selectedAntenna.range);
         }
 
         static $inject = ["$rootScope", "updateViewEvent", "satChainServ", "calc.orbitalServ", "calc.satelliteServ"];
@@ -46,7 +46,7 @@ module App {
         }
 
         private updatePosition() {
-            var pos = this.satelliteServ.position(this.body.radius, this.sc.count, this.sc.altitude);
+            var pos = this.satelliteServ.position(this.sc.count, this.body.radius + this.sc.altitude);
 
             this.position.splice(pos.length);
             for (var index in pos)
@@ -55,8 +55,8 @@ module App {
 
         private updateConnectStatus() {
             var conn: boolean[] = this.satelliteServ.connectability(
-                this.body.radius, this.sc.count, this.sc.altitude, this.satChainServ.selectedAntenna.range);
-            var dist: number[] = this.satelliteServ.distance(this.body.radius, this.sc.count, this.sc.altitude);
+                this.body.radius, this.sc.count, this.body.radius + this.sc.altitude, this.satChainServ.selectedAntenna.range);
+            var dist: number[] = this.satelliteServ.distance(this.sc.count, this.body.radius + this.sc.altitude);
 
             var count: number = this.sc.count <= 4 ? 1 : 2;
             this.connection.splice(count);

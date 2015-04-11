@@ -13,12 +13,12 @@ module App {
             return this.orbitalServ.hohmannFinishDV(this.body.radius, this.sc.parkingAlt, this.sc.altitude, this.body.stdGravity) * 1000;
         }
         get slideAngle(): number {
-            var lowPeriod: number = this.orbitalServ.period(this.body.radius, this.sc.parkingAlt, this.body.stdGravity);
-            var highPeriod: number = this.orbitalServ.period(this.body.radius, this.sc.altitude, this.body.stdGravity);
+            var lowPeriod: number = this.orbitalServ.period(this.body.radius + this.sc.parkingAlt, this.body.stdGravity);
+            var highPeriod: number = this.orbitalServ.period(this.body.radius + this.sc.altitude, this.body.stdGravity);
             return this.orbitalServ.slidePhaseAngle(360 / this.sc.count, lowPeriod, highPeriod);
         }
         get slideTime(): number {
-            return this.slideAngle * this.orbitalServ.period(this.body.radius, this.sc.parkingAlt, this.body.stdGravity);
+            return this.slideAngle * this.orbitalServ.period(this.body.radius + this.sc.parkingAlt, this.body.stdGravity);
         }
 
         static $inject = ["satChainServ", "calc.orbitalServ", "calc.satelliteServ"];

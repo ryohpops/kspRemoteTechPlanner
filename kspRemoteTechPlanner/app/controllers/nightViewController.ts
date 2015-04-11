@@ -7,10 +7,10 @@ module App {
         sc: SatChain;
         body: Body;
         get period(): number {
-            return this.orbitalServ.period(this.body.radius, this.sc.altitude, this.body.stdGravity);
+            return this.orbitalServ.period(this.body.radius + this.sc.altitude, this.body.stdGravity);
         }
         get nightTime(): number {
-            return this.orbitalServ.nightTime(this.body.radius, this.sc.altitude, this.body.stdGravity);
+            return this.orbitalServ.nightTime(this.body.radius, this.body.radius + this.sc.altitude, this.body.stdGravity);
         }
         get reqGen(): number {
             var ae: number[] = [], aq: number[] = [];
@@ -19,7 +19,7 @@ module App {
                 aq.push(this.sc.antennas[index].quantity);
             }
 
-            return this.satelliteServ.requiredGenerator(this.sc.elcNeeded, ae, aq, this.body.radius, this.body.stdGravity, this.sc.altitude);
+            return this.satelliteServ.requiredGenerator(this.sc.elcNeeded, ae, aq, this.body.radius, this.body.stdGravity, this.body.radius + this.sc.altitude);
         }
         get reqBatt(): number {
             var ae: number[] = [], aq: number[] = [];
@@ -28,7 +28,7 @@ module App {
                 aq.push(this.sc.antennas[index].quantity);
             }
 
-            return this.satelliteServ.requiredBattery(this.sc.elcNeeded, ae, aq, this.body.radius, this.body.stdGravity, this.sc.altitude);
+            return this.satelliteServ.requiredBattery(this.sc.elcNeeded, ae, aq, this.body.radius, this.body.stdGravity, this.body.radius + this.sc.altitude);
         }
 
         static $inject = ["satChainServ", "calc.orbitalServ", "calc.satelliteServ"];
