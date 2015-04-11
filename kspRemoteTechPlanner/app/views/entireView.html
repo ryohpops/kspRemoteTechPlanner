@@ -39,8 +39,8 @@
         Sphere of Influence: {{entire.body.soi - entire.body.radius |number:3}} km
     </text>
     <text ng-repeat="dist in entire.distance track by $index"
-          ng-attr-x="{{(entire.position[0].x + entire.position[$index + 1].x) / 2 |scale:entire.real:entire.virtual}}"
-          ng-attr-y="{{(entire.position[0].y + entire.position[$index + 1].y) / 2 |scale:entire.real:entire.virtual}}"
+          ng-attr-x="{{entire.position[0].x * 0.3 + entire.position[$index + 1].x * 0.7 |scale:entire.real:entire.virtual}}"
+          ng-attr-y="{{entire.position[0].y * 0.3 + entire.position[$index + 1].y * 0.7 |scale:entire.real:entire.virtual}}"
           dy="0.4em">
         {{dist |number:3}} km
     </text>
