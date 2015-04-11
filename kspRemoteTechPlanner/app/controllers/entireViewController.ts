@@ -19,8 +19,8 @@ module App {
         get hasStable(): boolean {
             return this.satelliteServ.hasStableArea(this.body.radius, this.sc.count, this.body.radius + this.sc.altitude, this.satChainServ.selectedAntenna.range);
         }
-        get stableAltitude(): number {
-            return this.satelliteServ.stableLimitAltitude(this.sc.count, this.body.radius + this.sc.altitude, this.satChainServ.selectedAntenna.range);
+        get stableSma(): number {
+            return this.satelliteServ.stableLimitSma(this.sc.count, this.body.radius + this.sc.altitude, this.satChainServ.selectedAntenna.range);
         }
 
         static $inject = ["$rootScope", "updateViewEvent", "satChainServ", "calc.orbitalServ", "calc.satelliteServ"];

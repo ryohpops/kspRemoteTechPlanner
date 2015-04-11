@@ -11,7 +11,7 @@
     <circle ng-repeat="pos in entire.position"
             ng-attr-cx="{{pos.x |scale:entire.real:entire.virtual}}" ng-attr-cy="{{pos.y |scale:entire.real:entire.virtual}}"
             ng-attr-r="{{entire.satChainServ.selectedAntenna.range |scale:entire.real:entire.virtual}}" fill="red" fill-opacity="0.05" stroke="none"></circle>
-    <circle cx="0" cy="0" ng-attr-r="{{entire.stableAltitude |scale:entire.real:entire.virtual}}" fill="none" stroke="green" ng-show="entire.hasStable"></circle>
+    <circle cx="0" cy="0" ng-attr-r="{{entire.stableSma |scale:entire.real:entire.virtual}}" fill="none" stroke="green" ng-show="entire.hasStable"></circle>
 
     <circle cx="0" cy="0" ng-attr-r="{{entire.body.radius + entire.sc.altitude |scale:entire.real:entire.virtual}}" fill="none" stroke="black"></circle>
     <circle ng-repeat="pos in entire.position"
@@ -32,8 +32,8 @@
     <text x="0" ng-attr-y="{{entire.body.radius + entire.sc.altitude |scale:entire.real:entire.virtual}}" dy="1.2em">
         Altitude: {{entire.sc.altitude |number:3}} km
     </text>
-    <text x="0" ng-attr-y="{{-entire.stableAltitude |scale:entire.real:entire.virtual}}" text-anchor="middle" dy="-0.4em" ng-show="entire.hasStable">
-        Stable: {{entire.stableAltitude - entire.body.radius |number:3}} km
+    <text x="0" ng-attr-y="{{-entire.stableSma |scale:entire.real:entire.virtual}}" text-anchor="middle" dy="-0.4em" ng-show="entire.hasStable">
+        Stable: {{entire.stableSma - entire.body.radius |number:3}} km
     </text>
     <text x="0" ng-attr-y="{{entire.body.soi |scale:entire.real:entire.virtual}}" dy="1.2em">
         Sphere of Influence: {{entire.body.soi - entire.body.radius |number:3}} km
