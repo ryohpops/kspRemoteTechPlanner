@@ -1,3 +1,6 @@
+- 1.5.3 : 2015/04/22
+ * Views are now rendered by SVG.
+
 - 1.5.2 : 2015/03/26
  * Add data for Real Solar System. (dirtcrusher)
  * Views shrink on small window.
