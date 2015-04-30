@@ -47,7 +47,7 @@ module App {
             this.satChain.antennas[index].antenna.elcNeeded = a.elcNeeded;
         }
 
-        isSelectedAntenna(index: number) {
+        isSelectedAntenna(index: number): boolean {
             return this.satChain.antennaIndex === index;
         }
 
