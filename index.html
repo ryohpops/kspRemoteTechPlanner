@@ -1,23 +1,21 @@
 <!DOCTYPE html>
-
 <html lang="en" ng-app="app">
 <head>
     <meta charset="utf-8" />
     <title>Visual RemoteTech Planner for KSP</title>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link href="app.css" rel="stylesheet" />
 
     <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.11/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.11/angular-cookies.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-cookies.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-local-storage/0.1.5/angular-local-storage.min.js"></script>
-    <script src="https://code.createjs.com/easeljs-0.8.0.min.js"></script>
     <script src="appOut.js"></script>
 </head>
 <body>
-    <div class="container" ng-controller="appCtrl as app">
+    <div class="container">
         <h1>Visual RemoteTech Planner for KSP</h1>
 
         <!-- intro -->
@@ -56,7 +54,7 @@
             <!-- tab contents -->
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane fade in active" id="planner">
-                    <div ng-include src="'app/views/planner.html'" onload="app.initView()"></div>
+                    <div ng-include src="'app/views/planner.html'"></div>
                 </div>
                 <div role="tabpanel" class="tab-pane fade" id="desc">
                     <div ng-include src="'app/views/description.html'"></div>
@@ -78,8 +76,8 @@
                 <hr />
                 Created by ryohpops, © 2014. Forum is <a href="http://forum.kerbalspaceprogram.com/threads/90113">here</a>
                 and github repository is <a href="https://github.com/ryohpops/kspRemoteTechPlanner">here</a>.<br />
-                Built with <a href="https://angularjs.org/">AngularJS</a>, <a href="http://getbootstrap.com/">Bootstrap</a>, <a href="http://glyphicons.com/">GLYPHICONS</a> Halflings and
-                <a href="https://github.com/CreateJS/EaselJS">EaselJS</a>, licensed under <a href="https://github.com/ryohpops/kspRemoteTechPlanner/blob/master/LICENSE">MIT License</a>.<br />
+                Built with <a href="https://angularjs.org/">AngularJS</a>, <a href="http://getbootstrap.com/">Bootstrap</a> and <a href="http://glyphicons.com/">GLYPHICONS</a> Halflings, 
+                licensed under <a href="https://github.com/ryohpops/kspRemoteTechPlanner/blob/master/LICENSE">MIT License</a>.<br />
                 <a href="http://forum.kerbalspaceprogram.com/threads/83305">RemoteTech</a> and all the antenna/dish names are property of Remote Technologies Group.<br />
                 <a href="https://kerbalspaceprogram.com/">KSP</a>, Kerbal Space Program and all the planet/moon names are property of <a href="http://www.squad.com.mx/">Squad</a>.
                 <br /><br />
