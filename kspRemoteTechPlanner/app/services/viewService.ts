@@ -23,7 +23,7 @@ module App {
         realSize: number;
 
         get center(): Point {
-            return new Point(this.realSize / 2, this.realSize / 2);
+            return { x: this.realSize / 2, y: this.realSize / 2 };
         }
 
         constructor() {

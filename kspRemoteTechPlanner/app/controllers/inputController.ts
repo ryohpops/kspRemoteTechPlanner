@@ -8,8 +8,10 @@ module App {
         bodyDetailVisible: boolean;
         antennaDetailVisible: boolean[];
 
-        static $inject = ["satChainServ", "bodyDictionaryServ", "antennaDictionaryServ"];
+        static $inject = ["$rootScope", "updateViewEvent", "satChainServ", "bodyDictionaryServ", "antennaDictionaryServ"];
         constructor(
+            private $rootScope: ng.IRootScopeService,
+            private updateViewEvent: string,
             private satChainServ: SatChainService,
             private bodies: BodyDictionaryService,
             private antennas: AntennaDictionaryService
@@ -24,6 +26,10 @@ module App {
 
         save() {
             this.satChainServ.save();
+        }
+
+        updateView() {
+            this.$rootScope.$broadcast(this.updateViewEvent);
         }
 
         updateBody() {
@@ -41,7 +47,7 @@ module App {
             this.satChain.antennas[index].antenna.elcNeeded = a.elcNeeded;
         }
 
-        isSelectedAntenna(index: number) {
+        isSelectedAntenna(index: number): boolean {
             return this.satChain.antennaIndex === index;
         }
 

@@ -6,16 +6,16 @@ module App {
         ["localStorageServiceProvider", (lssp: ng.local.storage.ILocalStorageServiceProvider) => {
             lssp.setPrefix("kspRemoteTechPlanner");
         }])
+        .value("updateViewEvent", "updateView")
         .service("bodyDictionaryServ", BodyDictionaryService)
         .service("antennaDictionaryServ", AntennaDictionaryService)
         .service("satChainServ", SatChainService)
-        .service("graphicsHelperServ", GraphicsHelperService)
-        .service("entireViewServ", EntireViewService)
-        .service("nightViewServ", NightViewService)
-        .service("deltavViewServ", DeltavViewService)
         .controller("inputCtrl", InputController)
+        .controller("entireViewCtrl", EntireViewController)
+        .controller("nightViewCtrl", NightViewController)
+        .controller("deltavViewCtrl", DeltavViewController)
         .controller("bodyEditCtrl", BodyEditController)
         .controller("antennaEditCtrl", AntennaEditController)
-        .controller("appCtrl", AppController)
-        .filter("antennaType", antennaType);
+        .filter("antennaType", antennaType)
+        .filter("scale", scale);
 }

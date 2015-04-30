@@ -9,8 +9,10 @@ module App {
         isInEdit: boolean;
         editData: Body;
 
-        static $inject = ["bodyDictionaryServ", "satChainServ"];
+        static $inject = ["$rootScope", "updateViewEvent", "bodyDictionaryServ", "satChainServ"];
         constructor(
+            private $rootScope: ng.IRootScopeService,
+            private updateViewEvent: string,
             private bodyDictionaryServ: BodyDictionaryService,
             private satChainServ: SatChainService
             ) {
@@ -49,6 +51,10 @@ module App {
 
         cancel() {
             this.isInEdit = false;
+        }
+
+        updateView() {
+            this.$rootScope.$broadcast(this.updateViewEvent);
         }
     }
 }
