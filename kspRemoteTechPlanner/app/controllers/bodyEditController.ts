@@ -1,4 +1,4 @@
-﻿/// <reference path="../appreferences.ts" />
+﻿/// <reference path="../_references.ts" />
 
 module App {
     export class BodyEditController {

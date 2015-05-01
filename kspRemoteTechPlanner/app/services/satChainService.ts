@@ -1,4 +1,4 @@
-﻿/// <reference path="../appreferences.ts" />
+﻿/// <reference path="../_references.ts" />
 
 module App {
     export class SatChainService extends DataService<SatChain> {
@@ -11,12 +11,10 @@ module App {
         private _satChain: SatChain;
         get satChain(): SatChain { return this._satChain; }
 
-        static $inject = ["$cookieStore", "localStorageService", "calc.euclideanServ", "calc.orbitalServ"];
+        static $inject = ["$cookieStore", "localStorageService"];
         constructor(
             $cookieStore: ng.cookies.ICookieStoreService,
-            localStorage: ng.local.storage.ILocalStorageService<any>,
-            private euclideanServ: Calculator.EuclideanService,
-            private orbitalServ: Calculator.OrbitalService
+            localStorage: ng.local.storage.ILocalStorageService<any>
             ) {
 
             super($cookieStore, localStorage,

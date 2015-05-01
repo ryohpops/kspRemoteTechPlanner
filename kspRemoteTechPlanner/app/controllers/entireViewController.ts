@@ -1,7 +1,8 @@
-﻿/// <reference path="../appreferences.ts" />
+﻿/// <reference path="../_references.ts" />
 
 module App {
     import Point = Calculator.Point;
+    import calcSat = Calculator.Satellite;
 
     export class EntireViewController {
         'use strict';
@@ -17,19 +18,17 @@ module App {
         connection: boolean[];
         distance: number[];
         get hasStable(): boolean {
-            return this.satelliteServ.hasStableArea(this.body.radius, this.sc.count, this.body.radius + this.sc.altitude, this.satChainServ.selectedAntenna.range);
+            return calcSat.hasStableArea(this.body.radius, this.sc.count, this.body.radius + this.sc.altitude, this.satChainServ.selectedAntenna.range);
         }
         get stableSma(): number {
-            return this.satelliteServ.stableLimitSma(this.sc.count, this.body.radius + this.sc.altitude, this.satChainServ.selectedAntenna.range);
+            return calcSat.stableLimitSma(this.sc.count, this.body.radius + this.sc.altitude, this.satChainServ.selectedAntenna.range);
         }
 
-        static $inject = ["$rootScope", "updateViewEvent", "satChainServ", "calc.orbitalServ", "calc.satelliteServ"];
+        static $inject = ["$rootScope", "updateViewEvent", "satChainServ"];
         constructor(
             private $rootScope: ng.IRootScopeService,
             private updateViewEvent: string,
-            private satChainServ: SatChainService,
-            private orbitalServ: Calculator.OrbitalService,
-            private satelliteServ: Calculator.SatelliteService
+            private satChainServ: SatChainService
             ) {
 
             this.sc = this.satChainServ.satChain;
@@ -46,7 +45,7 @@ module App {
         }
 
         private updatePosition() {
-            var pos = this.satelliteServ.position(this.sc.count, this.body.radius + this.sc.altitude);
+            var pos = calcSat.position(this.sc.count, this.body.radius + this.sc.altitude);
 
             this.position.splice(pos.length);
             for (var index in pos)
@@ -54,9 +53,9 @@ module App {
         }
 
         private updateConnectStatus() {
-            var conn: boolean[] = this.satelliteServ.connectability(
+            var conn: boolean[] = calcSat.connectability(
                 this.body.radius, this.sc.count, this.body.radius + this.sc.altitude, this.satChainServ.selectedAntenna.range);
-            var dist: number[] = this.satelliteServ.distance(this.sc.count, this.body.radius + this.sc.altitude);
+            var dist: number[] = calcSat.distance(this.sc.count, this.body.radius + this.sc.altitude);
 
             var count: number = this.sc.count <= 4 ? 1 : 2;
             this.connection.splice(count);

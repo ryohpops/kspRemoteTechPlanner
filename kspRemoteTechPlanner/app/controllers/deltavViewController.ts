@@ -1,31 +1,31 @@
-﻿/// <reference path="../appreferences.ts" />
+﻿/// <reference path="../_references.ts" />
 
 module App {
+    import calcOrb = Calculator.Orbital;
+
     export class DeltavViewController {
         'use strict';
 
         sc: SatChain;
         body: Body;
         get startDV(): number {
-            return this.orbitalServ.hohmannStartDV(this.body.radius + this.sc.parkingAlt, this.body.radius + this.sc.altitude, this.body.stdGravity) * 1000;
+            return calcOrb.hohmannStartDV(this.body.radius + this.sc.parkingAlt, this.body.radius + this.sc.altitude, this.body.stdGravity) * 1000;
         }
         get finishDV(): number {
-            return this.orbitalServ.hohmannFinishDV(this.body.radius + this.sc.parkingAlt, this.body.radius + this.sc.altitude, this.body.stdGravity) * 1000;
+            return calcOrb.hohmannFinishDV(this.body.radius + this.sc.parkingAlt, this.body.radius + this.sc.altitude, this.body.stdGravity) * 1000;
         }
         get slideAngle(): number {
-            var lowPeriod: number = this.orbitalServ.period(this.body.radius + this.sc.parkingAlt, this.body.stdGravity);
-            var highPeriod: number = this.orbitalServ.period(this.body.radius + this.sc.altitude, this.body.stdGravity);
-            return this.orbitalServ.slidePhaseAngle(360 / this.sc.count, lowPeriod, highPeriod);
+            var lowPeriod: number = calcOrb.period(this.body.radius + this.sc.parkingAlt, this.body.stdGravity);
+            var highPeriod: number = calcOrb.period(this.body.radius + this.sc.altitude, this.body.stdGravity);
+            return calcOrb.slidePhaseAngle(360 / this.sc.count, lowPeriod, highPeriod);
         }
         get slideTime(): number {
-            return (this.slideAngle / 360) * this.orbitalServ.period(this.body.radius + this.sc.parkingAlt, this.body.stdGravity);
+            return (this.slideAngle / 360) * calcOrb.period(this.body.radius + this.sc.parkingAlt, this.body.stdGravity);
         }
 
-        static $inject = ["satChainServ", "calc.orbitalServ", "calc.satelliteServ"];
+        static $inject = ["satChainServ"];
         constructor(
-            private satChainServ: SatChainService,
-            private orbitalServ: Calculator.OrbitalService,
-            private satelliteServ: Calculator.SatelliteService
+            private satChainServ: SatChainService
             ) {
 
             this.sc = this.satChainServ.satChain;
