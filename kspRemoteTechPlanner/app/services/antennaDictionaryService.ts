@@ -54,21 +54,17 @@ module App {
             this._userAntennas = this.dynamic;
         }
 
-        private clone(antenna: Antenna): Antenna {
-            return { name: antenna.name, type: antenna.type, range: antenna.range, elcNeeded: antenna.elcNeeded };
-        }
-
         get(name: string): Antenna {
             if (Object.keys(this.stockAntennas).indexOf(name) !== -1)
-                return this.clone(this.stockAntennas[name]);
+                return this.stockAntennas[name].clone();
             else if (Object.keys(this.userAntennas).indexOf(name) !== -1)
-                return this.clone(this.userAntennas[name]);
+                return this.userAntennas[name].clone();
             else
                 return undefined;
         }
 
         set(name: string, antenna: Antenna) {
-            this.userAntennas[name] = this.clone(antenna);
+            this.userAntennas[name] = antenna.clone();
         }
 
         remove(name: string) {

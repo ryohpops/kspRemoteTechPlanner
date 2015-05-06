@@ -28,7 +28,7 @@ module App {
         }
 
         add() {
-            this.editData = { name: "", color: "", radius: 0, stdGravity: 0, soi: 0 };
+            this.editData = new Body("", "", 0, 0, 0);
             this.isInEdit = true;
         }
 

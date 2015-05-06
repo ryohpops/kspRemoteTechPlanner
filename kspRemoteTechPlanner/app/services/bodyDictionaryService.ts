@@ -66,21 +66,17 @@ module App {
             this._userBodies = this.dynamic;
         }
 
-        private clone(body: Body): Body {
-            return { name: body.name, color: body.color, radius: body.radius, stdGravity: body.stdGravity, soi: body.soi };
-        }
-
         get(name: string): Body {
             if (Object.keys(this.stockBodies).indexOf(name) !== -1)
-                return this.clone(this.stockBodies[name]);
+                return this.stockBodies[name].clone();
             else if (Object.keys(this.userBodies).indexOf(name) !== -1)
-                return this.clone(this.userBodies[name]);
+                return this.userBodies[name].clone();
             else
                 return undefined;
         }
 
         set(name: string, body: Body) {
-            this.userBodies[name] = this.clone(body);
+            this.userBodies[name] = body.clone();
         }
 
         remove(name: string) {
