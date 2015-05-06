@@ -9,15 +9,15 @@ module App {
         isInEdit: boolean;
         editData: Body;
 
-        static $inject = ["$rootScope", "updateViewEvent", "bodyDictionaryServ", "satChainServ"];
+        static $inject = ["$rootScope", "updateViewEvent", "bodyDictServ", "satChainServ"];
         constructor(
             private $rootScope: ng.IRootScopeService,
             private updateViewEvent: string,
-            private bodyDictionaryServ: BodyDictionaryService,
+            private bodyDictServ: BodyDictionaryService,
             private satChainServ: SatChainService
             ) {
 
-            this.userBodies = bodyDictionaryServ.userBodies;
+            this.userBodies = bodyDictServ.userBodies;
             this.satChain = satChainServ.satChain;
             this.isInEdit = false;
             this.editData = undefined;
@@ -33,20 +33,20 @@ module App {
         }
 
         edit(name: string) {
-            this.editData = this.bodyDictionaryServ.get(name);
+            this.editData = this.bodyDictServ.get(name);
             this.isInEdit = true;
         }
 
         remove(name: string) {
             this.isInEdit = false;
-            this.bodyDictionaryServ.remove(name);
-            this.bodyDictionaryServ.save();
+            this.bodyDictServ.remove(name);
+            this.bodyDictServ.save();
         }
 
         save() {
             this.isInEdit = false;
-            this.bodyDictionaryServ.set(this.editData.name, this.editData);
-            this.bodyDictionaryServ.save();
+            this.bodyDictServ.set(this.editData.name, this.editData);
+            this.bodyDictServ.save();
         }
 
         cancel() {

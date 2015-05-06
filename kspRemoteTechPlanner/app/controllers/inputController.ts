@@ -8,7 +8,7 @@ module App {
         bodyDetailVisible: boolean;
         antennaDetailVisible: boolean[];
 
-        static $inject = ["$rootScope", "updateViewEvent", "satChainServ", "bodyDictionaryServ", "antennaDictionaryServ"];
+        static $inject = ["$rootScope", "updateViewEvent", "satChainServ", "bodyDictServ", "antennaDictServ"];
         constructor(
             private $rootScope: ng.IRootScopeService,
             private updateViewEvent: string,

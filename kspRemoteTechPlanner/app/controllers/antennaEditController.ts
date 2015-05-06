@@ -9,15 +9,15 @@ module App {
         isInEdit: boolean;
         editData: Antenna;
 
-        static $inject = ["$rootScope", "updateViewEvent", "antennaDictionaryServ", "satChainServ"];
+        static $inject = ["$rootScope", "updateViewEvent", "antennaDictServ", "satChainServ"];
         constructor(
             private $rootScope: ng.IRootScopeService,
             private updateViewEvent: string,
-            private antennaDictionaryServ: AntennaDictionaryService,
+            private antennaDictServ: AntennaDictionaryService,
             private satChainServ: SatChainService
             ) {
 
-            this.userAntennas = antennaDictionaryServ.userAntennas;
+            this.userAntennas = antennaDictServ.userAntennas;
             this.satChain = satChainServ.satChain;
             this.isInEdit = false;
             this.editData = undefined;
@@ -38,20 +38,20 @@ module App {
         }
 
         edit(name: string) {
-            this.editData = this.antennaDictionaryServ.get(name);
+            this.editData = this.antennaDictServ.get(name);
             this.isInEdit = true;
         }
 
         remove(name: string) {
             this.isInEdit = false;
-            this.antennaDictionaryServ.remove(name);
-            this.antennaDictionaryServ.save();
+            this.antennaDictServ.remove(name);
+            this.antennaDictServ.save();
         }
 
         save() {
             this.isInEdit = false;
-            this.antennaDictionaryServ.set(this.editData.name, this.editData);
-            this.antennaDictionaryServ.save();
+            this.antennaDictServ.set(this.editData.name, this.editData);
+            this.antennaDictServ.save();
         }
 
         cancel() {

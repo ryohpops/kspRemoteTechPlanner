@@ -7,8 +7,8 @@ module App {
             lssp.setPrefix("kspRemoteTechPlanner");
         }])
         .value("updateViewEvent", "updateView")
-        .service("bodyDictionaryServ", BodyDictionaryService)
-        .service("antennaDictionaryServ", AntennaDictionaryService)
+        .service("bodyDictServ", BodyDictionaryService)
+        .service("antennaDictServ", AntennaDictionaryService)
         .service("satChainServ", SatChainService)
         .controller("inputCtrl", InputController)
         .controller("entireViewCtrl", EntireViewController)
