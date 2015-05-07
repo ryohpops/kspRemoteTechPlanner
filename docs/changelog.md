@@ -1,3 +1,6 @@
+- 1.5.4 : 2015/05/07
+ * Fix calculation of Delta-V.
+
 - 1.5.3 : 2015/04/22
  * Views are now rendered by SVG.
 
