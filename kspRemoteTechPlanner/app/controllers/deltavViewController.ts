@@ -7,10 +7,10 @@ module App {
         sc: SatChain;
         body: Body;
         get startDV(): number {
-            return this.orbitalServ.hohmannStartDV(this.body.radius, this.sc.parkingAlt, this.sc.altitude, this.body.stdGravity) * 1000;
+            return this.orbitalServ.hohmannStartDV(this.body.radius + this.sc.parkingAlt, this.body.radius + this.sc.altitude, this.body.stdGravity) * 1000;
         }
         get finishDV(): number {
-            return this.orbitalServ.hohmannFinishDV(this.body.radius, this.sc.parkingAlt, this.sc.altitude, this.body.stdGravity) * 1000;
+            return this.orbitalServ.hohmannFinishDV(this.body.radius + this.sc.parkingAlt, this.body.radius + this.sc.altitude, this.body.stdGravity) * 1000;
         }
         get slideAngle(): number {
             var lowPeriod: number = this.orbitalServ.period(this.body.radius + this.sc.parkingAlt, this.body.stdGravity);
