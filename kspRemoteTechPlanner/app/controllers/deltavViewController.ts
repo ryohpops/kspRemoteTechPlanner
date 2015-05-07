@@ -18,7 +18,7 @@ module App {
             return this.orbitalServ.slidePhaseAngle(360 / this.sc.count, lowPeriod, highPeriod);
         }
         get slideTime(): number {
-            return this.slideAngle * this.orbitalServ.period(this.body.radius + this.sc.parkingAlt, this.body.stdGravity);
+            return (this.slideAngle / 360) * this.orbitalServ.period(this.body.radius + this.sc.parkingAlt, this.body.stdGravity);
         }
 
         static $inject = ["satChainServ", "calc.orbitalServ", "calc.satelliteServ"];
