@@ -5,5 +5,5 @@ Web-based satellite network planner for the MOD, [RemoteTech](http://forum.kerba
 
 Latest release is available [here](http://ryohpops.github.io/kspRemoteTechPlanner/) and forum is [here](http://forum.kerbalspaceprogram.com/threads/90113).
 
-- 1.5.3 : 2015/04/22
- * Views are now rendered by SVG.
+- 1.5.4 : 2015/05/07
+ * Fix calculation of Delta-V.
