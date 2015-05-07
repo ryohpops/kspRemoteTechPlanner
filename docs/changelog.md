@@ -1,3 +1,6 @@
+- 1.5.5 : 2015/05/08
+ * Fix display of Slide time.
+
 - 1.5.4 : 2015/05/07
  * Fix calculation of Delta-V.
 
