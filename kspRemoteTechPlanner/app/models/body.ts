@@ -32,4 +32,12 @@ module App {
             return new Body(this);
         }
     }
+
+    export interface BodyJSON {
+        name: string;
+        color: string;
+        radius: number;
+        stdGravity: number;
+        soi: number;
+    }
 }

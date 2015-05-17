@@ -38,4 +38,14 @@ module App {
             }
         }
     }
+
+    export interface SatChainJSON {
+        body: string;
+        count: number;
+        altitude: number;
+        elcNeeded: number;
+        antennas: AntennaEquipmentJSON[];
+        antennaIndex: number;
+        parkingAlt: number;
+    }
 }

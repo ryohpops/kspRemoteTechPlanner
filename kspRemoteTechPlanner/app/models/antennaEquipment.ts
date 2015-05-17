@@ -5,4 +5,9 @@ module App {
         antenna: Antenna;
         quantity: number;
     }
+
+    export interface AntennaEquipmentJSON {
+        antenna: string;
+        quantity: number;
+    }
 }

@@ -32,4 +32,11 @@ module App {
             return new Antenna(this);
         }
     }
+
+    export interface AntennaJSON {
+        name: string;
+        type: AntennaType;
+        range: number;
+        elcNeeded: number;
+    }
 }
