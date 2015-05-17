@@ -12,6 +12,10 @@ module App {
         antennaIndex: number;
         parkingAlt: number;
 
+        get selectedAntenna(): Antenna {
+            return this.antennas[this.antennaIndex].antenna;
+        }
+
         constructor(body: Body, count: number, altitude: number, elcNeeded: number, antennas: AntennaEquipment[], antennaIndex: number, parkingAlt: number);
         constructor(storedData: any);
         constructor(data: any, count?: number, altitude?: number, elcNeeded?: number, antennas?: AntennaEquipment[], antennaIndex?: number, parkingAlt?: number) {

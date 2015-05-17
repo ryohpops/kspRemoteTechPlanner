@@ -24,10 +24,6 @@ module App {
             this._satChain = this.data;
         }
 
-        get selectedAntenna(): Antenna {
-            return this.satChain.antennas[this.satChain.antennaIndex].antenna;
-        }
-
         private static updater(satChain: any, oldVersion: number): SatChain {
             if (oldVersion === undefined) { // update to ver 1.5
                 satChain.antennas = [{ antenna: satChain.antenna, quantity: 1 }];

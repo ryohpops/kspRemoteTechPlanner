@@ -9,7 +9,7 @@ module App {
 
         real: number = 800;
         get virtual(): number {
-            return (this.body.radius + this.sc.altitude + this.satChainServ.selectedAntenna.range) * 2 * 1.05;
+            return (this.body.radius + this.sc.altitude + this.sc.selectedAntenna.range) * 2 * 1.05;
         }
 
         sc: SatChain;
@@ -18,10 +18,10 @@ module App {
         connection: boolean[];
         distance: number[];
         get hasStable(): boolean {
-            return calcSat.hasStableArea(this.body.radius, this.sc.count, this.body.radius + this.sc.altitude, this.satChainServ.selectedAntenna.range);
+            return calcSat.hasStableArea(this.body.radius, this.sc.count, this.body.radius + this.sc.altitude, this.sc.selectedAntenna.range);
         }
         get stableSma(): number {
-            return calcSat.stableLimitSma(this.sc.count, this.body.radius + this.sc.altitude, this.satChainServ.selectedAntenna.range);
+            return calcSat.stableLimitSma(this.sc.count, this.body.radius + this.sc.altitude, this.sc.selectedAntenna.range);
         }
 
         static $inject = ["$rootScope", "updateViewEvent", "satChainServ"];
@@ -54,7 +54,7 @@ module App {
 
         private updateConnectStatus() {
             var conn: boolean[] = calcSat.connectability(
-                this.body.radius, this.sc.count, this.body.radius + this.sc.altitude, this.satChainServ.selectedAntenna.range);
+                this.body.radius, this.sc.count, this.body.radius + this.sc.altitude, this.sc.selectedAntenna.range);
             var dist: number[] = calcSat.distance(this.sc.count, this.body.radius + this.sc.altitude);
 
             var count: number = this.sc.count <= 4 ? 1 : 2;
