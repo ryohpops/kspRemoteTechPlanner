@@ -44,9 +44,8 @@
     <TypeScriptCompile Include="app\models\body.ts" />
     <TypeScriptCompile Include="app\models\antennaEquipment.ts" />
     <TypeScriptCompile Include="app\models\satChain.ts" />
-    <TypeScriptCompile Include="app\services\dataService.ts" />
-    <TypeScriptCompile Include="app\services\duplexDataService.ts" />
     <Content Include="app\views\nightView.html" />
+    <TypeScriptCompile Include="app\services\storageService.ts" />
     <TypeScriptCompile Include="calculator\_references.ts" />
     <TypeScriptCompile Include="calculator\euclidean.ts" />
     <TypeScriptCompile Include="calculator\orbital.ts" />

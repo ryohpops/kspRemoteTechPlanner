@@ -5,7 +5,11 @@ module App {
         [index: string]: Body;
     }
 
-    export class BodyDictionaryService extends DuplexDataService<BodyDictionary>{
+    interface BodyJSONDictionary {
+        [index: string]: BodyJSON;
+    }
+
+    export class BodyDictionaryService {
         'use strict';
 
         private static dataKey: string = "userBody";
@@ -18,52 +22,54 @@ module App {
         private _userBodies: BodyDictionary;
         get userBodies(): BodyDictionary { return this._userBodies; }
 
-        static $inject = ["$cookieStore", "localStorageService"];
+        static $inject = ["storageServ"];
         constructor(
-            $cookieStore: ng.cookies.ICookieStoreService,
-            localStorage: ng.local.storage.ILocalStorageService<any>
+            private storageServ: StorageService
             ) {
 
-            super($cookieStore, localStorage,
-                {
-                    "Kerbol": { name: "Kerbol", color: "rgb(255,242,0)", radius: 261600, stdGravity: 1172332800, soi: Number.POSITIVE_INFINITY },
-                    "Moho": { name: "Moho", color: "rgb(185,122,87)", radius: 250, stdGravity: 168.60938, soi: 9646.663 },
-                    "Eve": { name: "Eve", color: "rgb(163,73,164)", radius: 700, stdGravity: 8171.7302, soi: 85109.365 },
-                    "Gilly": { name: "Gilly", color: "rgb(239,228,176)", radius: 13, stdGravity: 0.0082894498, soi: 126.12327 },
-                    "Kerbin": { name: "Kerbin", color: "rgb(63,111,40)", radius: 600, stdGravity: 3531.6, soi: 84159.286 },
-                    "Mun": { name: "Mun", color: "rgb(127,127,127)", radius: 200, stdGravity: 65.138398, soi: 2429.5591 },
-                    "Minmus": { name: "Minmus", color: "rgb(153,217,234)", radius: 60, stdGravity: 1.7658, soi: 2247.4284 },
-                    "Duna": { name: "Duna", color: "rgb(237,28,36)", radius: 320, stdGravity: 301.36321, soi: 47921.949 },
-                    "Ike": { name: "Ike", color: "rgb(127,127,127)", radius: 130, stdGravity: 18.568369, soi: 1049.5989 },
-                    "Dres": { name: "Dres", color: "rgb(195,195,195)", radius: 138, stdGravity: 21.484489, soi: 32832.84 },
-                    "Jool": { name: "Jool", color: "rgb(92,231,58)", radius: 6000, stdGravity: 282528, soi: 2455985.2 },
-                    "Laythe": { name: "Laythe", color: "rgb(25,55,98)", radius: 500, stdGravity: 1962, soi: 3723.6458 },
-                    "Vall": { name: "Vall", color: "rgb(82,133,141)", radius: 300, stdGravity: 207.48150, soi: 2406.4014 },
-                    "Tylo": { name: "Tylo", color: "rgb(195,195,195)", radius: 600, stdGravity: 4523.8934, soi: 10856.518 },
-                    "Bop": { name: "Bop", color: "rgb(142,106,51)", radius: 65, stdGravity: 2.4868349, soi: 1221.0609 },
-                    "Pol": { name: "Pol", color: "rgb(206,211,1)", radius: 44, stdGravity: 0.72170208, soi: 1042.1389 },
-                    "Eeloo": { name: "Eeloo", color: "rgb(221,221,210)", radius: 210, stdGravity: 74.410815, soi: 119082.94 },
-                    "Mercury": { name: "Mercury", color: "rgb(185,122,87)", radius: 2439, stdGravity: 22026, soi: 112410 },
-                    "Venus": { name: "Venus", color: "rgb(163,73,164)", radius: 6051, stdGravity: 324670, soi: 616210 },
-                    "Earth": { name: "Earth", color: "rgb(63,111,40)", radius: 6371, stdGravity: 398600, soi: 923895 },
-                    "Moon": { name: "Moon", color: "rgb(127,127,127)", radius: 1737, stdGravity: 4900, soi: 66167 },
-                    "Mars": { name: "Mars", color: "rgb(237,28,36)", radius: 3380, stdGravity: 42811, soi: 577231 },
-                    "Phobos": { name: "Phobos", color: "rgb(142,106,51)", radius: 7, stdGravity: 0.000715, soi: 27 },
-                    "Deimos": { name: "Deimos", color: "rgb(239,228,176)", radius: 5.456, stdGravity: 0.000098716, soi: 25 },
-                    "Jupiter": { name: "Jupiter", color: "rgb(92,231,58)", radius: 69911, stdGravity: 127000000, soi: 48190353 },
-                    "Io": { name: "Io", color: "rgb(206,211,1)", radius: 1811, stdGravity: 5957.6, soi: 7841 },
-                    "Europa": { name: "Europa", color: "rgb(221,221,210)", radius: 1550, stdGravity: 3201.5, soi: 9728 },
-                    "Ganymede": { name: "Ganymede", color: "rgb(195,195,195)", radius: 2624, stdGravity: 9884.3, soi: 10856.518 },
-                    "Callisto": { name: "Callisto", color: "rgb(127,127,127)", radius: 2409, stdGravity: 7176.5, soi: 37706 },
-                    "Saturn": { name: "Saturn", color: "rgb(195,195,195)", radius: 60268, stdGravity: 37900000, soi: 54468720 },
-                    "Titan": { name: "Titan", color: "rgb(25,55,98)", radius: 2566, stdGravity: 8972.5, soi: 43324 },
-                    "Uranus": { name: "Uranus", color: "rgb(153,217,234)", radius: 25559, stdGravity: 5790000, soi: 51686225 },
-                    "Pluto": { name: "Pluto", color: "rgb(82,133,141)", radius: 1143, stdGravity: 870.44, soi: 3116132 }
-                }, {},
-                BodyDictionaryService.dataKey, BodyDictionaryService.versionKey, BodyDictionaryService.modelVersion, BodyDictionaryService.updater);
+            this._stockBodies = {
+                "Kerbol": new Body("Kerbol", "rgb(255,242,0)", 261600, 1172332800, Number.POSITIVE_INFINITY),
+                "Moho": new Body("Moho", "rgb(185,122,87)", 250, 168.60938, 9646.663),
+                "Eve": new Body("Eve", "rgb(163,73,164)", 700, 8171.7302, 85109.365),
+                "Gilly": new Body("Gilly", "rgb(239,228,176)", 13, 0.0082894498, 126.12327),
+                "Kerbin": new Body("Kerbin", "rgb(63,111,40)", 600, 3531.6, 84159.286),
+                "Mun": new Body("Mun", "rgb(127,127,127)", 200, 65.138398, 2429.5591),
+                "Minmus": new Body("Minmus", "rgb(153,217,234)", 60, 1.7658, 2247.4284),
+                "Duna": new Body("Duna", "rgb(237,28,36)", 320, 301.36321, 47921.949),
+                "Ike": new Body("Ike", "rgb(127,127,127)", 130, 18.568369, 1049.5989),
+                "Dres": new Body("Dres", "rgb(195,195,195)", 138, 21.484489, 32832.84),
+                "Jool": new Body("Jool", "rgb(92,231,58)", 6000, 282528, 2455985.2),
+                "Laythe": new Body("Laythe", "rgb(25,55,98)", 500, 1962, 3723.6458),
+                "Vall": new Body("Vall", "rgb(82,133,141)", 300, 207.48150, 2406.4014),
+                "Tylo": new Body("Tylo", "rgb(195,195,195)", 600, 4523.8934, 10856.518),
+                "Bop": new Body("Bop", "rgb(142,106,51)", 65, 2.4868349, 1221.0609),
+                "Pol": new Body("Pol", "rgb(206,211,1)", 44, 0.72170208, 1042.1389),
+                "Eeloo": new Body("Eeloo", "rgb(221,221,210)", 210, 74.410815, 119082.94),
+                "Mercury": new Body("Mercury", "rgb(185,122,87)", 2439, 22026, 112410),
+                "Venus": new Body("Venus", "rgb(163,73,164)", 6051, 324670, 616210),
+                "Earth": new Body("Earth", "rgb(63,111,40)", 6371, 398600, 923895),
+                "Moon": new Body("Moon", "rgb(127,127,127)", 1737, 4900, 66167),
+                "Mars": new Body("Mars", "rgb(237,28,36)", 3380, 42811, 577231),
+                "Phobos": new Body("Phobos", "rgb(142,106,51)", 7, 0.000715, 27),
+                "Deimos": new Body("Deimos", "rgb(239,228,176)", 5.456, 0.000098716, 25),
+                "Jupiter": new Body("Jupiter", "rgb(92,231,58)", 69911, 127000000, 48190353),
+                "Io": new Body("Io", "rgb(206,211,1)", 1811, 5957.6, 7841),
+                "Europa": new Body("Europa", "rgb(221,221,210)", 1550, 3201.5, 9728),
+                "Ganymede": new Body("Ganymede", "rgb(195,195,195)", 2624, 9884.3, 10856.518),
+                "Callisto": new Body("Callisto", "rgb(127,127,127)", 2409, 7176.5, 37706),
+                "Saturn": new Body("Saturn", "rgb(195,195,195)", 60268, 37900000, 54468720),
+                "Titan": new Body("Titan", "rgb(25,55,98)", 2566, 8972.5, 43324),
+                "Uranus": new Body("Uranus", "rgb(153,217,234)", 25559, 5790000, 51686225),
+                "Pluto": new Body("Pluto", "rgb(82,133,141)", 1143, 870.44, 3116132)
+            };
 
-            this._stockBodies = this.static;
-            this._userBodies = this.dynamic;
+            var loaded: LoadResult = storageServ.load(BodyDictionaryService.dataKey, BodyDictionaryService.versionKey);
+            if (loaded.data)
+                this._userBodies = this.unpack(this.update(loaded.data, loaded.version));
+            else
+                this._userBodies = {};
+
+            storageServ.setVersion(BodyDictionaryService.versionKey, BodyDictionaryService.modelVersion);
         }
 
         get(name: string): Body {
@@ -83,8 +89,34 @@ module App {
             delete this.userBodies[name];
         }
 
-        private static updater(userBodies: any, oldVersion: number): BodyDictionary {
-            return userBodies;
+        save() {
+            this.storageServ.save(BodyDictionaryService.dataKey, this.pack(this.userBodies));
+        }
+
+        private pack(bodyDict: BodyDictionary): BodyJSONDictionary {
+            var bjd: BodyJSONDictionary = {};
+
+            for (var index in bodyDict) {
+                var b: Body = bodyDict[index];
+                bjd[index] = { name: b.name, color: b.color, radius: b.radius, stdGravity: b.stdGravity, soi: b.soi };
+            }
+
+            return bjd;
+        }
+
+        private unpack(json: BodyJSONDictionary): BodyDictionary {
+            var bd: BodyDictionary = {};
+
+            for (var index in json) {
+                var bj: BodyJSON = json[index];
+                bd[index] = new Body(bj.name, bj.color, bj.radius, bj.stdGravity, bj.soi);
+            }
+
+            return bd;
+        }
+
+        private update(ubJson: any, oldVersion: number): BodyDictionary {
+            return ubJson;
         }
     }
 }

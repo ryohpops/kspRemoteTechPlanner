@@ -3,8 +3,7 @@
 /// <reference path="models/body.ts" />
 /// <reference path="models/satchain.ts" />
 
-/// <reference path="services/dataservice.ts" />
-/// <reference path="services/duplexdataservice.ts" />
+/// <reference path="services/storageservice.ts" />
 
 /// <reference path="services/antennadictionaryservice.ts" />
 /// <reference path="services/bodydictionaryservice.ts" />
