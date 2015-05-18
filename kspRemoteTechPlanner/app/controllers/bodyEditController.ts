@@ -5,26 +5,25 @@ module App {
         'use strict';
 
         userBodies: BodyDictionary;
-        satChain: SatChain;
+        sc: SatChain;
         isInEdit: boolean;
         editData: Body;
 
-        static $inject = ["$rootScope", "updateViewEvent", "bodyDictServ", "satChainServ"];
+        static $inject = ["eventServ", "bodyDictServ", "satChainServ"];
         constructor(
-            private $rootScope: ng.IRootScopeService,
-            private updateViewEvent: string,
+            private eventServ: EventService,
             private bodyDictServ: BodyDictionaryService,
             private satChainServ: SatChainService
             ) {
 
             this.userBodies = bodyDictServ.userBodies;
-            this.satChain = satChainServ.satChain;
+            this.sc = satChainServ.satChain;
             this.isInEdit = false;
             this.editData = undefined;
         }
 
         isUsed(name: string): boolean {
-            return this.satChain.body.name === name;
+            return this.sc.body.name === name;
         }
 
         add() {
@@ -51,10 +50,6 @@ module App {
 
         cancel() {
             this.isInEdit = false;
-        }
-
-        updateView() {
-            this.$rootScope.$broadcast(this.updateViewEvent);
         }
     }
 }

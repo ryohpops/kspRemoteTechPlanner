@@ -5,28 +5,27 @@ module App {
         'use strict';
 
         userAntennas: AntennaDictionary;
-        satChain: SatChain;
+        sc: SatChain;
         isInEdit: boolean;
         editData: Antenna;
 
-        static $inject = ["$rootScope", "updateViewEvent", "antennaDictServ", "satChainServ"];
+        static $inject = ["eventServ", "antennaDictServ", "satChainServ"];
         constructor(
-            private $rootScope: ng.IRootScopeService,
-            private updateViewEvent: string,
+            private eventServ: EventService,
             private antennaDictServ: AntennaDictionaryService,
             private satChainServ: SatChainService
             ) {
 
             this.userAntennas = antennaDictServ.userAntennas;
-            this.satChain = satChainServ.satChain;
+            this.sc = satChainServ.satChain;
             this.isInEdit = false;
             this.editData = undefined;
         }
 
         isUsed(name: string): boolean {
             var ret: boolean = false;
-            for (var index in this.satChain.antennas) {
-                if (this.satChain.antennas[index].antenna.name === name)
+            for (var index in this.sc.antennas) {
+                if (this.sc.antennas[index].antenna.name === name)
                     ret = true;
             }
             return ret;
@@ -56,10 +55,6 @@ module App {
 
         cancel() {
             this.isInEdit = false;
-        }
-
-        updateView() {
-            this.$rootScope.$broadcast(this.updateViewEvent);
         }
     }
 }

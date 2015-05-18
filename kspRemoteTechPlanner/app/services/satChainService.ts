@@ -11,8 +11,9 @@ module App {
         private _satChain: SatChain;
         get satChain(): SatChain { return this._satChain; }
 
-        static $inject = ["storageServ", "bodyDictServ", "antennaDictServ"];
+        static $inject = ["eventServ", "storageServ", "bodyDictServ", "antennaDictServ"];
         constructor(
+            private eventServ: EventService,
             private storageServ: StorageService,
             private bodyDictServ: BodyDictionaryService,
             private antennaDictServ: AntennaDictionaryService
@@ -27,6 +28,27 @@ module App {
             }
 
             storageServ.setVersion(SatChainService.versionKey, SatChainService.modelVersion);
+
+            eventServ.on(Events.updateBody,(event: ng.IAngularEvent) => {
+                this.updateBody();
+            });
+            eventServ.on(Events.updateAntenna,(event: ng.IAngularEvent) => {
+                this.updateAntenna();
+            });
+        }
+
+        private updateBody() {
+            var b: Body = this.bodyDictServ.get(this.satChain.body.name);
+            for (var item in b)
+                this.satChain.body[item] = b[item];
+        }
+
+        private updateAntenna() {
+            for (var index in this.satChain.antennas) {
+                var a: Antenna = this.antennaDictServ.get(this.satChain.antennas[index].antenna.name);
+                for (var item in a)
+                    this.satChain.antennas[index].antenna[item] = a[item];
+            }
         }
 
         save() {

@@ -24,10 +24,9 @@ module App {
             return calcSat.stableLimitSma(this.sc.count, this.body.radius + this.sc.altitude, this.sc.selectedAntenna.range);
         }
 
-        static $inject = ["$rootScope", "updateViewEvent", "satChainServ"];
+        static $inject = ["eventServ", "satChainServ"];
         constructor(
-            private $rootScope: ng.IRootScopeService,
-            private updateViewEvent: string,
+            private eventServ: EventService,
             private satChainServ: SatChainService
             ) {
 
@@ -37,11 +36,11 @@ module App {
             this.connection = [];
             this.distance = [];
 
-            $rootScope.$on(this.updateViewEvent,(event: ng.IAngularEvent) => {
+            eventServ.on(Events.updateView,(event: ng.IAngularEvent) => {
                 this.updatePosition();
                 this.updateConnectStatus();
             });
-            $rootScope.$emit(this.updateViewEvent);
+            eventServ.updateView();
         }
 
         private updatePosition() {
