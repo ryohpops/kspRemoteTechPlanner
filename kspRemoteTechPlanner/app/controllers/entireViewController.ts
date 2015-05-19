@@ -36,7 +36,7 @@ module App {
             this.connection = [];
             this.distance = [];
 
-            eventServ.on(Events.updateView,(event: ng.IAngularEvent) => {
+            eventServ.on(Events.updateView,(event: angular.IAngularEvent) => {
                 this.updatePosition();
                 this.updateConnectStatus();
             });

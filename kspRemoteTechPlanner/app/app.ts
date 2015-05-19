@@ -3,7 +3,7 @@
 module App {
     angular.module("app", ["ngCookies", "LocalStorageModule"])
         .config(
-        ["localStorageServiceProvider", (lssp: ng.local.storage.ILocalStorageServiceProvider) => {
+        ["localStorageServiceProvider", (lssp: angular.local.storage.ILocalStorageServiceProvider) => {
             lssp.setPrefix("kspRemoteTechPlanner");
         }])
         .service("eventServ", EventService)

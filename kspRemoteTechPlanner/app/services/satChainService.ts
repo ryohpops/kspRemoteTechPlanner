@@ -29,10 +29,10 @@ module App {
 
             storageServ.setVersion(SatChainService.versionKey, SatChainService.modelVersion);
 
-            eventServ.on(Events.updateBody,(event: ng.IAngularEvent) => {
+            eventServ.on(Events.updateBody,(event: angular.IAngularEvent) => {
                 this.updateBody();
             });
-            eventServ.on(Events.updateAntenna,(event: ng.IAngularEvent) => {
+            eventServ.on(Events.updateAntenna,(event: angular.IAngularEvent) => {
                 this.updateAntenna();
             });
         }
