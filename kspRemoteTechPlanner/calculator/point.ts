@@ -1,4 +1,4 @@
-﻿/// <reference path="../calculatorreferences.ts" />
+﻿/// <reference path="_references.ts" />
 
 module Calculator {
     export interface Point {

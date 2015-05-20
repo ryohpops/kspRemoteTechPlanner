@@ -1,4 +1,5 @@
-﻿<form name="antennaEditForm" role="form" novalidate ng-submit="antennaEditForm.$valid && (antennaEdit.save() || antennaEdit.updateView())">
+﻿<form name="antennaEditForm" role="form" novalidate
+      ng-submit="antennaEditForm.$valid && (antennaEdit.save() || antennaEdit.eventServ.updateAntenna() || antennaEdit.eventServ.updateView())">
     <table class="table table-hover editable">
         <thead>
             <tr>
