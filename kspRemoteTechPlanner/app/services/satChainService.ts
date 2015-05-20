@@ -27,6 +27,7 @@ module App {
                     [{ antenna: antennaDictServ.get("Communotron 16"), quantity: 1 }], 0, 70);
             }
 
+            this.save();
             storageServ.setVersion(SatChainService.versionKey, SatChainService.modelVersion);
 
             eventServ.on(Events.updateBody,(event: angular.IAngularEvent) => {
@@ -89,9 +90,10 @@ module App {
             }
 
             if (oldVersion === 1) {
+                scJson.body = scJson.body.name;
                 for (var index in scJson.antennas) {
                     var ae = scJson.antennas[index];
-                    scJson.antennas.push({ antenna: ae.antenna.name, quantity: ae.quantity });
+                    scJson.antennas[index] = ({ antenna: ae.antenna.name, quantity: ae.quantity });
                 }
                 oldVersion = 2;
             }

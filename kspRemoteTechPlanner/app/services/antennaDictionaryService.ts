@@ -56,6 +56,7 @@ module App {
             else
                 this._userAntennas = {};
 
+            this.save();
             storageServ.setVersion(AntennaDictionaryService.versionKey, AntennaDictionaryService.modelVersion);
         }
 

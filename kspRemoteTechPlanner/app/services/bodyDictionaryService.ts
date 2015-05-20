@@ -69,6 +69,7 @@ module App {
             else
                 this._userBodies = {};
 
+            this.save();
             storageServ.setVersion(BodyDictionaryService.versionKey, BodyDictionaryService.modelVersion);
         }
 
