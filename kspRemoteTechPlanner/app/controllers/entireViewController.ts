@@ -9,19 +9,18 @@ module App {
 
         real: number = 800;
         get virtual(): number {
-            return (this.body.radius + this.sc.altitude + this.sc.selectedAntenna.range) * 2 * 1.05;
+            return (this.sc.body.radius + this.sc.altitude + this.sc.selectedAntenna.range) * 2 * 1.05;
         }
 
         sc: SatChain;
-        body: Body;
         position: Point[];
         connection: boolean[];
         distance: number[];
         get hasStable(): boolean {
-            return calcSat.hasStableArea(this.body.radius, this.sc.count, this.body.radius + this.sc.altitude, this.sc.selectedAntenna.range);
+            return calcSat.hasStableArea(this.sc.body.radius, this.sc.count, this.sc.body.radius + this.sc.altitude, this.sc.selectedAntenna.range);
         }
         get stableSma(): number {
-            return calcSat.stableLimitSma(this.sc.count, this.body.radius + this.sc.altitude, this.sc.selectedAntenna.range);
+            return calcSat.stableLimitSma(this.sc.count, this.sc.body.radius + this.sc.altitude, this.sc.selectedAntenna.range);
         }
 
         static $inject = ["eventServ", "satChainServ"];
@@ -31,7 +30,6 @@ module App {
             ) {
 
             this.sc = this.satChainServ.satChain;
-            this.body = this.sc.body;
             this.position = [];
             this.connection = [];
             this.distance = [];
@@ -44,7 +42,7 @@ module App {
         }
 
         private updatePosition() {
-            var pos = calcSat.position(this.sc.count, this.body.radius + this.sc.altitude);
+            var pos = calcSat.position(this.sc.count, this.sc.body.radius + this.sc.altitude);
 
             this.position.splice(pos.length);
             for (var index in pos)
@@ -53,8 +51,8 @@ module App {
 
         private updateConnectStatus() {
             var conn: boolean[] = calcSat.connectability(
-                this.body.radius, this.sc.count, this.body.radius + this.sc.altitude, this.sc.selectedAntenna.range);
-            var dist: number[] = calcSat.distance(this.sc.count, this.body.radius + this.sc.altitude);
+                this.sc.body.radius, this.sc.count, this.sc.body.radius + this.sc.altitude, this.sc.selectedAntenna.range);
+            var dist: number[] = calcSat.distance(this.sc.count, this.sc.body.radius + this.sc.altitude);
 
             var count: number = this.sc.count <= 4 ? 1 : 2;
             this.connection.splice(count);
