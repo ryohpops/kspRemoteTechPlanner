@@ -1,5 +1,5 @@
 ﻿<h3>Data input</h3>
-<form role="form" novalidate>
+<form role="form" novalidate ng-controller="inputCtrl as input">
     <div class="form-group">
         <label for="body">Body</label>
         <select class="form-control" ng-model="input.sc.body.name" ng-change="input.onBodyChange()">
