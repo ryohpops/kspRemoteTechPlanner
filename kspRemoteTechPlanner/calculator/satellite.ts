@@ -57,13 +57,13 @@ module Calculator.Satellite {
         return totalElcNeeded(satElc, antennaElc, antennaQuantity) * period / (period - night);
     }
 
-    export function slidePhaseAngle(radius: number, stdGravParam: number, count: number, targetSma: number, parkingSma): number {
+    export function slidePhaseAngle(radius: number, stdGravParam: number, count: number, targetSma: number, parkingSma: number): number {
         var periodParking: number = calcOrb.period(parkingSma, stdGravParam);
         var periodTarget: number = calcOrb.period(targetSma, stdGravParam);
         return calcOrb.slidePhaseAngle(360 / count, periodParking, periodTarget);
     }
 
-    export function slidePhaseTime(radius: number, stdGravParam: number, count: number, targetSma: number, parkingSma): number {
+    export function slidePhaseTime(radius: number, stdGravParam: number, count: number, targetSma: number, parkingSma: number): number {
         return Satellite.slidePhaseAngle(radius, stdGravParam, count, targetSma, parkingSma) / 360 * calcOrb.period(parkingSma, stdGravParam);
     }
 }

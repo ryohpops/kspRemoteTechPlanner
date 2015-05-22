@@ -40,15 +40,20 @@ module App {
 
         private updateBody() {
             var b: Body = this.bodyDictServ.get(this.satChain.body.name);
-            for (var item in b)
-                this.satChain.body[item] = b[item];
+            this.satChain.body.name = b.name;
+            this.satChain.body.color = b.color;
+            this.satChain.body.radius = b.radius;
+            this.satChain.body.stdGravity = b.stdGravity;
+            this.satChain.body.soi = b.soi;
         }
 
         private updateAntenna() {
             for (var index in this.satChain.antennas) {
                 var a: Antenna = this.antennaDictServ.get(this.satChain.antennas[index].antenna.name);
-                for (var item in a)
-                    this.satChain.antennas[index].antenna[item] = a[item];
+                this.satChain.antennas[index].antenna.name = a.name;
+                this.satChain.antennas[index].antenna.type = a.type;
+                this.satChain.antennas[index].antenna.range = a.range;
+                this.satChain.antennas[index].antenna.elcNeeded = a.elcNeeded;
             }
         }
 
