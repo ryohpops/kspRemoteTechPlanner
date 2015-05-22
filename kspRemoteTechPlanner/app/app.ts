@@ -19,6 +19,7 @@ module App {
         .controller("deltavViewCtrl", DeltavViewController)
         .controller("bodyEditCtrl", BodyEditController)
         .controller("antennaEditCtrl", AntennaEditController)
+        .directive("foldingDetail", foldingDetail)
         .filter("antennaType", antennaType)
         .filter("scale", scale);
 }

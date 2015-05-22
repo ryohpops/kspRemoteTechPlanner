@@ -17,6 +17,8 @@
 /// <reference path="controllers/inputcontroller.ts" />
 /// <reference path="controllers/nightviewcontroller.ts" />
 
+/// <reference path="directives/foldingdiv/foldingdetail.ts" />
+
 /// <reference path="filters/antennatype.ts" />
 /// <reference path="filters/scale.ts" />
 

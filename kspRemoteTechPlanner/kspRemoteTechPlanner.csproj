@@ -18,6 +18,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="app.css" />
+    <Content Include="app\directives\foldingDiv\foldingDetailTemplate.html" />
     <Content Include="app\views\antennaEdit.html" />
     <Content Include="app\views\bodyEdit.html" />
     <Content Include="app\views\deltavView.html" />
@@ -38,6 +39,7 @@
     <TypeScriptCompile Include="app\controllers\deltavViewController.ts" />
     <TypeScriptCompile Include="app\controllers\entireViewController.ts" />
     <TypeScriptCompile Include="app\controllers\nightViewController.ts" />
+    <TypeScriptCompile Include="app\directives\foldingDiv\foldingDetail.ts" />
     <TypeScriptCompile Include="app\filters\antennaType.ts" />
     <TypeScriptCompile Include="app\filters\scale.ts" />
     <TypeScriptCompile Include="app\models\antenna.ts" />
