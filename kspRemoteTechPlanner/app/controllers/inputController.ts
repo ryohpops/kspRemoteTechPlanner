@@ -27,20 +27,38 @@ module App {
             return this.sc.antennaIndex === index;
         }
 
+        onChange() {
+            this.satChainServ.save();
+            this.eventServ.updateView();
+        }
+
+        onBodyChange() {
+            this.eventServ.updateBody();
+            this.onChange();
+        }
+
+        onAntennaChange() {
+            this.eventServ.updateAntenna();
+            this.onChange();
+        }
+
         setAntennaIndex(index: number) {
             this.sc.antennaIndex = index;
+            this.onChange();
         }
 
-        addNewAntenna() {
+        onAddAntenna() {
             this.sc.antennas.push({ antenna: this.antennas.get("Reflectron DP-10"), quantity: 1 });
             this.antennaDetailVisible.push(false);
+            this.onAntennaChange();
         }
 
-        removeSelectedAntenna() {
+        onRemoveSelectedAntenna() {
             this.sc.antennas.splice(this.sc.antennaIndex, 1);
             this.antennaDetailVisible.splice(this.sc.antennaIndex, 1);
             if (this.sc.antennaIndex === this.sc.antennas.length)
                 this.sc.antennaIndex--;
+            this.onAntennaChange();
         }
     }
 }

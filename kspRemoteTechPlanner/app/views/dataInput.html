@@ -2,8 +2,7 @@
 <form role="form" novalidate>
     <div class="form-group">
         <label for="body">Body</label>
-        <select class="form-control" ng-model="input.sc.body.name"
-                ng-change="input.eventServ.updateBody() || input.eventServ.updateView() || input.satChainServ.save()">
+        <select class="form-control" ng-model="input.sc.body.name" ng-change="input.onBodyChange()">
             <optgroup label="---- Stock ----"></optgroup>
             <option>Kerbol</option>
             <option>Moho</option>
@@ -91,26 +90,25 @@
     <div class="form-group">
         <label for="count">Count</label>
         <input type="number" class="form-control" id="count" ng-model="input.sc.count" ng-model-options="{debounce:300}"
-               required ng-change="input.eventServ.updateView() || input.satChainServ.save()" />
+               required ng-change="input.onChange()" />
     </div>
 
     <div class="form-group">
         <label for="altitude">Altitude(km)</label>
         <input type="number" class="form-control" id="altitude" ng-model="input.sc.altitude" ng-model-options="{debounce:300}"
-               required ng-change="input.eventServ.updateView() || input.satChainServ.save()" />
+               required ng-change="input.onChange()" />
     </div>
 
     <div class="form-group">
         <label for="elcNeeded">Probe electricity consumption<br />(exclude antenna's, per sec.)</label>
         <input type="number" class="form-control" id="elcNeeded" ng-model="input.sc.elcNeeded" ng-model-options="{debounce:300}"
-               required ng-change="input.eventServ.updateView() || input.satChainServ.save()" />
+               required ng-change="input.onChange()" />
     </div>
 
     <div class="form-group">
         <label for="antenna">Antenna</label>
         <div ng-repeat="antennaEquipment in input.sc.antennas">
-            <select class="form-control" ng-model="antennaEquipment.antenna.name"
-                    ng-change="input.eventServ.updateAntenna() || input.eventServ.updateView() || input.satChainServ.save()">
+            <select class="form-control" ng-model="antennaEquipment.antenna.name" ng-change="input.onAntennaChange()">
                 <optgroup label="---- RemoteTech ----"></optgroup>
                 <optgroup label="Omnidirectional">
                     <option>Reflectron DP-10</option>
@@ -178,7 +176,7 @@
                     <div class="btn-group btn-group-justified" role="group">
                         <div class="btn-group btn-group-sm" role="group">
                             <button type="button" class="btn btn-default" ng-class="{'btn-success': input.isSelectedAntenna($index)}"
-                                    ng-click="input.setAntennaIndex($index) || input.eventServ.updateView() || input.satChainServ.save()">
+                                    ng-click="input.setAntennaIndex($index)">
                                 Show
                             </button>
                         </div>
@@ -188,7 +186,7 @@
                     <div class="input-group input-group-sm">
                         <span class="input-group-addon">quantity</span>
                         <input type="number" class="form-control" required ng-model="antennaEquipment.quantity" ng-model-options="{debounce:300}"
-                               ng-change="input.eventServ.updateView() || input.satChainServ.save()" />
+                               ng-change="input.onChange()" />
                     </div>
                 </div>
             </div>
@@ -198,11 +196,10 @@
         <!-- antenna list controller -->
         <div class="btn-group btn-group-justified" role="group">
             <div class="btn-group btn-group-sm" role="group">
-                <button class="btn btn-default" ng-click="input.addNewAntenna() || input.eventServ.updateView() || input.satChainServ.save()">Add after the last</button>
+                <button class="btn btn-default" ng-click="input.onAddAntenna()">Add after the last</button>
             </div>
             <div class="btn-group btn-group-sm" role="group">
-                <button class="btn btn-default" ng-disabled="input.sc.antennas.length <= 1"
-                        ng-click="input.removeSelectedAntenna() || input.eventServ.updateView() || input.satChainServ.save()">
+                <button class="btn btn-default" ng-disabled="input.sc.antennas.length <= 1" ng-click="input.onRemoveSelectedAntenna()">
                     Remove selected
                 </button>
             </div>
@@ -212,6 +209,6 @@
     <div class="form-group">
         <label for="parkingAlt">Parking altitude on launch(km)</label>
         <input type="number" class="form-control" id="parkingAlt" required ng-model="input.sc.parkingAlt" ng-model-options="{debounce:300}"
-               ng-change="input.eventServ.updateView() || input.satChainServ.save()" />
+               ng-change="input.onChange()" />
     </div>
 </form>

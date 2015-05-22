@@ -31,6 +31,10 @@ module App {
             this.isInEdit = true;
         }
 
+        cancel() {
+            this.isInEdit = false;
+        }
+
         edit(name: string) {
             this.editData = this.bodyDictServ.get(name);
             this.isInEdit = true;
@@ -42,14 +46,13 @@ module App {
             this.bodyDictServ.save();
         }
 
-        save() {
+        onValidSubmit() {
             this.isInEdit = false;
             this.bodyDictServ.set(this.editData.name, this.editData);
             this.bodyDictServ.save();
-        }
 
-        cancel() {
-            this.isInEdit = false;
+            this.eventServ.updateBody();
+            this.eventServ.updateView();
         }
     }
 }

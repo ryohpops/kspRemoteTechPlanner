@@ -36,6 +36,10 @@ module App {
             this.isInEdit = true;
         }
 
+        cancel() {
+            this.isInEdit = false;
+        }
+
         edit(name: string) {
             this.editData = this.antennaDictServ.get(name);
             this.isInEdit = true;
@@ -47,14 +51,13 @@ module App {
             this.antennaDictServ.save();
         }
 
-        save() {
+        onValidSubmit() {
             this.isInEdit = false;
             this.antennaDictServ.set(this.editData.name, this.editData);
             this.antennaDictServ.save();
-        }
 
-        cancel() {
-            this.isInEdit = false;
+            this.eventServ.updateAntenna();
+            this.eventServ.updateView();
         }
     }
 }
