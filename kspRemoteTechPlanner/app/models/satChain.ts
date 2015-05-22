@@ -1,9 +1,9 @@
 ﻿/// <reference path="../_references.ts" />
 
 module App {
-    export class SatChain {
-        'use strict';
+    'use strict';
 
+    export class SatChain {
         body: Body;
         count: number;
         altitude: number;

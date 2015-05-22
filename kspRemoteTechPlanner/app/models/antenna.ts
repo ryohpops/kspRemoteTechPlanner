@@ -1,6 +1,8 @@
 ﻿/// <reference path="../_references.ts" />
 
 module App {
+    'use strict';
+
     export class AntennaType {
         static omni: string = "0";
         static dish: string = "1";

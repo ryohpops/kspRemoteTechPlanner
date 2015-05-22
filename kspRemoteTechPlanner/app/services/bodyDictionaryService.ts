@@ -1,6 +1,8 @@
 ﻿/// <reference path="../_references.ts" />
 
 module App {
+    'use strict';
+
     export interface BodyDictionary {
         [index: string]: Body;
     }
@@ -10,8 +12,6 @@ module App {
     }
 
     export class BodyDictionaryService {
-        'use strict';
-
         private static dataKey: string = "userBody";
         private static versionKey: string = "userBodyVersion";
         private static modelVersion: number = 1;

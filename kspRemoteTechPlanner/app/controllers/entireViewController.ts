@@ -1,12 +1,12 @@
 ﻿/// <reference path="../_references.ts" />
 
 module App {
+    'use strict';
+
     import Point = Calculator.Point;
     import calcSat = Calculator.Satellite;
 
     export class EntireViewController {
-        'use strict';
-
         real: number = 800;
         get virtual(): number {
             return (this.sc.body.radius + this.sc.altitude + this.sc.selectedAntenna.range) * 2 * 1.05;

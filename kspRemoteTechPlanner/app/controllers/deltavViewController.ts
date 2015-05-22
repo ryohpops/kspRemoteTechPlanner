@@ -1,11 +1,11 @@
 ﻿/// <reference path="../_references.ts" />
 
 module App {
+    'use strict';
+
     import calcOrb = Calculator.Orbital;
 
     export class DeltavViewController {
-        'use strict';
-
         sc: SatChain;
         body: Body;
         get startDV(): number {

@@ -1,12 +1,12 @@
 ﻿/// <reference path="../_references.ts" />
 
 module App {
+    'use strict';
+
     import calcOrb = Calculator.Orbital;
     import calcSat = Calculator.Satellite;
 
     export class NightViewController {
-        'use strict';
-
         sc: SatChain;
         body: Body;
         get period(): number {

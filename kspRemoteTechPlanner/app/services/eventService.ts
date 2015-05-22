@@ -1,6 +1,8 @@
 ﻿/// <reference path="../_references.ts" />
 
 module App {
+    'use strict';
+
     export class Events {
         static updateBody: string = "updateBody";
         static updateAntenna: string = "updateAntenna";
@@ -8,8 +10,6 @@ module App {
     }
 
     export class EventService {
-        'use strict';
-
         static $inject = ["$rootScope"];
         constructor(
             private $rootScope: angular.IRootScopeService

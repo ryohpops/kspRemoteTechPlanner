@@ -1,9 +1,9 @@
 ﻿/// <reference path="../_references.ts" />
 
 module App {
-    export class AntennaEditController {
-        'use strict';
+    'use strict';
 
+    export class AntennaEditController {
         userAntennas: AntennaDictionary;
         sc: SatChain;
         isInEdit: boolean;

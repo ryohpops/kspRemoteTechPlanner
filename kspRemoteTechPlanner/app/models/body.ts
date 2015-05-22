@@ -1,9 +1,9 @@
 ﻿/// <reference path="../_references.ts" />
 
 module App {
-    export class Body {
-        'use strict';
+    'use strict';
 
+    export class Body {
         name: string;
         color: string;
         radius: number;

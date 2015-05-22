@@ -1,6 +1,8 @@
 ﻿/// <reference path="_references.ts" />
 
 module App {
+    'use strict';
+
     angular.module("app", ["ngCookies", "LocalStorageModule"])
         .config(
         ["localStorageServiceProvider", (lssp: angular.local.storage.ILocalStorageServiceProvider) => {

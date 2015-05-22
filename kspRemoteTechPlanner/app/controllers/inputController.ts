@@ -1,9 +1,9 @@
 ﻿/// <reference path="../_references.ts" />
 
 module App {
-    export class InputController {
-        'use strict';
+    'use strict';
 
+    export class InputController {
         sc: SatChain;
         bodyDetailVisible: boolean;
         antennaDetailVisible: boolean[];

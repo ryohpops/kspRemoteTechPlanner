@@ -1,6 +1,8 @@
 ﻿/// <reference path="../_references.ts" />
 
 module App {
+    'use strict';
+
     export interface AntennaDictionary {
         [index: string]: Antenna;
     }
@@ -10,8 +12,6 @@ module App {
     }
 
     export class AntennaDictionaryService {
-        'use strict';
-
         private static dataKey: string = "userAntenna";
         private static versionKey: string = "userAntennaVersion";
         private static modelVersion: number = 1;

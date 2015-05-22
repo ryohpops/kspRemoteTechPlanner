@@ -1,14 +1,14 @@
 ﻿/// <reference path="../_references.ts" />
 
 module App {
+    'use strict';
+
     export interface LoadResult {
         data: any;
         version: number;
     }
 
     export class StorageService {
-        'use strict';
-
         static $inject = ["$cookieStore", "localStorageService"];
         constructor(
             private $cookieStore: angular.cookies.ICookiesService,

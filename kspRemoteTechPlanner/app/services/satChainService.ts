@@ -1,9 +1,9 @@
 ﻿/// <reference path="../_references.ts" />
 
 module App {
-    export class SatChainService {
-        'use strict';
+    'use strict';
 
+    export class SatChainService {
         private static dataKey: string = "inputData";
         private static versionKey: string = "inputDataVersion";
         private static modelVersion: number = 2;

@@ -1,9 +1,9 @@
 ﻿/// <reference path="../_references.ts" />
 
 module App {
-    export class BodyEditController {
-        'use strict';
+    'use strict';
 
+    export class BodyEditController {
         userBodies: BodyDictionary;
         sc: SatChain;
         isInEdit: boolean;
