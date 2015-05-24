@@ -2,65 +2,10 @@
 <form role="form" novalidate ng-controller="inputCtrl as input">
     <div class="form-group">
         <label for="body">Body</label>
-        <select class="form-control" ng-model="input.sc.body.name" ng-change="input.onBodyChange()">
-            <optgroup label="---- Stock ----"></optgroup>
-            <option>Kerbol</option>
-            <option>Moho</option>
-            <option>Eve</option>
-            <optgroup label="Eve's moon">
-                <option>Gilly</option>
-            </optgroup>
-            <option>Kerbin</option>
-            <optgroup label="Kerbin's moons">
-                <option>Mun</option>
-                <option>Minmus</option>
-            </optgroup>
-            <option>Duna</option>
-            <optgroup label="Duna's moon">
-                <option>Ike</option>
-            </optgroup>
-            <option>Dres</option>
-            <option>Jool</option>
-            <optgroup label="Jool's moons">
-                <option>Laythe</option>
-                <option>Vall</option>
-                <option>Tylo</option>
-                <option>Bop</option>
-                <option>Pol</option>
-            </optgroup>
-            <option>Eeloo</option>
-            <optgroup label=""></optgroup>
-
-            <optgroup label="---- Real Solar System ----"></optgroup>
-            <option>Mercury</option>
-            <option>Venus</option>
-            <option>Earth</option>
-            <optgroup label="Earth's moon:">
-                <option>Moon</option>
-            </optgroup>
-            <option>Mars</option>
-            <optgroup label="Mars's moons">
-                <option>Phobos</option>
-                <option>Deimos</option>
-            </optgroup>
-            <option>Jupiter</option>
-            <optgroup label="Jupiter's moons">
-                <option>Io</option>
-                <option>Europa</option>
-                <option>Ganymede</option>
-                <option>Callisto</option>
-            </optgroup>
-            <option>Saturn</option>
-            <optgroup label="Saturn's moon">
-                <option>Titan</option>
-            </optgroup>
-            <option>Uranus</option>
-            <option>Pluto</option>
-            <optgroup label=""></optgroup>
-
-            <optgroup label="---- User data ----"></optgroup>
-            <option ng-repeat="userBody in input.bodies.userBodies">{{userBody.name}}</option>
-        </select>
+        <!-- body selector -->
+        <div ng-init="input.option = 'stock'"></div>
+        <div ng-include src="'app/views/bodySelectorStock.html'" ng-show="input.option === 'stock'"></div>
+        <div ng-include src="'app/views/bodySelectorRSS.html'" ng-show="input.option === 'rss'"></div>
 
         <!-- detail for body -->
         <div folding-detail>

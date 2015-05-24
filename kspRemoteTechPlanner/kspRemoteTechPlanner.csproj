@@ -18,6 +18,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="app.css" />
+    <Content Include="app\views\bodySelectorRSS.html" />
+    <Content Include="app\views\bodySelectorStock.html" />
     <Content Include="app\directives\foldingDiv\foldingDetailTemplate.html" />
     <Content Include="app\views\antennaEdit.html" />
     <Content Include="app\views\bodyEdit.html" />
