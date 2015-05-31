@@ -5,9 +5,11 @@ module App {
 
     export class InputController {
         sc: SatChain;
+        settings: Settings
 
-        static $inject = ["eventServ", "satChainServ", "bodyDictServ", "antennaDictServ"];
+        static $inject = ["settingsServ", "eventServ", "satChainServ", "bodyDictServ", "antennaDictServ"];
         constructor(
+            private settingsServ: SettingsService,
             private eventServ: EventService,
             private satChainServ: SatChainService,
             private bodies: BodyDictionaryService,
@@ -15,6 +17,7 @@ module App {
             ) {
 
             this.sc = this.satChainServ.satChain;
+            this.settings = this.settingsServ.settings;
         }
 
         isSelectedAntenna(index: number): boolean {

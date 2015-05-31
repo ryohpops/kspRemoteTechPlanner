@@ -38,5 +38,9 @@ module App {
             else
                 this.localStorage.remove(dataKey);
         }
+
+        reset() {
+            this.localStorage.clearAll();
+        }
     }
 }
