@@ -8,11 +8,13 @@ module App {
         ["localStorageServiceProvider", (lssp: angular.local.storage.ILocalStorageServiceProvider) => {
             lssp.setPrefix("kspRemoteTechPlanner");
         }])
+        .service("settingsServ", SettingsService)
         .service("eventServ", EventService)
         .service("storageServ", StorageService)
         .service("bodyDictServ", BodyDictionaryService)
         .service("antennaDictServ", AntennaDictionaryService)
         .service("satChainServ", SatChainService)
+        .controller("settingsCtrl", SettingsController)
         .controller("inputCtrl", InputController)
         .controller("entireViewCtrl", EntireViewController)
         .controller("nightViewCtrl", NightViewController)
