@@ -15,6 +15,10 @@ module App {
             this.settings = this.settingsServ.settings;
         }
 
+        onChange() {
+            this.settingsServ.save();
+        }
+
         onResetConfirm() {
             this.storageServ.reset();
             location.reload();
