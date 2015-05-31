@@ -3,8 +3,8 @@
     <div class="form-group">
         <label for="body">Body</label>
         <!-- body selector -->
-        <div ng-include src="'app/views/bodySelectorStock.html'" ng-show="input.settings.stockData === 'stock'"></div>
-        <div ng-include src="'app/views/bodySelectorRSS.html'" ng-show="input.settings.stockData === 'rss'"></div>
+        <div ng-include src="'app/views/dataInput/bodySelectorStock.html'" ng-show="input.settings.stockData === 'stock'"></div>
+        <div ng-include src="'app/views/dataInput/bodySelectorRSS.html'" ng-show="input.settings.stockData === 'rss'"></div>
 
         <!-- detail for body -->
         <div folding-detail>
@@ -45,8 +45,8 @@
         <label for="antenna">Antenna</label>
         <div ng-repeat="antennaEquipment in input.sc.antennas">
             <!-- antenna selector -->
-            <div ng-include src="'app/views/antennaSelectorStock.html'" ng-show="input.settings.stockData === 'stock'"></div>
-            <div ng-include src="'app/views/antennaSelectorRSS.html'" ng-show="input.settings.stockData === 'rss'"></div>
+            <div ng-include src="'app/views/dataInput/antennaSelectorStock.html'" ng-show="input.settings.stockData === 'stock'"></div>
+            <div ng-include src="'app/views/dataInput/antennaSelectorRSS.html'" ng-show="input.settings.stockData === 'rss'"></div>
 
             <!-- detail for antenna -->
             <div folding-detail>

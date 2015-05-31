@@ -18,10 +18,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="app.css" />
-    <Content Include="app\views\antennaSelectorRSS.html" />
-    <Content Include="app\views\antennaSelectorStock.html" />
-    <Content Include="app\views\bodySelectorRSS.html" />
-    <Content Include="app\views\bodySelectorStock.html" />
+    <Content Include="app\views\dataInput\antennaSelectorRSS.html" />
+    <Content Include="app\views\dataInput\antennaSelectorStock.html" />
+    <Content Include="app\views\dataInput\bodySelectorRSS.html" />
+    <Content Include="app\views\dataInput\bodySelectorStock.html" />
     <Content Include="app\directives\foldingDiv\foldingDetailTemplate.html" />
     <Content Include="app\views\antennaEdit.html" />
     <Content Include="app\views\bodyEdit.html" />
