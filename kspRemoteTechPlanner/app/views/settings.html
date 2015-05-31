@@ -1,0 +1,19 @@
+﻿<br />
+<form class="form-horizontal" role="form" novalidate ng-controller="settingsCtrl as settings">
+    <div class="form-group">
+        <label for="stockData" class="col-sm-2 control-label">Stock Data</label>
+        <div class="col-sm-10">
+            <select class="form-control" ng-model="settings.settings.stockData">
+                <option value="stock">Stock</option>
+                <option value="rss">Real Solar System</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="reset" class="col-sm-2 control-label">Reset</label>
+        <div class="col-sm-10">
+            <button class="btn btn-danger">Clear all data</button>
+        </div>
+    </div>
+</form>

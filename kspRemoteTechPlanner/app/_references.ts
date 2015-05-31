@@ -18,6 +18,7 @@
 /// <reference path="controllers/entireviewcontroller.ts" />
 /// <reference path="controllers/inputcontroller.ts" />
 /// <reference path="controllers/nightviewcontroller.ts" />
+/// <reference path="controllers/settingscontroller.ts" />
 
 /// <reference path="directives/foldingdiv/foldingdetail.ts" />
 

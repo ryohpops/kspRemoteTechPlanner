@@ -46,9 +46,10 @@
             <!-- tab navigation -->
             <ul class=" nav nav-tabs" role="tablist">
                 <li role="presentation" class="active"><a href="#planner" aria-controls="planner" role="tab" data-toggle="tab">Planner</a></li>
-                <li role="presentation"><a href="#desc" aria-controls="desc" role="tab" data-toggle="tab">Description</a></li>
                 <li role="presentation"><a href="#body" aria-controls="body" role="tab" data-toggle="tab">Body Edit</a></li>
                 <li role="presentation"><a href="#antenna" aria-controls="antenna" role="tab" data-toggle="tab">Antenna Edit</a></li>
+                <li role="presentation"><a href="#desc" aria-controls="desc" role="tab" data-toggle="tab">Description</a></li>
+                <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
             </ul>
 
             <!-- tab contents -->
@@ -56,16 +57,17 @@
                 <div role="tabpanel" class="tab-pane fade in active" id="planner">
                     <div ng-include src="'app/views/planner.html'"></div>
                 </div>
-                <div role="tabpanel" class="tab-pane fade" id="desc">
-                    <div ng-include src="'app/views/description.html'"></div>
-                </div>
-
                 <div role="tabpanel" class="tab-pane fade" id="body">
                     <div ng-include src="'app/views/bodyEdit.html'"></div>
                 </div>
-
                 <div role="tabpanel" class="tab-pane fade" id="antenna">
                     <div ng-include src="'app/views/antennaEdit.html'"></div>
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="desc">
+                    <div ng-include src="'app/views/description.html'"></div>
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="settings">
+                    <div ng-include src="'app/views/settings.html'"></div>
                 </div>
             </div>
         </div>

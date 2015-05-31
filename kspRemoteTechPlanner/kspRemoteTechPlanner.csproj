@@ -30,6 +30,7 @@
     <Content Include="app\views\dataInput.html" />
     <Content Include="app\views\entireView.html" />
     <Content Include="app\views\planner.html" />
+    <Content Include="app\views\settings.html" />
     <Content Include="index.html" />
   </ItemGroup>
   <ItemGroup>
@@ -43,6 +44,7 @@
     <TypeScriptCompile Include="app\controllers\deltavViewController.ts" />
     <TypeScriptCompile Include="app\controllers\entireViewController.ts" />
     <TypeScriptCompile Include="app\controllers\nightViewController.ts" />
+    <TypeScriptCompile Include="app\controllers\settingsController.ts" />
     <TypeScriptCompile Include="app\directives\foldingDiv\foldingDetail.ts" />
     <TypeScriptCompile Include="app\filters\antennaType.ts" />
     <TypeScriptCompile Include="app\filters\scale.ts" />
