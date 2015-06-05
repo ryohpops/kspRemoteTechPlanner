@@ -5,5 +5,5 @@ Web-based satellite network planner for the MOD, [RemoteTech](http://forum.kerba
 
 Latest release is available [here](http://ryohpops.github.io/kspRemoteTechPlanner/) and forum is [here](http://forum.kerbalspaceprogram.com/threads/90113).
 
-- 1.5.5 : 2015/05/08
- * Fix display of Slide time.
+- 1.5.6 : 2015/06/05
+ * Fix calculation of night time. (Aerospace)

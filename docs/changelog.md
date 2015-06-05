@@ -1,3 +1,6 @@
+- 1.5.6 : 2015/06/05
+ * Fix calculation of night time. (Aerospace)
+
 - 1.5.5 : 2015/05/08
  * Fix display of Slide time.
 
