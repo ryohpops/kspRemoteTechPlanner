@@ -10,7 +10,7 @@ module Calculator {
         }
 
         nightTime(radius: number, sma: number, stdGravParam: number): number {
-            return this.period(sma, stdGravParam) * Math.asin((radius / 2) / sma) / Math.PI;
+            return this.period(sma, stdGravParam) * Math.asin(radius / sma) / Math.PI;
         }
 
         hohmannStartDV(sma1: number, sma2: number, stdGravParam: number): number {
