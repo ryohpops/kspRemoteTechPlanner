@@ -8,7 +8,7 @@ module Calculator.Orbital {
     }
 
     export function nightTime(radius: number, sma: number, stdGravParam: number): number {
-        return Orbital.period(sma, stdGravParam) * Math.asin((radius / 2) / sma) / Math.PI;
+        return Orbital.period(sma, stdGravParam) * Math.asin(radius / sma) / Math.PI;
     }
 
     export function hohmannStartDV(sma1: number, sma2: number, stdGravParam: number): number {
