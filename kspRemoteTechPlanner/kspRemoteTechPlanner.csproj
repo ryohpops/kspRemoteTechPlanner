@@ -29,6 +29,7 @@
     <Content Include="app\views\description.html" />
     <Content Include="app\views\dataInput.html" />
     <Content Include="app\views\entireView.html" />
+    <Content Include="app\views\multiLaunchView.html" />
     <Content Include="app\views\planner.html" />
     <Content Include="app\views\settings.html" />
     <Content Include="index.html" />
@@ -41,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="app\app.ts" />
+    <TypeScriptCompile Include="app\controllers\multiLaunchViewController.ts" />
     <TypeScriptCompile Include="app\controllers\singleLaunchViewController.ts" />
     <TypeScriptCompile Include="app\controllers\entireViewController.ts" />
     <TypeScriptCompile Include="app\controllers\nightViewController.ts" />

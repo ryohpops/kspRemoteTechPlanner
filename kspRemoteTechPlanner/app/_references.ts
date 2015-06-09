@@ -14,11 +14,12 @@
 
 /// <reference path="controllers/antennaeditcontroller.ts" />
 /// <reference path="controllers/bodyeditcontroller.ts" />
-/// <reference path="controllers/singleLaunchviewcontroller.ts" />
 /// <reference path="controllers/entireviewcontroller.ts" />
 /// <reference path="controllers/inputcontroller.ts" />
+/// <reference path="controllers/multilaunchviewcontroller.ts" />
 /// <reference path="controllers/nightviewcontroller.ts" />
 /// <reference path="controllers/settingscontroller.ts" />
+/// <reference path="controllers/singlelaunchviewcontroller.ts" />
 
 /// <reference path="directives/foldingdiv/foldingdetail.ts" />
 
