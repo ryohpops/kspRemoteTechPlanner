@@ -18,7 +18,7 @@ module App {
         .controller("inputCtrl", InputController)
         .controller("entireViewCtrl", EntireViewController)
         .controller("nightViewCtrl", NightViewController)
-        .controller("deltavViewCtrl", DeltavViewController)
+        .controller("singleLaunchViewCtrl", SingleLaunchViewController)
         .controller("bodyEditCtrl", BodyEditController)
         .controller("antennaEditCtrl", AntennaEditController)
         .directive("foldingDetail", foldingDetail)

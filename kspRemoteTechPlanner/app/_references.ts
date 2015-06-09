@@ -14,7 +14,7 @@
 
 /// <reference path="controllers/antennaeditcontroller.ts" />
 /// <reference path="controllers/bodyeditcontroller.ts" />
-/// <reference path="controllers/deltavviewcontroller.ts" />
+/// <reference path="controllers/singleLaunchviewcontroller.ts" />
 /// <reference path="controllers/entireviewcontroller.ts" />
 /// <reference path="controllers/inputcontroller.ts" />
 /// <reference path="controllers/nightviewcontroller.ts" />
