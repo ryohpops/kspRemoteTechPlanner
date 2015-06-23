@@ -7,6 +7,10 @@ module Calculator.Orbital {
         return 2 * Math.PI * Math.sqrt(Math.pow(sma, 3) / stdGravParam);
     }
 
+    export function sma(stdGravParam: number, period: number): number {
+        return Math.pow(Math.pow(period, 2) * stdGravParam / (4 * Math.pow(Math.PI, 2)), 1 / 3);
+    }
+
     export function nightTime(radius: number, sma: number, stdGravParam: number): number {
         return Orbital.period(sma, stdGravParam) * Math.asin(radius / sma) / Math.PI;
     }
