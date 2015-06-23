@@ -1,8 +1,23 @@
 ﻿<div class="spacer-svg"></div>
 <div ng-controller="multiLaunchViewCtrl as mlv">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="-200 -200 400 400"
-         stroke-width="1" text-anchor="middle" font-family="Arial" font-size="14">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="-200 -220 400 400" stroke-width="1" text-anchor="middle" font-family="Arial" font-size="14">
+        <circle cx="0" cy="0" r="20" ng-attr-fill="{{miv.body.color}}"></circle>
+        <circle cx="0" cy="0" r="50" fill="none" stroke="black"></circle>
 
-        <rect x="-200" y="-200" width="400" height="400" fill="none" stroke="black"></rect>
+        <circle cx="0" cy="0" r="150" fill="none" stroke="black" stroke-dasharray="2"></circle>
+
+        <circle cx="0" cy="20" r="130" fill="none" stroke="#FF8000"></circle>
+        <circle cx="0" cy="-20" r="170" fill="none" stroke="#0080FF"></circle>
+
+        <text x="0" y="-190" dy="-0.4em">Higher period: {{mlv.higherPeriod |number:3}} sec.</text>
+        <text x="0" y="-185" dy="1.2em">Ap: {{mlv.ap |number:3}} km</text>
+
+        <text x="0" y="-110" dy="-0.4em">Lower period: {{mlv.lowerPeriod |number:3}} sec.</text>
+        <text x="0" y="-105" dy="1.2em">Pe: {{mlv.pe |number:3}} km</text>
+
+        <text x="0" y="130" dy="-0.4em">ΔV to lower: {{mlv.lowerDV |number:3}} m/s</text>
+        <text x="0" y="150" dy="1.2em">ΔV to higher: {{mlv.higherDV |number:3}} m/s</text>
+
+        <rect x="-200" y="-220" width="400" height="400" fill="none" stroke="black"></rect>
     </svg>
 </div>
