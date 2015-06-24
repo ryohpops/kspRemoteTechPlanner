@@ -24,5 +24,6 @@ module App {
         .controller("antennaEditCtrl", AntennaEditController)
         .directive("foldingDetail", foldingDetail)
         .filter("antennaType", antennaType)
+        .filter("format", format)
         .filter("scale", scale);
 }

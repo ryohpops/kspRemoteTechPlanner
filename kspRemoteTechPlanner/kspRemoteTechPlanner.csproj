@@ -49,6 +49,7 @@
     <TypeScriptCompile Include="app\controllers\settingsController.ts" />
     <TypeScriptCompile Include="app\directives\foldingDiv\foldingDetail.ts" />
     <TypeScriptCompile Include="app\filters\antennaType.ts" />
+    <TypeScriptCompile Include="app\filters\format.ts" />
     <TypeScriptCompile Include="app\filters\scale.ts" />
     <TypeScriptCompile Include="app\models\antenna.ts" />
     <TypeScriptCompile Include="app\models\body.ts" />
