@@ -2,10 +2,10 @@
 <div ng-controller="entireViewCtrl as entire">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="-400 -400 800 800"
          stroke-width="1" text-anchor="middle" font-family="Arial" font-size="14">
-        <marker id="arrow-start" markerWidth="20" markerHeight="20" viewBox="0 -10 20 20" orient="auto">
-            <polygon id="arrow" points="0,0 20,-10 20,10" fill="none"></polygon>
+        <marker id="arrow-start" markerWidth="16" markerHeight="16" viewBox="0 -8 16 16" orient="auto">
+            <polygon id="arrow" points="0,0 16,-8 16,8" fill="none"></polygon>
         </marker>
-        <marker id="arrow-end" markerWidth="20" markerHeight="20" viewBox="-20 -10 20 20" orient="auto">
+        <marker id="arrow-end" markerWidth="16" markerHeight="16" viewBox="-16 -8 16 16" orient="auto">
             <use xlink:href="#arrow" transform="rotate(180)"></use>
         </marker>
 
@@ -31,19 +31,19 @@
             {{entire.sc.body.name}}
         </text>
         <text x="0" ng-attr-y="{{entire.sc.body.radius + entire.sc.altitude |scale:entire.real:entire.virtual}}" dy="1.2em">
-            Altitude: {{entire.sc.altitude |number:3}} km
+            Altitude: {{entire.sc.altitude |format:"length"}}
         </text>
         <text x="0" ng-attr-y="{{-entire.stableSma |scale:entire.real:entire.virtual}}" text-anchor="middle" dy="-0.4em" ng-show="entire.hasStable">
-            Stable: {{entire.stableSma - entire.sc.body.radius |number:3}} km
+            Stable: {{entire.stableSma - entire.sc.body.radius |format:"length"}}
         </text>
         <text x="0" ng-attr-y="{{entire.sc.body.soi |scale:entire.real:entire.virtual}}" dy="1.2em">
-            Sphere of Influence: {{entire.sc.body.soi - entire.sc.body.radius |number:3}} km
+            Sphere of Influence: {{entire.sc.body.soi - entire.sc.body.radius |format:"length"}}
         </text>
         <text ng-repeat="dist in entire.distance track by $index"
               ng-attr-x="{{entire.position[0].x * 0.3 + entire.position[$index + 1].x * 0.7 |scale:entire.real:entire.virtual}}"
               ng-attr-y="{{entire.position[0].y * 0.3 + entire.position[$index + 1].y * 0.7 |scale:entire.real:entire.virtual}}"
               dy="0.4em">
-            {{dist |number:3}} km
+            {{dist |format:"length"}}
         </text>
     </svg>
 </div>

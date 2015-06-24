@@ -6,9 +6,9 @@
         <circle cx="0" cy="0" r="150" fill="none" stroke="black" stroke-opacity="0.2"></circle>
         <circle cx="0" cy="0" r="50" ng-attr-fill="{{night.body.color}}"></circle>
 
-        <text x="0" y="-150" dy="-0.4em">Orbital period: {{night.period |number}} sec.</text>
-        <text x="190" y="-50" dy="-0.4em" text-anchor="end">Night time: {{night.nightTime |number}} sec.</text>
-        <text x="0" y="150" dy="1.2em">Required generator: {{night.reqGen |number:3}} per sec.</text>
-        <text x="190" y="50" dy="1.2em" text-anchor="end">Required Battery: {{night.reqBatt |number:3}}</text>
+        <text x="0" y="-150" dy="-0.4em">Orbital period: {{night.period |format:"time"}}</text>
+        <text x="190" y="-50" dy="-0.4em" text-anchor="end">Night time: {{night.nightTime |format:"time"}}</text>
+        <text x="0" y="150" dy="1.2em">Required generator: {{night.reqGen |format}} per sec.</text>
+        <text x="190" y="50" dy="1.2em" text-anchor="end">Required Battery: {{night.reqBatt |format}}</text>
     </svg>
 </div>

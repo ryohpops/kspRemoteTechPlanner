@@ -24,6 +24,7 @@
 /// <reference path="directives/foldingdiv/foldingdetail.ts" />
 
 /// <reference path="filters/antennatype.ts" />
+/// <reference path="filters/format.ts" />
 /// <reference path="filters/scale.ts" />
 
 /// <reference path="app.ts" />
