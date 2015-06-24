@@ -1,5 +1,5 @@
 ﻿<div class="spacer-svg"></div>
-<div ng-controller="deltavViewCtrl as deltav">
+<div ng-controller="singleLaunchViewCtrl as slv">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="-200 -200 400 400"
          stroke-width="1" text-anchor="middle" font-family="Arial" font-size="14">
         <marker id="ship" markerWidth="10" markerHeight="10" viewBox="-5 -5 10 10">
@@ -18,20 +18,20 @@
 
         <circle cx="0" cy="0" r="150" fill="none" stroke="black"></circle>
         <circle cx="0" cy="0" r="50" fill="none" stroke="black"></circle>
-        <circle cx="0" cy="0" r="20" ng-attr-fill="{{deltav.body.color}}"></circle>
+        <circle cx="0" cy="0" r="20" ng-attr-fill="{{slv.body.color}}"></circle>
 
         <text x="100" y="0">
             <tspan dy="-0.4em">Start dV: </tspan>
-            <tspan x="100" dy="1.2em">{{deltav.startDV |number:3}} m/s</tspan>
+            <tspan x="100" dy="1.2em">{{slv.startDV |number:3}} m/s</tspan>
         </text>
         <text x="-100" y="0">
             <tspan dy="-0.4em">Finish dV: </tspan>
-            <tspan x="-100" dy="1.2em">{{deltav.finishDV |number:3}} m/s</tspan>
+            <tspan x="-100" dy="1.2em">{{slv.finishDV |number:3}} m/s</tspan>
         </text>
-        <text x="0" y="50" dy="1.2em">Total dV: {{deltav.startDV + deltav.finishDV |number:3}} m/s</text>
+        <text x="0" y="50" dy="1.2em">Total dV: {{slv.startDV + slv.finishDV |number:3}} m/s</text>
 
-        <text x="0" y="-150" dy="-0.4em">Silde angle: {{deltav.slideAngle |number:3}} deg.</text>
-        <text x="0" y="150" dy="1.2em">Slide time: {{deltav.slideTime |number:3}} sec.</text>
+        <text x="0" y="-150" dy="-0.4em">Silde angle: {{slv.slideAngle |number:3}} deg.</text>
+        <text x="0" y="150" dy="1.2em">Slide time: {{slv.slideTime |number:3}} sec.</text>
 
         <rect x="-200" y="-200" width="400" height="400" fill="none" stroke="black"></rect>
     </svg>

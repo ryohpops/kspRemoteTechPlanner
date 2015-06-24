@@ -5,7 +5,7 @@ module App {
 
     import calcOrb = Calculator.Orbital;
 
-    export class DeltavViewController {
+    export class SingleLaunchViewController {
         sc: SatChain;
         body: Body;
         get startDV(): number {
