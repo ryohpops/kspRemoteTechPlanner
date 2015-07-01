@@ -14,7 +14,7 @@ module App {
     export class AntennaDictionaryService {
         private static dataKey: string = "userAntenna";
         private static versionKey: string = "userAntennaVersion";
-        private static modelVersion: number = 1;
+        private static modelVersion: number = 2;
 
         private _stockAntennas: AntennaDictionary;
         get stockAntennas(): AntennaDictionary { return this._stockAntennas; }
@@ -111,6 +111,17 @@ module App {
                     else if (userAntennas[key].type == 1)
                         userAntennas[key].type = "1";
                 }
+                oldVersion = 1;
+            }
+
+            if (oldVersion === 1) {
+                for (var key in userAntennas) {
+                    if (userAntennas[key].type === "0")
+                        userAntennas[key].type = AntennaType.omni;
+                    else if (userAntennas[key].type === "1")
+                        userAntennas[key].type = AntennaType.dish;
+                }
+                oldVersion = 2;
             }
 
             return userAntennas;

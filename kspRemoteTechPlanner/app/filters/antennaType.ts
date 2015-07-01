@@ -5,9 +5,9 @@ module App {
 
     export function antennaType(): Function {
         return (input: string): string => {
-            if (input === "0")
+            if (input === AntennaType.omni)
                 return "Omnidirectional";
-            else if (input === "1")
+            else if (input === AntennaType.dish)
                 return "Dish";
         }
     }

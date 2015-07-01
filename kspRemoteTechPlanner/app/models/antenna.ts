@@ -4,17 +4,17 @@ module App {
     'use strict';
 
     export class AntennaType {
-        static omni: string = "0";
-        static dish: string = "1";
+        static omni: string = "omni";
+        static dish: string = "dish";
     }
 
     export class Antenna {
         name: string;
-        type: AntennaType;
+        type: string;
         range: number;
         elcNeeded: number;
 
-        constructor(name: string, type: AntennaType, range: number, elcNeeded: number) {
+        constructor(name: string, type: string, range: number, elcNeeded: number) {
             this.name = name;
             this.type = type;
             this.range = range;
@@ -28,7 +28,7 @@ module App {
 
     export interface AntennaJSON {
         name: string;
-        type: AntennaType;
+        type: string;
         range: number;
         elcNeeded: number;
     }
