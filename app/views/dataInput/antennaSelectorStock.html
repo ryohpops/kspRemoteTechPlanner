@@ -1,0 +1,22 @@
+<select class="form-control" ng-model="antennaEquipment.antenna.name" ng-change="input.onAntennaChange()">
+    <optgroup label="---- RemoteTech ----"></optgroup>
+    <optgroup label="Omnidirectional">
+        <option>Reflectron DP-10</option>
+        <option>Communotron 16</option>
+        <option>CommTech EXP-VR-2T</option>
+        <option>Communotron 32</option>
+    </optgroup>
+    <optgroup label="Dish">
+        <option>Comms DTS-M1</option>
+        <option>Reflectron KR-7</option>
+        <option>Communotron 88-88</option>
+        <option>Reflectron KR-14</option>
+        <option>CommTech-1</option>
+        <option>Reflectron GX-128</option>
+    </optgroup>
+    <optgroup label=""></optgroup>
+
+    <optgroup label="---- User data ----">
+        <option ng-repeat="userAntenna in input.antennas.userAntennas">{{userAntenna.name}}</option>
+    </optgroup>
+</select>

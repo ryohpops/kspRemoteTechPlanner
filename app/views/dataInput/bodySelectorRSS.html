@@ -1,0 +1,31 @@
+<select class="form-control" ng-model="input.sc.body.name" ng-change="input.onBodyChange()">
+    <optgroup label="---- Real Solar System ----"></optgroup>
+    <option>Mercury</option>
+    <option>Venus</option>
+    <option>Earth</option>
+    <optgroup label="Earth's moon:">
+        <option>Moon</option>
+    </optgroup>
+    <option>Mars</option>
+    <optgroup label="Mars's moons">
+        <option>Phobos</option>
+        <option>Deimos</option>
+    </optgroup>
+    <option>Jupiter</option>
+    <optgroup label="Jupiter's moons">
+        <option>Io</option>
+        <option>Europa</option>
+        <option>Ganymede</option>
+        <option>Callisto</option>
+    </optgroup>
+    <option>Saturn</option>
+    <optgroup label="Saturn's moon">
+        <option>Titan</option>
+    </optgroup>
+    <option>Uranus</option>
+    <option>Pluto</option>
+    <optgroup label=""></optgroup>
+
+    <optgroup label="---- User data ----"></optgroup>
+    <option ng-repeat="userBody in input.bodies.userBodies">{{userBody.name}}</option>
+</select>

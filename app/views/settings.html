@@ -1,0 +1,43 @@
+<br />
+<form class="form-horizontal" role="form" novalidate ng-controller="settingsCtrl as settings">
+    <div class="form-group">
+        <label for="stockData" class="col-sm-2 control-label">Stock Data</label>
+        <div class="col-sm-10">
+            <select class="form-control" ng-model="settings.settings.stockData" ng-change="settings.onChange()">
+                <option value="stock">Stock</option>
+                <option value="rss">Real Solar System</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="reset" class="col-sm-2 control-label">Reset</label>
+        <div class="col-sm-10">
+            <button class="btn btn-warning" data-toggle="modal" data-target="#resetModal">Clear all data</button>
+        </div>
+
+        <div class="modal fade" id="resetModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Reset confirmation</h4>
+                    </div>
+                    <div class="modal-body">
+                        This action will clear these data:
+                        <ul>
+                            <li>Last input state on Planner tab</li>
+                            <li>Bodies created by user</li>
+                            <li>Antennas created by user</li>
+                            <li>Settings on this tab</li>
+                        </ul>
+                        This page will be refreshed automatically to restore the default state.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-danger" ng-click="settings.onResetConfirm()">Reset</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,4 +1,5 @@
-<form name="antennaEditForm" role="form" novalidate ng-submit="antennaEditForm.$valid && (antennaEdit.save() || antennaEdit.updateView())">
+<form name="antennaEditForm" role="form" novalidate ng-controller="antennaEditCtrl as antennaEdit"
+      ng-submit="antennaEditForm.$valid && antennaEdit.onValidSubmit()">
     <table class="table table-hover editable">
         <thead>
             <tr>
@@ -31,8 +32,8 @@
                 </td>
                 <td>
                     <select required class="form-control" ng-model="antennaEdit.editData.type">
-                        <option value="0">omni</option>
-                        <option value="1">dish</option>
+                        <option>omni</option>
+                        <option>dish</option>
                     </select>
                 </td>
                 <td>

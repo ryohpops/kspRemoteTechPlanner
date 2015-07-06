@@ -1,49 +1,49 @@
 <div class="spacer-svg"></div>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="-400 -400 800 800"
-     stroke-width="1" text-anchor="middle" font-family="Arial" font-size="14">
-    <marker id="arrow-start" markerWidth="20" markerHeight="20" viewBox="0 -10 20 20" orient="auto">
-        <polygon id="arrow" points="0,0 20,-10 20,10" fill="none"></polygon>
-    </marker>
-    <marker id="arrow-end" markerWidth="20" markerHeight="20" viewBox="-20 -10 20 20" orient="auto">
-        <use xlink:href="#arrow" transform="rotate(180)"></use>
-    </marker>
+<div ng-controller="entireViewCtrl as entire">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="-400 -400 800 800"
+         stroke-width="1" text-anchor="middle" font-family="Arial" font-size="14">
+        <marker id="arrow-start" markerWidth="16" markerHeight="16" viewBox="0 -8 16 16" orient="auto">
+            <polygon id="arrow" points="0,0 16,-8 16,8" fill="none"></polygon>
+        </marker>
+        <marker id="arrow-end" markerWidth="16" markerHeight="16" viewBox="-16 -8 16 16" orient="auto">
+            <use xlink:href="#arrow" transform="rotate(180)"></use>
+        </marker>
 
-    <circle ng-repeat="pos in entire.position"
-            ng-attr-cx="{{pos.x |scale:entire.real:entire.virtual}}" ng-attr-cy="{{pos.y |scale:entire.real:entire.virtual}}"
-            ng-attr-r="{{entire.satChainServ.selectedAntenna.range |scale:entire.real:entire.virtual}}" fill="red" fill-opacity="0.05" stroke="none"></circle>
-    <circle cx="0" cy="0" ng-attr-r="{{entire.stableSma |scale:entire.real:entire.virtual}}" fill="none" stroke="green" ng-show="entire.hasStable"></circle>
+        <circle ng-repeat="pos in entire.position"
+                ng-attr-cx="{{pos.x |scale:entire.real:entire.virtual}}" ng-attr-cy="{{pos.y |scale:entire.real:entire.virtual}}"
+                ng-attr-r="{{entire.sc.selectedAntenna.range |scale:entire.real:entire.virtual}}" fill="red" fill-opacity="0.05" stroke="none"></circle>
+        <circle cx="0" cy="0" ng-attr-r="{{entire.stableSma |scale:entire.real:entire.virtual}}" fill="none" stroke="green" ng-show="entire.hasStable"></circle>
 
-    <circle cx="0" cy="0" ng-attr-r="{{entire.body.radius + entire.sc.altitude |scale:entire.real:entire.virtual}}" fill="none" stroke="black"></circle>
-    <circle ng-repeat="pos in entire.position"
-            ng-attr-cx="{{pos.x |scale:entire.real:entire.virtual}}" ng-attr-cy="{{pos.y |scale:entire.real:entire.virtual}}" r="4" fill="black"></circle>
+        <circle cx="0" cy="0" ng-attr-r="{{entire.sc.body.radius + entire.sc.altitude |scale:entire.real:entire.virtual}}" fill="none" stroke="black"></circle>
+        <circle ng-repeat="pos in entire.position"
+                ng-attr-cx="{{pos.x |scale:entire.real:entire.virtual}}" ng-attr-cy="{{pos.y |scale:entire.real:entire.virtual}}" r="4" fill="black"></circle>
 
-    <g ng-repeat="conn in entire.connection track by $index" ng-attr-stroke="{{conn ? 'blue' : 'red'}}">
-        <line ng-attr-x1="{{entire.position[0].x |scale:entire.real:entire.virtual}}" ng-attr-y1="{{entire.position[0].y |scale:entire.real:entire.virtual}}"
-              ng-attr-x2="{{entire.position[$index + 1].x |scale:entire.real:entire.virtual}}" ng-attr-y2="{{entire.position[$index + 1].y |scale:entire.real:entire.virtual}}"
-              marker-start="url(#arrow-start)" marker-end="url(#arrow-end)"></line>
-    </g>
+        <g ng-repeat="conn in entire.connection track by $index" ng-attr-stroke="{{conn ? 'blue' : 'red'}}">
+            <line ng-attr-x1="{{entire.position[0].x |scale:entire.real:entire.virtual}}" ng-attr-y1="{{entire.position[0].y |scale:entire.real:entire.virtual}}"
+                  ng-attr-x2="{{entire.position[$index + 1].x |scale:entire.real:entire.virtual}}" ng-attr-y2="{{entire.position[$index + 1].y |scale:entire.real:entire.virtual}}"
+                  marker-start="url(#arrow-start)" marker-end="url(#arrow-end)"></line>
+        </g>
 
-    <circle cx="0" cy="0" ng-attr-r="{{entire.body.radius |scale:entire.real:entire.virtual}}" ng-attr-fill="{{entire.body.color}}"></circle>
-    <circle cx="0" cy="0" ng-attr-r="{{entire.body.soi |scale:entire.real:entire.virtual}}" fill="none" stroke="yellow"></circle>
+        <circle cx="0" cy="0" ng-attr-r="{{entire.sc.body.radius |scale:entire.real:entire.virtual}}" ng-attr-fill="{{entire.sc.body.color}}"></circle>
+        <circle cx="0" cy="0" ng-attr-r="{{entire.sc.body.soi |scale:entire.real:entire.virtual}}" fill="none" stroke="yellow"></circle>
 
-    <text x="0" y="0" dy="0.4em" fill="black" stroke="white" font-size="24" font-weight="bold">
-        {{entire.body.name}}
-    </text>
-    <text x="0" ng-attr-y="{{entire.body.radius + entire.sc.altitude |scale:entire.real:entire.virtual}}" dy="1.2em">
-        Altitude: {{entire.sc.altitude |number:3}} km
-    </text>
-    <text x="0" ng-attr-y="{{-entire.stableSma |scale:entire.real:entire.virtual}}" text-anchor="middle" dy="-0.4em" ng-show="entire.hasStable">
-        Stable: {{entire.stableSma - entire.body.radius |number:3}} km
-    </text>
-    <text x="0" ng-attr-y="{{entire.body.soi |scale:entire.real:entire.virtual}}" dy="1.2em">
-        Sphere of Influence: {{entire.body.soi - entire.body.radius |number:3}} km
-    </text>
-    <text ng-repeat="dist in entire.distance track by $index"
-          ng-attr-x="{{entire.position[0].x * 0.3 + entire.position[$index + 1].x * 0.7 |scale:entire.real:entire.virtual}}"
-          ng-attr-y="{{entire.position[0].y * 0.3 + entire.position[$index + 1].y * 0.7 |scale:entire.real:entire.virtual}}"
-          dy="0.4em">
-        {{dist |number:3}} km
-    </text>
-
-    <rect x="-400" y="-400" width="800" height="800" fill="none" stroke="black"></rect>
-</svg>
+        <text x="0" y="0" dy="0.4em" fill="black" stroke="white" font-size="24" font-weight="bold">
+            {{entire.sc.body.name}}
+        </text>
+        <text x="0" ng-attr-y="{{entire.sc.body.radius + entire.sc.altitude |scale:entire.real:entire.virtual}}" dy="1.2em">
+            Altitude: {{entire.sc.altitude |format:"length"}}
+        </text>
+        <text x="0" ng-attr-y="{{-entire.stableSma |scale:entire.real:entire.virtual}}" text-anchor="middle" dy="-0.4em" ng-show="entire.hasStable">
+            Stable: {{entire.stableSma - entire.sc.body.radius |format:"length"}}
+        </text>
+        <text x="0" ng-attr-y="{{entire.sc.body.soi |scale:entire.real:entire.virtual}}" dy="1.2em">
+            Sphere of Influence: {{entire.sc.body.soi - entire.sc.body.radius |format:"length"}}
+        </text>
+        <text ng-repeat="dist in entire.distance track by $index"
+              ng-attr-x="{{entire.position[0].x * 0.3 + entire.position[$index + 1].x * 0.7 |scale:entire.real:entire.virtual}}"
+              ng-attr-y="{{entire.position[0].y * 0.3 + entire.position[$index + 1].y * 0.7 |scale:entire.real:entire.virtual}}"
+              dy="0.4em">
+            {{dist |format:"length"}}
+        </text>
+    </svg>
+</div>
