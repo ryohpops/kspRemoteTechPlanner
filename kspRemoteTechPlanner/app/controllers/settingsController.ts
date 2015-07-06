@@ -21,7 +21,7 @@ module App {
 
         onResetConfirm() {
             this.storageServ.reset();
-            location.reload();
+            location.replace(location.protocol + "//" + location.host);
         }
     }
 }
