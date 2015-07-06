@@ -1,3 +1,7 @@
+- 1.6.1 : 2015/07/06
+ * Fix settings page.
+ * Fix reset feature.
+
 - 1.6 : 2015/07/06
  * Add Multiple Launch View.
  * Borderlines are drawn clearer.
