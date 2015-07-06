@@ -1,65 +1,63 @@
-﻿/// <reference path="../appreferences.ts" />
+﻿/// <reference path="../_references.ts" />
 
 module App {
-    export class AntennaEditController {
-        'use strict';
+    'use strict';
 
+    export class AntennaEditController {
         userAntennas: AntennaDictionary;
-        satChain: SatChain;
+        sc: SatChain;
         isInEdit: boolean;
         editData: Antenna;
 
-        static $inject = ["$rootScope", "updateViewEvent", "antennaDictionaryServ", "satChainServ"];
+        static $inject = ["eventServ", "antennaDictServ", "satChainServ"];
         constructor(
-            private $rootScope: ng.IRootScopeService,
-            private updateViewEvent: string,
-            private antennaDictionaryServ: AntennaDictionaryService,
+            private eventServ: EventService,
+            private antennaDictServ: AntennaDictionaryService,
             private satChainServ: SatChainService
             ) {
 
-            this.userAntennas = antennaDictionaryServ.userAntennas;
-            this.satChain = satChainServ.satChain;
+            this.userAntennas = antennaDictServ.userAntennas;
+            this.sc = satChainServ.satChain;
             this.isInEdit = false;
             this.editData = undefined;
         }
 
         isUsed(name: string): boolean {
             var ret: boolean = false;
-            for (var index in this.satChain.antennas) {
-                if (this.satChain.antennas[index].antenna.name === name)
+            for (var index in this.sc.antennas) {
+                if (this.sc.antennas[index].antenna.name === name)
                     ret = true;
             }
             return ret;
         }
 
         add() {
-            this.editData = { name: "", type: AntennaType.omni, range: 0, elcNeeded: 0 };
+            this.editData = new Antenna("", AntennaType.omni, 0, 0);
             this.isInEdit = true;
-        }
-
-        edit(name: string) {
-            this.editData = this.antennaDictionaryServ.get(name);
-            this.isInEdit = true;
-        }
-
-        remove(name: string) {
-            this.isInEdit = false;
-            this.antennaDictionaryServ.remove(name);
-            this.antennaDictionaryServ.save();
-        }
-
-        save() {
-            this.isInEdit = false;
-            this.antennaDictionaryServ.set(this.editData.name, this.editData);
-            this.antennaDictionaryServ.save();
         }
 
         cancel() {
             this.isInEdit = false;
         }
 
-        updateView() {
-            this.$rootScope.$broadcast(this.updateViewEvent);
+        edit(name: string) {
+            this.editData = this.antennaDictServ.get(name);
+            this.isInEdit = true;
+        }
+
+        remove(name: string) {
+            this.isInEdit = false;
+            this.antennaDictServ.remove(name);
+            this.antennaDictServ.save();
+        }
+
+        onValidSubmit() {
+            this.isInEdit = false;
+            this.antennaDictServ.set(this.editData.name, this.editData);
+            this.antennaDictServ.save();
+
+            this.eventServ.updateAntenna();
+            this.eventServ.updateView();
         }
     }
 }

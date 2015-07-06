@@ -18,13 +18,20 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="app.css" />
+    <Content Include="app\views\dataInput\antennaSelectorRSS.html" />
+    <Content Include="app\views\dataInput\antennaSelectorStock.html" />
+    <Content Include="app\views\dataInput\bodySelectorRSS.html" />
+    <Content Include="app\views\dataInput\bodySelectorStock.html" />
+    <Content Include="app\directives\foldingDiv\foldingDetailTemplate.html" />
     <Content Include="app\views\antennaEdit.html" />
     <Content Include="app\views\bodyEdit.html" />
-    <Content Include="app\views\deltavView.html" />
+    <Content Include="app\views\singleLaunchView.html" />
     <Content Include="app\views\description.html" />
     <Content Include="app\views\dataInput.html" />
     <Content Include="app\views\entireView.html" />
+    <Content Include="app\views\multiLaunchView.html" />
     <Content Include="app\views\planner.html" />
+    <Content Include="app\views\settings.html" />
     <Content Include="index.html" />
   </ItemGroup>
   <ItemGroup>
@@ -35,31 +42,36 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="app\app.ts" />
-    <TypeScriptCompile Include="app\controllers\deltavViewController.ts" />
+    <TypeScriptCompile Include="app\controllers\multiLaunchViewController.ts" />
+    <TypeScriptCompile Include="app\controllers\singleLaunchViewController.ts" />
     <TypeScriptCompile Include="app\controllers\entireViewController.ts" />
     <TypeScriptCompile Include="app\controllers\nightViewController.ts" />
+    <TypeScriptCompile Include="app\controllers\settingsController.ts" />
+    <TypeScriptCompile Include="app\directives\foldingDiv\foldingDetail.ts" />
     <TypeScriptCompile Include="app\filters\antennaType.ts" />
+    <TypeScriptCompile Include="app\filters\format.ts" />
     <TypeScriptCompile Include="app\filters\scale.ts" />
     <TypeScriptCompile Include="app\models\antenna.ts" />
     <TypeScriptCompile Include="app\models\body.ts" />
     <TypeScriptCompile Include="app\models\antennaEquipment.ts" />
     <TypeScriptCompile Include="app\models\satChain.ts" />
-    <TypeScriptCompile Include="app\services\dataService.ts" />
-    <TypeScriptCompile Include="app\services\duplexDataService.ts" />
     <Content Include="app\views\nightView.html" />
-    <TypeScriptCompile Include="calculator\calculator.ts" />
-    <TypeScriptCompile Include="calculator\calculatorReferences.ts" />
-    <TypeScriptCompile Include="calculator\services\euclideanService.ts" />
-    <TypeScriptCompile Include="calculator\services\orbitalService.ts" />
+    <TypeScriptCompile Include="app\models\settings.ts" />
+    <TypeScriptCompile Include="app\services\eventService.ts" />
+    <TypeScriptCompile Include="app\services\settingsService.ts" />
+    <TypeScriptCompile Include="app\services\storageService.ts" />
+    <TypeScriptCompile Include="calculator\_references.ts" />
+    <TypeScriptCompile Include="calculator\euclidean.ts" />
+    <TypeScriptCompile Include="calculator\orbital.ts" />
     <TypeScriptCompile Include="app\controllers\antennaEditController.ts" />
     <TypeScriptCompile Include="app\controllers\bodyEditController.ts" />
     <TypeScriptCompile Include="app\controllers\inputController.ts" />
-    <TypeScriptCompile Include="calculator\models\point.ts" />
+    <TypeScriptCompile Include="calculator\point.ts" />
     <TypeScriptCompile Include="app\services\antennaDictionaryService.ts" />
     <TypeScriptCompile Include="app\services\bodyDictionaryService.ts" />
     <TypeScriptCompile Include="app\services\satChainService.ts" />
-    <TypeScriptCompile Include="app\appReferences.ts" />
-    <TypeScriptCompile Include="calculator\services\satelliteService.ts" />
+    <TypeScriptCompile Include="app\_references.ts" />
+    <TypeScriptCompile Include="calculator\satellite.ts" />
     <TypeScriptCompile Include="scripts\typings\angular-local-storage\angular-local-storage.d.ts" />
     <TypeScriptCompile Include="scripts\typings\angularjs\angular-animate.d.ts" />
     <TypeScriptCompile Include="scripts\typings\angularjs\angular-cookies.d.ts" />
@@ -114,6 +126,7 @@
     <TypeScriptModuleKind>none</TypeScriptModuleKind>
     <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
     <TypeScriptOutFile>appOut.js</TypeScriptOutFile>
+    <TypeScriptNoImplicitAny>True</TypeScriptNoImplicitAny>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
     <TypeScriptTarget>ES5</TypeScriptTarget>

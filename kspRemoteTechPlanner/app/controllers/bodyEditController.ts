@@ -1,60 +1,58 @@
-﻿/// <reference path="../appreferences.ts" />
+﻿/// <reference path="../_references.ts" />
 
 module App {
-    export class BodyEditController {
-        'use strict';
+    'use strict';
 
+    export class BodyEditController {
         userBodies: BodyDictionary;
-        satChain: SatChain;
+        sc: SatChain;
         isInEdit: boolean;
         editData: Body;
 
-        static $inject = ["$rootScope", "updateViewEvent", "bodyDictionaryServ", "satChainServ"];
+        static $inject = ["eventServ", "bodyDictServ", "satChainServ"];
         constructor(
-            private $rootScope: ng.IRootScopeService,
-            private updateViewEvent: string,
-            private bodyDictionaryServ: BodyDictionaryService,
+            private eventServ: EventService,
+            private bodyDictServ: BodyDictionaryService,
             private satChainServ: SatChainService
             ) {
 
-            this.userBodies = bodyDictionaryServ.userBodies;
-            this.satChain = satChainServ.satChain;
+            this.userBodies = bodyDictServ.userBodies;
+            this.sc = satChainServ.satChain;
             this.isInEdit = false;
             this.editData = undefined;
         }
 
         isUsed(name: string): boolean {
-            return this.satChain.body.name === name;
+            return this.sc.body.name === name;
         }
 
         add() {
-            this.editData = { name: "", color: "", radius: 0, stdGravity: 0, soi: 0 };
+            this.editData = new Body("", "", 0, 0, 0);
             this.isInEdit = true;
-        }
-
-        edit(name: string) {
-            this.editData = this.bodyDictionaryServ.get(name);
-            this.isInEdit = true;
-        }
-
-        remove(name: string) {
-            this.isInEdit = false;
-            this.bodyDictionaryServ.remove(name);
-            this.bodyDictionaryServ.save();
-        }
-
-        save() {
-            this.isInEdit = false;
-            this.bodyDictionaryServ.set(this.editData.name, this.editData);
-            this.bodyDictionaryServ.save();
         }
 
         cancel() {
             this.isInEdit = false;
         }
 
-        updateView() {
-            this.$rootScope.$broadcast(this.updateViewEvent);
+        edit(name: string) {
+            this.editData = this.bodyDictServ.get(name);
+            this.isInEdit = true;
+        }
+
+        remove(name: string) {
+            this.isInEdit = false;
+            this.bodyDictServ.remove(name);
+            this.bodyDictServ.save();
+        }
+
+        onValidSubmit() {
+            this.isInEdit = false;
+            this.bodyDictServ.set(this.editData.name, this.editData);
+            this.bodyDictServ.save();
+
+            this.eventServ.updateBody();
+            this.eventServ.updateView();
         }
     }
 }

@@ -1,0 +1,36 @@
+﻿<div class="spacer-svg"></div>
+<div ng-controller="singleLaunchViewCtrl as slv">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="-200 -200 400 400"
+         stroke-width="1" text-anchor="middle" font-family="Arial" font-size="14">
+        <marker id="ship" markerWidth="10" markerHeight="10" viewBox="-5 -5 10 10">
+            <polygon points="-5,0 5,-5 5,5" fill="green"></polygon>
+        </marker>
+
+        <path fill="none" stroke="green" marker-mid="url(#ship)"
+              d="M 50,0 A 100,100 90 0 0 -50,-100 A 100,100 90 0 0 -150,0"></path>
+
+        <defs>
+            <circle id="spot" cx="-150" cy="0" r="4"></circle>
+        </defs>
+        <use xlink:href="#spot" fill="black" transform="rotate(45)"></use>
+        <use xlink:href="#spot" fill="none" stroke="black"></use>
+        <use xlink:href="#spot" fill="black" transform="rotate(-45)"></use>
+
+        <circle cx="0" cy="0" r="150" fill="none" stroke="black"></circle>
+        <circle cx="0" cy="0" r="50" fill="none" stroke="black"></circle>
+        <circle cx="0" cy="0" r="20" ng-attr-fill="{{slv.body.color}}"></circle>
+
+        <text x="100" y="0">
+            <tspan dy="-0.4em">Start dV: </tspan>
+            <tspan x="100" dy="1.2em">{{slv.startDV |format:"speed"}}</tspan>
+        </text>
+        <text x="-100" y="0">
+            <tspan dy="-0.4em">Finish dV: </tspan>
+            <tspan x="-100" dy="1.2em">{{slv.finishDV |format:"speed"}}</tspan>
+        </text>
+        <text x="0" y="50" dy="1.2em">Total dV: {{slv.startDV + slv.finishDV |format:"speed"}}</text>
+
+        <text x="0" y="-150" dy="-0.4em">Silde angle: {{slv.slideAngle |format}} deg.</text>
+        <text x="0" y="150" dy="1.2em">Slide time: {{slv.slideTime |format:"speed"}}</text>
+    </svg>
+</div>

@@ -1,21 +1,29 @@
-﻿/// <reference path="appreferences.ts" />
+﻿/// <reference path="_references.ts" />
 
 module App {
-    angular.module("app", ["ngCookies", "LocalStorageModule", "calc"])
+    'use strict';
+
+    angular.module("app", ["ngCookies", "LocalStorageModule"])
         .config(
-        ["localStorageServiceProvider", (lssp: ng.local.storage.ILocalStorageServiceProvider) => {
+        ["localStorageServiceProvider", (lssp: angular.local.storage.ILocalStorageServiceProvider) => {
             lssp.setPrefix("kspRemoteTechPlanner");
         }])
-        .value("updateViewEvent", "updateView")
-        .service("bodyDictionaryServ", BodyDictionaryService)
-        .service("antennaDictionaryServ", AntennaDictionaryService)
+        .service("settingsServ", SettingsService)
+        .service("eventServ", EventService)
+        .service("storageServ", StorageService)
+        .service("bodyDictServ", BodyDictionaryService)
+        .service("antennaDictServ", AntennaDictionaryService)
         .service("satChainServ", SatChainService)
+        .controller("settingsCtrl", SettingsController)
         .controller("inputCtrl", InputController)
         .controller("entireViewCtrl", EntireViewController)
         .controller("nightViewCtrl", NightViewController)
-        .controller("deltavViewCtrl", DeltavViewController)
+        .controller("singleLaunchViewCtrl", SingleLaunchViewController)
+        .controller("multiLaunchViewCtrl", MultiLaunchViewController)
         .controller("bodyEditCtrl", BodyEditController)
         .controller("antennaEditCtrl", AntennaEditController)
+        .directive("foldingDetail", foldingDetail)
         .filter("antennaType", antennaType)
+        .filter("format", format)
         .filter("scale", scale);
 }

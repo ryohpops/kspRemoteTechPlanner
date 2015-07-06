@@ -1,52 +1,48 @@
-﻿/// <reference path="../appreferences.ts" />
+﻿/// <reference path="../_references.ts" />
 
 module App {
+    'use strict';
+
     import Point = Calculator.Point;
+    import calcSat = Calculator.Satellite;
 
     export class EntireViewController {
-        'use strict';
-
         real: number = 800;
         get virtual(): number {
-            return (this.body.radius + this.sc.altitude + this.satChainServ.selectedAntenna.range) * 2 * 1.05;
+            return (this.sc.body.radius + this.sc.altitude + this.sc.selectedAntenna.range) * 2 * 1.05;
         }
 
         sc: SatChain;
-        body: Body;
         position: Point[];
         connection: boolean[];
         distance: number[];
         get hasStable(): boolean {
-            return this.satelliteServ.hasStableArea(this.body.radius, this.sc.count, this.body.radius + this.sc.altitude, this.satChainServ.selectedAntenna.range);
+            return calcSat.hasStableArea(this.sc.body.radius, this.sc.count, this.sc.body.radius + this.sc.altitude, this.sc.selectedAntenna.range);
         }
         get stableSma(): number {
-            return this.satelliteServ.stableLimitSma(this.sc.count, this.body.radius + this.sc.altitude, this.satChainServ.selectedAntenna.range);
+            return calcSat.stableLimitSma(this.sc.count, this.sc.body.radius + this.sc.altitude, this.sc.selectedAntenna.range);
         }
 
-        static $inject = ["$rootScope", "updateViewEvent", "satChainServ", "calc.orbitalServ", "calc.satelliteServ"];
+        static $inject = ["eventServ", "satChainServ"];
         constructor(
-            private $rootScope: ng.IRootScopeService,
-            private updateViewEvent: string,
-            private satChainServ: SatChainService,
-            private orbitalServ: Calculator.OrbitalService,
-            private satelliteServ: Calculator.SatelliteService
+            private eventServ: EventService,
+            private satChainServ: SatChainService
             ) {
 
             this.sc = this.satChainServ.satChain;
-            this.body = this.sc.body;
             this.position = [];
             this.connection = [];
             this.distance = [];
 
-            $rootScope.$on(this.updateViewEvent,(event: ng.IAngularEvent) => {
+            eventServ.on(Events.updateView,(event: angular.IAngularEvent) => {
                 this.updatePosition();
                 this.updateConnectStatus();
             });
-            $rootScope.$emit(this.updateViewEvent);
+            eventServ.updateView();
         }
 
         private updatePosition() {
-            var pos = this.satelliteServ.position(this.sc.count, this.body.radius + this.sc.altitude);
+            var pos = calcSat.position(this.sc.count, this.sc.body.radius + this.sc.altitude);
 
             this.position.splice(pos.length);
             for (var index in pos)
@@ -54,9 +50,9 @@ module App {
         }
 
         private updateConnectStatus() {
-            var conn: boolean[] = this.satelliteServ.connectability(
-                this.body.radius, this.sc.count, this.body.radius + this.sc.altitude, this.satChainServ.selectedAntenna.range);
-            var dist: number[] = this.satelliteServ.distance(this.sc.count, this.body.radius + this.sc.altitude);
+            var conn: boolean[] = calcSat.connectability(
+                this.sc.body.radius, this.sc.count, this.sc.body.radius + this.sc.altitude, this.sc.selectedAntenna.range);
+            var dist: number[] = calcSat.distance(this.sc.count, this.sc.body.radius + this.sc.altitude);
 
             var count: number = this.sc.count <= 4 ? 1 : 2;
             this.connection.splice(count);

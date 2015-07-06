@@ -1,46 +1,109 @@
-﻿/// <reference path="../appreferences.ts" />
+﻿/// <reference path="../_references.ts" />
 
 module App {
-    export class SatChainService extends DataService<SatChain> {
-        'use strict';
+    'use strict';
 
+    export class SatChainService {
         private static dataKey: string = "inputData";
         private static versionKey: string = "inputDataVersion";
-        private static modelVersion: number = 1;
+        private static modelVersion: number = 2;
 
         private _satChain: SatChain;
         get satChain(): SatChain { return this._satChain; }
 
-        static $inject = ["$cookieStore", "localStorageService", "calc.euclideanServ", "calc.orbitalServ"];
+        static $inject = ["eventServ", "storageServ", "bodyDictServ", "antennaDictServ"];
         constructor(
-            $cookieStore: ng.cookies.ICookieStoreService,
-            localStorage: ng.local.storage.ILocalStorageService<any>,
-            private euclideanServ: Calculator.EuclideanService,
-            private orbitalServ: Calculator.OrbitalService
+            private eventServ: EventService,
+            private storageServ: StorageService,
+            private bodyDictServ: BodyDictionaryService,
+            private antennaDictServ: AntennaDictionaryService
             ) {
 
-            super($cookieStore, localStorage,
-                {
-                    body: { name: "Kerbin", color: "rgb(63,111,40)", radius: 600, stdGravity: 3531.6, soi: 84159.286 },
-                    count: 4, altitude: 1000, elcNeeded: 0.029,
-                    antennas: [{ antenna: { name: "Communotron 16", type: AntennaType.omni, range: 2500, elcNeeded: 0.13 }, quantity: 1 }],
-                    antennaIndex: 0, parkingAlt: 70
-                },
-                SatChainService.dataKey, SatChainService.versionKey, SatChainService.modelVersion, SatChainService.updater);
-            this._satChain = this.data;
-        }
-
-        get selectedAntenna(): Antenna {
-            return this.satChain.antennas[this.satChain.antennaIndex].antenna;
-        }
-
-        private static updater(satChain: any, oldVersion: number): SatChain {
-            if (oldVersion === undefined) { // update to ver 1.5
-                satChain.antennas = [{ antenna: satChain.antenna, quantity: 1 }];
-                satChain.antennaIndex = 0;
+            var loaded: LoadResult = storageServ.load(SatChainService.dataKey, SatChainService.versionKey);
+            if (loaded.data) {
+                this._satChain = this.unpack(this.update(loaded.data, loaded.version));
+            } else {
+                this._satChain = new SatChain(bodyDictServ.get("Kerbin"), 4, 1000, 0.029,
+                    [{ antenna: antennaDictServ.get("Communotron 16"), quantity: 1 }], 0, 70);
             }
 
-            return satChain;
+            this.save();
+            storageServ.setVersion(SatChainService.versionKey, SatChainService.modelVersion);
+
+            eventServ.on(Events.updateBody,(event: angular.IAngularEvent) => {
+                this.updateBody();
+            });
+            eventServ.on(Events.updateAntenna,(event: angular.IAngularEvent) => {
+                this.updateAntenna();
+            });
+        }
+
+        private updateBody() {
+            var b: Body = this.bodyDictServ.get(this.satChain.body.name);
+            this.satChain.body.name = b.name;
+            this.satChain.body.color = b.color;
+            this.satChain.body.radius = b.radius;
+            this.satChain.body.stdGravity = b.stdGravity;
+            this.satChain.body.soi = b.soi;
+        }
+
+        private updateAntenna() {
+            for (var index in this.satChain.antennas) {
+                var a: Antenna = this.antennaDictServ.get(this.satChain.antennas[index].antenna.name);
+                this.satChain.antennas[index].antenna.name = a.name;
+                this.satChain.antennas[index].antenna.type = a.type;
+                this.satChain.antennas[index].antenna.range = a.range;
+                this.satChain.antennas[index].antenna.elcNeeded = a.elcNeeded;
+            }
+        }
+
+        save() {
+            this.storageServ.save(SatChainService.dataKey, this.pack(this.satChain));
+        }
+
+        private pack(satChain: SatChain): SatChainJSON {
+            var json: SatChainJSON = {
+                body: satChain.body.name, count: satChain.count, altitude: satChain.altitude, elcNeeded: satChain.elcNeeded,
+                antennas: new Array<AntennaEquipmentJSON>(), antennaIndex: satChain.antennaIndex, parkingAlt: satChain.parkingAlt
+            };
+
+            for (var index in this.satChain.antennas) {
+                var ae: AntennaEquipment = this.satChain.antennas[index];
+                json.antennas.push({ antenna: ae.antenna.name, quantity: ae.quantity });
+            }
+
+            return json;
+        }
+
+        private unpack(json: SatChainJSON): SatChain {
+            var sc: SatChain = new SatChain(this.bodyDictServ.get(json.body), json.count, json.altitude, json.elcNeeded,
+                new Array<AntennaEquipment>(), json.antennaIndex, json.parkingAlt);
+
+            for (var index in json.antennas) {
+                var aej: AntennaEquipmentJSON = json.antennas[index];
+                sc.antennas.push({ antenna: this.antennaDictServ.get(aej.antenna), quantity: aej.quantity });
+            }
+
+            return sc;
+        }
+
+        private update(scJson: any, oldVersion: number): SatChainJSON {
+            if (oldVersion === undefined) { // update to ver 1.5
+                scJson.antennas = [{ antenna: scJson.antenna, quantity: 1 }];
+                scJson.antennaIndex = 0;
+                oldVersion = 1;
+            }
+
+            if (oldVersion === 1) {
+                scJson.body = scJson.body.name;
+                for (var index in scJson.antennas) {
+                    var ae = scJson.antennas[index];
+                    scJson.antennas[index] = ({ antenna: ae.antenna.name, quantity: ae.quantity });
+                }
+                oldVersion = 2;
+            }
+
+            return scJson;
         }
     }
 }

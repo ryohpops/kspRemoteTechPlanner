@@ -1,16 +1,19 @@
-﻿/// <reference path="../appreferences.ts" />
+﻿/// <reference path="../_references.ts" />
 
 module App {
-    export class NightViewController {
-        'use strict';
+    'use strict';
 
+    import calcOrb = Calculator.Orbital;
+    import calcSat = Calculator.Satellite;
+
+    export class NightViewController {
         sc: SatChain;
         body: Body;
         get period(): number {
-            return this.orbitalServ.period(this.body.radius + this.sc.altitude, this.body.stdGravity);
+            return calcOrb.period(this.body.radius + this.sc.altitude, this.body.stdGravity);
         }
         get nightTime(): number {
-            return this.orbitalServ.nightTime(this.body.radius, this.body.radius + this.sc.altitude, this.body.stdGravity);
+            return calcOrb.nightTime(this.body.radius, this.body.radius + this.sc.altitude, this.body.stdGravity);
         }
         get reqGen(): number {
             var ae: number[] = [], aq: number[] = [];
@@ -19,7 +22,7 @@ module App {
                 aq.push(this.sc.antennas[index].quantity);
             }
 
-            return this.satelliteServ.requiredGenerator(this.sc.elcNeeded, ae, aq, this.body.radius, this.body.stdGravity, this.body.radius + this.sc.altitude);
+            return calcSat.requiredGenerator(this.sc.elcNeeded, ae, aq, this.body.radius, this.body.stdGravity, this.body.radius + this.sc.altitude);
         }
         get reqBatt(): number {
             var ae: number[] = [], aq: number[] = [];
@@ -28,14 +31,12 @@ module App {
                 aq.push(this.sc.antennas[index].quantity);
             }
 
-            return this.satelliteServ.requiredBattery(this.sc.elcNeeded, ae, aq, this.body.radius, this.body.stdGravity, this.body.radius + this.sc.altitude);
+            return calcSat.requiredBattery(this.sc.elcNeeded, ae, aq, this.body.radius, this.body.stdGravity, this.body.radius + this.sc.altitude);
         }
 
-        static $inject = ["satChainServ", "calc.orbitalServ", "calc.satelliteServ"];
+        static $inject = ["satChainServ"];
         constructor(
-            private satChainServ: SatChainService,
-            private orbitalServ: Calculator.OrbitalService,
-            private satelliteServ: Calculator.SatelliteService
+            private satChainServ: SatChainService
             ) {
 
             this.sc = this.satChainServ.satChain;

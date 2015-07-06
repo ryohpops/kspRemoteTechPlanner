@@ -1,14 +1,34 @@
-﻿/// <reference path="../appreferences.ts" />
+﻿/// <reference path="../_references.ts" />
 
 module App {
+    'use strict';
+
     export class AntennaType {
-        static omni: string = "0";
-        static dish: string = "1";
+        static omni: string = "omni";
+        static dish: string = "dish";
     }
 
-    export interface Antenna {
+    export class Antenna {
         name: string;
-        type: AntennaType;
+        type: string;
+        range: number;
+        elcNeeded: number;
+
+        constructor(name: string, type: string, range: number, elcNeeded: number) {
+            this.name = name;
+            this.type = type;
+            this.range = range;
+            this.elcNeeded = elcNeeded;
+        }
+
+        clone(): Antenna {
+            return new Antenna(this.name, this.type, this.range, this.elcNeeded);
+        }
+    }
+
+    export interface AntennaJSON {
+        name: string;
+        type: string;
         range: number;
         elcNeeded: number;
     }

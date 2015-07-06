@@ -1,0 +1,13 @@
+﻿<!-- content -->
+<div ng-transclude ng-show="visible" ng-init="visible = false">
+</div>
+
+<!-- toggle content -->
+<div class="btn-group btn-group-justified" role="group">
+    <div class="btn-group btn-group-xs" role="group">
+        <button type="button" class="btn" ng-click="visible = !visible">
+            <span class="glyphicon glyphicon-collapse-up"></span>
+            <span class="glyphicon glyphicon-collapse-down"></span>
+        </button>
+    </div>
+</div>

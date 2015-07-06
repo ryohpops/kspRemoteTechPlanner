@@ -2,23 +2,28 @@
     <!-- three views  -->
     <div class="col-sm-9">
         <div class="row">
-            <div class="col-sm-12" ng-controller="entireViewCtrl as entire">
+            <div class="col-sm-12">
                 <h3>Entire View</h3>
-                <div class="wrap-svg" ng-include src="'app/views/entireView.html'"></div>
+                <div class="wrap-svg" ng-include="'app/views/entireView.html'"></div>
             </div>
 
-            <div class="col-sm-6" ng-controller="nightViewCtrl as night">
+            <div class="col-sm-6">
                 <h3>Night View</h3>
-                <div class="wrap-svg" ng-include src="'app/views/nightView.html'"></div>
+                <div class="wrap-svg" ng-include="'app/views/nightView.html'"></div>
             </div>
 
-            <div class="col-sm-6" ng-controller="deltavViewCtrl as deltav">
-                <h3>Delta-V View</h3>
-                <div class="wrap-svg" ng-include src="'app/views/deltavView.html'"></div>
+            <div class="col-sm-6">
+                <h3>Single Launch View</h3>
+                <div class="wrap-svg" ng-include="'app/views/singleLaunchView.html'"></div>
+            </div>
+
+            <div class="col-sm-6">
+                <h3>Multiple Launch View</h3>
+                <div class="wrap-svg" ng-include="'app/views/multiLaunchView.html'"></div>
             </div>
         </div>
     </div>
 
     <!-- Data input -->
-    <div class="col-sm-3" ng-controller="inputCtrl as input" ng-include src="'app/views/dataInput.html'"></div>
+    <div class="col-sm-3" ng-include="'app/views/dataInput.html'"></div>
 </div>

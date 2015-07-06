@@ -1,3 +1,8 @@
+- 1.6 : 2015/07/06
+ * Add Multiple Launch View.
+ * Borderlines are drawn clearer.
+ * Improved units used in Views.
+
 - 1.5.6 : 2015/06/05
  * Fix calculation of night time. (Aerospace)
 

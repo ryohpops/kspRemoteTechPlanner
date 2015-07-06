@@ -1,172 +1,64 @@
 ﻿<h3>Data input</h3>
-<form role="form" novalidate>
+<form role="form" novalidate ng-controller="inputCtrl as input">
     <div class="form-group">
         <label for="body">Body</label>
-        <select class="form-control" ng-model="input.satChain.body.name" ng-change="input.updateBody() || input.save() || input.updateView()">
-            <optgroup label="---- Stock ----"></optgroup>
-            <option>Kerbol</option>
-            <option>Moho</option>
-            <option>Eve</option>
-            <optgroup label="Eve's moon">
-                <option>Gilly</option>
-            </optgroup>
-            <option>Kerbin</option>
-            <optgroup label="Kerbin's moons">
-                <option>Mun</option>
-                <option>Minmus</option>
-            </optgroup>
-            <option>Duna</option>
-            <optgroup label="Duna's moon">
-                <option>Ike</option>
-            </optgroup>
-            <option>Dres</option>
-            <option>Jool</option>
-            <optgroup label="Jool's moons">
-                <option>Laythe</option>
-                <option>Vall</option>
-                <option>Tylo</option>
-                <option>Bop</option>
-                <option>Pol</option>
-            </optgroup>
-            <option>Eeloo</option>
-            <optgroup label=""></optgroup>
-
-            <optgroup label="---- Real Solar System ----"></optgroup>
-            <option>Mercury</option>
-            <option>Venus</option>
-            <option>Earth</option>
-            <optgroup label="Earth's moo:">
-                <option>Moon</option>
-            </optgroup>
-            <option>Mars</option>
-            <optgroup label="Mars's moons">
-                <option>Phobos</option>
-                <option>Deimos</option>
-            </optgroup>
-            <option>Jupiter</option>
-            <optgroup label="Jupiter's moons">
-                <option>Io</option>
-                <option>Europa</option>
-                <option>Ganymede</option>
-                <option>Callisto</option>
-            </optgroup>
-            <option>Saturn</option>
-            <optgroup label="Saturn's moon">
-                <option>Titan</option>
-            </optgroup>
-            <option>Uranus</option>
-            <option>Pluto</option>
-            <optgroup label=""></optgroup>
-
-            <optgroup label="---- User data ----"></optgroup>
-            <option ng-repeat="userBody in input.bodies.userBodies">{{userBody.name}}</option>
-        </select>
+        <!-- body selector -->
+        <div ng-include="'app/views/dataInput/bodySelectorStock.html'" ng-show="input.settings.stockData === 'stock'"></div>
+        <div ng-include="'app/views/dataInput/bodySelectorRSS.html'" ng-show="input.settings.stockData === 'rss'"></div>
 
         <!-- detail for body -->
-        <div class="wrap-detail" ng-show="input.bodyDetailVisible">
-            <dl class="detail">
-                <dt>Color</dt>
-                <dd>{{input.satChain.body.color}}</dd>
-                <dt>Radius</dt>
-                <dd>{{input.satChain.body.radius |number}} km</dd>
-                <dt>Standard gravitational parameter</dt>
-                <dd>{{input.satChain.body.stdGravity |number}} km<sup>3</sup>s<sup>-2</sup></dd>
-                <dt>Sphere of Influence</dt>
-                <dd>{{input.satChain.body.soi |number}} km</dd>
-            </dl>
-        </div>
-
-        <!-- body detail toggle -->
-        <div class="btn-group btn-group-justified" role="group">
-            <div class="btn-group btn-group-xs" role="group">
-                <button type="button" class="btn" ng-click="input.bodyDetailVisible = !input.bodyDetailVisible">
-                    <span class="glyphicon glyphicon-collapse-up"></span>
-                    <span class="glyphicon glyphicon-collapse-down"></span>
-                </button>
+        <div folding-detail>
+            <div class="wrap-detail">
+                <dl class="detail">
+                    <dt>Color</dt>
+                    <dd>{{input.sc.body.color}}</dd>
+                    <dt>Radius</dt>
+                    <dd>{{input.sc.body.radius |number}} km</dd>
+                    <dt>Standard gravitational parameter</dt>
+                    <dd>{{input.sc.body.stdGravity |number}} km<sup>3</sup>s<sup>-2</sup></dd>
+                    <dt>Sphere of Influence</dt>
+                    <dd>{{input.sc.body.soi |number}} km</dd>
+                </dl>
             </div>
         </div>
     </div>
 
     <div class="form-group">
         <label for="count">Count</label>
-        <input type="number" class="form-control" id="count" ng-model="input.satChain.count" ng-model-options="{debounce:300}"
-               required ng-change="input.save() || input.updateView()" />
+        <input type="number" class="form-control" id="count" ng-model="input.sc.count" ng-model-options="{debounce:300}"
+               required ng-change="input.onChange()" />
     </div>
 
     <div class="form-group">
         <label for="altitude">Altitude(km)</label>
-        <input type="number" class="form-control" id="altitude" ng-model="input.satChain.altitude" ng-model-options="{debounce:300}"
-               required ng-change="input.save() || input.updateView()" />
+        <input type="number" class="form-control" id="altitude" ng-model="input.sc.altitude" ng-model-options="{debounce:300}"
+               required ng-change="input.onChange()" />
     </div>
 
     <div class="form-group">
         <label for="elcNeeded">Probe electricity consumption<br />(exclude antenna's, per sec.)</label>
-        <input type="number" class="form-control" id="elcNeeded" ng-model="input.satChain.elcNeeded" ng-model-options="{debounce:300}"
-               required ng-change="input.save() || input.updateView()" />
+        <input type="number" class="form-control" id="elcNeeded" ng-model="input.sc.elcNeeded" ng-model-options="{debounce:300}"
+               required ng-change="input.onChange()" />
     </div>
 
     <div class="form-group">
         <label for="antenna">Antenna</label>
-        <div ng-repeat="antennaEquipment in input.satChain.antennas">
-            <select class="form-control" ng-model="antennaEquipment.antenna.name" ng-change="input.updateAntenna($index) || input.save() || input.updateView()">
-                <optgroup label="---- RemoteTech ----"></optgroup>
-                <optgroup label="Omnidirectional">
-                    <option>Reflectron DP-10</option>
-                    <option>Communotron 16</option>
-                    <option>CommTech EXP-VR-2T</option>
-                    <option>Communotron 32</option>
-                </optgroup>
-                <optgroup label="Dish">
-                    <option>Comms DTS-M1</option>
-                    <option>Reflectron KR-7</option>
-                    <option>Communotron 88-88</option>
-                    <option>Reflectron KR-14</option>
-                    <option>CommTech-1</option>
-                    <option>Reflectron GX-128</option>
-                </optgroup>
-                <optgroup label=""></optgroup>
-
-                <optgroup label="---- Real Solar System ----"></optgroup>
-                <optgroup label="Omnidirectional">
-                    <option>RSS Reflectron DP-10</option>
-                    <option>RSS Communotron 16</option>
-                    <option>RSS CommTech EXP-VR-2T</option>
-                    <option>RSS Communotron 32</option>
-                </optgroup>
-                <optgroup label="Dish">
-                    <option>RSS Comms DTS-M1</option>
-                    <option>RSS Reflectron KR-7</option>
-                    <option>RSS Communotron 88-88</option>
-                    <option>RSS Reflectron KR-14</option>
-                    <option>RSS CommTech-1</option>
-                    <option>RSS Reflectron GX-128</option>
-                </optgroup>
-                <optgroup label=""></optgroup>
-
-                <optgroup label="---- User data ----">
-                    <option ng-repeat="userAntenna in input.antennas.userAntennas">{{userAntenna.name}}</option>
-                </optgroup>
-            </select>
+        <div ng-repeat="antennaEquipment in input.sc.antennas">
+            <!-- antenna selector -->
+            <div ng-include="'app/views/dataInput/antennaSelectorStock.html'" ng-show="input.settings.stockData === 'stock'"></div>
+            <div ng-include="'app/views/dataInput/antennaSelectorRSS.html'" ng-show="input.settings.stockData === 'rss'"></div>
 
             <!-- detail for antenna -->
-            <div class="wrap-detail" ng-show="input.antennaDetailVisible[$index]">
-                <dl class="detail">
-                    <dt>Type</dt>
-                    <dd>{{antennaEquipment.antenna.type |antennaType}}</dd>
-                    <dt>Range</dt>
-                    <dd>{{antennaEquipment.antenna.range |number}} km</dd>
-                    <dt>Electricity consumption</dt>
-                    <dd>{{antennaEquipment.antenna.elcNeeded |number}} /sec.</dd>
-                </dl>
-            </div>
-
-            <!-- antenna detail toggle -->
-            <div class="btn-group btn-group-justified" role="group">
-                <div class="btn-group btn-group-xs" role="group">
-                    <button type="button" class="btn" ng-click="input.antennaDetailVisible[$index] = !input.antennaDetailVisible[$index]">
-                        <span class="glyphicon glyphicon-collapse-up"></span>
-                        <span class="glyphicon glyphicon-collapse-down"></span>
-                    </button>
+            <div folding-detail>
+                <div class="wrap-detail">
+                    <dl class="detail">
+                        <dt>Type</dt>
+                        <dd>{{antennaEquipment.antenna.type |antennaType}}</dd>
+                        <dt>Range</dt>
+                        <dd>{{antennaEquipment.antenna.range |number}} km</dd>
+                        <dt>Electricity consumption</dt>
+                        <dd>{{antennaEquipment.antenna.elcNeeded |number}} /sec.</dd>
+                    </dl>
                 </div>
             </div>
 
@@ -176,7 +68,7 @@
                     <div class="btn-group btn-group-justified" role="group">
                         <div class="btn-group btn-group-sm" role="group">
                             <button type="button" class="btn btn-default" ng-class="{'btn-success': input.isSelectedAntenna($index)}"
-                                    ng-click="input.setAntennaIndex($index) || input.save() || input.updateView()">
+                                    ng-click="input.setAntennaIndex($index)">
                                 Show
                             </button>
                         </div>
@@ -186,7 +78,7 @@
                     <div class="input-group input-group-sm">
                         <span class="input-group-addon">quantity</span>
                         <input type="number" class="form-control" required ng-model="antennaEquipment.quantity" ng-model-options="{debounce:300}"
-                               ng-change="input.save() || input.updateView()" />
+                               ng-change="input.onChange()" />
                     </div>
                 </div>
             </div>
@@ -196,11 +88,10 @@
         <!-- antenna list controller -->
         <div class="btn-group btn-group-justified" role="group">
             <div class="btn-group btn-group-sm" role="group">
-                <button class="btn btn-default" ng-click="input.addNewAntenna() || input.save() || input.updateView()">Add after the last</button>
+                <button class="btn btn-default" ng-click="input.onAddAntenna()">Add after the last</button>
             </div>
             <div class="btn-group btn-group-sm" role="group">
-                <button class="btn btn-default" ng-disabled="input.satChain.antennas.length <= 1"
-                        ng-click="input.removeSelectedAntenna() || input.save() || input.updateView()">
+                <button class="btn btn-default" ng-disabled="input.sc.antennas.length <= 1" ng-click="input.onRemoveSelectedAntenna()">
                     Remove selected
                 </button>
             </div>
@@ -209,7 +100,7 @@
 
     <div class="form-group">
         <label for="parkingAlt">Parking altitude on launch(km)</label>
-        <input type="number" class="form-control" id="parkingAlt" required ng-model="input.satChain.parkingAlt" ng-model-options="{debounce:300}"
-               ng-change="input.save() || input.updateView()" />
+        <input type="number" class="form-control" id="parkingAlt" required ng-model="input.sc.parkingAlt" ng-model-options="{debounce:300}"
+               ng-change="input.onChange()" />
     </div>
 </form>
