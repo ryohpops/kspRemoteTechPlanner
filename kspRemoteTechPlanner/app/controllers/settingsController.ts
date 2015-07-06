@@ -6,7 +6,7 @@ module App {
     export class SettingsController {
         settings: Settings;
 
-        $inject = ["settingsServ", "storageServ"];
+        static $inject = ["settingsServ", "storageServ"];
         constructor(
             private settingsServ: SettingsService,
             private storageServ: StorageService
@@ -21,7 +21,7 @@ module App {
 
         onResetConfirm() {
             this.storageServ.reset();
-            location.reload();
+            location.replace(location.protocol + "//" + location.host);
         }
     }
 }
