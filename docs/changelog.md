@@ -1,3 +1,6 @@
+- 1.6.2 : 2015/07/07
+ * Fix Delta-V unit of Multiple Launch View.
+
 - 1.6.1 : 2015/07/06
  * Fix settings page.
  * Fix reset feature.

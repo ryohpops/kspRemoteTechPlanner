@@ -21,10 +21,10 @@ module App {
             return calcOrb.sma(this.body.stdGravity, this.lowerPeriod) * 2 - (this.sc.altitude + this.body.radius * 2);
         }
         get higherDV(): number {
-            return calcOrb.hohmannStartDV(this.body.radius + this.sc.altitude, this.body.radius + this.ap, this.body.stdGravity);
+            return calcOrb.hohmannStartDV(this.body.radius + this.sc.altitude, this.body.radius + this.ap, this.body.stdGravity) * 1000;
         }
         get lowerDV(): number {
-            return calcOrb.hohmannStartDV(this.body.radius + this.sc.altitude, this.body.radius + this.pe, this.body.stdGravity);
+            return calcOrb.hohmannStartDV(this.body.radius + this.sc.altitude, this.body.radius + this.pe, this.body.stdGravity) * 1000;
         }
 
         static $inject = ["satChainServ"];
