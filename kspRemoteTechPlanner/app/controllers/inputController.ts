@@ -5,7 +5,7 @@ module App {
 
     export class InputController {
         sc: SatChain;
-        settings: Settings
+        settings: Settings;
 
         static $inject = ["settingsServ", "eventServ", "satChainServ", "bodyDictServ", "antennaDictServ"];
         constructor(
