@@ -18,6 +18,7 @@ module App {
 
             this.sc = this.satChainServ.satChain;
             this.settings = this.settingsServ.settings;
+            this.onChange();
         }
 
         isSelectedAntenna(index: number): boolean {
@@ -26,6 +27,7 @@ module App {
 
         onChange() {
             this.satChainServ.save();
+            this.sc.updateMam(this.settings.multipleAntennaMultiplier);
             this.eventServ.updateView();
         }
 
