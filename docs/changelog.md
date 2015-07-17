@@ -1,3 +1,6 @@
+- 1.6.3 : 2015/07/18
+ * Fix unit of Slide time.
+
 - 1.6.2 : 2015/07/07
  * Fix Delta-V unit of Multiple Launch View.
 
