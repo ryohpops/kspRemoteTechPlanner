@@ -6,7 +6,7 @@ module App {
     export class SettingsService {
         private static dataKey: string = "settings";
         private static versionKey: string = "settingsVersion";
-        private static modelVersion: number = 1;
+        private static modelVersion: number = 2;
 
         private _settings: Settings;
         get settings(): Settings { return this._settings; }
@@ -20,7 +20,7 @@ module App {
             if (loaded.data) {
                 this._settings = this.unpack(this.update(loaded.data, loaded.version));
             } else {
-                this._settings = new Settings(StockData.stock);
+                this._settings = new Settings(StockData.stock, 1, RangeModelType.standard, 0);
             }
 
             this.save();
@@ -33,18 +33,29 @@ module App {
 
         private pack(settings: Settings): SettingsJSON {
             var json: SettingsJSON = {
-                stockData: settings.stockData
+                stockData: settings.stockData,
+                rangeMultiplier: settings.rangeMultiplier,
+                rangeModelType: settings.rangeModelType,
+                multipleAntennaMultiplier: settings.multipleAntennaMultiplier
             };
 
             return json;
         }
 
         private unpack(json: SettingsJSON): Settings {
-            return new Settings(json.stockData);
+            return new Settings(json.stockData, json.rangeMultiplier, json.rangeModelType, json.multipleAntennaMultiplier);
         }
 
         private update(settingsJson: any, oldVersion: number): SettingsJSON {
-            return <SettingsJSON>settingsJson;
+            if (oldVersion === 1) {
+                settingsJson.rangeMultiplier = 1;
+                settingsJson.rangeModelType = RangeModelType.standard;
+                settingsJson.multipleAntennaMultiplier = 0;
+
+                oldVersion = 2;
+            }
+
+            return settingsJson;
         }
     }
 }

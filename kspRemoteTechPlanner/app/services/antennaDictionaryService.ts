@@ -22,9 +22,10 @@ module App {
         private _userAntennas: AntennaDictionary;
         get userAntennas(): AntennaDictionary { return this._userAntennas; }
 
-        static $inject = ["storageServ"];
+        static $inject = ["storageServ", "settingsServ"];
         constructor(
-            private storageServ: StorageService
+            private storageServ: StorageService,
+            private settingsServ: SettingsService
             ) {
 
             this._stockAntennas = {
@@ -61,12 +62,15 @@ module App {
         }
 
         get(name: string): Antenna {
+            var ret: Antenna;
             if (Object.keys(this.stockAntennas).indexOf(name) !== -1)
-                return this.stockAntennas[name].clone();
+                ret = this.stockAntennas[name].clone();
             else if (Object.keys(this.userAntennas).indexOf(name) !== -1)
-                return this.userAntennas[name].clone();
-            else
-                return undefined;
+                ret = this.userAntennas[name].clone();
+
+            if (ret)
+                ret.range *= this.settingsServ.settings.rangeMultiplier;
+            return ret;
         }
 
         set(name: string, antenna: Antenna) {
