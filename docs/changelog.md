@@ -1,3 +1,7 @@
+- 1.6.4 : 2015/07/19
+ * Implement Range Multiplier.
+ * Implement Multiple Antenna Multiplier.
+
 - 1.6.3 : 2015/07/18
  * Fix unit of Slide time.
 
