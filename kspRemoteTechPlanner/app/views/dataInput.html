@@ -43,6 +43,37 @@
 
     <div class="form-group">
         <label for="antenna">Antenna</label>
+
+        <div ng-show="input.settings.multipleAntennaMultiplier > 0">
+            <em>Multiple Antenna Multiplier</em>
+            <div folding-detail>
+                <div class="wrap-detail">
+                    <dl class="detail">
+                        <dt>Type</dt>
+                        <dd>{{input.sc.mam.type |antennaType}}</dd>
+                        <dt>Range</dt>
+                        <dd>{{input.sc.mam.range |number}} km</dd>
+                        <dt>Electricity consumption</dt>
+                        <dd>{{input.sc.mam.elcNeeded |number}} /sec.</dd>
+                    </dl>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12 col-md-4">
+                    <div class="btn-group btn-group-justified" role="group">
+                        <div class="btn-group btn-group-sm" role="group">
+                            <button type="button" class="btn btn-default" ng-class="{'btn-success': input.isSelectedAntenna(input.sc.mamIndex)}"
+                                    ng-click="input.setAntennaIndex(input.sc.mamIndex)">
+                                Show
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+        </div>
+
         <div ng-repeat="antennaEquipment in input.sc.antennas">
             <!-- antenna selector -->
             <div ng-include="'app/views/dataInput/antennaSelectorStock.html'" ng-show="input.settings.stockData === 'stock'"></div>
