@@ -1,6 +1,6 @@
 ﻿/// <reference path="_references.ts" />
 
-module Calculator.Orbital {
+namespace Calculator.Orbital {
     'use strict';
 
     export function period(sma: number, stdGravParam: number): number {
@@ -12,7 +12,7 @@ module Calculator.Orbital {
     }
 
     export function nightTime(radius: number, sma: number, stdGravParam: number): number {
-        return Orbital.period(sma, stdGravParam) * Math.asin(radius / sma) / Math.PI;
+        return period(sma, stdGravParam) * Math.asin(radius / sma) / Math.PI;
     }
 
     export function hohmannStartDV(sma1: number, sma2: number, stdGravParam: number): number {

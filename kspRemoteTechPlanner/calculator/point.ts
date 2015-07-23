@@ -1,6 +1,6 @@
 ﻿/// <reference path="_references.ts" />
 
-module Calculator {
+namespace Calculator {
     'use strict';
 
     export interface Point {

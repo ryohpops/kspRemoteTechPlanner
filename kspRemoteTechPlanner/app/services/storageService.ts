@@ -1,6 +1,6 @@
 ﻿/// <reference path="../_references.ts" />
 
-module App {
+namespace App {
     'use strict';
 
     export interface LoadResult {
@@ -18,12 +18,12 @@ module App {
         }
 
         load(dataKey: string, versionKey: string): LoadResult {
-            var savedData: any = this.localStorage.get<any>(dataKey); // JSON object, potential of old-version model
+            let savedData: any = this.localStorage.get<any>(dataKey); // JSON object, potential of old-version model
             if (!savedData) {
                 savedData = this.$cookieStore.get(dataKey); // deprecated, will be deleted in the near future.
                 this.$cookieStore.remove(dataKey);
             }
-            var savedVersion: number = this.localStorage.get<number>(versionKey);
+            let savedVersion: number = this.localStorage.get<number>(versionKey);
 
             return { data: savedData, version: savedVersion };
         }

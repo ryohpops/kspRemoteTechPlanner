@@ -1,6 +1,6 @@
 ﻿/// <reference path="../_references.ts" />
 
-module App {
+namespace App {
     'use strict';
 
     export class AntennaEditController {
@@ -23,9 +23,9 @@ module App {
         }
 
         isUsed(name: string): boolean {
-            var ret: boolean = false;
-            for (var index in this.sc.antennas) {
-                if (this.sc.antennas[index].antenna.name === name)
+            let ret: boolean = false;
+            for (let ae of this.sc.antennas) {
+                if (ae.antenna.name === name)
                     ret = true;
             }
             return ret;

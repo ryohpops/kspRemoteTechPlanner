@@ -1,17 +1,17 @@
 ﻿/// <reference path="../_references.ts" />
 
-module App {
+namespace App {
     'use strict';
 
-    var lengthUnits: string[] = ["km", "Mm", "Gm", "Tm"];
-    var lengthShrinkRate: number = 1000;
-    var lengthUnitLimits: number = 10000;
+    const lengthUnits: string[] = ["km", "Mm", "Gm", "Tm"];
+    const lengthShrinkRate: number = 1000;
+    const lengthUnitLimits: number = 10000;
 
     export function format(): Function {
         return (target: number, mode: string): string => {
             switch (mode) {
                 case "length":
-                    var shrink: number = 0;
+                    let shrink: number = 0;
                     while (target >= lengthUnitLimits && shrink < lengthUnits.length - 1) {
                         target /= lengthShrinkRate;
                         shrink++;

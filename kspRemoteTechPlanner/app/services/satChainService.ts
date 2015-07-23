@@ -1,6 +1,6 @@
 ﻿/// <reference path="../_references.ts" />
 
-module App {
+namespace App {
     'use strict';
 
     export class SatChainService {
@@ -18,8 +18,7 @@ module App {
             private bodyDictServ: BodyDictionaryService,
             private antennaDictServ: AntennaDictionaryService
             ) {
-
-            var loaded: LoadResult = storageServ.load(SatChainService.dataKey, SatChainService.versionKey);
+            let loaded: LoadResult = storageServ.load(SatChainService.dataKey, SatChainService.versionKey);
             if (loaded.data) {
                 this._satChain = this.unpack(this.update(loaded.data, loaded.version));
             } else {
@@ -30,30 +29,31 @@ module App {
             this.save();
             storageServ.setVersion(SatChainService.versionKey, SatChainService.modelVersion);
 
-            eventServ.on(Events.updateBody,(event: angular.IAngularEvent) => {
+            eventServ.on(Events.updateBody, (event: angular.IAngularEvent) => {
                 this.updateBody();
             });
-            eventServ.on(Events.updateAntenna,(event: angular.IAngularEvent) => {
+            eventServ.on(Events.updateAntenna, (event: angular.IAngularEvent) => {
                 this.updateAntenna();
             });
         }
 
         private updateBody() {
-            var b: Body = this.bodyDictServ.get(this.satChain.body.name);
-            this.satChain.body.name = b.name;
-            this.satChain.body.color = b.color;
-            this.satChain.body.radius = b.radius;
-            this.satChain.body.stdGravity = b.stdGravity;
-            this.satChain.body.soi = b.soi;
+            let b: Body = this.satChain.body;
+            let bDict: Body = this.bodyDictServ.get(b.name);
+            b.name = bDict.name;
+            b.color = bDict.color;
+            b.radius = bDict.radius;
+            b.stdGravity = bDict.stdGravity;
+            b.soi = bDict.soi;
         }
 
         private updateAntenna() {
-            for (var index in this.satChain.antennas) {
-                var a: Antenna = this.antennaDictServ.get(this.satChain.antennas[index].antenna.name);
-                this.satChain.antennas[index].antenna.name = a.name;
-                this.satChain.antennas[index].antenna.type = a.type;
-                this.satChain.antennas[index].antenna.range = a.range;
-                this.satChain.antennas[index].antenna.elcNeeded = a.elcNeeded;
+            for (let ae of this.satChain.antennas) {
+                let aDict: Antenna = this.antennaDictServ.get(ae.antenna.name);
+                ae.antenna.name = aDict.name;
+                ae.antenna.type = aDict.type;
+                ae.antenna.range = aDict.range;
+                ae.antenna.elcNeeded = aDict.elcNeeded;
             }
         }
 
@@ -62,27 +62,23 @@ module App {
         }
 
         private pack(satChain: SatChain): SatChainJSON {
-            var json: SatChainJSON = {
+            let json: SatChainJSON = {
                 body: satChain.body.name, count: satChain.count, altitude: satChain.altitude, elcNeeded: satChain.elcNeeded,
                 antennas: new Array<AntennaEquipmentJSON>(), antennaIndex: satChain.antennaIndex, parkingAlt: satChain.parkingAlt
             };
 
-            for (var index in this.satChain.antennas) {
-                var ae: AntennaEquipment = this.satChain.antennas[index];
+            for (let ae of this.satChain.antennas)
                 json.antennas.push({ antenna: ae.antenna.name, quantity: ae.quantity });
-            }
 
             return json;
         }
 
         private unpack(json: SatChainJSON): SatChain {
-            var sc: SatChain = new SatChain(this.bodyDictServ.get(json.body), json.count, json.altitude, json.elcNeeded,
+            let sc: SatChain = new SatChain(this.bodyDictServ.get(json.body), json.count, json.altitude, json.elcNeeded,
                 new Array<AntennaEquipment>(), json.antennaIndex, json.parkingAlt);
 
-            for (var index in json.antennas) {
-                var aej: AntennaEquipmentJSON = json.antennas[index];
+            for (let aej of json.antennas)
                 sc.antennas.push({ antenna: this.antennaDictServ.get(aej.antenna), quantity: aej.quantity });
-            }
 
             return sc;
         }
@@ -96,8 +92,8 @@ module App {
 
             if (oldVersion === 1) {
                 scJson.body = scJson.body.name;
-                for (var index in scJson.antennas) {
-                    var ae = scJson.antennas[index];
+                for (let index in scJson.antennas) {
+                    let ae = scJson.antennas[index];
                     scJson.antennas[index] = ({ antenna: ae.antenna.name, quantity: ae.quantity });
                 }
                 oldVersion = 2;

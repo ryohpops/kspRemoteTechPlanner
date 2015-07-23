@@ -1,6 +1,6 @@
 ﻿/// <reference path="../_references.ts" />
 
-module App {
+namespace App {
     'use strict';
 
     export class SatChain {
@@ -39,9 +39,9 @@ module App {
         }
 
         longestRangeOmni(): Antenna {
-            var ret: Antenna = new Antenna("error", AntennaType.omni, 0, 0);
-            for (var index in this.antennas) {
-                var a: Antenna = this.antennas[index].antenna;
+            let ret: Antenna = new Antenna("error", AntennaType.omni, 0, 0);
+            for (let ae of this.antennas) {
+                let a: Antenna = ae.antenna;
                 if (a.range > ret.range)
                     ret = a.clone();
             }
@@ -51,10 +51,9 @@ module App {
         updateMam(multipleAntennaMultiplier: number) {
             this.mam.range = this.longestRangeOmni().range;
 
-            var totalOmniRange: number = 0;
-            var totalOmniElcNeeded: number = 0;
-            for (var index in this.antennas) {
-                var ae: AntennaEquipment = this.antennas[index];
+            let totalOmniRange: number = 0;
+            let totalOmniElcNeeded: number = 0;
+            for (let ae of this.antennas) {
                 totalOmniRange += ae.antenna.range * ae.quantity;
                 totalOmniElcNeeded += ae.antenna.elcNeeded + ae.quantity;
             }

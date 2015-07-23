@@ -1,15 +1,10 @@
 ﻿/// <reference path="../_references.ts" />
 
-module App {
+namespace App {
     'use strict';
 
-    export interface BodyDictionary {
-        [index: string]: Body;
-    }
-
-    interface BodyJSONDictionary {
-        [index: string]: BodyJSON;
-    }
+    export type BodyDictionary = { [index: string]: Body };
+    type BodyJSONDictionary = { [index: string]: BodyJSON };
 
     export class BodyDictionaryService {
         private static dataKey: string = "userBody";
@@ -63,7 +58,7 @@ module App {
                 "Pluto": new Body("Pluto", "rgb(82,133,141)", 1143, 870.44, 3116132)
             };
 
-            var loaded: LoadResult = storageServ.load(BodyDictionaryService.dataKey, BodyDictionaryService.versionKey);
+            let loaded: LoadResult = storageServ.load(BodyDictionaryService.dataKey, BodyDictionaryService.versionKey);
             if (loaded.data)
                 this._userBodies = this.unpack(this.update(loaded.data, loaded.version));
             else
@@ -74,9 +69,9 @@ module App {
         }
 
         get(name: string): Body {
-            if (Object.keys(this.stockBodies).indexOf(name) !== -1)
+            if (name in this.stockBodies)
                 return this.stockBodies[name].clone();
-            else if (Object.keys(this.userBodies).indexOf(name) !== -1)
+            else if (name in this.userBodies)
                 return this.userBodies[name].clone();
             else
                 return undefined;
@@ -95,10 +90,10 @@ module App {
         }
 
         private pack(bodyDict: BodyDictionary): BodyJSONDictionary {
-            var bjd: BodyJSONDictionary = {};
+            let bjd: BodyJSONDictionary = {};
 
-            for (var index in bodyDict) {
-                var b: Body = bodyDict[index];
+            for (let index in bodyDict) {
+                let b: Body = bodyDict[index];
                 bjd[index] = { name: b.name, color: b.color, radius: b.radius, stdGravity: b.stdGravity, soi: b.soi };
             }
 
@@ -106,10 +101,10 @@ module App {
         }
 
         private unpack(json: BodyJSONDictionary): BodyDictionary {
-            var bd: BodyDictionary = {};
+            let bd: BodyDictionary = {};
 
-            for (var index in json) {
-                var bj: BodyJSON = json[index];
+            for (let index in json) {
+                let bj: BodyJSON = json[index];
                 bd[index] = new Body(bj.name, bj.color, bj.radius, bj.stdGravity, bj.soi);
             }
 
