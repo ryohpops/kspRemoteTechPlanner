@@ -1,6 +1,6 @@
 ﻿/// <reference path="../_references.ts" />
 
-module App {
+namespace App {
     'use strict';
 
     import calcOrb = Calculator.Orbital;
@@ -16,8 +16,8 @@ module App {
             return calcOrb.nightTime(this.body.radius, this.body.radius + this.sc.altitude, this.body.stdGravity);
         }
         get reqGen(): number {
-            var ae: number[] = [], aq: number[] = [];
-            for (var index in this.sc.antennas) {
+            let ae: number[] = new Array(), aq: number[] = new Array();
+            for (let index in this.sc.antennas) {
                 ae.push(this.sc.antennas[index].antenna.elcNeeded);
                 aq.push(this.sc.antennas[index].quantity);
             }
@@ -25,8 +25,8 @@ module App {
             return calcSat.requiredGenerator(this.sc.elcNeeded, ae, aq, this.body.radius, this.body.stdGravity, this.body.radius + this.sc.altitude);
         }
         get reqBatt(): number {
-            var ae: number[] = [], aq: number[] = [];
-            for (var index in this.sc.antennas) {
+            let ae: number[] = new Array(), aq: number[] = new Array();
+            for (let index in this.sc.antennas) {
                 ae.push(this.sc.antennas[index].antenna.elcNeeded);
                 aq.push(this.sc.antennas[index].quantity);
             }

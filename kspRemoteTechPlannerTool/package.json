@@ -13,9 +13,5 @@
     "require-dir": "^0.1.0",
     "rimraf": "^2.2.8",
     "run-sequence": "^1.0.2"
-  },
-  "scripts": {
-    "test": "node_modules\\.bin\\gulp.cmd test",
-    "deploy": "node_modules\\.bin\\gulp.cmd deploy"
   }
 }

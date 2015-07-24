@@ -1,6 +1,6 @@
 ﻿/// <reference path="../_references.ts" />
 
-module App {
+namespace App {
     'use strict';
 
     import calcOrb = Calculator.Orbital;
@@ -15,8 +15,8 @@ module App {
             return calcOrb.hohmannFinishDV(this.body.radius + this.sc.parkingAlt, this.body.radius + this.sc.altitude, this.body.stdGravity) * 1000;
         }
         get slideAngle(): number {
-            var lowPeriod: number = calcOrb.period(this.body.radius + this.sc.parkingAlt, this.body.stdGravity);
-            var highPeriod: number = calcOrb.period(this.body.radius + this.sc.altitude, this.body.stdGravity);
+            let lowPeriod: number = calcOrb.period(this.body.radius + this.sc.parkingAlt, this.body.stdGravity);
+            let highPeriod: number = calcOrb.period(this.body.radius + this.sc.altitude, this.body.stdGravity);
             return calcOrb.slidePhaseAngle(360 / this.sc.count, lowPeriod, highPeriod);
         }
         get slideTime(): number {

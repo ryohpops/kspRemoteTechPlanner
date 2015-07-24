@@ -1,15 +1,10 @@
 ﻿/// <reference path="../_references.ts" />
 
-module App {
+namespace App {
     'use strict';
 
-    export interface AntennaDictionary {
-        [index: string]: Antenna;
-    }
-
-    interface AntennaJSONDictionary {
-        [index: string]: AntennaJSON;
-    }
+    export type AntennaDictionary = { [index: string]: Antenna };
+    type AntennaJSONDictionary = { [index: string]: AntennaJSON };
 
     export class AntennaDictionaryService {
         private static dataKey: string = "userAntenna";
@@ -51,7 +46,7 @@ module App {
                 "RSS Reflectron GX-128": new Antenna("RSS Reflectron GX-128", AntennaType.dish, 8000000000, 0.65)
             };
 
-            var loaded: LoadResult = storageServ.load(AntennaDictionaryService.dataKey, AntennaDictionaryService.versionKey);
+            let loaded: LoadResult = storageServ.load(AntennaDictionaryService.dataKey, AntennaDictionaryService.versionKey);
             if (loaded.data)
                 this._userAntennas = this.unpack(this.update(loaded.data, loaded.version));
             else
@@ -62,10 +57,10 @@ module App {
         }
 
         get(name: string): Antenna {
-            var ret: Antenna;
-            if (Object.keys(this.stockAntennas).indexOf(name) !== -1)
+            let ret: Antenna;
+            if (name in this.stockAntennas)
                 ret = this.stockAntennas[name].clone();
-            else if (Object.keys(this.userAntennas).indexOf(name) !== -1)
+            else if (name in this.userAntennas)
                 ret = this.userAntennas[name].clone();
 
             if (ret)
@@ -86,10 +81,10 @@ module App {
         }
 
         private pack(antennaDict: AntennaDictionary): AntennaJSONDictionary {
-            var ajd: AntennaJSONDictionary = {};
+            let ajd: AntennaJSONDictionary = {};
 
-            for (var index in antennaDict) {
-                var a: Antenna = antennaDict[index];
+            for (let index in antennaDict) {
+                let a: Antenna = antennaDict[index];
                 ajd[index] = { name: a.name, type: a.type, range: a.range, elcNeeded: a.elcNeeded };
             }
 
@@ -97,10 +92,10 @@ module App {
         }
 
         private unpack(json: AntennaJSONDictionary): AntennaDictionary {
-            var ad: AntennaDictionary = {};
+            let ad: AntennaDictionary = {};
 
-            for (var index in json) {
-                var aj: AntennaJSON = json[index];
+            for (let index in json) {
+                let aj: AntennaJSON = json[index];
                 ad[index] = new Antenna(aj.name, aj.type, aj.range, aj.elcNeeded);
             }
 
@@ -109,7 +104,7 @@ module App {
 
         private update(userAntennas: any, oldVersion: number): AntennaDictionary {
             if (oldVersion === undefined) { // update to ver 1.5
-                for (var key in userAntennas) {
+                for (let key in userAntennas) {
                     if (userAntennas[key].type == 0)
                         userAntennas[key].type = "0";
                     else if (userAntennas[key].type == 1)
@@ -119,7 +114,7 @@ module App {
             }
 
             if (oldVersion === 1) {
-                for (var key in userAntennas) {
+                for (let key in userAntennas) {
                     if (userAntennas[key].type === "0")
                         userAntennas[key].type = AntennaType.omni;
                     else if (userAntennas[key].type === "1")

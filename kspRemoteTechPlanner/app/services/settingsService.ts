@@ -1,6 +1,6 @@
 ﻿/// <reference path="../_references.ts" />
 
-module App {
+namespace App {
     'use strict';
 
     export class SettingsService {
@@ -16,7 +16,7 @@ module App {
             private storageServ: StorageService
             ) {
 
-            var loaded: LoadResult = storageServ.load(SettingsService.dataKey, SettingsService.versionKey);
+            let loaded: LoadResult = storageServ.load(SettingsService.dataKey, SettingsService.versionKey);
             if (loaded.data) {
                 this._settings = this.unpack(this.update(loaded.data, loaded.version));
             } else {
@@ -32,7 +32,7 @@ module App {
         }
 
         private pack(settings: Settings): SettingsJSON {
-            var json: SettingsJSON = {
+            let json: SettingsJSON = {
                 stockData: settings.stockData,
                 rangeMultiplier: settings.rangeMultiplier,
                 rangeModelType: settings.rangeModelType,

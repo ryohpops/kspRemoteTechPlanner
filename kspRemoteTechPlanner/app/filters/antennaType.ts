@@ -1,8 +1,8 @@
 ﻿/// <reference path="../_references.ts" />
 
-module App {
+namespace App {
     'use strict';
-
+    
     export function antennaType(): Function {
         return (input: string): string => {
             if (input === AntennaType.omni)

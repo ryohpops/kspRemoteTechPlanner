@@ -1,6 +1,6 @@
 ﻿/// <reference path="../_references.ts" />
 
-module App {
+namespace App {
     'use strict';
 
     import Point = Calculator.Point;
@@ -30,11 +30,11 @@ module App {
             ) {
 
             this.sc = this.satChainServ.satChain;
-            this.position = [];
-            this.connection = [];
-            this.distance = [];
+            this.position = new Array();
+            this.connection = new Array();
+            this.distance = new Array();
 
-            eventServ.on(Events.updateView,(event: angular.IAngularEvent) => {
+            eventServ.on(Events.updateView, (event: angular.IAngularEvent) => {
                 this.updatePosition();
                 this.updateConnectStatus();
             });
@@ -42,22 +42,22 @@ module App {
         }
 
         private updatePosition() {
-            var pos = calcSat.position(this.sc.count, this.sc.body.radius + this.sc.altitude);
+            let pos = calcSat.position(this.sc.count, this.sc.body.radius + this.sc.altitude);
 
             this.position.splice(pos.length);
-            for (var index in pos)
+            for (let index in pos)
                 this.position[index] = pos[index];
         }
 
         private updateConnectStatus() {
-            var conn: boolean[] = calcSat.connectability(
+            let conn: boolean[] = calcSat.connectability(
                 this.sc.body.radius, this.sc.count, this.sc.body.radius + this.sc.altitude, this.sc.selectedAntenna.range);
-            var dist: number[] = calcSat.distance(this.sc.count, this.sc.body.radius + this.sc.altitude);
+            let dist: number[] = calcSat.distance(this.sc.count, this.sc.body.radius + this.sc.altitude);
 
-            var count: number = this.sc.count <= 4 ? 1 : 2;
+            let count: number = this.sc.count <= 4 ? 1 : 2;
             this.connection.splice(count);
             this.distance.splice(count);
-            for (var i: number = 0; i < count; i++) {
+            for (let i: number = 0; i < count; i++) {
                 this.connection[i] = conn[i + 1];
                 this.distance[i] = dist[i + 1];
             }

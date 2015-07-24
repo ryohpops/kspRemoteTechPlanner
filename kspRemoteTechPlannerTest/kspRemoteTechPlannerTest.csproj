@@ -10,12 +10,13 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <DebugType>full</DebugType>
     <DebugSymbols>true</DebugSymbols>
-    <TypeScriptToolsVersion>1.4</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>1.5</TypeScriptToolsVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <ItemGroup>
     <Content Include="conf.js" />
@@ -27,11 +28,11 @@
     <TypeScriptCompile Include="objects\index.ts" />
     <TypeScriptCompile Include="scripts\typings\angular-protractor\angular-protractor.d.ts" />
     <TypeScriptCompile Include="scripts\typings\jasmine\jasmine.d.ts" />
+    <TypeScriptCompile Include="scripts\typings\selenium-webdriver\selenium-webdriver.d.ts" />
     <TypeScriptCompile Include="_references.ts" />
     <TypeScriptCompile Include="objects\antennaEdit.ts" />
     <TypeScriptCompile Include="objects\bodyEdit.ts" />
     <TypeScriptCompile Include="objects\dataInput.ts" />
-    <TypeScriptCompile Include="scripts\typings\selenium-webdriver\selenium-webdriver.d.ts" />
     <TypeScriptCompile Include="specs\dataInputSpec.ts" />
   </ItemGroup>
   <PropertyGroup>
