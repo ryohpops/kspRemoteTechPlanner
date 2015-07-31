@@ -57,7 +57,7 @@ namespace App {
                 totalOmniRange += ae.antenna.range * ae.quantity;
                 totalOmniElcNeeded += ae.antenna.elcNeeded + ae.quantity;
             }
-            this.mam.range += totalOmniRange * multipleAntennaMultiplier;
+            this.mam.range += (totalOmniRange - this.longestRangeOmni().range) * multipleAntennaMultiplier;
             this.mam.elcNeeded = totalOmniElcNeeded;
         }
     }

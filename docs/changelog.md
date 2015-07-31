@@ -1,3 +1,6 @@
+- 1.6.5 : 2015/07/31
+ * Fix calculation of Multiple Antenna Multiplier. (westamastaflash)
+
 - 1.6.4 : 2015/07/19
  * Implement Range Multiplier.
  * Implement Multiple Antenna Multiplier.
