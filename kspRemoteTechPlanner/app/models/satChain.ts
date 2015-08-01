@@ -42,7 +42,7 @@ module App {
             var ret: Antenna = new Antenna("error", AntennaType.omni, 0, 0);
             for (var index in this.antennas) {
                 var a: Antenna = this.antennas[index].antenna;
-                if (a.range > ret.range)
+                if (a.type === AntennaType.omni && a.range > ret.range)
                     ret = a.clone();
             }
             return ret;
@@ -55,8 +55,10 @@ module App {
             var totalOmniElcNeeded: number = 0;
             for (var index in this.antennas) {
                 var ae: AntennaEquipment = this.antennas[index];
-                totalOmniRange += ae.antenna.range * ae.quantity;
-                totalOmniElcNeeded += ae.antenna.elcNeeded + ae.quantity;
+                if (ae.antenna.type === AntennaType.omni) {
+                    totalOmniRange += ae.antenna.range * ae.quantity;
+                    totalOmniElcNeeded += ae.antenna.elcNeeded + ae.quantity;
+                }
             }
             this.mam.range += (totalOmniRange - this.longestRangeOmni().range) * multipleAntennaMultiplier;
             this.mam.elcNeeded = totalOmniElcNeeded;
