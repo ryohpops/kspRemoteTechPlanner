@@ -42,7 +42,7 @@ namespace App {
             let ret: Antenna = new Antenna("error", AntennaType.omni, 0, 0);
             for (let ae of this.antennas) {
                 let a: Antenna = ae.antenna;
-                if (a.range > ret.range)
+                if (a.type === AntennaType.omni && a.range > ret.range)
                     ret = a.clone();
             }
             return ret;
@@ -54,8 +54,10 @@ namespace App {
             let totalOmniRange: number = 0;
             let totalOmniElcNeeded: number = 0;
             for (let ae of this.antennas) {
-                totalOmniRange += ae.antenna.range * ae.quantity;
-                totalOmniElcNeeded += ae.antenna.elcNeeded + ae.quantity;
+                if (ae.antenna.type === AntennaType.omni) {
+                    totalOmniRange += ae.antenna.range * ae.quantity;
+                    totalOmniElcNeeded += ae.antenna.elcNeeded + ae.quantity;
+                }
             }
             this.mam.range += (totalOmniRange - this.longestRangeOmni().range) * multipleAntennaMultiplier;
             this.mam.elcNeeded = totalOmniElcNeeded;

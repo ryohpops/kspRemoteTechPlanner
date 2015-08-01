@@ -1,3 +1,6 @@
+- 1.6.6 : 2015/08/01
+ * Fix calculation of Multiple Antenna Multiplier again. (westamastaflash)
+
 - 1.6.5 : 2015/07/31
  * Fix calculation of Multiple Antenna Multiplier. (westamastaflash)
 
